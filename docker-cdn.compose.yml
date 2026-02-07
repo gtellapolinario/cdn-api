@@ -1,0 +1,21 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: cdn_nginx
+    restart: unless-stopped
+    volumes:
+      - ./static-files:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - web
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.cdn.rule=Host(`cdn.gtmedics.com`)'
+      - 'traefik.http.routers.cdn.entrypoints=websecure'
+      - 'traefik.http.routers.cdn.tls.certresolver=mytlschallenge'
+      - 'traefik.http.services.cdn.loadbalancer.server.port=80'
+      - 'traefik.docker.network=web'
+
+networks:
+  web:
+    external: true

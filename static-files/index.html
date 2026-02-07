@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CDN Apoio Clínico - API</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f7fa;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #2563eb;
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      color: #1e40af;
+      margin-top: 30px;
+      padding-left: 10px;
+      border-left: 4px solid #3b82f6;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #1d4ed8;
+    }
+
+    pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    .badge-new {
+      background: #10b981;
+      color: white;
+    }
+
+    .badge-core {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .badge-data {
+      background: #8b5cf6;
+      color: white;
+    }
+
+    .badge-ui {
+      background: #f59e0b;
+      color: white;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .stat-card {
+      background: #f0f9ff;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #3b82f6;
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1e40af;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🚀 CDN Apoio Clínico - API</h1>
+    <p>Servidor de arquivos estáticos para aplicações médicas</p>
+
+    <!-- Estatísticas -->
+    <div class="stats" id="statsContainer">
+      <div class="stat-card">
+        <div class="stat-number" id="totalModulos">23</div>
+        <div class="stat-label">Módulos JS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="totalHotstrings">200+</div>
+        <div class="stat-label">Hotstrings</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="totalProtocolos">150+</div>
+        <div class="stat-label">Protocolos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="totalFarmacos">5800+</div>
+        <div class="stat-label">Fármacos</div>
+      </div>
+    </div>
+
+    <!-- APOIO CLÍNICO - Módulos Médicos -->
+    <h2>🏥 Apoio Clínico - Módulos Médicos</h2>
+    <ul>
+      <li>
+        <a href="/apoioClinico/js/app-main.min.js">app-main.min.js</a>
+        <span class="badge badge-core">CORE</span>
+        - App principal (minificado)
+      </li>
+      <li>
+        <a href="/apoioClinico/js/calcula.js">calcula.js</a>
+        <span class="badge badge-core">CORE</span>
+        - Calculadoras médicas
+      </li>
+      <li>
+        <a href="/apoioClinico/js/clinica.js">clinica.js</a>
+        <span class="badge badge-ui">UI</span>
+        - Interface clínica médica
+      </li>
+      <li>
+        <a href="/apoioClinico/js/cnes-module.js">cnes-module.js</a>
+        <span class="badge badge-new">NEW</span>
+        <span class="badge badge-data">DATA</span>
+        - Dados CNES
+      </li>
+      <li>
+        <a href="/apoioClinico/js/editor-autoresize.js">editor-autoresize.js</a>
+        <span class="badge badge-ui">UI</span>
+        - Auto-resize de textarea
+      </li>
+      <li>
+        <a href="/apoioClinico/js/especialidades-module.js">especialidades-module.js</a>
+        <span class="badge badge-new">NEW</span>
+        <span class="badge badge-ui">UI</span>
+        - Tabs de especialidades (Pediatria, Clínica, Gineco, etc)
+      </li>
+      <li>
+        <a href="/apoioClinico/js/exames-module.js">exames-module.js</a>
+        <span class="badge badge-new">NEW</span>
+        <span class="badge badge-data">DATA</span>
+        - Solicitações de exames
+      </li>
+      <li>
+        <a href="/apoioClinico/js/farmacos_completo.js">farmacos_completo.js</a>
+        <span class="badge badge-data">DATA</span>
+        - Base de fármacos (5800+ linhas)
+      </li>
+      <li>
+        <a href="/apoioClinico/js/hotstrings-metadata-module.js">hotstrings-metadata-module.js</a>
+        <span class="badge badge-new">NEW</span>
+        <span class="badge badge-data">DATA</span>
+        - Metadados das prescrições (sintomas, dicas clínicas)
+      </li>
+      <li>
+        <a href="/apoioClinico/js/hotstrings-module.js">hotstrings-module.js</a>
+        <span class="badge badge-new">NEW</span>
+        <span class="badge badge-data">DATA</span>
+        - Base de prescrições (200+ hotstrings)
+      </li>
+      <li>
+        <a href="/apoioClinico/js/hotstrings.min.js">hotstrings.min.js</a>
+        <span class="badge badge-core">CORE</span>
+        - Hotstrings (minificado)
+      </li>
+      <li>
+        <a href="/apoioClinico/js/protocolos-completo.js">protocolos-completo.js</a>
+        <span class="badge badge-data">DATA</span>
+        - Protocolos completos (4000+ linhas)
+      </li>
+      <li>
+        <a href="/apoioClinico/js/protocolos-data-module.js">protocolos-data-module.js</a>
+        <span class="badge badge-new">NEW</span>
+        <span class="badge badge-data">DATA</span>
+        - Protocolos clínicos estruturados (HTML + receitas)
+      </li>
+      <li>
+        <a href="/apoioClinico/js/sigtap-farmacos.js">sigtap-farmacos.js</a>
+        <span class="badge badge-data">DATA</span>
+        - Fármacos SIGTAP
+      </li>
+      <li>
+        <a href="/apoioClinico/js/sigtap-procedimentos.js">sigtap-procedimentos.js</a>
+        <span class="badge badge-data">DATA</span>
+        - Procedimentos SIGTAP
+      </li>
+    </ul>
+
+    <!-- GERAL - Módulos Compartilhados -->
+    <h2>📦 Geral - Módulos Compartilhados</h2>
+    <ul>
+      <li>
+        <a href="/geral/js/clipboard.js">clipboard.js</a>
+        <span class="badge badge-core">CORE</span>
+        - Copy/paste
+      </li>
+      <li>
+        <a href="/geral/js/editor.js">editor.js</a>
+        <span class="badge badge-core">CORE</span>
+        - Editor com auto-save
+      </li>
+      <li>
+        <a href="/geral/js/font-resize.js">font-resize.js</a>
+        <span class="badge badge-ui">UI</span>
+        - Controle de fonte
+      </li>
+      <li>
+        <a href="/geral/js/sidebar.js">sidebar.js</a>
+        <span class="badge badge-ui">UI</span>
+        - Sidebar responsiva
+      </li>
+      <li>
+        <a href="/geral/js/ufs-brasil-module.js">ufs-brasil-module.js</a>
+        <span class="badge badge-new">NEW</span>
+        <span class="badge badge-data">DATA</span>
+        - Estados brasileiros (UF) com renderização de select
+      </li>
+      <li>
+        <a href="/geral/js/utils.js">utils.js</a>
+        <span class="badge badge-core">CORE</span>
+        - Utilitários gerais
+      </li>
+    </ul>
+
+    <!-- Arquivos HTML Estáticos -->
+    <h2>📄 Páginas HTML</h2>
+    <ul>
+      <li><a href="/apoioClinico/index.html">index.html</a> - Página inicial Apoio Clínico</li>
+      <li><a href="/geral/index.html">index.html</a> - Página inicial Geral</li>
+    </ul>
+
+    <!-- Uso Básico -->
+    <h2>🔧 Exemplos de Uso</h2>
+    <pre><code>&lt;!-- Exemplo 1: Módulo de Hotstrings --&gt;
+&lt;script src="https://cdn.gtmedics.com/apoioClinico/js/hotstrings-module.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Pegar prescrição
+  const dengue = window.HotstringsModule.get('dengue_a90');
+  console.log(dengue);
+  
+  // Buscar
+  const resultados = window.HotstringsModule.buscar('asma');
+  console.log(resultados);
+&lt;/script&gt;
+
+&lt;!-- Exemplo 2: Módulo de UFs (Select de Estados) --&gt;
+&lt;script src="https://cdn.gtmedics.com/geral/js/ufs-brasil-module.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Renderizar select de UF com label
+  window.UFsBrasilModule.renderizarLabelSelect('container', {
+    id: 'crmUf',
+    name: 'crmUf',
+    placeholder: 'UF',
+    selectedValue: 'SP'
+  });
+  
+  // Ou apenas o select
+  window.UFsBrasilModule.renderizarSelect('selectContainer', {
+    id: 'estado',
+    showNomeCompleto: true, // Mostra "SP - São Paulo"
+  });
+&lt;/script&gt;
+
+&lt;!-- Exemplo 3: Módulo de Protocolos --&gt;
+&lt;script src="https://cdn.gtmedics.com/apoioClinico/js/protocolos-data-module.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Pegar protocolo de cardiologia
+  const dorToracica = window.ProtocolosDataModule.getProtocolo('cardiologia', 'dor_toracica');
+  console.log(dorToracica.rx_text);
+  
+  // Buscar protocolos
+  const busca = window.ProtocolosDataModule.buscar('IAM');
+  console.log(busca);
+&lt;/script&gt;
+
+&lt;!-- Exemplo 4: Tabs de Especialidades --&gt;
+&lt;script src="https://cdn.gtmedics.com/apoioClinico/js/especialidades-module.js"&gt;&lt;/script&gt;
+&lt;div id="specialtyTabs"&gt;&lt;/div&gt;
+&lt;iframe id="contentFrame"&gt;&lt;/iframe&gt;
+&lt;script&gt;
+  // As tabs são auto-renderizadas
+  // Carrega pediatria por padrão
+&lt;/script&gt;
+
+&lt;!-- Exemplo 5: Hotstrings + Metadata (Integrado) --&gt;
+&lt;script src="https://cdn.gtmedics.com/apoioClinico/js/hotstrings-module.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.gtmedics.com/apoioClinico/js/hotstrings-metadata-module.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Pegar dados completos (prescrição + metadata)
+  const dengueCombinado = window.HotstringsMetadataModule.getCombinado('dengue_a90');
+  console.log(dengueCombinado);
+  // {
+  //   key: "dengue_a90",
+  //   title: "Dengue A90",
+  //   symptoms: "Febre alta, cefaleia...",
+  //   tips: "Dipirona + Ondansetrona...",
+  //   prescription: "1) DIPIRONA 500mg..."
+  // }
+&lt;/script&gt;</code></pre>
+
+    <!-- Testes Interativos -->
+    <h2>🧪 Testes Interativos</h2>
+    <div>
+      <button onclick="testarHotstrings()">Testar Hotstrings</button>
+      <button onclick="testarUFs()">Testar UFs</button>
+      <button onclick="testarProtocolos()">Testar Protocolos</button>
+      <button onclick="testarMetadata()">Testar Metadata</button>
+      <button onclick="testarEspecialidades()">Testar Especialidades</button>
+    </div>
+
+    <div id="testOutput"
+      style="margin-top: 20px; padding: 15px; background: #f9fafb; border-radius: 8px; display: none;">
+      <h3>Resultado:</h3>
+      <pre id="testResult" style="background: white; padding: 10px; max-height: 400px; overflow-y: auto;"></pre>
+    </div>
+
+    <!-- Footer -->
+    <div
+      style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #64748b; font-size: 14px;">
+      <p>🏥 CDN Apoio Clínico v2.0 | Desenvolvido para profissionais de saúde</p>
+      <p style="font-size: 12px; margin-top: 10px;">
+        📂 Estrutura: <code>/apoioClinico</code> (módulos médicos) | <code>/geral</code> (módulos compartilhados)
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts GERAL (compartilhados) -->
+  <script src="/geral/js/utils.js"></script>
+  <script src="/geral/js/editor.js"></script>
+  <script src="/geral/js/sidebar.js"></script>
+  <script src="/geral/js/clipboard.js"></script>
+  <script src="/geral/js/font-resize.js"></script>
+  <script src="/geral/js/ufs-brasil-module.js"></script>
+
+  <!-- Scripts APOIO CLÍNICO (módulos médicos) -->
+  <script src="/apoioClinico/js/hotstrings.min.js"></script>
+  <script src="/apoioClinico/js/hotstrings-module.js"></script>
+  <script src="/apoioClinico/js/hotstrings-metadata-module.js"></script>
+  <script src="/apoioClinico/js/protocolos-data-module.js"></script>
+  <script src="/apoioClinico/js/clinica.js"></script>
+  <script src="/apoioClinico/js/exames-module.js"></script>
+  <script src="/apoioClinico/js/calcula.js"></script>
+  <script src="/apoioClinico/js/cnes-module.js"></script>
+  <script src="/apoioClinico/js/especialidades-module.js"></script>
+
+  <!-- Testes -->
+  <script>
+    function testarHotstrings() {
+      if (!window.HotstringsModule) {
+        mostrarResultado('❌ HotstringsModule não carregado!');
+        return;
+      }
+      const stats = window.HotstringsModule.getEstatisticas();
+      const dengue = window.HotstringsModule.get('dengue_a90');
+      mostrarResultado(`✅ HotstringsModule OK!\n\nTotal: ${stats.total} prescrições\n\nExemplo (Dengue):\n${dengue ? dengue.substring(0, 300) + '...' : 'N/A'}`);
+    }
+
+    function testarUFs() {
+      if (!window.UFsBrasilModule) {
+        mostrarResultado('❌ UFsBrasilModule não carregado!');
+        return;
+      }
+      const sp = window.UFsBrasilModule.getUF('SP');
+      const siglas = window.UFsBrasilModule.getSiglas();
+      mostrarResultado(`✅ UFsBrasilModule OK!\n\nTotal: ${siglas.length} estados\n\nSP: ${JSON.stringify(sp, null, 2)}`);
+    }
+
+    function testarProtocolos() {
+      if (!window.ProtocolosDataModule) {
+        mostrarResultado('❌ ProtocolosDataModule não carregado!');
+        return;
+      }
+      const stats = window.ProtocolosDataModule.getEstatisticas();
+      const categorias = window.ProtocolosDataModule.getCategorias();
+      mostrarResultado(`✅ ProtocolosDataModule OK!\n\nTotal: ${stats.total} protocolos\nCategorias: ${stats.categorias}\n\n${JSON.stringify(categorias, null, 2)}`);
+    }
+
+    function testarMetadata() {
+      if (!window.HotstringsMetadataModule) {
+        mostrarResultado('❌ HotstringsMetadataModule não carregado!');
+        return;
+      }
+      const stats = window.HotstringsMetadataModule.getEstatisticas();
+      const dengue = window.HotstringsMetadataModule.get('dengue_a90');
+      mostrarResultado(`✅ HotstringsMetadataModule OK!\n\nTotal: ${stats.total} metadados\n\nDengue metadata:\n${JSON.stringify(dengue, null, 2)}`);
+    }
+
+    function testarEspecialidades() {
+      if (!window.EspecialidadesModule) {
+        mostrarResultado('❌ EspecialidadesModule não carregado!');
+        return;
+      }
+      const especialidades = window.EspecialidadesModule.specialties;
+      mostrarResultado(`✅ EspecialidadesModule OK!\n\nTotal: ${especialidades.length} especialidades\n\n${JSON.stringify(especialidades, null, 2)}`);
+    }
+
+    function mostrarResultado(texto) {
+      document.getElementById('testOutput').style.display = 'block';
+      document.getElementById('testResult').textContent = texto;
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geral - Utilitários</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 p-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-xl shadow-md p-8">
+      <h1 class="text-3xl font-bold text-blue-900 mb-4">
+        📦 Módulos Gerais - VERSÃO DEBUG
+      </h1>
+
+      <p class="text-gray-600 mb-6">
+        Módulos compartilhados entre diferentes aplicações
+      </p>
+
+      <!-- Teste de UFs -->
+      <div class="mb-8">
+        <h2 class="text-xl font-bold mb-4">Teste: Select de UF</h2>
+        <div id="ufContainer" class="p-4 bg-gray-100 rounded">
+          <p class="text-sm text-gray-500">Carregando...</p>
+        </div>
+        <button onclick="renderizarSelectManual()"
+          class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+          🔄 Renderizar Manualmente
+        </button>
+      </div>
+
+      <!-- Debug -->
+      <div class="mb-8 p-4 bg-gray-900 text-green-400 rounded font-mono text-xs">
+        <div id="debug">Logs aparecerão aqui...</div>
+      </div>
+
+      <!-- Teste de Clipboard -->
+      <div class="mb-8">
+        <h2 class="text-xl font-bold mb-4">Teste: Clipboard</h2>
+        <button onclick="copiarTexto()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          📋 Copiar Texto de Teste
+        </button>
+      </div>
+
+      <div class="mt-8 pt-8 border-t">
+        <a href="/" class="text-blue-600 hover:underline">← Voltar ao CDN</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/geral/js/utils.js"></script>
+  <script src="/geral/js/editor.js"></script>
+  <script src="/geral/js/clipboard.js"></script>
+  <script src="/geral/js/ufs-brasil-module.js?v=debug1"
+    onload="log('✅ Script ufs-brasil-module.js carregado com sucesso!')"
+    onerror="log('❌ ERRO ao carregar script ufs-brasil-module.js (Verifique Network tab)')"></script>
+
+  <script>
+    const debugEl = document.getElementById('debug');
+
+    function log(msg) {
+      const time = new Date().toLocaleTimeString();
+      debugEl.innerHTML += `[${time}] ${msg}<br>`;
+      console.log(msg);
+    }
+
+    function renderizarSelectManual() {
+      log('🔄 Tentativa manual de renderização...');
+      renderizarSelect();
+    }
+
+    function renderizarSelect() {
+      log('🔍 Verificando módulo UFsBrasilModule...');
+
+      if (!window.UFsBrasilModule) {
+        log('❌ ERRO: UFsBrasilModule não encontrado!');
+        log('window.UFsBrasilModule = ' + window.UFsBrasilModule);
+        return;
+      }
+
+      log('✅ Módulo encontrado!');
+      log(`📊 Total de estados: ${window.UFsBrasilModule.data.length}`);
+
+      const container = document.getElementById('ufContainer');
+      if (!container) {
+        log('❌ ERRO: Container #ufContainer não encontrado!');
+        return;
+      }
+
+      log('✅ Container encontrado!');
+
+      try {
+        log('🎨 Renderizando select...');
+
+        const select = window.UFsBrasilModule.renderizarLabelSelect('ufContainer', {
+          id: 'testUf',
+          name: 'testUf',
+          selectedValue: 'SP',
+          placeholder: 'Selecione UF',
+          labelText: 'Estado:'
+        });
+
+        if (select) {
+          log(`✅ SELECT RENDERIZADO! Total de opções: ${select.options.length}`);
+
+          // Adiciona listener
+          select.addEventListener('change', function (e) {
+            const uf = window.UFsBrasilModule.getUF(e.target.value);
+            log(`📍 Selecionado: ${JSON.stringify(uf)}`);
+          });
+        } else {
+          log('❌ ERRO: Select retornou null');
+        }
+      } catch (error) {
+        log(`❌ ERRO CRÍTICO: ${error.message}`);
+        console.error(error);
+      }
+    }
+
+    // Tenta renderizar ao carregar
+    window.addEventListener('load', function () {
+      log('📄 Página carregada (window.load)');
+      setTimeout(function () {
+        log('⏱️ Timeout de 500ms atingido');
+        renderizarSelect();
+      }, 500);
+    });
+
+    function copiarTexto() {
+      const texto = 'Texto copiado com sucesso! 🎉';
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('Texto copiado!');
+      });
+    }
+  </script>
+</body>
+
+
+
+</html>
