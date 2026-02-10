@@ -21,7 +21,40 @@ TARGETS: list[Tuple[Path, Path, Path]] = [
         Path("static-files/apoioClinico"),
         Path("storage/apoioClinicoBackup"),
     ),
+    (
+        Path("static-files/geral/components/prescription/js"),
+        Path("static-files/geral/components/prescription"),
+        Path("storage/geralPrescriptionBackup"),
+    ),
+    (
+        Path("static-files/geral/components/prescription/tabs/js"),
+        Path("static-files/geral/components/prescription/tabs"),
+        Path("storage/geralPrescriptionTabsBackup"),
+    ),
+    (
+        Path("static-files/geral/components/prescription/aside/js"),
+        Path("static-files/geral/components/prescription/aside"),
+        Path("storage/geralPrescriptionAsideBackup"),
+    ),
+    (
+        Path("static-files/geral/components/header/js"),
+        Path("static-files/geral/components/header"),
+        Path("storage/geralHeaderBackup"),
+    ),
+    (
+        Path("static-files/geral/components/api/js"),
+        Path("static-files/geral/components/api"),
+        Path("storage/geralApiBackup"),
+    ),
+    (
+        Path("static-files/geral/components/prescription/tabs/psf/js"),
+        Path("static-files/geral/components/prescription/tabs/psf"),
+        Path("storage/geralPrescriptionTabsPsfBackup"),
+    ),
 ]
+
+# URL base do CDN (usada na geração do VERSIONS.md)
+CDN_BASE_URL = "https://cdn.gtmedics.com"
 
 # Regex para identificar arquivos JS que já possuem hash (ex: script.a1b2c3d4.js)
 HASHED_RE = re.compile(r"\.[0-9a-f]{8}\.js$", re.IGNORECASE)
@@ -86,9 +119,12 @@ def cleanup_old_versions(
                     shutil.move(str(p), str(backup_dir / p.name))
                 except shutil.Error as e:
                     print(f"      [!] Error moving {p.name}: {e}")
-                    if (backup_dir / p.name).exists():
-                        print(f"      [!] Target exists, removing source: {p.name}")
+                    backup_path = backup_dir / p.name
+                    if backup_path.exists() and calculate_hash(p) == calculate_hash(backup_path):
+                        print(f"      [!] Backup verified (hash match), removing source: {p.name}")
                         p.unlink()
+                    else:
+                        print(f"      [!] Backup NOT verified, keeping source: {p.name}")
 
 
 def process_directory(js_dir: Path, manifest_dir: Path, backup_dir: Path) -> None:
@@ -151,30 +187,30 @@ def generate_versions_md(base_dir: Path) -> None:
                     content.append("*No files*\n")
                 else:
                     # Seção Loader (Copy-Paste Friendly)
-                    folder_name = js_rel.parts[
-                        -2
-                    ]  # Pega 'geral' ou 'apoioClinico' assumindo estrutura static-files/NAME/js
+                    folder_name = js_rel.parts[-2]  # Pega 'geral' ou 'apoioClinico'
 
                     content.append("### 📋 Copy-Paste for CDNLoader")
-                    content.append("```javascript")
-                    content.append(f"// Base: https://cdn.gtmedics.com/{folder_name}")
+                    content.append("```html")
+                    content.append("<script>")
+                    content.append(f"  // Base: {CDN_BASE_URL}/{folder_name}")
                     content.append(
-                        'const loader = new CDNLoader("https://cdn.gtmedics.com/'
-                        + folder_name
-                        + '");'
+                        f'  const loader = new CDNLoader("{CDN_BASE_URL}/{folder_name}");'
                     )
-                    content.append("(async () => {")
+                    content.append("  (async () => {")
                     for original_name in sorted(data.keys()):
-                        content.append(f'  await loader.load("{original_name}");')
-                    content.append("})();")
+                        content.append(f'    await loader.load("{original_name}");')
+                    content.append("  })();")
+                    content.append("</script>")
                     content.append("```\n")
 
                     # Seção Direct Link
-                    content.append("### 🔗 Direct Hashed Links (Hardcoded)")
+                    content.append(
+                        "### 🔗 Direct Hashed Links (Manual Update Required)"
+                    )
                     content.append("```html")
                     for hashed_file in sorted(data.values()):
                         content.append(
-                            f'<script src="https://cdn.gtmedics.com/{folder_name}/js/{hashed_file}"></script>'
+                            f'<script src="{CDN_BASE_URL}/{folder_name}/js/{hashed_file}"></script>'
                         )
                     content.append("```")
         except Exception as e:

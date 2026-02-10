@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GT-Medics CDN Loader Test</title>
+
+  <!-- ============================================ -->
+  <!-- CDNs EXTERNAS                                -->
+  <!-- ============================================ -->
+
+  <!-- Tailwind CSS (browser) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Google Material Symbols (usado nos tabs/header) -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- ============================================ -->
+  <!-- CDN GT-MEDICS — CSS                          -->
+  <!-- ============================================ -->
+  <link rel="stylesheet" href="https://cdn.gtmedics.com/geral/css/styles.min.css" />
+  <link rel="stylesheet" href="https://cdn.gtmedics.com/geral/css/neuromorphic-styles.css" />
+
+  <!-- Limpeza ao fechar o navegador -->
+  <script>
+    window.addEventListener('beforeunload', function () {
+      localStorage.clear();
+      sessionStorage.clear();
+      document.cookie.split(';').forEach(function (c) {
+        document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+      });
+    });
+  </script>
+</head>
+
+<body class="min-h-screen bg-white text-slate-900">
+  <div class="mx-auto w-full max-w-[1400px] p-4 md:p-6">
+
+    <!-- APP SHELL -->
+    <div
+      class="rounded-[20px] bg-[#e0e5ec] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+
+      <!-- HEADER -->
+      <div id="header-index"></div>
+
+      <!-- PAINEL DE TABS -->
+      <div class="p-2 md:p-4">
+        <!-- RECEITUARIO -->
+        <section id="tab-prescricao" class="tabPanel p-4"></section>
+        <!-- EXAMES -->
+        <section id="tab_exames" class="hidden"></section>
+        <!-- GUIAS SUS -->
+        <section id="tab_guias" class="hidden"></section>
+        <!-- APOIO -->
+        <section id="tab_apoio" class="hidden"></section>
+        <!-- PSF -->
+        <section id="tab_psf" class="hidden"></section>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center text-[11px] font-semibold text-slate-900 print:hidden">
+      GT-Medics &mdash; 2025 &reg;
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- CDN GT-MEDICS — JS (CDNLoader)               -->
+  <!-- ============================================ -->
+  <!--
+    MODO BUNDLE (alternativa ao CDNLoader individual):
+      <script src="https://cdn.gtmedics.com/geral/cdn-loader.js"></script>
+      <script>
+        const loader = new CDNLoader("https://cdn.gtmedics.com/geral");
+        loader.load("bundle.min.js");
+      </script>
+
+    O modo abaixo carrega cada arquivo individualmente via CDNLoader,
+    util para debug e para validar que todos os manifests estao corretos.
+    A ordem DEVE ser identica a do build-bundle.cjs.
+  -->
+
+  <!-- CDNLoader Class -->
+  <script src="https://cdn.gtmedics.com/geral/cdn-loader.js"></script>
+
+  <script>
+    // Debug global
+    window.onerror = function (msg, url, line) {
+      console.error('[Erro Global] ' + msg + ' (' + url + ':' + line + ')');
+      return false;
+    };
+
+    // ==========================================
+    // INSTANCIAS CDNLoader (9 manifests)
+    // ==========================================
+    // Cada instancia aponta para a pasta pai de /js
+    // e busca o manifest.json na raiz dessa pasta.
+    //
+    //   CDN                                              MANIFEST
+    //   cdn.gtmedics.com/geral                         → geral/manifest.json
+    //   cdn.gtmedics.com/apoioClinico                  → apoioClinico/manifest.json
+    //   cdn.gtmedics.com/geral/components/api          → .../api/manifest.json
+    //   cdn.gtmedics.com/geral/components/header       → .../header/manifest.json
+    //   cdn.gtmedics.com/geral/components/prescription → .../prescription/manifest.json
+    //   cdn.gtmedics.com/.../prescription/box           → .../box/manifest.json
+    //   cdn.gtmedics.com/.../prescription/tabs          → .../tabs/manifest.json
+    //   cdn.gtmedics.com/.../prescription/aside         → .../aside/manifest.json
+    //   cdn.gtmedics.com/.../prescription/tabs/psf      → .../psf/manifest.json
+
+    var CDN = 'https://cdn.gtmedics.com';
+
+    var loaderGeral      = new CDNLoader(CDN + '/geral');
+    var loaderApoio      = new CDNLoader(CDN + '/apoioClinico');
+    var loaderApi        = new CDNLoader(CDN + '/geral/components/api');
+    var loaderHeader     = new CDNLoader(CDN + '/geral/components/header');
+    var loaderComponents = new CDNLoader(CDN + '/geral/components/prescription');
+    var loaderBox        = new CDNLoader(CDN + '/geral/components/prescription/box');
+    var loaderTabs       = new CDNLoader(CDN + '/geral/components/prescription/tabs');
+    var loaderAside      = new CDNLoader(CDN + '/geral/components/prescription/aside');
+    var loaderPsf        = new CDNLoader(CDN + '/geral/components/prescription/tabs/psf');
+
+    (async () => {
+      try {
+        console.log('--- CDNLoader Test: Iniciando carregamento individual ---');
+        var t0 = performance.now();
+
+        // ==========================================
+        // NIVEL 0 — Dados base e modulos autonomos
+        // (Ordem identica ao build-bundle.cjs)
+        // ==========================================
+        console.log('[1/7] Dados base...');
+        await loaderApoio.load('unified_hotstrings.js');
+        await loaderApoio.load('exames-module.js');
+        await loaderGeral.load('adm_drugs.js');
+        await loaderGeral.load('ufs-brasil-module.js');
+
+        // ==========================================
+        // NIVEL 1 — API / CDNLoader helpers
+        // ==========================================
+        console.log('[2/7] API...');
+        await loaderApi.load('functions-initial.js');
+
+        // ==========================================
+        // NIVEL 2 — Header
+        // ==========================================
+        console.log('[3/7] Header...');
+        await loaderHeader.load('header_index.js');
+        await loaderHeader.load('header_tool_container.js');
+        await loaderHeader.load('header_toolbar.js');
+
+        // ==========================================
+        // NIVEL 3 — Event Bus & Registry (antes dos aside)
+        // ==========================================
+        console.log('[4/7] Event Bus + Registry...');
+        await loaderAside.load('aside_event_bus.js');
+        await loaderAside.load('aside_registry.js');
+
+        // ==========================================
+        // NIVEL 4 — Componentes de Prescricao
+        // ==========================================
+        console.log('[5/7] Prescricao + Aside...');
+
+        // Prescricao core
+        await loaderComponents.load('prescription_header.js');
+        await loaderComponents.load('prescription_footer.js');
+
+        // Box
+        await loaderBox.load('apoiomed_prescription_box.js');
+
+        // Aside (sidebar)
+        await loaderAside.load('aside_cnes_search.js');
+        await loaderAside.load('aside_ubs_selector.js');
+        await loaderAside.load('aside_formatting_tools.js');
+        await loaderAside.load('aside_hotstrings_panel.js');
+        await loaderAside.load('apoiomed_aside.js');
+
+        // ==========================================
+        // NIVEL 5 — Abas
+        // ==========================================
+        console.log('[6/7] Tabs...');
+        await loaderTabs.load('tab_receituario.js');
+        await loaderTabs.load('tab_exames.js');
+        await loaderTabs.load('tab_guias.js');
+        await loaderTabs.load('tab_apoio.js');
+        await loaderTabs.load('tab_psf.js');
+
+        // ==========================================
+        // NIVEL 6 — Page Controller (orquestra tudo — sempre por ultimo)
+        // ==========================================
+        console.log('[7/7] Page Controller...');
+        await loaderComponents.load('page_controller.js');
+
+        var elapsed = ((performance.now() - t0) / 1000).toFixed(2);
+        console.log('--- CDNLoader Test: Carregamento completo em ' + elapsed + 's ---');
+
+        // ==========================================
+        // MODULOS LAZY-LOADED (nao no bundle)
+        // Carregados sob demanda pelo tab_psf.js via CDNLoader
+        // ==========================================
+        // PSF tabs/psf/js/:
+        //   index.js              → renderPsfHome()
+        //   marevan.js            → renderMarevanTab()
+        //   inc_radio.js          → renderRadioTab()
+        //
+        // PSF apoioClinico/js/:
+        //   psf-app.js            → renderPsfPatologias()
+        //
+        // PSF sub-modulos (carregados pelo index.js do PSF):
+        //   calc_2025.js          → renderCalc()
+        //   dengue_2025.js        → renderDengue()
+        //   escriba_2025.js       → renderEscriba()
+        //   exames_simples_2025.js→ renderExamesSimples()
+        //   gesta_plano_2025.js   → renderGestaPlano()
+        //   ped_2025.js           → renderPed()
+        //   prenatal_neuro_2025.js→ renderPrenatal()
+        //   psiqui_2025.js        → renderPsiqui()
+        //   tree_2025.js          → renderTree()
+        //   visita_2025.js        → renderVisita()
+
+      } catch (err) {
+        console.error('ERRO FATAL no carregamento:', err);
+        document.body.innerHTML += '<div style="position:fixed;bottom:0;left:0;right:0;padding:16px;background:#fee;color:#c00;font-family:monospace;font-size:13px;z-index:9999">'
+          + 'Erro CDNLoader: ' + err.message + '</div>';
+      }
+    })();
+  </script>
+
+</body>
+</html>

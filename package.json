@@ -1,0 +1,16 @@
+{
+	"name": "gtmedics-bundle",
+	"version": "1.0.0",
+	"description": "Bundle builder para GT-Medics",
+	"scripts": {
+		"build": "node build-bundle.cjs --prod",
+		"build:dev": "node build-bundle.cjs --dev",
+		"watch": "nodemon --watch static-files -e js --exec 'npm run build:dev'"
+	},
+	"dependencies": {
+		"uglify-js": "^3.19.3"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.11"
+	}
+}

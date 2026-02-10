@@ -1,17 +1,15 @@
 {
-  "app-main.min.js": "app-main.min.8974e42d.js",
-  "calcula.js": "calcula.ddc9a7f9.js",
+  "app-main.min.js": "app-main.min.639e6be0.js",
   "clinica.js": "clinica.ee93bb56.js",
-  "cnes-module.js": "cnes-module.14bebc7e.js",
-  "editor-autoresize.js": "editor-autoresize.0e4c10e0.js",
-  "especialidades-module.js": "especialidades-module.2ba65e20.js",
-  "exames-module.js": "exames-module.4a4ebfb1.js",
+  "editor-autoresize.js": "editor-autoresize.1d1d96ff.js",
+  "especialidades-module.js": "especialidades-module.da469810.js",
+  "exames-module.js": "exames-module.8a77b394.js",
   "farmacos_completo.js": "farmacos_completo.aa61a581.js",
-  "hotstrings-metadata-module.js": "hotstrings-metadata-module.565d5c10.js",
-  "hotstrings-module.js": "hotstrings-module.f26c718b.js",
-  "hotstrings.min.js": "hotstrings.min.b7ed4abb.js",
   "protocolos-completo.js": "protocolos-completo.a5e0901b.js",
   "protocolos-data-module.js": "protocolos-data-module.78544603.js",
+  "psf-app.js": "psf-app.4037619e.js",
+  "psf-utils.js": "psf-utils.5ec2e0ed.js",
   "sigtap-farmacos.js": "sigtap-farmacos.ceaac00a.js",
-  "sigtap-procedimentos.js": "sigtap-procedimentos.6b549324.js"
+  "sigtap-procedimentos.js": "sigtap-procedimentos.6b549324.js",
+  "unified_hotstrings.js": "unified_hotstrings.9e23a1f9.js"
 }

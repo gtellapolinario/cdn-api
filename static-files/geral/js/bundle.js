@@ -1,0 +1,7786 @@
+/**
+ * GT-Medics - Bundle Principal
+ * @version 1.0.0
+ * @generated 2026-02-10T04:27:09.814Z
+ * @files 25 arquivos concatenados
+ */
+
+'use strict';
+
+
+/* ==========================================
+   [1/25] apoioClinico/js/unified_hotstrings.js
+   ========================================== */
+// unified_hotstrings.js
+(() => {
+  'use strict';
+
+  // ========================================
+  // HOTSTRINGS RÁPIDOS (shortcuts simples)
+  // ========================================
+  const quick_hotstrings = {
+		// Medicamentos Simples
+		lsr: '| Losartana 50mg  1 - 0 - 1',
+		espr: '| Espironolactona 25mg  0 - 0 - 1',
+		atn: '| Atenolol 25mg   1 - 0 - 1',
+		anl: '| Anlodipino 5mg   1 - 0 - 1',
+		nfd: '| Nifedipino mg   1 - 0 - 1',
+		hdr: '| Hidroclorotiazida 25mg  1 - 0 - 0',
+		ard: '| Aradois 50mg   1 - 0 - 1',
+		abl: '| Ablok 25mg   1 - 0 - 1',
+		frs: '| Furosemida 40mg   1 - 0 - 0',
+		enl: '| Enalapril mg   1 - 0 - 1',
+		olms: '| Olmesartana 40mg   1 - 0 - 0',
+		crv: '| Carvedilol mg   1 - 0 - 1',
+		indp: '| Indapamida 1,5mg   1 - 0 - 0',
+		mtldp: '| Metildopa 250mg   1 - 1 - 1',
+		cptp: '| Captopril 25mg   1 - 1 - 1',
+		amlrd: '| Amilorida 5mg   1 - 0 - 0',
+		prpr: '| Propranolol 40mg   1 - 0 - 1',
+		vrpm: '| Verapamil 80mg   1 - 0 - 0',
+		dltz: '| Diltiazem 60mg   1 - 0 - 0',
+		// Prescrições Complexas
+		qmsol:
+			'QUEIMADURA SOLAR LEVE (L55.0)\n\nUso Tópico\n\n1 ) SULFADIAZINA DE PRATA creme\nAplicar fina camada nas áreas afetadas 2x/dia por 5 dias\n\n2 ) NEOMICINA + BACITRACINA pomada\nAlternativa para pequenas lesões, aplicar 2x/dia\n\nUso Oral\n\n3 ) IBUPROFENO 300mg\nTomar 01 cp via oral de 8/8h por 03 dias\n\nNa unidade\n\n1 ) DIPIRONA 1g IM\n\nORIENTAR medidas de hidratação e proteção solar',
+		rnalerg:
+			'RINITE ALÉRGICA (J30.9)\n\nUso Oral\n\n1 ) LORATADINA 10mg\nTomar 01 cp via oral 1x/dia por 07 dias\n\nUso Tópico\n\n2 ) SORO FISIOLÓGICO nasal 0,9%\nInstilar 3-5 gotas em cada narina, 3x/dia\n\nNa unidade\n\n1 ) DEXCLORFENIRAMINA 5mg IM (se crise alérgica intensa)',
+		ansiedade:
+			'SÍNDROME ANSIOSA / CRISE DE ANSIEDADE LEVE (F41.0)\n\nUso Oral\n\n1 ) PASSIFLORA EXTRATO SECO 200mg\nTomar 01 cp via oral 2x/dia\n\n2 ) VALERIANA + MELISSA (fitoterápico composto)\nTomar 01 cp via oral à noite, se necessário\n\nNa unidade\n\n1 ) DIAZEPAM 5mg IM (se crise aguda com agitação)',
+		// Adicione mais prescrições conforme necessário
+		dm2: 'DIABETES MELLITUS TIPO 2 (E11.9)\n\nUso Oral\n\n1 ) METFORMINA 850mg\nTomar 01 cp via oral 2x/dia (após as refeições)\n\n2 ) GLICLAZIDA 30mg\nTomar 01 cp via oral 1x/dia (pela manhã)\n\nOrientações\n\n- Dieta com restrição de carboidratos simples\n- Atividade física regular (30 min, 5x/semana)\n- Monitorização glicêmica capilar',
+		has: 'HIPERTENSÃO ARTERIAL SISTÊMICA (I10)\n\nUso Oral\n\n1 ) LOSARTANA 50mg\nTomar 01 cp via oral 1x/dia (pela manhã)\n\n2 ) HIDROCLOROTIAZIDA 25mg\nTomar 01 cp via oral 1x/dia (pela manhã)\n\nOrientações\n\n- Restrição de sódio na dieta\n- Atividade física regular\n- Monitorização da PA em casa',
+		// Anti-inflamatórios
+		diclof: 'Diclofenaco Sódico 50 mg __________ 30 cp(s) \n Tomar 1 cp(s) de 8/8h. \n \n',
+		ibup: 'Ibuprofeno 600 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h. \n \n',
+		naprox: 'Naproxeno 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		melox: 'Meloxicam 15 mg __________ 10 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		nimes: 'Nimesulida 100 mg __________ 12 cp(s) \n Tomar 1 cp(s) a cada 12 horas, por no máximo 5 dias. \n \n',
+		celecox: 'Celecoxibe 200 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		etoricox: 'Etoricoxibe 90 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		ceto: 'Cetoprofeno 100 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		tenox: 'Tenoxicam 20 mg __________ 1 cx(s)  cp(s) \n Tomar 1 cp(s) ao dia por 5 dias. \n \n',
+		// Analgésicos
+		paracet: 'Paracetamol 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h. \n \n',
+		paracet750: 'Paracetamol 750 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h. \n \n',
+		dip: 'Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h. \n \n',
+		dip1: 'Dipirona 1g __________ 10 cp(s) \n Tomar 1 cp(s) de 6/6h. \n \n',
+		tramal: 'Tramadol 50 mg __________ 30 cp(s) \n Tomar 1 cp(s) de 8/8h. \n \n',
+		tramal100: 'Tramadol 100 mg Retard __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		codein: 'Codeína 30 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h se necessário. \n \n',
+		paco: 'Paracetamol {+} Codeína 500 mg/30 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h se necessário. \n \n',
+		revang: 'Tramadol 37,5 mg {+} Paracetamol 325 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h se necessário. \n \n',
+		// Inibidores de bomba de prótons
+		omep: 'Omeprazol 20 mg __________ 28 cp(s) \n Tomar 1 cápsula em jejum. \n \n',
+		panto: 'Pantoprazol 40 mg __________ 28 cp(s) \n Tomar 1 cp(s) em jejum. \n \n',
+		esomep: 'Esomeprazol 40 mg __________ 28 cp(s) \n Tomar 1 cápsula em jejum. \n \n',
+		lanso: 'Lansoprazol 30 mg __________ 28 cp(s) \n Tomar 1 cápsula em jejum. \n \n',
+		dexlanso: 'Dexlansoprazol 60 mg __________ 30 cp(s) \n Tomar 1 cápsula ao dia, com ou sem alimentos, conforme prescrição. \n \n',
+		rabepra: 'Rabeprazol 20 mg __________ 28 cp(s) \n Tomar 1 cp(s) em jejum. \n \n',
+		ilapra: 'Ilaprazol 10 mg __________ 28 cp(s) \n Tomar 1 cápsula ao dia. \n \n',
+		// Antialérgicos
+		lorat: 'Loratadina 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		deslorat: 'Desloratadina 5 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		hidroxi: 'Hidroxizina 25 mg __________ 30 cp(s) \n Tomar 1 cp(s) a cada 8 horas. \n \n',
+		zina: 'Cetirizina 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		alleg60: 'Fexofenadina 60 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		alleg120: 'Fexofenadina 120 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		alleg180: 'Fexofenadina 180 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		bila: 'Bilastina 20 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, longe das refeições. \n \n',
+		dexclor: 'Dexclorfeniramina 2 mg __________ 30 cp(s) \n Tomar 1 cp(s) a cada 8 horas, se necessário. \n \n',
+		ebastina: 'Ebastina 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		// Corticoides
+		pred5: 'Prednisona 5 mg __________ 20 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		pred: 'Prednisona 20 mg __________ 10 cp(s) \n Tomar 2 cp(s) ao dia, por 5 dias. \n \n',
+		avam: 'Avamys spray nasal ______________ 3 frasco(s) \n Aplicar 1 jato em cada narina de 12/12 horas por 3 meses. \n \n',
+		budesonida: 'Budesonida 32/50/64 mcg/jato spray nasal: 1 frasco \n Aplicar 1 jato em cada narina de 12/12 horas por 15 dias. \n \n',
+		beclo: 'Beclometasona 50 mcg/jato spray nasal ______________ 1 frasco \n Aplicar 1 jato em cada narina de 12/12 horas por 15 dias. \n \n',
+		fluticas: 'Fluticasona Spray Nasal 50 mcg __________ 1 Frasco \n Aplicar 1 jato em cada narina, 2 vezes ao dia. \n \n',
+		dipro: 'Diprospan ______________ 1 ampola \n Aplicar im dose única \n \n',
+		bt30: 'Betatrinta ______________ 1 ampola \n Aplicar im dose única \n \n',
+		monteluc: 'Montelucaste 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		acetilcisteina: 'Acetilcisteína 600 mg __________ 16 cp(s) Efervescentes \n Dissolver 1 cp(s) em água 1 vez ao dia. \n \n',
+		adrena: 'Adrenalina 1 mg/ml __________ 1 Ampola \n Aplicar conforme protocolo em caso de anafilaxia. \n \n',
+		dexa: 'Dexametasona 4 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12h por 5 dias. \n \n',
+		// Medicamentos tópicos
+		betacreme: 'Betametasona 0,1% Creme __________ 1 Bisnaga \n Aplicar na área afetada 2 vezes ao dia. \n \n',
+		trok: 'Cetoconazol {+} Betametasona creme __________ 1 bisnaga \n Aplicar na região afetada de 12/12 horas por 7 dias. \n \n',
+		dexacreme: 'Dexametasona creme __________ 1 bisnaga \n Aplicar na região afetada de 12/12 horas por 7 dias. \n \n',
+		desoni: 'Desonida creme __________ 1 bisnaga \n Aplicar na região afetada uma vez ao dia por 7 dias. \n \n',
+		momecreme: 'Mometasona 0,1% Creme __________ 1 Bisnaga \n Aplicar na área afetada 1 vez ao dia. \n \n',
+		hidrocreme: 'Hidrocortisona 1% Creme __________ 1 Bisnaga \n Aplicar na área afetada 2 vezes ao dia. \n \n',
+		// Antibióticos
+		penv: 'Penicilina V Potássica 500.000 UI __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h por 10 dias. \n \n',
+		benza: 'Benzilpenicilina Benzatina 1.200.000 UI __________ 1 Ampola \n Administrar 1 dose intramuscular profunda, dose única. \n \n',
+		benzasif1: 'Benzilpenicilina Benzatina 1.200.000 UI __________ 2 Ampolas \n Administrar 1 ampola im profundo em cada nádega, dose única. \n Aplicação Data:   \n Observações:   \n \n',
+		benzasif2: 'Benzilpenicilina Benzatina 1.200.000 UI __________ 2 Ampolas \n Administrar 1 ampola im profundo em cada nádega, dose única. \n Aplicação Data:   \n Observações:   \n \n',
+		benzasif3:
+			'Benzilpenicilina Benzatina 1.200.000 UI __________ 6 Ampolas \n Administrar 1 ampola im profundo em cada nádega, uma vez por semana por 3 semanas. \n Aplicação semana 1: Data:   \n Aplicação semana 2: Data:   \n Aplicação semana 3: Data:   \n \n',
+		amox500: 'Amoxicilina 500 mg __________ 21 cp(s) \n Tomar 1 cp(s) de 8/8h, por 7 dias. \n \n',
+		clav500: 'Amoxicilina {+} Clavulanato 500 mg/125 mg __________ 21 cp(s) \n Tomar 1 cp(s) de 8/8h, por 7 dias. \n \n',
+		amox875: 'Amoxicilina 875 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h, por 7 dias. \n \n',
+		clav875: 'Amoxicilina {+} Clavulanato 875 mg/125 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h, por 7 dias. \n \n',
+		cefalex: 'Cefalexina 500 mg __________ 28 cp(s) \n Tomar 1 cp(s) de 6/6h por 7 dias. \n \n',
+		cefadrox: 'Cefadroxila 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h por 10 dias. \n \n',
+		cefurox: 'Cefuroxima 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		cefaclo: 'Cefaclor 500 mg __________ 21 cp(s) \n Tomar 1 cp(s) de 8/8h por 7 dias. \n \n',
+		cefpro: 'Cefprozil 500 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		ceftriax: 'Ceftriaxona 1g __________ 1 Ampola \n Administrar 1g intravenosa ou intramuscular, uma vez ao dia, \n seguindo esquema de diluição e e prescrição do médico assistente. \n \n',
+		cefixi: 'Cefixima 400 mg __________ 10 cp(s) \n Tomar 1 cp(s) ao dia, por 7 dias. \n \n',
+		cefpodox: 'Cefpodoxima 200 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		cefditore: 'Cefditoreno 400 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12h por 5 a 7 dias. \n \n',
+		clinda: 'Clindamicina 300 mg __________ 16 cp(s) \n Tomar 1 cp(s) de 8/8h por 10 dias. \n \n',
+		lincom: 'Lincomicina 500 mg __________ 16 cp(s) \n Tomar 1 cp(s) de 8/8h por 10 dias. \n \n',
+		azi: 'Azitromicina 500 mg __________ 5 cp(s) \n Tomar 1 cp(s) ao dia, por 5 dias. \n \n',
+		claritro: 'Claritromicina 500 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		eritro: 'Eritromicina 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h por 10 dias. \n \n',
+		bactrif: 'Sulfametoxazol {+} Trimetoprima 800 mg/160 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h por 10 dias. \n \n',
+		bactri: 'Sulfametoxazol {+} Trimetoprima 400 mg/80 mg __________ 10 cp(s) \n Tomar 2 cp(s) de 12/12h em infecções graves, conforme prescrição. \n \n',
+		nalidix: 'Ácido Nalidíxico 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h por 7 dias. \n \n',
+		cipro: 'Ciprofloxacino 500 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		oflox: 'Ofloxacino 400 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		levo: 'Levofloxacino 500 mg __________ 7 cp(s) \n Tomar 1 cp(s) ao dia, por 7 dias. \n \n',
+		moxi: 'Moxifloxacino 400 mg __________ 7 cp(s) \n Tomar 1 cp(s) ao dia, por 7 dias. \n \n',
+		gemiflox: 'Gemifloxacino 320 mg __________ 5 cp(s) \n Tomar 1 cp(s) ao dia, por 5 dias. \n \n',
+		norflox: 'Norfloxacino 400 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		doxici: 'Doxiciclina 100 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		tetra: 'Tetraciclina 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h por 7 dias. \n \n',
+		minoc: 'Minociclina 100 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		metroni: 'Metronidazol 250 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h por 7 dias. \n \n',
+		tinida: 'Tinidazol 500 mg __________ 4 cp(s) \n Tomar 4 cp(s) em dose única. \n \n',
+		nitrofu: 'Nitrofurantoína 100 mg __________ 21 cp(s) \n Tomar 1 cp(s) de 8/8h por 7 dias. \n \n',
+		fosfomi: 'Fosfomicina Trometamol 3g __________ 1 Envelope \n Dissolver 1 envelope em água e tomar em dose única. \n \n',
+		metena: 'Metenamina 1g __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		fenazopir: 'Fenazopiridina 100 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 8/8h por 2 dias. \n \n',
+		Mefex: 'Mefex 500 mg ______________ 14 cp(s) \n Tomar 1 cp(s) de 12/12 horas por 7 dias \n \n',
+		// Antiparasitários
+		albend: 'Albendazol 400 mg __________ X cp(s) \n Tomar 1 cp(s) após o almoço, repetir em 15 dias. \n \n',
+		anni: 'Annita 500 mg __________ 1 cx(s)  \n Tomar 1 cp(s) de 12/12 horas por 3 dias. Acima de 12 anos. \n \n',
+		ivermec: 'Ivermectina 6 mg __________ X cp(s) \n Dar X cp(s) dose única pela manhã. \n (Dose: ½ cp(s) a cada 15 Kg de peso) \n \n',
+		// Anticonvulsivantes
+		fenito: 'Fenitoína 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		fenob: 'Fenobarbital 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		carba: 'Carbamazepina 200 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		primid: 'Primidona 250 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		depak: 'Ácido Valproico 250 mg __________ 360 cp(s) \n Tomar 2 cp(s) de 8/8h. \n \n',
+		valpro: 'Valproato de Sódio 500 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		lamot: 'Lamotrigina 25 mg __________ 30 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		lamot100: 'Lamotrigina 100 mg __________ 30 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		lamot50: 'Lamotrigina 50 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia \n \n',
+		levetic: 'Levetiracetam 500 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		topira: 'Topiramato 50 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		gabapen: 'Gabapentina 300 mg __________ 90 cp(s) \n Tomar 1 cp(s) a cada 8 horas. \n \n',
+		pregab: 'Pregabalina 75 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		pregab150: 'Pregabalina 150 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		oxcarb: 'Oxcarbazepina 300 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		eslicarb: 'Eslicarbazepina 800 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		zonis: 'Zonisamida 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		tiagab: 'Tiagabina 12 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		peramp: 'Perampanel 4 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		// Ansiolíticos
+		clona: 'Clonazepam 2 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		cloba: 'Clobazam 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		diaze: 'Diazepam 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		bromomaz: 'Bromazepam 3 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		// Antidepressivos
+		amitri: 'Amitriptilina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		imipra: 'Imipramina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		nortri: 'Nortriptilina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		desipra: 'Desipramina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		clomipra: 'Clomipramina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		clomipra75: 'Clomipramina 75 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		doxep: 'Doxepina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		trimipra: 'Trimipramina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		fluoxe: 'Fluoxetina 20 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		fluoxe40: 'Fluoxetina 20 mg __________ 60 cp(s) \n Tomar 2 cp(s) de manhã. \n \n',
+		sertra: 'Sertralina 50 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		sertra100: 'Sertralina 100 mg __________ 60 cp(s) \n Tomar 2 cp(s) de manhã. \n \n',
+		escit: 'Escitalopram 10 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		escit20: 'Escitalopram 20 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		citalo: 'Citalopram 20 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		parox: 'Paroxetina 20 mg __________ 30 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		fluvox: 'Fluvoxamina 50 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		voex: 'Vortioxetina 5 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		voex10: 'Vortioxetina 10 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		voex15: 'Vortioxetina 15 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		voex20: 'Vortioxetina 20 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		vilazo: 'Vilazodona 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		vilazo20: 'Vilazodona 20 mg __________ 30 cp(s) \n Tomar 2 cp(s) ao dia. \n \n',
+		bup: 'Bupropiona 150 mg __________ 60 cp(s) \n Tomar 1 cp(s) pela manhã. \n \n',
+		bup300: 'Bupropiona 300 mg __________ 60 cp(s) \n Tomar 1 cp(s) pela manhã. \n \n',
+		mirta: 'Mirtazapina 15 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		mirta30: 'Mirtazapina 30 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		mirta45: 'Mirtazapina 45 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		mirta60: 'Mirtazapina 60 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		atomex40: 'Atomexetina 10 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		atomex60: 'Atomexetina 60 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		atomex80: 'Atomexetina 80 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		desvenla: 'Desvenlafaxina 50 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		desvenla100: 'Desvenlafaxina 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		dulox: 'Duloxetina 30 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		dulox60: 'Duloxetina 60 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		venla: 'Venlafaxina 37,5 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		venla75: 'Venlafaxina 75 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		venla150: 'Venlafaxina 150 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		// Antidiabéticos
+		met1: 'Metformina XR 500 mg __________ Contínuo \n Tomar 1 cp(s) no almoço \n \n',
+		met2: 'Metformina XR 500 mg __________ Contínuo \n Tomar 1 cp(s) no almoço e 1 cp(s) no jantar \n \n',
+		met3: 'Metformina XR 500 mg __________ Contínuo \n Tomar 2 cp(s) no almoço e 1 cp(s) no jantar \n \n',
+		met4: 'Metformina XR 500 mg __________ Contínuo \n Tomar 2 cp(s) no almoço e 2 cp(s) no jantar \n \n',
+		met5: 'Metformina XR 500 mg __________ Contínuo \n Tomar 1 cp(s) de manhã, 2 cp(s) no almoço e 2 cp(s) no jantar \n \n',
+		glifa1: 'Glifage XR 500 mg __________ Contínuo \n Tomar 1 cp(s) no almoço \n \n',
+		glifa2: 'Glifage XR 500 mg __________ Contínuo \n Tomar 1 cp(s) no almoço e 1 cp(s) no jantar \n \n',
+		glifa3: 'Glifage XR 500 mg __________ Contínuo \n Tomar 2 cp(s) no almoço e 1 cp(s) no jantar \n \n',
+		glifa4: 'Glifage XR 500 mg __________ Contínuo \n Tomar 2 cp(s) no almoço e 2 cp(s) no jantar \n \n',
+		glifa5: 'Glifage XR 500 mg __________ Contínuo \n Tomar 1 cp(s) de manhã, 2 cp(s) no almoço e 2 cp(s) no jantar \n \n',
+		met850: 'Metformina 850 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		glica: 'Glicazida 30 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		tolbuta: 'Tolbutamida 500 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		glib: 'Glibenclamida 5 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		glime1: 'Glimepirida 1 mg __________ Contínuo \n Tomar 1 cp(s) ao dia, geralmente no café da manhã \n \n',
+		glime2: 'Glimepirida 2 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		repagli: 'Repaglinida 0,5 mg __________ Contínuo \n Tomar 1 cp(s) 15 minutos antes das refeições \n \n',
+		nategli: 'Nateglinida 120 mg __________ Contínuo \n Tomar 1 cp(s) 30 minutos antes das refeições \n \n',
+		pioglita: 'Pioglitazona 15 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		rosiglta4: 'Rosiglitazona 4 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		alog: 'Alogliptina 25 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		linagli: 'Linagliptina 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		sitagli: 'Sitagliptina 100 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		saxagli: 'Saxagliptina 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		vildagi: 'Vildagliptina 50 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		forxi: 'Dapagliflozina 10 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		ertug: 'Ertugliflozina 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		empagli: 'Empagliflozina 10 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		canagli: 'Canagliflozina 100 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		dulaglu: 'Dulaglutida (Trulicity) 0,75 mg __________ Contínuo \n Injetar 0,75 mg uma vez por semana \n \n',
+		tirez: 'Tirzepatida (Mounjaro) 5 mg __________ Contínuo \n Injetar 5 mg uma vez por semana \n \n',
+		liraglut: 'Liraglutida (Victoza) 0,6 mg __________ Contínuo \n Iniciar com 0,6 mg ao dia; aumentar gradativamente conforme orientação \n \n',
+		semaglu: 'Semaglutida (Ozempic) 0,25 mg __________ Contínuo \n Aplicar 0,25 mg uma vez por semana; aumentar conforme orientação \n \n',
+		exena: 'Exenatida (Byetta) 5 mcg __________ Contínuo \n Aplicar 5 mcg de 12/12h \n \n',
+		acarb25: 'Acarbose 25 mg __________ Contínuo \n Tomar 1 cp(s) com cada refeição principal \n \n',
+		acarb50: 'Acarbose 50 mg __________ Contínuo \n Tomar 1 cp(s) com cada refeição principal \n \n',
+		migli25: 'Miglitol 25 mg __________ Contínuo \n Tomar 1 cp(s) com cada refeição principal \n \n',
+		migli50: 'Miglitol 50 mg __________ Contínuo \n Tomar 2 cp(s) com cada refeição principal \n \n',
+		glucobay25: 'Glucobay 25 mg __________ Contínuo \n Tomar 1 cp(s) com cada refeição principal \n \n',
+		glucobay50: 'Glucobay 50 mg __________ Contínuo \n Tomar 2 cp(s) com cada refeição principal \n \n',
+		inph: 'Insulina NPH __________ Contínuo \n Aplicar ui de manhã, ui no almoço e ui no jantar \n \n',
+		iregular: 'Insulina Regular __________ Contínuo \n Aplicar ui de manhã, ui no almoço e ui no jantar \n \n',
+		glargi: 'Insulina Glargina 100ui/ml-REFIL 3 mL subcutânea  __________ Contínuo \n Aplicar  ui de 1 em 1 dia durante 180 dias pela manhã \n \n',
+		aspar: 'Insulina Asparte 100ui/ml Caneta de 3 mL subcutânea  __________ Contínuo \n Aplicar  ui de 1 em 1 dia durante 180 dias pela manhã \n \n',
+		deglu: 'Insulina Degludeca (Tresiba) __________ Contínuo \n Aplicar dose conforme prescrição uma vez ao dia, no mesmo horário \n \n',
+		lispro: 'Insulina Lispro (Humalog) __________ Contínuo \n Aplicar conforme orientação médica, geralmente antes das refeições \n \n',
+		glulin: 'Insulina Glulisine (Apidra) __________ Contínuo \n Aplicar 15 minutos antes das refeições conforme orientação médica \n \n',
+		detemi: 'Insulina Detemir (Levemir) __________ Contínuo \n Aplicar ui ao deitar ou conforme prescrição \n \n',
+		// Anti-hipertensivos
+		selo25: 'Selozok (Metoprolol) 25 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		selo50: 'Selozok (Metoprolol) 50 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		metopro25: 'Metoprolol 25 mg __________ Contínuo \n Tomar 1 cp(s) ao dia. \n \n',
+		metopro50: 'Metoprolol 50 mg __________ Contínuo \n Tomar 1 cp(s) ao dia. \n \n',
+		bisopro5: 'Bisoprolol 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		bisopro10: 'Bisoprolol 10 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		los: 'Losartana 50 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		valsar: 'Valsartana 320 mg __________ Contínuo \n Tomar 1 cp(s) ao dia. \n \n',
+		olme20: 'Olmesartana 20 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		olme40: 'Olmesartana 40 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		olmeh: 'Olmesartana {+} Hidroclorotiazida (40 mg {+} 25 mg) __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		telmi: 'Telmisartana 40 mg __________ Contínuo \n Tomar 1 cp(s) ao dia. \n \n',
+		enala5: 'Enalapril 5 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		enala10: 'Enalapril 10 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		enala20: 'Enalapril 20 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		capto: 'Captopril 25 mg __________ Contínuo \n Tomar 1 cp(s) de 8/8h \n \n',
+		ramipri: 'Ramipril 2,5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		anlo: 'Anlodipino 5 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		nife10: 'Nifedipino 10 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		nife20: 'Nifedipino 20 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		dilti: 'Diltiazem 180 mg (liberação prolongada) __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		verapa: 'Verapamil 180 mg (liberação prolongada) __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		anlo5: 'Anlodipino 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		anlo10: 'Anlodipino 10 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		hidro: 'Hidroclorotiazida 25 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		clorta: 'Clortalidona 25 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		indapa: 'Indapamida 1,5 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		furo: 'Furosemida 40 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		espiro: 'Espironolactona 25 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		minox: 'Minoxidil 5 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		hidrala: 'Hidralazina 25 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		valsarh: 'Valsartana {+} Hidroclorotiazida (160 mg {+} 12,5 mg) __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		canderh: 'Candesartan {+} Hidroclorotiazida (16 mg {+} 12,5 mg) __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		doxazo2: 'Doxazosina 2 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		doxazo4: 'Doxazosina 4 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		// Antipsicóticos
+		halocp: 'Haloperidol 5 mg __________ 120 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		haloim: 'Haloperidol Decanoato 50 mg/ml __________ ampolas \n Aplicar ampolas im em glúteo a cada 28 dias. \n \n',
+		clorpro: 'Clorpromazina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		clorpro100: 'Clorpromazina 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		levomep: 'Levomepromazina 25 mg __________ 90 cp(s) \n Tomar 1 cp(s) ao deitar. \n \n',
+		triflu: 'Trifluoperazina 5 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h \n \n',
+		flufen: 'Flufenazina 2,5 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		risp1: 'Risperidona 1 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		risp2: 'Risperidona 2 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		pedrisp: 'Risperidona 1 mg/ml __________ 1 Frasco \n Tomar gotas à noite. \n \n',
+		quet: 'Quetiapina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		quet100: 'Quetiapina 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		olanza: 'Olanzapina 2,5 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		olanza5: 'Olanzapina 5 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		olanza10: 'Olanzapina 10 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		arip: 'Aripiprazol 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		arip15: 'Aripiprazol 15 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		clozapina: 'Clozapina 25 mg __________  cp(s) \n Tomar cp(s) à noite (monitorar contagem leucocitária). \n \n',
+		zipra: 'Ziprasidona 80 mg __________ 60 cp(s) \n Tomar 1 cp(s) pela manhã e 1 à noite. \n \n',
+		palip: 'Paliperidona 6 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		carip: 'Cariprazina 1,5 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		brexpi: 'Brexpiprazol 0,5 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		lumate: 'Lumateperona 42 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		// Prescrições Específicas
+		asmajato: 'USO INALATÓRIO \n  \n Beclometasona 250 mcg  ______________ Contínuo \n 02 jatos de 12/12 horas \n  \n Salbutamol Spray 100 mcg  ______________ Contínuo \n 04 jatos de 4/4 horas, se crise. \n \n',
+		gestafol:
+			'ÁCIDO FÓLICO 0,2 mg/ml  SOLUÇÃO ORAL ______________ Contínuo \n Tomar 40 (quarenta) gotas 1x ao dia, 30 minutos antes Do almoço. \n  \n  BROMOPRIDA 10 mg ______________ 1CX \n  \n  PARACETAMOL 500 mg ______________ 2 cx(s) \n Tomar 01 cp(s) de 8/8hs se dor de cabeça. \n  \n USO TÓPICO \n  \n  Repelente ______________ 02 frasco(s) \n Aplicar nas áreas expostas Do corpo, entre o amanhecer e a hora de dormir; \n Reaplicar de acordo com os intervalos recomendados nas instruções de uso; \n Caso use protetor solar, aplique o protetor antes e o repelente depois; \n Não aplicar na região dos olhos, narinas e boca; \n Não dormir com repelente, \n Não utilizar se a pele estiver irritada ou lesionada; \n Não aplicar por baixo de roupas; \n Em caso de intoxicação e/ou reação adversa, procurar a UBS mais próxima. \n  \n OBSERVAÇÃO: Não tomar o Ácido Fólico com leite. \n \n',
+		ivas1:
+			'Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6 horas se dor ou febre. \n  \n  Prednisona 20 mg __________ 10 cp(s) \n Tomar 2 cp(s) de manhã por 5 dias. \n  \n  Acebrofilina 50 mg/5 mL __________ 1 frasco \n Tomar 10 mL de 12/12 horas por 5 dias. \n  \n  Soro fisiológico 0,9% __________ 1 frasco \n Lavar As narinas de 4/4 horas. \n \n',
+		ivas2:
+			'Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6 horas se dor ou febre. \n  \n  Loratadina 10 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12 horas por 5 dias. \n  \n  Soro fisiológico 0,9% __________ 1 frasco \n Lavar As narinas de 4/4 horas. \n \n',
+		gea: 'Soro de reidratação oral __________ 10 envelopes \n Tomar 1 litro de soro ao dia, durante 5 dias. \n  \n  Probiótico (Enterogermina, Floratil, Bifidoflora, outros) __________ 1 cx(s)  \n Tomar 1 flaconete de 12/12 horas por 5 dias. \n  \n  Bromoprida 10 mg __________ 1 cx(s)  \n Tomar 1 cp(s) de 8/8 horas, se náusea ou vômitos. \n  \n  Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6 horas se dor ou febre. \n \n',
+		deng: 'Dipirona 500 mg ______________ 20cp \n Tomar 1cp de 6/6 horas se dor ou febre \n  \n Bromoprida 10 mg ______________ 1cx \n Tomar 1cp de 8/8hs se náusea ou vômito. \n  \n Soro de reidratação oral __________ 10 envelopes \n Tomar 1 litro de soro ao dia, durante 5 dias. \n  \n Hidratação abundante \n  \n Sinais de alarme - ATENÇÃO \n Caso apresente algum dos seguintes sintomas, procure imediatamente assistência médica: \n Dor abdominal forte e constante. \n Vômitos frequentes. \n Sinais de líquidos se acumulando no corpo. \n Sensação de desmaio ou tontura ao levantar. \n Sonolência ou irritabilidade contínuos. \n Sangramentos em gengivas, nariz ou outras mucosas. \n Redução na quantidade de urina. \n Diminuição da temperatura corpórea. \n Dificuldade para respirar. \n \n',
+		tadala: 'FENTOLAMINA 1,25 mg/ML \n TADALAFILA 40 mg/ML \n ARGININA 0,1 mg/ML  \n IOHIMBINA 0,1 mg/ML  \n BROMOPRIDA 2 mg/ML\n BROMOPRIDA 2 mg/ML  __________ 14 mL  \n 1 JATO SUBLINGUAL UMA VEZ AO DIA \n \n',
+		pedgea:
+			'Soro de reidratação oral __________ 10 envelopes \n Tomar 1 litro de soro ao dia, durante 5 dias. \n  \n  Probiótico (Enterogermina, Floratil, Bifidoflora, outros) __________ 1 cx(s)  \n Tomar 1 flaconete/sachê de 12/12 horas por 5 dias. \n  \n  Bromoprida 4 mg/ml __________ 1 frasco \n Tomar gotas de 8/8 horas, se náusea ou vômitos. \n  \n  Dipirona 500 mg/ml __________ 1 frasco \n Tomargotas de 6/6 horas se dor ou febre. \n \n',
+		covid:
+			'PaxlovidTM (Nirmatrelvir {+} Ritonavir) ______________ 10cp \n Tomar 2 cp(s) de Nirmatrelvir mais 1 cp(s) de Ritonavir, juntos, de 12/12 horas por 5 dias. \n {Iniciar somente se até 5 dias do início dos sintomas.} \n Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6 horas se dor ou febre. \n  \n Bromoprida 10 mg ______________ 1cx \n Tomar 1cp de 8/8hs se náusea ou vômito. \n  \n Sinais de alarme - ATENÇÃO \n Caso apresente algum dos seguintes sintomas, procure imediatamente assistência médica: \n Falta de ar; \n Respiração rápida/ ofegante; \n Febre persistente; \n Dor forte/ dor súbita. \n Caso esses sintomas ocorram, retornar para reavaliação, \n ou procurar o pronto atendimento. \n \n',
+		lactente: 'Sulfato Ferroso 125 mg/ml ______________ Contínuo \n Dar  gotas até 2 anos de idade. \n  \n  Vitamina D 200 ui ______________ Contínuo \n \n',
+		// Estatinas
+		sinv20: 'Sinvastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		sinv40: 'Sinvastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		sinv80: 'Sinvastatina 80 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		rosu5: 'Rosuvastatina 5 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		rosu10: 'Rosuvastatina 10 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		rosu20: 'Rosuvastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		rosu40: 'Rosuvastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		ator20: 'Atorvastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		ator40: 'Atorvastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		ator80: 'Atorvastatina 80 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		prav10: 'Pravastatina 10 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		prav20: 'Pravastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		prav40: 'Pravastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		prav80: 'Pravastatina 80 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		lovast10: 'Lovastatina 10 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		lovast20: 'Lovastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		lovast40: 'Lovastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		flustat20: 'Fluvastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		flustat40: 'Fluvastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		pitav2: 'Pitavastatina 2 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		pitav4: 'Pitavastatina 4 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		// Anticoagulantes e Antiagregantes
+		mareva: 'Varfarina Sódica 5 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, conforme prescrição e monitoramento do INR. \n \n',
+		rivarox: 'Rivaroxabana 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, após refeição. \n \n',
+		rivarox15: 'Rivaroxabana 15 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, após refeição. \n \n',
+		rivarox20: 'Rivaroxabana 20 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, após refeição. \n \n',
+		apix: 'Apixabana 5 mg __________ 60 cp(s) \n Tomar 1 cp(s) a cada 12 horas, conforme prescrição. \n \n',
+		dabig: 'Dabigatrana 150 mg __________ 60 cp(s) \n Tomar 1 cápsula de 12/12h. \n \n',
+		edox: 'Edoxabana 60 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		acid: 'Ácido Acetilsalicílico (AAS) 100 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, após refeição, para prevenção cardiovascular. \n \n',
+		clopido: 'Clopidogrel 75 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, conforme prescrição. \n \n',
+		ticag: 'Ticagrelor 90 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		prasug: 'Prasugrel 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, conforme prescrição médica. \n \n',
+		// Antieméticos
+		onda8: 'Ondansetrona 8 mg __________ 1cx \n Tomar 1 cp(s) de 8/8h, se náusea ou vômito. \n \n',
+		onda4: 'Ondansetrona 4 mg __________ 1cx \n Tomar 1 cp(s) de 8/8h, se náusea ou vômito. \n \n',
+		metoclop: 'Metoclopramida 10 mg __________ 20 cp(s) \n Tomar 1 cp(s) a cada 8 horas, antes das refeições. \n \n',
+		domp: 'Domperidona 10 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h, se náusea ou vômito. \n \n',
+		dimeni: 'Dimenidrinato 50 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h, se náusea ou vômito. \n \n',
+		mecliz: 'Meclizina 25 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h, se náusea ou vômito. \n \n',
+		// Outros
+		condo: 'Condroitina 1,2G {+} Glicosamina 1,5G __________ 60 sachês \n Tomar 1 sachê dissolvido em um copo com água a noite \n \n',
+		alendron: 'Alendronato 70 mg __________ 8cp \n Tomar 1 cp(s) por semana. \n \n',
+		mesigy: 'Noretisterona 50 mg {+} Estradiol 5 mg __________ 6 ampolas \n Aplicar 1 ampola im em glúteo profundo uma vez ao mês. \n \n',
+		dexfer: 'Dexfer 400 mg __________ 120cp \n Tomar 1 cp(s) ao dia no almoço \n \n',
+		b12sl: 'Metilcobalamina 1.000 mcg __________ 60cp \n Tomar 1 cp(s) sublingual após o almoço \n \n',
+		calcio: 'Cálcio 600 mg {+} Vitamina D 400 ui ______________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		d1000: 'Colicalciferol D 1.000 ui ______________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		d50000: 'Colicalciferol D 50.000 ui ______________ 8cp \n Tomar 1 cp(s) por semana por 8 semanas \n \n',
+		b12im: 'Citoneurim 5.000 ______________ 3 ampolas \n Aplicar 1 ampola im uma vez por semana por 3 semanas \n \n',
+		medrox: 'Medroxiprogesterona 150 mg ______________ 2 ampolas \n Aplicar 1 ampola im uma vez a cada 3 meses \n \n',
+		levot4: 'Levotiroxina 25 mcg ______________ Contínuo \n Tomar 01 cp(s) em jejum \n \n',
+		ciprofi: 'Ciprofibrato 100 mg  ______________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		alopur: 'Alopurinol 300 mg  ______________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		maxalt: 'Maxalt  ______________ 1 cx(s)  \n Tomar 1 cp(s) ao dia se crise de enxaqueca \n \n',
+		acebro: 'Acebrofilina 50 mg/5 mL ______________ 2 frasco(s) \n Tomar 10 mL de 12/12h por 7 dias \n \n',
+		sorooral: 'Soro de reidratação oral  ______________ 5 envelopes \n Tomar 1 litro de soro por dia, durante 5 dias \n \n',
+		entero: 'Enterogermina ______________ 1 cx(s)  \n Tomar 1 flaconete de 12/12h por 5 dias \n \n',
+		bromo: 'Bromoprida 10 mg  ______________ 1 cx(s)  \n Tomar 1 cp(s) de 8/8 horas, se náusea ou vômito \n \n',
+		plasi: 'Metoclopramida 10 mg  ______________ 1 cx(s)  \n Tomar 1 cp(s) de 8/8 horas, se náusea ou vômito \n \n',
+		vonau: 'Ondasentrona 8 mg  ______________ 1cx \n Tomar 1 cp(s) de 8/8 horas, se náusea ou vômito \n \n',
+		tobra: 'Tobramicina colírio ______________ 1 frasco \n Aplicar 1 gota em cada olho de 4 em 4 horas, por 5 dias. \n \n',
+		ciprocolirio: 'Ciprofloxacino colírio ______________ 1 frasco \n Aplicar 1 gota em cada olho de 4 em 4 horas, por 5 dias. \n \n',
+		ciprooto: 'Ciprofloxacina otológica ______________ 1 frasco \n Aplicar 5 gotas em cada ouvido de 6/6h por 7 dias. \n \n',
+		betnova: 'Oto Betnovate ______________ 1 frasco \n Aplicar 5 gotas no ouvido afetado de 12/12 horas por 7 dias. \n \n',
+		cerum: 'Cerumin ______________ 1 frasco \n Aplicar 5 gotas em cada ouvido de 6/6h por 7 dias. \n \n',
+		hexomed: 'Hexomedine spray ______________ 1 frasco \n Aplicar na boca 4 vezes ao dia, antes dos alimentos. \n \n',
+		malvatri: 'Malvatricin spray ______________ 1 frasco \n Aplicar na boca 4 vezes ao dia, antes dos alimentos. \n \n',
+		minilax: 'Minilax ______________ 1 bisnaga \n Aplicar, via retal, todo o conteúDo da embalagem. \n \n',
+		buscop: 'Escopolamina 10 mg ______________ 1Cxs \n Tomar  1cp de 8/8 horas, se cólica \n \n',
+		mecli: 'Meclin 25 mg ______________ 1Cxs \n Tomar  1cp de 12/12 horas, se crise de labirintite \n \n',
+		luft: 'Simeticona 125 mg ______________ 1Cxs \n Tomar  1cp de 8/8 horas, se cólica \n \n',
+		neba: 'Neomicina {+} Bacitracina pomada: 1 bisnaga \n Aplicar na região afetada de 12/12 horas por 7 dias. \n \n',
+		sulprata: 'Sulfadiazina de Prata 1% pomada: 1 bisnaga \n Aplicar na região afetada de 12/12 horas por 7 dias. \n \n',
+		ferro: 'Sulfato Ferroso 40 mg ______________ Contínuo \n 1 cp, 30 min. antes Do almoço, da 20ª semana de gestação a 3 meses Do pós parto. \n \n',
+		peg: 'PEG 4.000 sem eletrólitos ______________ Contínuo \n Diluir 40gramas (2 colheres de sopa) em um copo de água, e tomar uma vez ao dia  \n \n',
+		// Pediatria
+		pedparacet: 'Paracetamol 200 mg/ml __________ 2 frasco(s) \n Tomar gotas de 6/6 horas, se dor ou febre \n (Dose: 1 gota/kg/dose) \n \n',
+		peddip: 'Dipirona 500 mg/ml __________ 2 frasco(s) \n Tomar gotas de 6/6 horas, se dor ou febre \n (Dose: 1 gota/kg/dose) \n \n',
+		pedibup: 'Ibuprofeno 100 mg/ml __________ 2 frasco(s) \n Tomar gotas de 6/6 horas, se dor ou febre \n (Dose: 1 gota/kg/dose) \n \n',
+		pedceto: 'Cetoprofeno 20 mg/ml __________ 2 frasco(s) \n Tomar gotas de 8/8 horas, por 5 dias \n (Dose: 1 gota/kg/dose) \n \n',
+		pedazi: 'Azitromicina 200 mg/5 mL suspensão oral __________ 2 frasco(s) \n Tomar ml ao dia por 5 dias \n (Dose: 10 mg/kg/dia = 0,25 mL/kg/dia) \n \n',
+		pedcefa: 'Cefalexina 250 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar X mL de 6/6h por 7 dias (6h, 12h, 18h e 24h) \n (Dose: 1 mL/kg/dia divididos em 4 doses iguais) \n \n',
+		pedcefaclo: 'Cefaclor 250 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar X mL de 12/12 horas por 10 dias \n (Dose: 0,5 a 1 mL/kg/dia) \n \n',
+		amox250: 'Amoxicilina 250 mg/5 mL __________ 2 frasco(s) \n Tomar ml de 8/8 horas por 7 dias \n \n',
+		clav250: 'Amoxicilina {+} clavulanato (250{+}62,5)mg/5 mL __________ 2 frasco(s) \n Tomar ml de 8/8 horas por 7 dias \n \n',
+		amox400: 'Amoxicilina 400 mg __________ 2 frasco(s) \n Tomar ml de 12/12 horas por 7 dias \n \n',
+		clav400: 'Amoxicilina {+} clavulanato (400{+}57)mg __________ 2 frasco(s) \n Tomar ml de 12/12 horas por 7 dias \n \n',
+		pedbactri: 'Sulfametoxazol {+} Trimetoprima 200 mg/40 mg/ml __________ 1 Frasco \n Tomar ml de 12/12h. \n \n',
+		pedclari: 'Claritromicina 250 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar X mL de 12/12 horas por 10 dias \n (Dose: 15 mg/kg/dia) \n \n',
+		pedsulfa: 'Sulfametoxazol {+} Trimetroprim 200 mg {+} 40 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar X mL de 12/12 horas por 10 dias \n (Dose: 1 mL/kg/dia) \n \n',
+		pedmebe: 'Mebendazol 100 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar 5 mL após almoço e jantar por 3 dias. Repetir após 15 dias. \n (Dose: Repetir após 15 dias. Dose dobrada: Teníase) \n \n',
+		pedalbe: 'Albendazol 400 mg/10 mL suspensão oral __________ X frasco \n Dar 10 mL após o almoço, repetir após 15 dias. Acima de 2 anos. \n \n',
+		pedanni: 'Annita 20 mg/10 mL suspensão oral __________ X frasco \n Dar  ml de 12/12 horas por 3 dias. Acima de 1 ano. \n Dose: 375 mL (7,5 mg) por kg, 12/12 horas 3 dias \n \n',
+		pedmetro: 'Metronidazol 200 mg/5 mL suspensão oral __________ 1 frasco \n Dar X mL de 12/12 horas por X dias. \n Giardíase: 0,25 mL/kg/dose 7 dias. Amebíase: 0,4 mL/kg/dose 10 dias \n \n',
+		pedoselt: 'Oseltamivir 75 mg cápsula __________ X cp(s) \n Diluir a cápsula em 5 mL de água. Dar X ml de 12/12 horas por 5 dias. \n (Dose: < 15 Kg: 2 mL; 15 a 23: 3 mL; 23 a 40: 4 mL; Acima de 40 Kg: 1 cp) \n \n',
+		pedpred: 'Prednisolona 3 mg/ml xarope __________ 1 frasco \n Dar  ml de manhã, por 5 dias. \n \n',
+		peddexa: 'Dexametasona 0,5 mg/5 mL xarope __________ 1 frasco \n Dar X ml de 12/12 horas, por 5 dias. \n (Dose: 1 a 2 mL/kg/dia) \n \n',
+		peddex: 'Dexclorfeniramina 2 mg/5 mL xarope __________ 1 frasco \n Dar X ml de 8/8 horas, por X dias. \n (>6 meses = 0,4 mL/kg/dia) \n \n',
+		pedlorat: 'Loratadina 1 mg/ml xarope __________ 1 frasco \n Dar X ml uma vez ao dia por X dias. \n (> 2 anos. Dose: 2 a 5a = 5 mL; a partir de 6a = 10 mL) \n \n',
+		peddeslorat: 'Desloratadina 0,5 mg/ml __________ 1 frasco \n Tomar  ml ao dia por 10 dias \n \n',
+		pedalleg: 'Allegra pediátrico solução oral __________ 1 frasco \n Dar X ml de 12/12 horas por 7 dias. \n \n',
+		pedmonte: 'Montelucaste 4/5/10 mg __________ 1 caixa \n 2 a 5 anos de idade: Dar 1 cp(s) mastigável de 4 mg diariamente \n 6 a 14 anos: Dar 1 cp(s) mastigável de 5 mg diariamente \n \n',
+		pedacebro: 'Acebrofilina 25 mg/5 mL __________ 2 frasco(s) \n Tomar  ml de 12/12 horas por 7 dias \n \n',
+		pedvonau: 'Ondasentrona 4 mg  ______________ 1cx \n Dar  cp(s) de 8/8 horas, se náusea ou vômito \n \n',
+		peddomp: 'Domperidona 1 mg/ml suspensão oral __________ 1 frasco \n Dar X ml de 8/8 horas \n (Dose: 0,25 mL/kg/dose) \n \n',
+		pedbromo: 'Bromoprida 4 mg/ml __________ 2 frasco(s) \n Tomar  gotas de 8/8 horas, se náusea ou vômito \n \n',
+		pedfeno: 'Fenobarbital 40 mg/ml gotas: 1 frasco \n Dar X gotas à noite.  \n (Dose: 3 a 5 mg/kg/dia ? 1 gota = 1 mg) \n \n',
+		peddifen: 'Difenilhidantoína 100 mg/5 mL: 1 frasco \n Dar X ml de 12/12 horas. \n (Dose: 10 mg/kg/dia = 0,5 mL/kg/dia) \n \n',
+		pedcarba: 'Carbamazepina 100 mg/5 mL xarope: 1 frasco \n Dar X ml de 12/12 horas. \n (Dose: 10 a 30 mg/kg/dia = 0,5 a 1,5 mL/kg/dia) \n \n',
+		peddepak: 'Ácido Valpróico 250 mg/5 mL xarope: 1 frasco \n Dar X ml de 12/12 horas. \n (Dose: 15 a 60 mg/kg/dia = 0,3 a 1,2 mL/kg/dia) \n \n',
+		protovit: 'ProtoVit plus gotas ______________ 1 frasco \n Dar 12 gotas 1 vez ao dia. \n (Contém 500 UI de vitamina D, 1.500 UI de vitamina A) \n \n',
+		pednista: 'Nistatina {+} Óxido de Zinco pomada ______________ 1 bisnaga \n Aplicar após cada troca de fralda. \n \n',
+		pedureia: 'Creme de Uréia 5% {+} óleo de amêndoas pomada ______________ 150g \n Aplicar em todo o corpo imediatamente após o banho. \n \n',
+		pedperme5: 'Permetrina 5% loção ______________ 1 frasco (para Escabiose) \n Aplicar em todo o corpo, à noite, por 3 noites seguidas. De manha, banho para retirar o produto. Após 1 semana, repetir \n \n',
+		pedperme1: 'Permetrina 1% xampu ______________ 1 frasco (para Pediculose) \n Aplicar e deixar em contato por dez minutos, depois enxaguar bem. Repetir após 1 dia, depois 1 semana \n \n',
+		pednacl: 'Solução nasal de NaCl 0,9% ______________ 1 frasco \n Aplicar de 4 em 4 horas em ambas narinas por o dia. \n \n',
+		pednacl3: 'Solução nasal de Cloreto de Sódio 3% spray nasal ______________ 1 frasco \n Aplicar de 8/8h em ambas narinas. \n \n',
+		glicel: 'Supositório de Glicerina Infantil ______________ 1 caixa \n Aplicar, via retal. \n \n',
+		desc: 'Descon gotas __________ 1 frasco \n Tomar gotas de 8/8 horas por 5 dias \n (Dose: 2 gotas/kg/dia) \n \n',
+		bactrim: 'Sulfametoxazol + Trimetroprima (800+160)mg __________ 1caixa(s) \n Tomar 1 cp de 12/12 horas por 5 dias \n \n',
+		pedosel: 'Oseltamivir 75 mg cápsula __________ X comprimidos \n Diluir a cápsula em 5ml de água. Dar X ml de 12/12 horas por 5 dias. \n (Dose: < 15 Kg: 2mL; 15 a 23: 3 mL; 23 a 40: 4 mL; Acima de 40 Kg: 1 cp) \n \n',
+		ateno: 'Atenolol 25mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		ezet: 'Ezetimiba 10 mg __________ Contínuo \n Tomar 1 cp à noite \n \n',
+		b12nova: 'Bedoze __________ 2cx(s) \n Aplicar 1 ampola im uma vez por semana por 4 semanas \n \n',
+		ara: 'Aradois 50mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		ablok: 'Ablok 25mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		xarel: 'Xarelto mg __________ Contínuo \n Tomar 1 cp ao dia \n \n',
+		carvedi: 'Carvedilol mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		rosu: 'Rosuvastatina 20mg __________ Contínuo \n Tomar 1 cp à noite \n \n',
+		ator: 'Atorvastatina 20mg __________ Contínuo \n Tomar 1 cp à noite \n \n',
+		enala: 'Enalapril mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		daforin: 'Daforin 20mg/ml __________ 2 Frascos \n Tomar 1 cp de manhã \n \n',
+		neulep: 'Neuleptil __________ 60 Cps \n Tomar 1 cp à noite \n 4%: 40 mg/ml 1mL: 40gts, 1gt=1mg \n \n',
+		clitio: 'Carbonato de Lítio 300mg __________ 60 Cps \n Tomar 1 cp à noite \n \n',
+		metildo: 'Metildopa 250mg __________ Contínuo \n Tomar 1 cp de 8/8 horas \n \n',
+		// complexas
+		asma_ps:
+			'Salbutamol Spray 100 mcg/dose ou Fenoterol Spray 100 mcg/dose\n Fazer 4 a 10 puffs cada 20min na primeira hora.\n- Se Nebulização: Salbutamol 5mg/mL ou Fenoterol 5mg/mL\n Diluir 10 a 20 gotas em 4mL de SF0,9%. Fazer cada 20min na primeira hora.\n\n**ANTICOLINÉRGICO DE CURTA DURAÇÃO**\n- Se Bombinha / Spray: Ipratrópio Spray 200 mcg/dose\n Fazer 4 a 10 puffs cada 20min na primeira hora.\n- Se Nebulização: Ipratrópio 0,25mg/mL\n Diluir 20 a 40 gotas em 4mL de SF0,9%. Fazer cada 20min na primeira hora.\n\n**CORTICOIDE**\n- Se VO disponível: Prednisona 40mg VO AGORA ou Prednisolona 40mg VO AGORA\n- Se VO indisponível: Hidrocortisona (100mg/mL) 100mg EV AGORA ou Metilprednisolona (125mg/2mL) 62,5mg EV AGORA\n\n**SULFATO DE MAGNÉSIO**\n- Apenas em casos refratários ao tratamento com broncodilatadores otimizado\n Sulfato de Magnésio 50% (5g/10mL): Fazer 4mL + 100mL de SF0,9% EV AGORA, correr em 30 minutos.\n\n**OXIGENIOTERAPIA**\n- Cateter Nasal até 6L/min.\n- Máscara Não Reinalante até 15L/min.\n- VNI se necessário e indicado.\n- IOT se insuficiência respiratória franca.\n\n- Retornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		asma_alta_cara:
+			'Formoterol 12 mcg + Budesonida 400 mcg (Alenia®)\n - Utilize uma inalação por VO a 12/12h, por 30d. Seguir orientações da bula. Enxaguar boca após uso.\n\n Prednisolona 40 mg\n - Tomar 1cp VO de manhã, 1x/dia, por 5d.\n\n Salbutamol 100 mcg/dose \n Fazer 2 puffs até 4/4h em caso de cansaço sob demanda. Interromper em caso de palpitação\n\n Lavagem nasal com Soro Fisiológico (0,9%)\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Alimentação adequada; evitar alérgenos\n- Hidratar ~2L/dia.\n- Evitar alérgenos (poeira, perfumes, mofo, ácaros).\n- Evitar banhos muito quentes.\n\nRetornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		asma_alta_barato:
+			'Salbutamol 100 mcg/dose \n - Fazer 1 puff 8/8h por 30d.\n - Fazer 2 puffs até 4/4h em caso de cansaço sob demanda. Interromper em caso de palpitação\n\n Beclometasona 250 mcg/dose\n - Utilize uma inalação por VO a 12/12h, por 30d. Seguir orientações da bula. Enxaguar boca após uso.\n\n Prednisolona 40 mg\n - Tomar 1cp VO 1x/dia, de manhã, por 5d.\n\n Lavagem nasal com Soro Fisiológico (0,9%)\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Alimentação adequada; evitar alérgenos\n- Hidratar ~2L/dia.\n- Evitar alérgenos (poeira, perfumes, mofo, ácaros).\n- Evitar banhos muito quentes.\n\nRetornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		dpoc_ps:
+			'Salbutamol Spray 100 mcg/dose ou Fenoterol Spray 100 mcg/dose\n Fazer 4 a 10 puffs cada 20min na primeira hora.\n- Se Nebulização: Salbutamol 5mg/mL ou Fenoterol 5mg/mL\n Diluir 10 a 20 gotas em 4mL de SF0,9%. Fazer cada 20min na primeira hora.\n\n**ANTICOLINÉRGICO DE CURTA DURAÇÃO**\n- Se Bombinha / Spray: Ipratrópio Spray 200 mcg/dose\n Fazer 4 a 10 puffs cada 20min na primeira hora.\n- Se Nebulização: Ipratrópio 0,25mg/mL\n Diluir 20 a 40 gotas em 4mL de SF0,9%. Fazer cada 20min na primeira hora.\n\n**CORTICOIDE**\n- Se VO disponível: Prednisona 40mg VO AGORA ou Prednisolona 40mg VO AGORA\n- Se VO indisponível: Hidrocortisona (100mg/mL) 100mg EV AGORA ou Metilprednisolona (125mg/2mL) 62,5mg EV AGORA\n\n**SULFATO DE MAGNÉSIO**\n- Apenas em casos refratários ao tratamento com broncodilatadores otimizado\n Sulfato de Magnésio 50% (5g/10mL): Fazer 4mL + 100mL de SF0,9% EV AGORA, correr em 30 minutos.\n\n**OXIGENIOTERAPIA**\n- O2 em baixo fluxo (1-3 L/minuto) é recomendado em todos os pacientes com exacerbação aguda da DPOC e SatO2 < 90%.\n- VNI em BIPAP\n- IOT se insuficiência respiratória franca.\n\n**ANTIBIOTICOTERAPIA**\n- Indicada se piora da dispnéia + aumento de secreções + escarro purulento\n Amoxicilina + Clavulanato 875+125mg VO de 12/12 horas por 7 a 10 dias.\n Levofloxacino 750mg VO de 24/24 horas por 7d.\n Azitromicina 500mg VO de 24/24 horas por 5d.\n\nRetornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		dpoc_alta:
+			'Salbutamol 100 mcg/dose \n - Fazer 1 puff 8/8h por 30d.\n - Fazer 2 puffs até 4/4h em caso de cansaço sob demanda. Interromper em caso de palpitação\n\n Beclometasona 250 mcg/dose\n - Utilize uma inalação por VO a 12/12h, por 30d. Seguir orientações da bula. Enxaguar boca após uso.\n\n Prednisolona 40 mg\n - Tomar 1cp VO 1x/dia, de manhã, por 5d.\n\n Lavagem nasal com Soro Fisiológico (0,9%)\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Alimentação adequada; evitar alérgenos\n- Hidratar ~2L/dia.\n- Evitar alérgenos (poeira, perfumes, mofo, ácaros).\n- Evitar banhos muito quentes.\n\nRetornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		farv: 'Prednisolona 40mg\n - Tomar 1cp VO 1x/dia por 4d\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha 6/6h (máximo de 3 dias). Dissolver lentamente na boca.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem\n- Tenha uma dieta saudável, durma bem e evite álcool.\n- Mudanças em medicações devem ser com orientação médica.\n- Faça acompanhamento médico regular.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão\n\n- INTERNAÇÃO:\n\n- Pacientes com complicações supurativas (como abscesso retrofaríngeo ou tonsilar) ou toxemia significativa devido a infecção bacteriana devem ser internados para antibioticoterapia parenteral e avaliação cirúrgica.',
+		farb_penicilina:
+			'Penicilina Benzatina 1,2 milhões de unidades.\n - Uma aplicação, IM, dose única.\n\n Prednisolona 40mg\n Tomar 1cp VO por VO, 1x/dia, de manhã, por 4d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha 6/6h (máximo de 3 dias). Dissolver lentamente na boca.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Alimentação adequada, sono regular, evitar álcool. Não alterar medicações de rotina sem orientação.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão\n\n- INTERNAÇÃO:\n\n- Pacientes com complicações supurativas (como abscesso retrofaríngeo ou tonsilar) ou toxemia significativa devido a infecção bacteriana devem ser internados para antibioticoterapia parenteral e avaliação cirúrgica.',
+		farb_amoxclav:
+			'Amoxicilina-Clavulanato 875/125 mg\n - Tomar 1cp VO 12/12h, por 10d\n\n Prednisolona 40mg\n - Tomar 1cp VO 1x/dia, de manhã, por 4d\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha 6/6h (máximo de 3 dias). Dissolver lentamente na boca.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Alimentação adequada, sono regular, evitar álcool. Não alterar medicações de rotina sem orientação.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão\n\n- INTERNAÇÃO:\n\n- Pacientes com complicações supurativas (como abscesso retrofaríngeo ou tonsilar) ou toxemia significativa devido a infecção bacteriana devem ser internados para antibioticoterapia parenteral e avaliação cirúrgica.',
+		influenza_alto_risco:
+			'Oseltamivir 75 mg (Tamiflu®)\n - Tomar 1cp VO de 12/12 horas por 5d.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Paciente com risco de evolução para insuficiência respiratória.\n- Pacientes em síndrome respiratória aguda grave.',
+		pac_amoxclav:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n - Tomar 1cp VO oralmente a 12/12h por 10d.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.\n\n- INTERNAÇÃO:\n\nConsiderar se CURB-65 ≥2, comorbidades (DPOC, DM, ICC, neoplasias, DRC), intolerância VO ou baixo acesso à saúde.',
+		pac_levofloxacino:
+			'Levofloxacina 750 mg\n - Tomar 1cp VO al día por 7d.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.\n\n- INTERNAÇÃO:\n\nSe CURB-65 ≥2, comorbidades (DPOC, DM, ICC, neoplasias, DRC), intolerância VO ou baixo acesso à saúde.',
+		pac_cefuroxima_azitromicina:
+			'Cefuroxima 500 mg\n - Tomar 1cp VO por vía oral 12/12h por 7d.\n\n Azitromicina 500 mg\n - Tomar 1cp VO 1x/dia, por 7d.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.\n\n- INTERNAÇÃO:\n\nConsiderar se CURB-65 ≥2, comorbidades (DPOC, DM, ICC, neoplasias, DRC), intolerância VO ou baixo acesso à saúde.',
+		pac_claritromicina:
+			'Claritromicina 500 mg\n - Tomar 1cp VO 12/12h por 7d.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Alimentação adequada, sono regular, evitar álcool. Não alterar medicações de rotina sem orientação.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.\n\n- INTERNAÇÃO:\n\nConsiderar se CURB-65 ≥2, comorbidades (DPOC, DM, ICC, neoplasias, DRC), intolerância VO ou baixo acesso à saúde.',
+		rinossinusite_viral:
+			'Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Diplopia;\n- Redução da acuidade visual ou da mobilidade ocular;\n- Proptose ocular;\n- Presença de sinais meníngeos;\n- Alteração do estado mental;\n- Indícios de sepse;\n- Cefaleia ou dor facial intensa que não responde à medicação oral.',
+		rinossinusite_bacteriana_amoxicilina:
+			'Amoxicilina 875mg\n - Tomar 1cp VO de 12/12 horas, por 10d.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Diplopia;\n- Redução da acuidade visual ou da mobilidade ocular;\n- Proptose ocular;\n- Presença de sinais meníngeos;\n- Alteração do estado mental;\n- Indícios de sepse;\n- Cefaleia ou dor facial intensa que não responde à medicação oral.',
+		rinossinusite_bacteriana_amoxclav:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n Tomar 1cp VO a 12/12h por 10d.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Diplopia;\n- Redução da acuidade visual ou da mobilidade ocular;\n- Proptose ocular;\n- Presença de sinais meníngeos;\n- Alteração do estado mental;\n- Indícios de sepse;\n- Cefaleia ou dor facial intensa que não responde à medicação oral.',
+		rinosinu_bac:
+			'Levofloxacino 750mg\n Tomar 1cp VO 1x/dia por 10d.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Diplopia;\n- Redução da acuidade visual ou da mobilidade ocular;\n- Proptose ocular;\n- Presença de sinais meníngeos;\n- Alteração do estado mental;\n- Indícios de sepse;\n- Cefaleia ou dor facial intensa que não responde à medicação oral.',
+		tosse:
+			'Cloperastina 3,54 mg/mL (xarope) (Tilugen®, Seki®, Clope®)\n - Tomar 10mL de 8/8 horas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Cloridrato de Difenidramina + Cloreto de Amônio + Citrato de Sódio (Pastilha Endcoff®, Benalet®, Benatux®)\n - Dissolver lentamente 1 pastilha na boca, quando tosse intensa. Máximo de 8 pastilhas por dia.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora álgica, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.',
+		afta: 'Triancinolona acetonida tópica 1mg/g (Omcilon-A Orabase®)\n - Aplique uma fina camada sobre a lesão, preferencialmente à noite, antes de dormir. Pode ser usado a 8/8h, por 7d, após as refeições.\n\n Prednisolona 20 mg\n Tomar 1cp VO 1x/dia, por 5d, se houver múltiplas lesões.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Medidas Gerais\n- Higiene oral com escovas macias.\n- Evitar traumas na boca.\n- Evitar alimentos/bebidas ácidas, como suco de limão, refrigerantes, café, etc.\n\n- Retornar se piora:\n- Dor intensa, sangramento intenso e piora das lesões.\n- Incapacidade de se alimentar ou ingerir líquidos.',
+		alergia_ps:
+			'Difenidramina (50mg/mL)\n Fazer 1mL (1 ampola) EV em bólus AGORA\n\n Prometazina (50mg/2mL)\n Fazer 2mL IM AGORA\n\n Hidrocortisona (100mg/mL)\n Fazer 100mg EV AGORA\n\n Metilprednisolona (125mg/2mL)\n Fazer 62,5mg EV AGORA\n\n- Se sinais de anafilaxia presentes, seguir protocolo: Adrenalina (1mg/mL) 0,5mL EV/IM, Soro Fisiológico 1000mL EV AGORA, Difenidramina (50mg/mL) 1mL EV e Hidrocortisona (100mg/mL) 100mg EV.\n\nRetornar se piora:\n- Falta de ar: dispneia.\n- Dificuldade para falar ou engolir.\n- Edema facial ou periocular.\n- Pressão baixa ou tontura.\n- Piora do inchaço ou vermelhidão.\n\nINTERNAÇÃO: Anafilaxia requer internação para observação.',
+		alergia_alta:
+			'Prednisolona 40 mg\n - Tomar 1cp VO por dia, de manhã, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Alimentação adequada\n- Evitar alérgenos (ácaros, mofo, poeira, perfumes).\n- Hidratar ~2L/dia.\n- Restringir alimentos alergênicos até consulta médica: frutos do mar, enlatados e corantes.\n\nRetornar se piora:\n- Falta de ar: dispneia.\n- Dificuldade para falar ou engolir.\n- Edema facial ou periocular.\n- Pressão baixa ou tontura.\n- Piora do inchaço ou vermelhidão.',
+		celulite_erisipela_ps:
+			'Oxaciclina 2g EV de 4/4 horas, por 7-14 dias.\n Cefazolina 1-2 g EV de 8/8 horas, por 7-14 dias.\n Ceftriaxona 1 g EV de 12/12 horas, por 7-14 dias.\n Se infecção conjunta com úlcera diabética ou lesão por pressão: Ceftriaxona 1 g EV de 12/12 horas + Ciprofloxacino 400mg EV 12/12h.\n\n- Repouso no leito\n- Deve-se manter o membro elevado para facilitar a drenagem em virtude da gravidade do edema e das substâncias inflamatórias.\n- Permanganato de potássio 1:20.000 2x/dia no banho.\n\n- Retornar se piora:\n- Febre persistente (acima de 37,8°C) ou calafrios.\n- Dor intensa.\n- Aumento do inchaço ou vermelhidão no local da lesão.\n- Abscesso com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Suspeita de acometimento profundo (articular, ósseo ou muscular).\n- Sinais de choque/sepse.\n- Síndrome compartimental.\n- Envolvimento de enxerto vascular.\n- Falha na antibioticoterapia oral.\n- Pacientes imunossuprimidos e/ou sem capacidade de autocuidado.',
+		celulite_sem_mrsa:
+			'Cefalexina 500mg\n - Tomar 1cp VO de 6/6 horas por 7d.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Compressa de gelo: 15min até 6x/dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Coloque o membro acometido em posição elevada, facilitando a drenagem e diminuindo o inchaço.\n\n- Retornar se piora:\n- Febre persistente (acima de 37,8°C) ou calafrios.\n- Dor intensa.\n- Aumento do inchaço ou vermelhidão no local da lesão.\n- Abscesso com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Suspeita de acometimento profundo (articular, ósseo ou muscular).\n- Sinais de choque/sepse.\n- Síndrome compartimental.\n- Envolvimento de enxerto vascular.\n- Falha na antibioticoterapia oral.\n- Pacientes imunossuprimidos e/ou sem capacidade de autocuidado.',
+		celulite_com_mrsa:
+			'Sulfametoxazol + trimetoprima 800/160 mg (Bactrim®, Bacfar®, Bacteracin®)\n - Tomar 1cp VO de 12/12 horas por 7d.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Compressa de gelo: 15min até 6x/dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Coloque o membro acometido em posição elevada, facilitando a drenagem e diminuindo o inchaço.\n\n- Retornar se piora:\n- Febre persistente (acima de 37,8°C) ou calafrios.\n- Dor intensa.\n- Aumento do inchaço ou vermelhidão no local da lesão.\n- Abscesso com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Suspeita de acometimento profundo (articular, ósseo ou muscular).\n- Sinais de choque/sepse.\n- Síndrome compartimental.\n- Envolvimento de enxerto vascular.\n- Falha na antibioticoterapia oral.\n- Pacientes imunossuprimidos e/ou sem capacidade de autocuidado.',
+		erisipela_leve:
+			'Cefalexina 500mg\n - Tomar 1cp VO de 6/6 horas por 7d.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Compressa de gelo: 15min até 6x/dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Coloque o membro acometido em posição elevada, facilitando a drenagem e diminuindo o inchaço.\n\n- Retornar se piora:\n- Febre persistente (acima de 37,8°C) ou calafrios.\n- Dor intensa.\n- Aumento do inchaço ou vermelhidão no local da lesão.\n- Abscesso com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Recomendada para quadros moderados a graves com:\n- Acometimento facial.\n- Sinais de choque/sepse.\n- Síndrome compartimental.\n- Falha na antibioticoterapia oral.\n- Pacientes imunossuprimidos e/ou sem capacidade de autocuidado.',
+		dermatite_atopica:
+			'Tacrolimo 0,1% (pomada) (Protopic®, Tarfic®, Tacroz®, Cropoc®, Atobach®)\n - Aplicar sobre área afetadas até 2x/dia.\n\n Hidrocortisona creme (Cortisonal®, Cortigen®)\n - Aplicar sobre área afetadas até 2x/dia.\n\n Prednisolona 40 mg\n Tomar 1cp VO por dia, de manhã, por 5d. Usar se refratário a tratamento tópico.\n\n Loratadina 10 mg OU Allegra®/Fexofenadina 120 mg OU Levocetirizina/Zina® 5 mg\n - Tomar 1cp VO 12/12h, por 5d\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- RECOMENDAÇÕES para impedir recorrência.\n- Limitar o uso de sabonetes e optar por produtos de limpeza sem sabão, preferencialmente com pH neutro ou baixo (pH da pele 4-5,5).\n- Evitar exposição a alérgenos como ácaros, mofos, poeira, perfumes e pelos de animais.\n- Manter a casa limpa e ventilada, evitando carpetes e tapetes.\n- Hidratar ~2L/dia.\n- Optar por roupas leves de algodão que permitam a transpiração em vez de tecidos sintéticos.\n- Evitar banhos quentes, que podem agravar a atopia.\n\nRetornar se piora:\n- Falta de ar: dispneia.\n- Dificuldade para falar ou engolir.\n- Edema facial ou periocular.\n- Pressão baixa ou tontura.\n- Piora do inchaço ou vermelhidão.',
+		escabiose:
+			'Ivermectina 6mg (Leverctin®, Revectina®, Iverneo®)\n Tomar 2 cp(s)s hoje e 2 cp(s)s após 7 dias, ambos em dose única VO.\n\n Hidroxizina 25 mg (Hixizine®)\n Tomar 1cp VO a 12/12h por 5d; em caso de prurido intenso, pode-se tomar a 8/8h.\n\n Permetrina 1% (emulsão ou loção 60mL). (Permenati®, Pioletal®)\n Aplique na pele do pescoço para baixo, incluindo plantas e pés. Em pacientes calvos, aplique a suspensão no couro cabeludo, testa, linha do cabelo e têmporas.\n - Evite o contato com a mucosa bucal e os olhos.\n - Deixe a suspensão secar por 10 minutos antes de se vestir.\n - Mantenha na pele por 6 horas antes do banho.\n - Repita o tratamento em 1 semana.\n\n- Leia com atenção, pois o sucesso do tratamento depende dessas RECOMENDAÇÕES.\n- Troque diariamente a roupa de cama, banho e a roupa que foi usada no dia do tratamento e nos dias anteriores, pelo menos por três dias.\n- Lave as roupas, estenda-as ao sol quente e passe com ferro para eliminar o parasita.\n- Se não for possível lavar as roupas, coloque-as em um saco plástico por quatro a sete dias.\n- Mantenha as unhas curtas para não lesionar a pele ao coçar e evitar coçar a pele.\n- Evite banhos prolongados e quentes, use sabão neutro e aplique com moderação sobre as lesões.\n- Evite contato com alérgenos como poeira, pólens, pelos de animais, carpetes e cortinas. Mantenha os ambientes limpos e ventilados.\n- Opte por roupas leves.\n\nRetornar se piora:\n- Aumento do edema e inchaço na área da infecção\n- Intensificação da vermelhidão (hiperemia), acompanhada de calor e dor local\n- Febre (>37,8°C) ou sinais de tontura e hipotensão',
+		furunculo:
+			'Cefalexina 500 mg\n Tomar 1cp VO 6/6h por 7 días.\n\n Mupirocina 2% (Bactroban®, Bacrocin®) Pomada\n - Aplicar sobre a lesão até 3x/dia, por 7d ou até melhora.\n\n Compressas mornas.\n - Aplicar sobre a lesão por 20 minutos até 3x/dia até drenagem de pus.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\nRetornar se piora:\n- Aumento do edema e inchaço na área da infecção\n- Intensificação da vermelhidão (hiperemia), acompanhada de calor e dor local\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, secreção de pus)\n- Febre (>37,8°C) ou sinais de tontura e hipotensão\n\n- INTERNAÇÃO:\n\n- A internação é indicada apenas em casos de celulite/erisipela em locais de risco (como o rosto) e/ou critérios de sepse.',
+		herpes_simples_aciclovir:
+			'Aciclovir 400 mg\n - Tomar 1cp VO 8/8h VO, por 7d.\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\nRetornar se piora:\n- Piora do edema e inchaço na área da infecção.\n- Aumento da vermelhidão (hiperemia), acompanhada de calor e dor local.\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, drenagem de pus).\n- Febre (>37,8°C) ou sinais de tontura e hipotensão.',
+		herpes_simples_valaciclovir:
+			'Valaciclovir 500 mg\n - Tomar 1 cp(s)s, 8/8h VO, por 7d\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\nRetornar se piora:\n- Piora do edema e inchaço na área da infecção.\n- Aumento da vermelhidão (hiperemia), acompanhada de calor e dor local.\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, drenagem de pus).\n- Febre (>37,8°C) ou sinais de tontura e hipotensão.',
+		herpes_zoster:
+			'Valaciclovir 500 mg\n - Tomar 2 cp(s)s, 8/8h VO, por 7d\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia, por 5d, com alimentos\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Tramadol 50 mg\n - Tomar 1cp VO 6/6h em caso de dor intensa refratária as medicações acima, por 3d.\n\nRetornar se piora:\n- Piora do edema e inchaço na área da infecção.\n- Aumento da vermelhidão (hiperemia), acompanhada de calor e dor local.\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, drenagem de pus).\n- Febre (>37,8°C) ou sinais de tontura e hipotensão.\n\n- INTERNAÇÃO:\n\n- Indivíduos imunodeprimidos com quadro disseminado.\n- Presença de sintomas neurológicos, como suspeita de meningoencefalite ou mielite.\n- Quadro oftalmológico associado.\n- Indicado também para controle da dor aguda muito intensa.',
+		impetigo:
+			'Cefalexina 500 mg\n Tomar 1cp VO 6/6h por 7 días.\n\n Higiene das lesões com água + sabão neutro\n Não coçar ou remover as crostas; deixe-as cair espontaneamente para evitar disseminação. Mantenha as unhas cortadas e limpas para evitar contaminação.\n\n Limpar a região diariamente com água e sabão ou sabonetes antissépticos (Triclosano, Iodopovidona, Clorexidina).\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\nRetornar se piora:\n- Aumento do edema e inchaço na área da infecção\n- Intensificação da vermelhidão (hiperemia), acompanhada de calor e dor local\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, secreção de pus)\n- Febre (>37,8°C) ou sinais de tontura e hipotensão',
+		insolacao:
+			'Calamina 8% (Loção ou creme)\n Aplicar na região afetada 3x/dia, por até 5 dias.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Orientações\n- Evitar exposição ao sol. Se o fizer, use protetor solar.\n- Compressar de água fria (sem gelo).\n- Use roupas folgadas e arejadas.\n- Se presença de bolhas, mantenha elas cobertas com curativos e não as rompa. Em caso de rompimento, lavar com águaa morna e sabão neutro apenas.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)',
+		larva_migrans:
+			'Ivermectina 6mg (Leverctin®, Revectina®, Iverneo®)\n - Tomar 2 cp(s)s hoje em dose única.\n - Repetir em 7 dias, caso ainda mantenha o quadro.\n\n- Siga as seguintes RECOMENDAÇÕES.\n- Evitar coçar o local, para não causar feridas.\n- Manter a região limpa e seca, evitando que a pele infeccione.\n- Aplicar gelo na região afetada, para aliviar a coceira.\n\nRetornar se piora:\n- Surgimento de dor intensa, feridas ou pus no local da lesão.',
+		onicocriptose:
+			'Nebacetin (Sulfato de neomicina, Bacitracina zíncica) - pomada bisnaga de 15g\n - Aplique uma fina camada do produto, 3x/dia, com o auxílio de uma gaze, por 7d\n\n Higiene das lesões com água + sabão neutro\n - Não coçar ou retirar as crostas, deixar cair espontaneamente, pare evitar disseminação\n - Manter unhas cortadas e limpas para não contaminar\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n- Se recorrente, procurar sua unidade básica de saúde ou profissional dermatologista para tratamento definitivo.\n- Evitar uso de calçados apertados por o tratamento.\n\nRetornar se piora:\n- piora do edema e inchaço no local da infecção\n- piora da vermelhidão (hiperemia), com calor e dor local\n- local da infecção ficar duro ou roxo ou com abscesso (furúnculo, drenagem de pus)\n- febre (>37,8°C) ou sinais de tonteira e hipotensão',
+		tinea_pedis:
+			'Cetoconazol 2% Creme (Fungonazol®, Cetonat®, Funed Cetoconazol®)\n - Limpar as lesões com água e sabão neutro e secar. Aplicar o creme nas lesões a 12/12h, por 30d ou até a cura.\n\n- Siga as seguintes RECOMENDAÇÕES.\n- Seque bem os pés e entre os dedos após o banho.\n- Aplique talco antisséptico nos pés e entre os dedos.\n- Opte por meias de algodão.\n- Evite calçados fechados por longos períodos.\n- Limpe os sapatos periodicamente com produtos antifúngicos (ex.: Lysoform®).\n- Descarte sapatos velhos e evite compartilhar itens de higiene pessoal.\n- Evite andar descalço, especialmente em piscinas, saunas, banheiros e chuveiros compartilhados.\n\nRetornar se piora:\n- Aumento do edema e inchaço na área da infecção\n- Intensificação da vermelhidão (hiperemia), acompanhada de calor e dor local\n- Febre (>37,8°C) ou sinais de tontura e hipotensão',
+		tungiase:
+			'Ivermectina (6 mg/cp(s))\n 200 microgramas/kg VO dose única.\n\n- Siga as seguintes recomendações.\n- Usar calçados fechados em locais contaminados.\n- Usar repelentes à base de óleo de coco 2x/dia para diminuir a infestação.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)',
+		cistite_fosfo:
+			'Fosfomicina Trometamol 5,631g Envelope (Monuril®, Traturil®, Fosmoryl®)\n - Esvaziar a bexiga e tomar a medicação antes de dormir. Dissolver o conteúdo do envelope em 200mL de água, mexendo com uma colher. Tomar em dose única; não é necessário repetir.\n\n Fenazopiridina 200mg (Pyridium®)\n - Tomar 1cp VO de 8/8 horas, por 2d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado(a).\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Urinar sempre que sentir vontade, evitando segurar a urina por longos períodos.\n- Evitar Banhos de Espuma ou Ducha Vaginal: Essas práticas podem alterar o pH vaginal e eliminar bactérias protetoras.\n\n- Retornar se piora:\n- Febre (temperatura axilar acima de 37,8°C) ou calafrio/sudorese\n- Pressão baixa, tonteira, sangramento, vômito sem melhora\n- Dor abdominal ou dor nas costas intensa\n- Sangramento urinário intenso\n\n- INTERNAÇÃO:\n\n- Sepse.\n- Uropatia Obstrutiva ou Nefrolitíase.\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		cistite_nitro:
+			'Nitrofurantoína 100mg (Macrodantina®, Nitrofen®)\n - Tomar 1cp VO de 6/6 horas, por 7d.\n\n Fenazopiridina 200mg (Pyridium®)\n - Tomar 1cp VO de 8/8 horas, por 2d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado(a).\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Urinar sempre que sentir vontade, evitando segurar a urina por longos períodos.\n- Evitar Banhos de Espuma ou Ducha Vaginal: Essas práticas podem alterar o pH vaginal e eliminar bactérias protetoras.\n\n- Retornar se piora:\n- Febre (temperatura axilar acima de 37,8°C) ou calafrio/sudorese\n- Pressão baixa, tonteira, sangramento, vômito sem melhora\n- Dor abdominal ou dor nas costas intensa\n- Sangramento urinário intenso\n\n- INTERNAÇÃO:\n\n- Sepse.\n- Uropatia Obstrutiva ou Nefrolitíase.\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		cistite_gestante:
+			'Cefuroxima 250 mg (Zinnat®, Mefex®)\n - Tomar 1cp VO de 12/12 horas, por 7d.\n\n Fenazopiridina 200mg (Pyridium®)\n - Tomar 1cp VO de 8/8 horas, por 2d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado(a).\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Urinar sempre que sentir vontade, evitando segurar a urina por longos períodos.\n- Evitar Banhos de Espuma ou Ducha Vaginal: Essas práticas podem alterar o pH vaginal e eliminar bactérias protetoras.\n\n- Retornar se piora:\n- Febre (temperatura axilar acima de 37,8°C) ou calafrio/sudorese\n- Pressão baixa, tonteira, sangramento, vômito sem melhora\n- Dor abdominal ou dor nas costas intensa\n- Sangramento urinário intenso\n\n- INTERNAÇÃO:\n\n- Sepse.\n- Uropatia Obstrutiva ou Nefrolitíase.\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		hemorroida:
+			'Policresuleno + cloridrato de cinchocaína (Proctyl®)\n - Aplicar até 3x/dia, em região anal, por 7d.\n\n Banho em assento com água morna.\n - Realizar 2 a 3 vezes por dia, após as evacuações. Colocar água morna em uma bacia e sentar-se nu, permitindo que a água entre em contato com a lesão por pelo menos 15 minutos ou até esfriar.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia, por 5d.\n\n Alimentação e Hidratação\n Consuma aproximadamente 3 litros de líquido por dia, incluindo água, sucos de frutas e isotônicos.\n Aumente a ingestão de alimentos ricos em fibras, como mamão, laranja e legumes.\n Evite alimentos condimentados, como pimenta, chocolate e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Muvinlax®: tomar entre 1-3 sachês VO, por dia.\n\n Lactulose (667mg/120mL) 15mL VO, até 3x/dia.\n\n- Agendar consulta de reavaliação com Proctologista.\n- Tentar evitar o uso de papel higiênico. Lave-se por o banho ou com ducha higiênica.\n- Evitar esforço evacuatório, assim como ficar longos períodos sentado no vaso sanitário.\n\n- Retornar se piora:\n- Febre por mais de 48h, hipotensão, tonteira\n- Sangramento anal pior, vômitos sem melhora\n- Dor abdominal intensa',
+		pielonefrite_nao_complicada:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n Tomar 1cp VO a 12/12h por 10d.\n\n Fenazopiridina 200mg (Pyridium®)\n - Tomar 1cp VO de 8/8 horas, por 2d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado(a).\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Urinar sempre que sentir vontade, evitando segurar a urina por longos períodos.\n- Evitar Banhos de Espuma ou Ducha Vaginal: Essas práticas podem alterar o pH vaginal e eliminar bactérias protetoras.\n\n- Retornar se piora:\n- Persistência dos sintomas após 48 horas.\n- Febre (temperatura axilar acima de 37,8°C) ou calafrio/sudorese.\n- Pressão baixa, tonteira, sangramento, vômito sem melhora.\n- Dor abdominal ou dor nas costas intensa.\n- Sangramento urinário intenso.\n\n- INTERNAÇÃO:\n\n- Quadros Graves ou Suspeita de Complicação (Abscesso renal, Abscesso perinéfrico, Pielonefrite xantogranulomatosa, Necrose papilar)\n- Imunossuprimidos, Gestantes e Crianças\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		ureterolitiase_ps:
+			'Tenoxicam (20mg/2mL) 20mg EV bolus AGORA\n ou\n Cetoprofeno 100mg + 100mL de SF0,9% EV AGORA\n\n**SE ANALGESIA REFRATÁRIA OU MUITO INTENSA NA CHEGADA**\n Tramadol (50mg/1mL) 50mg + 100mL de SF0,9 EV lento AGORA\n ou\n Morfina (10 mg/1mL) + 9mL de SG 5% (Solução com 1mg/mL)\n Fazer 2 a 4mL em bólus até 4/4h.\n\n- RECOMENDAÇÕES GERAIS\n- Evitar hidratação venosa excessiva, pois a hidratação piora a dor do paciente.\n- Se infecção associada, iniciar antibiótico: Ceftriaxone 1g EV 12/12h.\n\n- Retornar se piora:\n- Dor abdominal ou lombar intensa, sem resposta às medicações.\n- febre ↑ 37,8°C/48h ou calafrios/sudorese.\n- Pressão baixa, tontura, sangramento urinário abundante, vômito persistente.\n- Incapacidade de tomar medicações VO.\n\n- INTERNAÇÃO:\n\n- Pacientes com indicação de intervenção urológica (cálculos ≥ 10 mm, insuficiência renal aguda, sepse urinária em rim obstruído, refratariedade ao tratamento clínico, anúria)\n- Internação em terapia intensiva: Pacientes com critérios para sepse/choque séptico, necessidade de drogas vasoativas, rebaixamento do nível de consciência, insuficiência respiratória aguda, necessidade de ventilação mecânica.',
+		ureterolitiase_nao_complicada:
+			'Tansulosina 0,4 mg\n - Tomar 1cp VO 1x/dia, por 4 a 6 semanas.\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia VO, por 5d.\n\n Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n - Tomar 1cp VO 12/12h, por 10d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado.\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Tramadol 50mg\n Tomar 1cp VO 8/8h, em caso de dor intensa refratária. Usar apenas em último caso.\n\n- Agendar consulta de reavaliação com o urologista para seguimento e investigação da causa.\n\n- Retornar se piora:\n- Dor abdominal ou lombar intensa, sem resposta às medicações.\n- febre ↑ 37,8°C/48h ou calafrios/sudorese.\n- Pressão baixa, tontura, sangramento urinário abundante, vômito persistente.\n- Incapacidade de tomar medicações VO.\n\n- INTERNAÇÃO:\n\n- Pacientes com cálculos ≥ 10 mm.\n- Injúria renal aguda\n- Rim único\n- Anúria\n- Dor refratária',
+		uretrite_homem:
+			'Ceftriaxona Sódica (ampola 500mg)\n - 1 ampola (500 mg) por via IM em dose única.\n\n Azitromicina 500 mg\n Tomar 2 cp(s)s por VO, dose única.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Abstenção de relações sexuais por o tratamento e 7 dias após o fim do mesmo.\n- Parceiro(as) sexuais também devem fazer o tratamento e abstenção.\n\n- Retornar se piora:\n- Piora da secreção ou sangramento urinário intenso.\n- Dor intensa mesmo após medicações.\n\n- INTERNAÇÃO:\n\n- Sinais de gravidade e/ou complicações sistêmicas.',
+		costocondrite:
+			'Naproxeno 500 mg\n Tomar 1cp VO a 12/12h, com alimento, por 4d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor articular intensa\n- Fraqueza, dormência, dificuldade de movimentação\n- Febre (temperatura axilar acima de 37,8°C)\n- Redução intensa do volume de urina e urina muito escura.',
+		dor_muscular_mialgia:
+			'Naproxeno 500 mg\n -Tomar 1cp VO 12/12h, com alimento, por 4d.\n\n Ciclobenzaprina + Cafeína 5 mg (Miosan CAF®)\n Tomar 1cp VO à noite, 1 vez por dia, por 4d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor articular intensa\n- Fraqueza, dormência, dificuldade de movimentação\n- Febre (temperatura axilar acima de 37,8°C)\n- Redução intensa do volume de urina e urina muito escura.',
+		gota_ps:
+			'Tenoxicam (20mg/2mL) 20mg EV bolus AGORA\n ou\n Cetoprofeno 100mg + 100mL de SF0,9% EV AGORA\n\n Dexametasona (10mg/2,5mL) 10mg EV em bolus AGORA\n Manter corticoides na alta por 3 a 5 dias.\n\n- Retornar se piora:\n- Piora ou manutenção da dor por mais de 48 horas, mesmo em uso correto das medicações.\n\n- INTERNAÇÃO:\n\n- Somente quando suspeita de artrite séptica concomitante para antibioticoterapia venosa.',
+		gota_alta:
+			'Naproxeno 500 mg\n - Tomar 1cp VO com alimentação, de 12/12 horas, por 5d.\n\n Colchicina 0,5 mg\n - Tomar 2 cp(s)s VO, e após 1 hora, tomar mais 1 cp(s).\n - Após, tomar 1 cp(s) de 12/12 horas até resolução da crise.\n\n Prednisolona 20mg\n - Tomar 1cp VO por dia, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem\n- Diminua o consumo de bebidas alcoólicas.\n- Regule sua alimentação: evite excesso de alimentos de origem animal, como churrascos e frutos do mar.\n\n- Retornar se piora:\n- Piora ou manutenção da dor por mais de 48 horas, mesmo em uso correto das medicações.\n\n- INTERNAÇÃO:\n\n- Somente quando suspeita de artrite séptica concomitante para antibioticoterapia venosa.',
+		cervicalgia_dorsalgia_lombalgia_ps:
+			'Tenoxicam (20mg/2mL) Fazer 20mg EV bolus AGORA\n ou\n Cetoprofeno Fazer 100mg + 100mL de SF0,9% EV AGORA\n ou\n Diclofenaco (75mg/3mL) 75mg IM AGORA\n\n Dexametasona (10mg/2,5mL) Fazer 10mg EV em bolus AGORA\n\n Tramadol (50mg/mL) Fazer 50mg + 100mL SF0,9% EV lento\n\n Tiocolchicosídeo (4mg/2mL) Fazer 4mg IM\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor articular intensa\n- Fraqueza, dormência, dificuldade de movimentação.\n- Febre (temperatura axilar acima de 37,8°C)\n- Redução intensa do volume de urina e urina muito escura.\n\n- INTERNAÇÃO:\n\n- Casos com dor refratária, déficit neurológico progressivo e síndrome da cauda equina são conduzidos com internação.',
+		cervicalgia_dorsalgia_lombalgia_alta:
+			'Naproxeno 500 mg\n -Tomar 1cp VO 12/12h, com alimento, por 4d.\n\n Ciclobenzaprina + Cafeína 5 mg (Miosan CAF®)\n Tomar 1cp VO à noite, 1 vez por dia, por 4d.\n\n Compressa com água morna de 8/8 horas na região acometida.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Tramadol 50mg\n Tomar 1cp VO até 6/6h. Usar apenas em último caso.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Após a melhora da dor, pratique atividades físicas com acompanhamento.\n- Se está acima do peso, procure ajuda para emagrecimento saudável.\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor articular intensa\n- Fraqueza, dormência, dificuldade de movimentação.\n- Febre (temperatura axilar acima de 37,8°C)\n- Redução intensa do volume de urina e urina muito escura.\n\n- INTERNAÇÃO:\n\n- Casos com dor refratária, déficit neurológico progressivo e síndrome da cauda equina são conduzidos com internação.',
+		const_funcional:
+			'Hidratação: tomar 2 a 3 litros de líquidos por dia.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n\n Plantago Ovata Forssk (Fibrems®, Metamucil®)\n - Diluir 1 envelope em 240mL de água VO, 3x/dia.\n\n Lactulose 667mg/mL (Pentalac®, Lactosan®)\n - Tomar 15mL VO, por dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Aumente a ingesta hídrica e o consume de fibras alimentares (leguminosas, grãos, cereais, vegetais e frutas)\n- Pratique exercícios físicos regularmente.\n- Tente evacuar logo após as refeições.\n\n- Retornar se piora:\n- Dor abdominal intensa e contínua.\n- Vômito persistentes.\n- Pressão baixa ou tontura.\n\n- INTERNAÇÃO:\n\n- Quadros associados a abdome agudo e/ou instabilidade.',
+		gea_n_infec:
+			'Racecadotrila 100mg (Tiorfan®, Avide®)\n - Tomar 1cp VO de 8/8 horas, antes das refeições por até 7 dias. Suspender em caso de constipação.\n\n Simeticona (Luftal®) 125 mg\n Tomar 1cp VO por día, vía oral, por 5d.\n\n Floratil® (Saccharomyces boulardii) 200 mg.\n Tomar 1cp VO por vía oral 12/12h por 3d.\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Alimentação saudável\n - Evite alimentos gordurosos, doces, refrigerantes e o consumo excessivo de massas, assim como laxantes como laranja, mamão, ameixa e fibras neste período.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n- Cuide-se bem: RECOMENDAÇÕES para melhorar os sintomas\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforço excessivo e desidratação.\n- Evitar consumo de café, sorbitol e leite.\n\n- Retornar se piora:\n- Febre (>37,8°C) por mais de 48h\n- Pressão baixa, tontura, sangramentos, vômitos persistentes e dor abdominal intensa\n- Piora da diarreia: mais de 6 episódios por dia, com sangue, muco ou pus nas fezes\n\n- INTERNAÇÃO:\n\n- Desidratação grave ou Intolerância VO',
+		gea_parasita:
+			'Nitazoxanida (Annita®) 500mg\n Tomar 1cp VO 12/12h por 3d.\n\n Simeticona (Luftal®) 125 mg\n Tomar 1cp VO por día, vía oral, por 5d.\n\n Floratil® (Saccharomyces boulardii) 200 mg.\n Tomar 1cp VO por vía oral 12/12h por 3d.\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Alimentação saudável\n - Evite alimentos gordurosos, doces, refrigerantes e o consumo excessivo de massas, assim como laxantes como laranja, mamão, ameixa e fibras neste período.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n- Cuide-se bem: RECOMENDAÇÕES para melhorar os sintomas\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforço excessivo e desidratação.\n- Evitar consumo de café, sorbitol e leite.\n\n- Retornar se piora:\n- Febre (>37,8°C) por mais de 48h\n- Pressão baixa, tontura, sangramentos, vômitos persistentes e dor abdominal intensa\n- Piora da diarreia: mais de 6 episódios por dia, com sangue, muco ou pus nas fezes\n\n- INTERNAÇÃO:\n\n- Desidratação grave ou Intolerância VO',
+		gea_cipro:
+			'Ciprofloxacino 500 mg\n - Tomar 1cp VO 12/12h, por 5d.\n\n Simeticona (Luftal®) 125 mg\n Tomar 1cp VO por día, vía oral, por 5d.\n\n Floratil® (Saccharomyces boulardii) 200 mg.\n Tomar 1cp VO por vía oral 12/12h por 3d.\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Alimentação saudável\n - Evite alimentos gordurosos, doces, refrigerantes e o consumo excessivo de massas, assim como laxantes como laranja, mamão, ameixa e fibras neste período.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n- Cuide-se bem: RECOMENDAÇÕES para melhorar os sintomas\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforço excessivo e desidratação.\n- Evitar consumo de café, sorbitol e leite.\n\n- Retornar se piora:\n- Febre (>37,8°C) por mais de 48h\n- Pressão baixa, tontura, sangramentos, vômitos persistentes e dor abdominal intensa\n- Piora da diarreia: mais de 6 episódios por dia, com sangue, muco ou pus nas fezes\n\n- INTERNAÇÃO:\n\n- Desidratação grave ou Intolerância VO',
+		gea_azi:
+			'Azitromicina 500 mg\n - Tomar 1cp VO 1x/dia, por 5d.\n\n Simeticona (Luftal®) 125 mg\n Tomar 1cp VO por día, vía oral, por 5d.\n\n Floratil® (Saccharomyces boulardii) 200 mg.\n Tomar 1cp VO por vía oral 12/12h por 3d.\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Alimentação saudável\n - Evite alimentos gordurosos, doces, refrigerantes e o consumo excessivo de massas, assim como laxantes como laranja, mamão, ameixa e fibras neste período.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n- Cuide-se bem: RECOMENDAÇÕES para melhorar os sintomas\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforço excessivo e desidratação.\n- Evitar consumo de café, sorbitol e leite.\n\n- Retornar se piora:\n- Febre (>37,8°C) por mais de 48h\n- Pressão baixa, tontura, sangramentos, vômitos persistentes e dor abdominal intensa\n- Piora da diarreia: mais de 6 episódios por dia, com sangue, muco ou pus nas fezes\n\n- INTERNAÇÃO:\n\n- Desidratação grave ou Intolerância VO',
+		diverticulite_amoxclav:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n Tomar 1cp VO a 12/12h por 10d.\n\n Hidratação e alimentação\n - Tomar de 1 a 2 litros de líquido por dia, por 5d, alternando entre água filtrada e isotônico.\n -Evitar alimentos gordurosos, doces, refrigerantes e excessos de massas.\n- por esse período, evitar laxantes como laranja, mamão, ameixa e alimentos ricos em fibras.\n- Nos primeiros dias, preferir alimentos pastosos (purês, sopas), evitando fibras, sementes e grãos.\n\n Buscopan Composto® (Escopolamina + Dipirona) ou BuscoDuo® (Escopolamina + Paracetamol)\n - Tomar 1cp VO 6/6h, em caso de dor ou cólica abdominal.\n\n Bromoprida (Digesan®) 10 mg ou Ondansetrona (Vonau®) 4 mg\n - Tomar 1cp VO a 8/8h VO, em caso de enjoo ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n Simeticona (Luftal®) 125 mg\n - Tomar 1cp VO um vez ao dia, por 5d.\n\n- Cuide-se bem: orientações para melhorar os sintomas.\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforços excessivos e desidratação.\n\n- Retorne se os sintomas piorarem, mesmo em uso de medicamentos:\n- Febre por mais de 48h, hipotensão, tontura.\n- Sangramento, vômito sem melhora, dor abdominal intensa.\n- Piora da diarreia: mais de 6 vezes ao dia, presença de sangue, muco ou pus nas fezes.\n\n- INTERNAÇÃO:\n\n- Falta de melhora clínica ou laboratorial em 48-72 horas;\n- Pacientes imunossuprimidos;\n- Idosos;\n- Febre alta (> 39 ºC);\n- Leucocitose acentuada;\n- Dor abdominal persistente;\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		diverticulite_sulfa_metro:
+			'Sulfametoxazol + trimetoprima 800/160 mg\n - Tomar 1cp VO a 12/12h por 10d.\n\n Metronidazol 500mg\n - Tomar 1cp VO a 8/8h por 10d.\n\n Hidratação e alimentação\n - Tomar de 1 a 2 litros de líquido por dia, por 5d, alternando entre água filtrada e isotônico.\n - Evitar alimentos gordurosos, doces, refrigerantes e excessos de massas.\n - Evite laxantes como laranja, mamão, ameixa e alimentos ricos em fibras por este período.\n - Nos primeiros dias, preferir alimentos pastosos (purês, sopas), evitando fibras, sementes e grãos.\n\n Buscopan Composto® (Escopolamina + Dipirona) ou BuscoDuo® (Escopolamina + Paracetamol)\n - Tomar 1cp VO 6/6h, em caso de dor ou cólica abdominal.\n\n Bromoprida (Digesan®) 10 mg ou Ondansetrona (Vonau®) 4 mg\n - Tomar 1cp VO a 8/8h VO, em caso de enjoo ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n Simeticona (Luftal®) 125 mg\n - Tomar 1cp VO um vez ao dia, por 5d.\n\n- Cuide-se bem: orientações para melhorar os sintomas.\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforços excessivos e desidratação.\n\n- Retorne se os sintomas piorarem, mesmo em uso de medicamentos:\n- Febre por mais de 48h, hipotensão, tontura.\n- Sangramento, vômito sem melhora, dor abdominal intensa.\n- Piora da diarreia: mais de 6 vezes ao dia, presença de sangue, muco ou pus nas fezes.\n\n- INTERNAÇÃO:\n\n- Falta de melhora clínica ou laboratorial em 48-72 horas;\n- Pacientes imunossuprimidos;\n- Idosos;\n- Febre alta (> 39 ºC);\n- Leucocitose acentuada;\n- Dor abdominal persistente;\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		diverticulite_cipro_metro:
+			'Ciprofloxacino 500mg\n - Tomar 1cp VO a 12/12h por 10d.\n\n Metronidazol 500mg\n - Tomar 1cp VO a 8/8h por 10d.\n\n Hidratação e alimentação\n - Tomar de 1 a 2 litros de líquido por dia, por 5d, alternando entre água filtrada e isotônico.\n - Evitar alimentos gordurosos, doces, refrigerantes e excessos de massas.\n - por esse período, evitar laxantes como laranja, mamão, ameixa e alimentos ricos em fibras.\n - Nos primeiros dias, preferir alimentos pastosos (purês, sopas), evitando fibras, sementes e grãos.\n\n Buscopan Composto® (Escopolamina + Dipirona) ou BuscoDuo® (Escopolamina + Paracetamol)\n - Tomar 1cp VO 6/6h, em caso de dor ou cólica abdominal.\n\n Bromoprida (Digesan®) 10 mg ou Ondansetrona (Vonau®) 4 mg\n - Tomar 1cp VO a 8/8h VO, em caso de enjoo ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n Simeticona (Luftal®) 125 mg\n - Tomar 1cp VO um vez ao dia, por 5d.\n\n- Cuide-se bem: orientações para melhorar os sintomas.\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforços excessivos e desidratação.\n\n- Retorne se os sintomas piorarem, mesmo em uso de medicamentos:\n- Febre por mais de 48h, hipotensão, tontura.\n- Sangramento, vômito sem melhora, dor abdominal intensa.\n- Piora da diarreia: mais de 6 vezes ao dia, presença de sangue, muco ou pus nas fezes.\n\n- INTERNAÇÃO:\n\n- Falta de melhora clínica ou laboratorial em 48-72 horas;\n- Pacientes imunossuprimidos;\n- Idosos;\n- Febre alta (> 39 ºC);\n- Leucocitose acentuada;\n- Dor abdominal persistente;\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		drge: 'Pantoprazol (Pantozol®) 40 mg\n Tomar 1cp VO 1x/dia, de manhã em jejum, por 10d.\n\n Domperidona (Motilium®, Peridal®) 10 mg\n Tomar 1cp VO 2x/dia, 30 minutos antes do almoço e jantar, por 10d. Interromper o uso em caso de diarreia.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n Tomar 1 colher, 3x/dia (entre as refeições e ao deitar) por até 5 dias.\n\n Simeticona (Luftal®) 125 mg\n - Tomar 1cp VO 1x/dia VO, por 10d.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Agendar consulta de reavaliação com Gastroenterologista.\n- RECOMENDAÇÕES para melhorar os sintomas\n- Fracione as refeições: consuma porções menores várias vezes ao dia.\n- Evite deitar-se após as refeições: aguarde pelo menos 2 a 3 horas e não deite de lado.\n- Não beba líquidos por as refeições: ingira-os 30 minutos antes ou 1 hora depois.\n- Evite bebidas gaseificadas e alcoólicas.\n- Cesse o tabagismo.\n- Não consuma alimentos gordurosos, cítricos (como limão e laranja), vinagre, ou café.\n- Eleve a cabeceira da cama com um travesseiro ao deitar-se.\n- Use roupas folgadas.\n- Evite anti-inflamatórios por este período: Ibuprofeno, Diclofenaco, Naproxeno, Nimesulida, Cetoprofeno, entre outros.\n\n- Retornar se piora:\n- Dor abdominal persistente.\n- Intensificação da dor, hipotensão e tonteira.',
+		agitacao_ps:
+			'# Agitação Psicomotora no PS\n## MEDICAÇÃO PARA USO IMEDIATO\n\n**VIA ORAL É PREFERÊNCIA**\n Diazepam 5mg ou 10mg VO\n Máximo 20mg/dia\n\n Clonazepam 0,25 ou 0,5 ou 2mg\n Máximo diário 4 a 6mg/dia\n\n**VIA INTRAMUSCULAR**\n Haloperidol (5mg/1mL)\n Fazer 1mL IM cada 30min até dose máxima de 30mg/dia\n\n Prometazina (50mg/2mL)\n Fazer 2mL IM\n\n Midazolam (5mg/5mL)\n Fazer 5mL IM\n\n**VIA ENDOVENOSA**\n Diazepam (10mg/2mL)\n Fazer 10mg EV em bolus lento.\n\n Midazolam (5mg/5mL)\n Fazer 5mL EV em bolus lento.\n\n- Abordagem Não Medicamentosa\n- Respeitar o espaço individual do paciente e prestar atenção para sua linguagem corporal.\n- Descalonamento Verbal (Estratégias verbais e não verbais para acalmar o paciente)\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)\n\n- INTERNAÇÃO:\n\n- A contenção mecânica deve ser realizada por uma equipe treinada... O paciente deve permanecer em decúbito dorsal com a cabeceira elevada. Sinais vitais devem ser monitorados a cada 15 a 30 minutos, e a avaliação psiquiátrica, cada 30min.',
+		cefaleias_ps:
+			'# Tratamento Cefaléias Primárias no Pronto Socorro\n## MEDICAÇÃO PARA USO IMEDIATO\n\n**TENSIONAL**\n Dipirona (1g/2mL) 2mL EV lento AGORA\n pode repetir de 6/6 horas\n\n Cetoprofeno 100mg + 100mL de SF0,9% EV AGORA\n\n**ENXAQUECA (MIGRÂNEA)**\n Dipirona (1g/2mL) 2mL EV lento AGORA\n pode repetir de 6/6 horas\n\n Cetoprofeno 100mg + 100mL de SF0,9% EV AGORA\n\n Sumatriptano (6mg/0,5mL) 6mg SC AGORA\n pode repetir em 2 horas se necessário\n\n Dexametasona (10mg/2,5mL) 10mg EV AGORA\n Se crises recorrentes ou dor > 72h (estado migranoso)\n\n Metoclopramida (10mg/2mL) 10mg + 100mL de SF0,9% EV lento\n ou\n Ondansetrona (4mg/2mL) 4mg EV AGORA\n Se náuseas e vômitos\n\n- Em todos os casos, deixar paciente a permanecer em repouso sob penumbra em ambiente tranquilo e silencioso.\n\n**SALVAS**\n Oxigênio suplementar: O2 em Máscara não reinalante 8 a 15 L/min por 15 minutos\n\n Sumatriptano (6mg/0,5mL) 6mg SC AGORA\n pode repetir em 2 horas se necessário\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos: (Não informado)\n\n- INTERNAÇÃO:\n\n- Cefaleias intensas refratárias ao tratamento clínico otimizado.\n- Estado de mal enxaquecoso.\n- Cefaleias secundárias de acordo com a causa.',
+		cefaleia_tensional_alta:
+			'Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem\n- Mantenha um sono regular.\n- Evite álcool e drogas.\n- Evite situações estressantes e estresses emocionais.\n- Pratique atividades físicas.\n- Não use opioides (tramadol, codeína).\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor de cabeça intensa sem melhora com medicações\n- Desmaio, alteração de consciência, visão dupla.\n- Fraqueza, dormência, dificuldade visual ou de fala.\n- Febre (temperatura axilar acima de 37,8°C)\n- Pressão baixa, tonteira, sangramento, vômito sem melhora.\n\n- INTERNAÇÃO:\n\n- Cefaleias intensas refratárias ao tratamento clínico otimizado.\n- Estado de mal enxaquecoso.\n- Cefaleias secundárias de acordo com a causa.',
+		cefaleia_enxaqueca_alta:
+			'Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Sumatriptano 50mg (Imigran®, Sumax®, Sutriptan®)\n - Tomar 1cp VO em caso de crise intensa e refratária. Não tomar mais de 4 cp(s)s no mesmo dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Metoclopramida 10 mg (Plasil ®) ou Ondansetrona (Vonau®) 4 mg\n Tomar 1cp VO a 8/8h VO, em caso de enjoo ou vômito.\n\n- Cuide-se bem\n- Tenha um sono regular.\n- Evite bebidas alcoólicas e uso de drogas.\n- Evite situações de estresse.\n- Faça atividades físicas.\n- Não utilize opioides (tramadol, codeína)\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor de cabeça intensa sem melhora com medicações\n- Desmaio, alteração de consciência, visão dupla.\n- Fraqueza, dormência, dificuldade visual ou de fala.\n- Febre (temperatura axilar acima de 37,8°C)\n- Pressão baixa, tonteira, sangramento, vômito sem melhora.\n\n- INTERNAÇÃO:\n\n- Cefaleias intensas refratárias ao tratamento clínico otimizado.\n- Estado de mal enxaquecoso.\n- Cefaleias secundárias de acordo com a causa.',
+		crise_ansiedade_ps:
+			'Clonazepam 0,25 ou 0,5\n Fazer 0,5mg VO e reavaliar.\n ou\n Clonazepam 2mg/mL (solução oral)\n Fazer 5-10 gotas e reavaliar.\n ou\n Diazepam 5mg\n Fazer 5mg VO e reavaliar.\n ou\n Alprazolam 0,25 ou 0,5mg\n Fazer 0,5mg e reavaliar.\n\n- Abordagem Não Medicamentosa\n- Acolhimento\n- Respiração diafragmática\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)',
+		crise_ansiedade_alta:
+			'Passiflora incarnata (Calman®, Pasalix®)\n - Tomar 1cp VO 12/12h por 3d.\n\n Dipirona 1g (Novalgina®) OU Paracetamol 500mg (Tylenol®)\n Tomar 1cp VO de até 6/6h em caso de dor ou febre (temperatura axilar acima de 37,8°C)\n\n- Agendar consulta de reavaliação com sua equipe médica ou agendar consulta com Psiquiatra/Psicólogo.\n- Cuide-se bem\n- Mantenha uma alimentação saudável, durma bem e evite bebidas alcoólicas e uso de drogas ilícitas.\n- Alterar medicações somente com orientação médica.\n- Realize acompanhamento médico regular.\n- Continue a terapia com regularidade, se já a faz.\n- Mantenha-se em harmonia no trabalho, família e amizades.\n- Durma bem.\n- Evite álcool, energéticos, tabaco e drogas.\n- Pratique exercícios; uma caminhada em família é muito benéfica para corpo e mente.\n- Conte sempre com a rede de apoio de família e amigos; não se isole.\n- Mantenha-se positivo: você superará essa fase e sairá mais forte.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)',
+		paralisia_facial:
+			'Prednisona 20mg\n Tomar 3 cp(s)s, 1x/dia, de manhã, por 5d seguidos de mais cinco dias com redução de 10mg a cada dia. (Esquema de desmame de 10 dias)\n\n Colírio Lubrificante Sem conservantes (Hyabak®)\n - Pingar uma gota no olho afetado, quantas vezes for necessário por o dia.\n\n Acetato de retinol pomada oftalmológica (10.000 unidades/g)\n - Aplicar nos olhos antes de dormir.\n\n- Orientações\n- Procure reabilitação com fisioterapia e/ou fonoaudiológia em casos de paralisia extensa.\n\nRetornar se piora:\n- Dor e irritação ocular intensa.\n- Novo sintoma neurológico: fraqueza, tonteira intensa, perda de força, dor de cabeça intensa ou desmaios.',
+		vertigem_labirintite:
+			'Flunarizina 10 mg (Vertix®)\n Tomar 1cp VO 1x/dia, por 7d.\n\n Dimenidrinato + Cloridrato de Piridoxina (Dramin B6®)\n Tomar 1cp VO 6/6h em caso de tonteira ou enjoo.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Orientações\n- Evitar esforço excessivo.\n- Evitar alimentos gordurosos, enlatados ou álcool.\n- Manter-se bem hidratado(a).\n- Evitar movimentos súbitos da cabeça e pescoço.\n- Cuidado ao levantar-se; evite movimentos bruscos com a cabeça.\n- Agendar consulta de reavaliação com sua equipe médica ou agendar consulta com Otorrinolaringologista.\n\nRetornar se piora:\n- Tontura persistente e agravante\n- Fraqueza, dormência, turvação visual, dificuldade de fala ou alteração na visão\n- Dor de cabeça intensa ou vômito contínuo\n- Desmaio, queda ou trauma\n\n- INTERNAÇÃO:\n\n- Nos casos de síndrome vertiginosa aguda de origem central.',
+		candidíase_leve:
+			'Fluconazol 150mg\n - Tomar 1cp VO em dose única.\n ou\n Miconazol 2% Creme (20mg/g)\n - Aplicar 1 aplicador (5g) intravaginal ao deitar por 7d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Uso de roupas íntimas de algodão.\n- Evitar calças apertadas.\n- Retirar roupa íntima para dormir.\n- Não realizar atividades sexuais ou usar preservativos por o período de tratamento.\n- Evitar lavagem com duchas higiênicas.\n\n- Retornar se piora:\n- Febre >37,8°C/48h.\n- Piora das dos sintomas mesmo com uso adequado das medicações.',
+		candidíase_intensa:
+			'Fluconazol 150mg\n - Tomar 1cp VO a cada 72 horas em 3 doses.\n\n Miconazol 2% Creme (20mg/g)\n - Aplicar 1 aplicador (5g) intravaginal ao deitar por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Uso de roupas íntimas de algodão.\n- Evitar calças apertadas.\n- Retirar roupa íntima para dormir.\n- Não realizar atividades sexuais ou usar preservativos por o período de tratamento.\n- Evitar lavagem com duchas higiênicas.\n\n- Retornar se piora:\n- Febre >37,8°C/48h.\n- Piora das dos sintomas mesmo com uso adequado das medicações.',
+		contracepcao_emergencia:
+			'Levonorgestrel 0,75mg\n - Tomar 2 cp(s)s VO, em dose única.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Os efeitos colaterais esperados são: náuseas e vômitos, vertigem, dor de cabeça, dor nos seios, dor abdominal, diarreia e irregularidade menstrual.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)\n\n- INTERNAÇÃO:\n\n- Não há.',
+		ginodip:
+			'Metronidazol 500mg\n - Tomar 1cp VO a 12/12h, por 14d.\n\n Ceftriaxona 500mg\n - Aplicar via IM em dose única.\n\n Doxiciclina 100mg\n - Tomar 1cp VO a 12/12h, por 14d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Orientações gerais:\n- Não praticar atividades sexuais por até 1 semanas após o fim do tratamento.\n- Use preservativos.\n\n- Retornar se piora:\n- Febre por mais de 72h (>37,8°C) e persistência dos sintomas.\n- Piora súbita dos sintomas.\n\n- INTERNAÇÃO:\n\n- Abscesso tubo-ovariano;\n- Gestantes;\n- Falta de resposta clínica após 72 horas de antibioticoterapia oral;\n- Intolerância a antibióticos orais ou dificuldade de acompanhamento ambulatorial;\n- Mau estado geral com febre alta, náuseas e vômitos, hipotensão, dor abdominal de difícil controle.\n- Risco de emergência cirúrgica (ex.: apendicite, gravidez ectópica).',
+		herpes_genital:
+			'Aciclovir 400 mg\n - Tomar 1cp VO 8/8h VO, por 7d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Uso de roupas íntimas de algodão.\n- Evitar calças apertadas.\n- Retirar roupa íntima para dormir.\n- Não realizar atividades sexuais ou usar preservativos por o período de tratamento.\n- Evitar lavagem com duchas higiênicas.\n\n- Retornar se piora:\n- Febre >37,8°C/48h.\n- Piora das dos sintomas mesmo com uso adequado das medicações.',
+		conjuntivite_bacteriana:
+			'Moxifloxacino 0,5% Colírio (Vigamox®, Oftalmox®)\n - Pingar uma gota no olho afetado de 6/6 horas, por 7d.\n\n Colírio Lubrificante Carmelose Sódica Oftalmológico (Lacrifilm®, Neo Fresh®, Ecofilm®)\n - Aplicar 1-2 gotas no(s) olho(s) afetado(s), até 4 vezes a dia.\n\n Irrigação com Soro Fisiológico (0,9%) Sem conservantes\n - Realizar a lavagem dos olhos com soro, até 3x/dia, em caso de secreções.\n - Usar compressa geladas com Soro Fisiológico 0,9% ou água filtrada, 3x ao dia por 10 minutos.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Cuide-se bem:\n- Não utilize lentes de contato por o tratamento do quadro.\n- Mantenha as mãos bem higienizadas com água e sabão neutro.\n- Separe objetos pessoais para evitar contaminação: toalhas, roupas, talheres, entre outros.\n\n- Retornar se piora:\n- Dor nos olhos intensa.\n- Piora da secreção ou vermelhidão dos olhos, apesar das medicações.\n- Dificuldades para enxergar.\n\n- INTERNAÇÃO:\n\n- Conjuntivite hiperaguda com comprometimento corneano grave;\n- Celulite orbitária.',
+		conjuntivite_viral:
+			'Colírio Lubrificante Carmelose Sódica Oftalmológico (Lacrifilm®, Neo Fresh®, Ecofilm®)\n - Aplicar 1-2 gotas no(s) olho(s) afetado(s), até 4 vezes a dia.\n\n Irrigação com Soro Fisiológico (0,9%) Sem conservantes\n - Realizar a lavagem dos olhos com soro, até 3x/dia, em caso de secreções.\n - Usar compressa geladas com Soro Fisiológico 0,9% ou água filtrada, 3x ao dia por 10 minutos.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Cuide-se bem:\n- Não utilize lentes de contato por o tratamento do quadro.\n- Mantenha as mãos bem higienizadas com água e sabão neutro.\n- Separe objetos pessoais para evitar contaminação: toalhas, roupas, talheres, entre outros.\n\n- Retornar se piora:\n- Dor nos olhos intensa.\n- Piora da secreção ou vermelhidão dos olhos, apesar das medicações.\n- Dificuldades para enxergar.\n\n- INTERNAÇÃO:\n\n- Conjuntivite hiperaguda com comprometimento corneano grave;\n- Celulite orbitária.',
+		hordeolo_calazio:
+			'Cloridrato de ciprofloxacino + dexametasona (Maxiflox-D®) pomada\n - Aplicar uma fina camada dentro da pálpebra acometida até 3x/dia.\n\n Compressa morna.\n - Realize massagens suaves na lesão por 10 minutos, 4x/dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Retornar se piora:\n- Dor nos olhos intensa.\n- Piora da secreção ou vermelhidão dos olhos, apesar das medicações.\n- Dificuldades para enxergar.',
+		abscesso_dentario:
+			'Amoxicilina/Clavulanato 875/125 mg\n - Tomar 1cp VO 12/12h por 7d.\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Procurar profissional dentista para seguimento do tratamento.\n- Evitar consumo de carnes e comidas duras.\n\n- Retornar se piora:\n- Febre persistente (>37,8°C) ou calafrios.\n- Dor intensa e dificuldade para se alimentar.\n- Agravamento do edema (inchaço) ou aumento da vermelhidão (eritema) na área afetada.\n- Presença de furúnculo (abscesso) com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Celulite de rápida progressão.\n- febre ↑ 37,8°C/48h, dispneia, disfagia e/ou trismo que limita a abertura da boca a menos de 10 mm.\n- Falha no tratamento prévio.\n- Incapacidade do paciente ou de seus familiares de administrar o tratamento de forma independente.\n- Necessidade de hidratação intravenosa.',
+		otite_externa_aguda:
+			'Ciprofloxacino + Hidrocortisona Otológico (Otociriax®)\n - Pingar 3 gotas na orelha acometida de 12/12 horas, por 7d.\n\n Cetoprofeno 150 mg\n Tomar 1cp VO ao dia, de manhã, por 5d, com alimentos.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Evitar molhar o ouvido, utilize tampões para evitar a entrada de água.\n\n- Retornar se os sintomas piorarem, mesmo com medicamentos.\n- Febre persistente por mais de 48h: >37,8°C.\n- Piora do quadro por 72 horas, mesmo com uso de antibióticos.\n\n- INTERNAÇÃO:\n\n- Pacientes imunossuprimidos com suspeita de otite externa necrosante, celulite facial e do pavilhão auricular, e abscessos no pavilhão auricular e pescoço.',
+		otite_media_amoxclav:
+			'Amoxicilina-Clavulanato (Clavulin® BD, Novamox 2x) 875/125 mg\n - Tomar 1cp VO 12/12h, por 7d\n\n Cetoprofeno 150 mg\n - Tomar 1cp VO 1x/dia, de manhã, por 5d, com alimentos\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n- Retornar se os sintomas piorarem, mesmo com medicamentos.\n- Febre persistente por mais de 48h: >37,8°C.\n- Piora do quadro por 72 horas, mesmo com uso de antibióticos.\n\n- INTERNAÇÃO:\n\n- Indicada na presença de complicações como otomastoidite, complicações intracranianas, sepse ou otalgia resistente à antibioticoterapia.',
+		sifilis_recente:
+			'Penicilina Benzatina 2,4 milhões de unidades.\n - Uma aplicação de 1,2 milhão em cada glúteo, IM, em dose única.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Agendar consulta com sua equipe médica ou unidade básica de saúde para reavaliação.\n\n- Retornar se piora das lesões.',
+		mordedura_animais:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n Tomar 1cp VO a 12/12h por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar se piora das lesões',
+		monkeypox:
+			'Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n- Manter-se isolado até que as lesões estejam cicatrizadas para evitar a transmissão.\n- Evite coçar as lesões e levar as mãos a boca ou olhos.\n- Faça a limpeza das lesões diariamente com água e sabão.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora das lesões, com saída de pus e formação de abscessos.\n\n- INTERNAÇÃO:\n\n- Sepse e encefalite.\n- Erupções cutâneas múltiplas com infecção bacteriana secundária.\n- Lesão extensa em mucosa oral, limitando a alimentação e a hidratação VO.\n- Número de erupções cutâneas: 100 ou mais para a população em geral; 25 ou mais para a população vulnerável (gestantes, imunossuprimidos e crianças com menos de 8 anos).',
+		hemotransfusoes_ps:
+			'**CONCENTRADO DE HEMÁCIAS**\n Volume: 10 a 20mL/kg\n Um concentrado de hemácias = 230 a 300mL -> Aumenta a Hb em 1g/dL e Hematócrito em 3%\n O tempo de infusão deve ser de 60 a 120 minutos.\n Acesso venoso exclusivo.\n Dosar novo Hb/Ht de 1 a 2h após a transfusão.\n\n**PLASMA FRESCO CONGELADO**\n Uma unidade = 200 a 250mL.\n Dose padrão é de 15 a 20mL/kg ou 4 unidades.\n Tempo de infusão máximo de 1 hora.\n\n**CRIOPRECIPITADO**\n Uma unidade a cada 10 kg de peso.\n Uma unidade = 30 a 40mL -> Contém fator VIII, fibrinogênio e Fator de von Willebrand.\n Geralmente, 8 a 10 bolsas em adultos.\n Transfusão deve ser imediata após descongelamento.\n\n**PLAQUETAS**\n Concentrado de plaquetas: 1U = 50mL para cada 10kg de peso\n Sugestão: transfundir 5 a 10 bolsas EV (1 para cada 7 a 10kg)\n Aférese: 200mL. Corresponde a 6U de concentrado de Plt'
+  };
+
+  // ========================================
+  // HOTSTRINGS PSF (prescrições completas)
+  // ========================================
+	const psf_hotstrings = {
+		abscesso_furunculo:
+			'CEFALEXINA 500mg\n   Tomar 01 cp via oral de 6/6h por 10 dias\n   **Ou**\nCLINDAMICINA 300mg\n   Tomar 01 cp via oral de 8/8h por 10 dias\nIBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\nDIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**USO TÓPICO**\nMUPIROCINA 20mg/g\nAplicar em região afetada 3x ao dia por 10 dias\n\n**NA UNIDADE:**\nDrenagem (se flutuação ou se julgar necessário) + analgesia com Dipirona 01 amp IM',
+		aftas: 'Clorexidina 0,2% solução oral __________ 1 fr.\n   Fazer bochecho de 2 minutos, após higiene oral, duas vezes ao dia, por 10 dias.',
+		amenorreia_secundaria: 'Medroxiprogesterona 10mg __________ 10 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, por 10 dias, interromper o uso e retornar ao médico no 14º dia',
+		amigdalite_j03_9:
+			'AMOXICILINA + CLAVULANATO (500mg+125mg)\n   Tomar 01 cp via oral de 8/8h por 07 dias\nIBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\nDIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Na unidade:**\nPenicilina G benzatina 1.2M UI IM dose única + sintomáticos pra casa',
+		anemia_crianca: 'Sulfato Ferroso 12,5mg Fe/2,5ml xarope\n   Tomar __ ml, via oral, duas vezes ao dia, por 90 dias.',
+		anemia_ferropriva_sintomatica_d50_0: 'SULFATO FERROSO 120MG (COMPRIMIDO) __________ 1CX\n   TOMAR 1 CP VO DE 12/12H POR NO MÍNIMO 3 MESES',
+		asma: 'Prednisona 20mg\n   Tomar 2 comprimidos, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSalbutamol+ Ipratrópio 120+20mcg/jato aerossol – 1 fr. (Combivent)\n   Aspirar 2 jatos, a cada 4 a 6 horas, por 5 dias.',
+		asma_aguda_leve_moderada_j45_0:
+			'1) PREDNISONA 20mg ——— 1 cx\n   Tomar 01 cp via oral de 12/12h por 05 dias\n2) SALBUTAMOL Xarope 2mg/5mL ——— 1 frasco\n   Tomar 5mL via oral de 8/8h por 05 dias (Opção comum para crianças ou adultos sem acesso ao inalador)\n\n**USO INALATÓRIO**\n1) SALBUTAMOL SPRAY 100mcg/jato\n   Inalar 2 jatos de 6/6h, por até 5 dias. Usar com espaçador.',
+		asma_crianca_1: 'Prednisolona 3mg/ml xarope\n   Tomar __ ml, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSF 0,9% 3 ml + Fenoterol 5mg/ml __ gotas + Ipratrópio 0,25mg/ml __ gotas\n   Nebulizar a cada 6 horas, por 5 dias',
+		asma_crianca_2: 'Prednisolona 3mg/ml xarope __________ 60 ml.\n   Tomar __ ml, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSalbutamol aerosol 100mcg/jato __________ 200 doses.\n   Aspirar 1 jato, a cada __ horas, por 5 dias.',
+		asma_crianca_3: 'Salbutamol 2mg/5ml xarope __________ 120 ml.\n   Tomar 0,15mg/kg ml, via oral, a cada 8 horas, por 5 dias.\nPrednisolona 3mg/ml xarope __________ 60 ml.\n   Tomar __ ml, via oral, uma vez ao dia, pela manhã, por 5 dias.',
+		asma_crise_aguda: 'Prednisona 20mg\n   Tomar 2 comprimidos, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSF 0,9% 3 ml + Fenoterol 5mg/ml 5 gotas + Ipratrópio 0,25mg/ml 30 gotas\n   Nebulizar a cada 6 horas, por 5 dias',
+		asma_crise_aguda_2: 'Prednisona 20mg\n   Tomar 2 comprimidos, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSalbutamol aerosol 100mcg/jato __________ 200 doses.\n   Aspirar 2 jatos, a cada 4 horas, por 5 dias.',
+		candidiase_vaginal_corrimento: '1) FLUCONAZOL 150mg\n   Tomar 01 cp via oral em dose única\n**USO TÓPICO**\n2) NISTATINA creme vaginal\n   Aplicar 01 aplicador por via vaginal à noite por 07 dias',
+		cefaleia_tensional_cefaleia_dor_de_cabeca_g44_2: '1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias',
+		cerume_impactado: '**USO OTOLÓGICO**\n1) CERUMIN\n   Aplicar 05 gotas em ouvido afetado, manter posição deitada com o ouvido para cima por 05 minutos, de 8/8h por 05 dias',
+		cervicite_e_uretrite:
+			'Ciprofloxacino 500mg __________ 3 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, por 3 dias.\nAzitromicina 500mg __________ 4 cp.\n   Tomar 2 cp, via oral, dose única. Repetir no parceiro.\n**Uso Externo:**\nCeftriaxona 250mg __________ 1 amp.\n   Aplicar 1 ampola, via intramuscular, dose única.',
+		cinetose: 'Meclizina 25mg (Meclin) __________ 15 cp.\n   Tomar 1 comprimido, via oral, uma hora antes de viajar. Repetir após 12 horas, se necessário.',
+		colelitiase: 'Ácido Ursodesoxicólico 300mg __________ 120 cp.\n   Tomar 1 cp, via oral, após o café da manhã e após o jantar, todos os dias.',
+		colica_biliar_litiase_biliar_pedra_nos_rins_k80_2:
+			'1) BUSCOPAN COMPOSTO\n   Tomar 01 cp via oral de 6/6h se dor abdominal ou febre\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n3) TRAMADOL 50mg\n   Tomar 01 cp via oral de 8/8h se dor intensa e refratária a analgésicos comuns\n4) ONDANSETRONA 8mg\n   Tomar 01 cp via oral de 8/8h se náuseas ou vômitos\n\n**NA UNIDADE:**\n1) Dipirona 01 amp + Buscopan Composto 01 amp em SF 0,9% 100 mL EV\n   SE PERSISTIR, REPETIR MAIS UMA RODADA DA PRESCRIÇÃO ACIMA. SE MESMO ASSIM PERSISTIR:\n1) TRAMADOL 1 AMP EM SF 0,9% 100ML EV',
+		conjuntivite_h10_9:
+			'**USO OFTÁLMICO**\n1) TOBRAMICINA 0,3%\n   Aplicar 02 gotas no olho afetado de 6/6h por 05 dias\n\n**Orientações**\n1) Fazer compressas frias por 20 minutos no olho afetado\n2) Evitar coçar os olhos e não usar soro fisiológico para lavar\n3) Suspender o uso de lentes de contato durante o tratamento',
+		constipacao_funcional_k59_0:
+			'1) LACTULONA xarope\n   Tomar 15 mL via oral 1x ao dia. Pode aumentar até 30 mL/dia conforme resposta\n2) ÓLEO MINERAL\n   Tomar 15 mL via oral de 8/8h por até 07 dias se fezes endurecidas\n\n**Orientações**\n1) Aumentar a ingestão de água (mínimo 2L/dia)\n2) Aumentar fibras (frutas, verduras e cereais integrais)\n3) Praticar atividade física regular\n4) Evitar segurar vontade de evacuar\n\n**NA UNIDADE (SE NECESSÁRIO):**\nFOSFATO DE SÓDIO (FLEET ENEMA) Aplicar 01 enema por via retal, dose única.',
+		crise_convulsiva_epilepsia_g40_9:
+			'**Na unidade (se crise ativa ou pós-crise):**\n1) DIAZEPAM 10mg (retal ou EV)\n   Administrar 01 ampola via retal ou EV, dose única\n2) OXIGÊNIO\n   Administrar com máscara, se saturação < 94%\n\n**Uso Oral (pós-crise, se paciente não for epiléptico conhecido):**\n1) OBSERVAÇÃO E ENCAMINHAMENTO para neurologista (sem iniciar antiepiléptico sem histórico confirmado)',
+		crise_hipertensiva_i10_r03_0:
+			'1) CAPTOPRIL 25mg\n   Tomar 01 cp via oral. Repetir em 1h se pressão não reduzir\n2) FUROSEMIDA 40mg\n   Tomar 01 cp via oral, se houver congestão ou edema\n\n**Na unidade**\n1) CAPTOPRIL 25mg SL\n   Administrar 01 cp sublingual, monitorar PA a cada 15 min\n\n**Orientações**\n1) Manter uso correto dos anti-hipertensivos\n2) Retorno com clínico ou cardiologista para ajuste medicamentoso',
+		dengue:
+			'# Dengue - Grupo A e B (70kg)\n## MEDICAÇÕES PARA USO IMEDIATO\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Dipirona 1g (Novalgina®) ou Paracetamol 500mg (Tylenol®)\n Tomar 1 comprimido via oral a cada 6 horas, se necessário, para dor ou febre (temperatura axilar acima de 37,8°C).\n\n Digesan® (Bromoprida) 10 mg ou Ondansetrona (Vonau®) 4 mg\n Tomar 1 comprimido a cada 8 horas, via oral, em caso de enjoo ou vômito.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1 comprimido cada 12 horas durante 5 días.\n\n- Eliminar focos de disseminação do mosquito Aedes aegypti.\n- Não use anti-inflamatórios como Nimesulida, Ibuprofeno, Diclofenaco, Cetoprofeno ou Naproxeno, entre outros.\n- Continue com os medicamentos de rotina.\n- Se você utiliza anticoagulantes (Rivaroxabana, Apixabana) ou antiagregantes (AAS, Clopidogrel), informe ao seu médico sobre a suspeita de dengue.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos\n- Dor abdominal intensa e contínua.\n- Vômito ou diarreia persistente.\n- Pressão baixa, tontura ou desmaios.\n- Sangramento ou manchas roxas na pele.\n\n- INTERNAÇÃO HOSPITALAR\n\n- Pacientes com sinais de alarme (grupo C) devem ser internados em hospital.\n- Pacientes em estado grave com sinais de choque (grupo D) devem ser encaminhados à terapia intensiva.\n- Internação é indicada também nas seguintes situações: recusa ou incapacidade de ingerir líquidos e alimentos; impossibilidade de acompanhamento ou retorno à unidade de saúde; descompensação de doença grave; plaquetas < 20.000/mm3.',
+		dengue_a90:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n2) ONDANSETRONA 8mg\n   Tomar 01 cp via oral de 8/8h se náuseas ou vômitos\n3) ENTEROGERMINA frasco\n   Tomar 01 frasco de 12/12h por 05 dias\n4) SRO\n   Diluir 01 sachê em 1L de água e beber ao longo do dia\n\n**Orientações**\nNão usar anti-inflamatórios (ibuprofeno, diclofenaco, cetoprofeno, nimesulida, etc)\nHidratação vigorosa (mínimo 80 mL/kg/dia)\nAlimentação leve (caldos, sucos, água de côco). Não tomar refrigerantes, sucos artificiais, gorduras como salgadinho e alimentos pesados.\nRetorno se: sangramentos, dor abdominal intensa, vômitos persistentes ou sonolência\nSe febre persistir mesmo com dipirona, intercalar com paracetamol\n\n**Na unidade**\n1) Dipirona 01 amp + Ondansetrona 01 amp em SF 0,9% 250 mL EV',
+		dermatite_de_contato_reacao_alergica_leve_l23_9: '1) LORATADINA 10mg\n   Tomar 01 cp via oral à noite por 07 dias\n**USO TÓPICO**\n2) DEXCLORFENIRAMINA + BETAMETASONA creme\n   Aplicar fina camada na região afetada 2x ao dia por 07 dias',
+		dermatite_seborreica_leve_l21_0:
+			'**Uso Tópico**\n1) CETOCONAZOL shampoo 2%\n   Aplicar no couro cabeludo 3x por semana, deixar agir por 5 minutos e enxaguar, por 4 semanas\n2) HIDROCORTISONA creme 1%\n   Aplicar fina camada 2x/dia nas áreas acometidas por 5 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se queixa de dor ou prurido intenso)',
+		dermatofitose_interdigital_pe_de_atleta_b35_3:
+			'**Uso Tópico**\n1) CLOTRIMAZOL creme\n   Aplicar fina camada 2x/dia por 14 dias\n\n**Orientações**\n→ Manter pés secos e arejados\n→ Trocar meias diariamente\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor local intensa)',
+		dip_1:
+			'Metronidazol 250mg __________ 56 cp.\n   Tomar 2 cp, via oral, a cada 12 horas, 14 dias.\nDoxiciclina 100mg __________ 28 cp.\n   Tomar 1 cp, via oral, a cada 12 horas, 14 dias.\nAzitromicina 500mg __________ 2 cp.\n   Parceiro tomar 2 cp, via oral, em dose única.\n**Uso Externo:**\nCeftriaxona 250mg __________ 1 amp.\n   Aplicar 1 ampola, via intramuscular, dose única.',
+		dip_2_comprometimento_sistemico:
+			'Metronidazol 250mg __________ 56 cp.\n   Tomar 2 cp, via oral, a cada 12 horas, por 14 dias.\nDoxiciclina 100mg __________ 28 cp.\n   Tomar 1 cp, via oral, a cada 12 horas, por 14 dias.\nLevofloxacino 500mg __________ 14 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, por 14 dias.\nAzitromicina 500mg __________ 2 cp.\n   Parceiro tomar 2 cp, via oral, em dose única.',
+		dismenorreia_1: 'Ibuprofeno 600mg __________ 15 cp.\n   Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nParacetamol+Codeína 500mg+30mg (Paco) __________ 12 cp.\n   Tomar 1 cp, via oral, a cada 8 horas, se dor forte',
+		dismenorreia_2:
+			'Emama 400mg __________ 60 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, todos os dias, por 30 dias. Após, tomar 1 cp, via oral uma vez ao dia, por 7 dias, no período menstrual.\nIbuprofeno 600mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.',
+		dispepsia_funcional_1:
+			'Omeprazol 20mg __________ 28 cp.\n   Tomar 1 cápsula, via oral, em jejum, imediatamente antes do café da manhã, por 28 dias.\nDomperidona 10mg (Domperix) __________ 60 cp. Tomar 1 comprimido, via oral, três vezes ao dia, refeições, por 20 dias',
+		dispesia_funcional_2:
+			'Omeprazol 20mg __________ 28 cp.\n   Tomar 1 cápsula, via oral, em jejum, imediatamente antes do café da manhã, por 28 dias.\nBromoprida 4mg/ml solução oral gotas __________ 3 fr. Tomar 60 gotas, via oral, a cada 8 horas, por 14 dias.',
+		dor_muscular_lombalgia_algia_m54_5:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor\n2) DICLOFENACO SÓDICO 50mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n3) CICLOBENZAPRINA 10mg\n   Tomar 01 cp via oral 2h antes de dormir por 05 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM + DICLOFENACO 75mg IM, dose única',
+		dorsalgia_1:
+			'Nimesulida 50mg/ml gotas __________ 2 fr. Tomar 40 gotas, via oral, a cada 12 horas, por 6 dias.\nParacetamol 500mg __________ 20 cp. Tomar 1 cp, via oral, a cada 6 horas, por 5 dias.\nCiclobenzaprina 5mg __________ 10 cp. Tomar 1 cp, via oral, à noite, por 10 dias.\n**Uso Externo:**\nBetametasona 5+2mg/ml __________ 1 amp. Aplicar 1 ampola, via intramuscular, dose única.',
+		dorsalgia_2:
+			'Diclofenaco de Sódio 50mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nDipirona 500mg/ml solução oral gotas __________ 1 fr. Tomar 40 gotas, via oral, a cada 8 horas, por 3 dias.\n**Uso Externo:**\nDexametasona 4mg/2,5ml __________ 1 amp. Aplicar 1 ampola, via intramuscular, dose única.',
+		dorsalgia_3:
+			'Ibuprofeno 600mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nTramadol 50mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nCiclobenzaprina 5mg __________ 10 cp. Tomar 1 cp, via oral, à noite, por 10 dias.\n\n**Uso Externo:**\nDexalgen __________ 3 amp.\n   Aplicar 1 ampola, via intramuscular, a cada 3 dias, por 3 doses.',
+		dorsalgia_intensa:
+			'Bi-Profenid 150mg __________ 10cp. Tomar 1 cp, via oral, uma vez ao dia, por 10 dias.\nTramadol 50mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nMusculare 10mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\n\n**Uso Externo:**\nDexalgen __________ 3 amp.\n   Aplicar 1 ampola, via intramuscular, a cada 3 dias, por 3 doses.',
+		dpoc_em_exacerbacao_j44_1:
+			'1) PREDNISONA 20mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n2) AZITROMICINA 500mg\n   Tomar 01 cp via oral 1x/dia por 05 dias\n\n**Inalatória (se disponível para casa):**\n3) SALBUTAMOL spray\n   Inalar 02 jatos de 6/6h com espaçador\n\n**Na unidade:**\n1) Inalação com 5 gotas de Fenoterol + 5 gotas de Brometo de Ipratrópio em 5 mL de SF 0,9%\n2) Hidrocortisona 100mg EV ou IM',
+		enterobiase_infestacao_por_oxiuros_b80:
+			'1) ALBENDAZOL 400mg\n   Tomar dose única via oral e repetir após 14 dias\n\n**Orientações**\nLavar roupas de cama e higiene pessoal\nTratar todos os contatos domiciliares\n\n**Na unidade**\n1) DIPIRONA 1g IM (se prurido anal intenso)',
+		enxaqueca_migranea_g43_9:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n3) NARATRIPTANA 2,5mg\n   Tomar 01 cp via oral ao sinal de dor intensa. Pode repetir em 4h se necessário. Máximo: 2 cp/dia\n\n**Na unidade**\n1) DIPIRONA 1g IM + DECADRON 4mg IM + ONDANSETRONA 01 amp IM',
+		erispela:
+			'1) CEFALEXINA 500mg\n   Tomar 01 cp via oral de 6/6h por 10 dias\n2) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n**Uso Tópico**\n4) NEOMICINA + BACITRACINA pomada\n   Aplicar fina camada na região afetada 3x/dia\n\n**Na unidade**\n1) DIPIRONA 1g IM + CEFTRIAXONA 1g IM',
+		escabiose_sarna_b86:
+			'**Uso Tópico**\n1) PERMETRINA 5% creme\n   Aplicar à noite da cabeça aos pés, deixar agir por 8-12h e remover no banho pela manhã. Repetir após 7 dias\n**Uso Oral (casos extensos ou falha do tópico)**\n2) IVERMECTINA 6mg\n   Tomar 3 comprimidos VO em dose única. Repetir após 7 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se prurido generalizado intenso)',
+		escoriacoes_feridas_leves_s00_8:
+			'**Uso Tópico**\n1) SULFADIAZINA DE PRATA creme\n   Aplicar fina camada na lesão 1 a 2x ao dia até cicatrização\n2) SF 0,9%\n   Lavar o local 2x ao dia antes da aplicação da pomada\n\n**Na unidade**\n1) DIPIRONA 1g IM, dose única para analgesia local',
+		faringite_viral_faringoamigdalite_viral_j02_9:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 03 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM + ORIENTAR repouso, hidratação e evitar antibiótico desnecessário',
+		foliculite:
+			'Eritromicina 500mg __________ 28 cp.\n   Tomar 1 cp, via oral, a cada 6 horas, por 7 dias. (às 6, 12, 18 e 24 horas)\n**Uso Externo:**\nMupirocina gel 2% __________ 15 g.\n   Aplicar nas lesões, após limpeza da pele com água e sabão, três vezes ao dia, por 7 dias.',
+		gases_em_bebes:
+			'Dimeticona gotas __________ 1 fr.\n   Tomar __ gotas, via oral, a cada 6 horas, por 10 dias.\n**Uso Externo:**\nSoro Fisiológico 0,9% __________ 1 fr.\n   Aplicar 1⁄2 conta-gotas em cada narina, 4 vezes ao dia (principalmente antes das mamadas e ao dormir).',
+		gastrite_drge_dispepsia_dor_no_estomago_k29_7_k21_9_k30:
+			'1) OMEPRAZOL 20mg\n   Tomar 01 cp via oral em jejum pela manhã por 30 dias\n2) BROMOPRIDA 10mg\n   Tomar 01 cp via oral 3x ao dia, 30 min antes das refeições\n3) ESCOPOLAMINA + DIPIRONA (10mg + 250mg)\n   Tomar 01 cp via oral de 6/6h se dor abdominal\n\n**Na unidade**\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		geca_gastroenterite_aguda_a09:
+			'1) OMEPRAZOL 20mg\n   Tomar 01 cp via oral em jejum pela manhã por 10 dias\n2) ENTEROGERMINA frasco\n   Tomar 01 frasco de 12/12h por 05 dias\n3) ONDANSETRONA 8mg\n   Tomar 01 cp via oral de 8/8h se náusea ou vômito\n4) ESCOPOLAMINA + DIPIRONA (10mg + 250mg)\n   Tomar 01 cp via oral de 6/6h se dor abdominal ou febre\n5) SAIS DE REIDRATAÇÃO ORAL\n   Diluir 01 sachê em 1L de água e beber ao longo do dia\n\nSe diarreia com sangue, febre ou dor em pontada:\n6) CIPROFLOXACINO 500mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		gota_1_crise: 'Indometacina 50mg __________ 20 cp. Tomar 1 cápsula, via oral, a cada 8 horas, por 7 dias.\nColchicina 1mg __________ 20 cp. Tomar 1 comprimido, via oral, a cada 8 horas, por 7 dias.',
+		gota_2_crise: 'Diclofenaco de Sódio 50mg __________ 20 cp. Tomar 1 cp, via oral, a cada 8 horas, por 7 dias.\nColchicina 1mg __________ 20 cp. Tomar 1 cp, via oral, a cada 8 horas, por 7 dias.',
+		gota_3_crise: 'Prednisona 20mg __________ 18 cp. Tomar 2 cp, via oral, uma vez ao dia, por 5 dias. Após, tomar 1 cp, via oral, uma vez ao dia, por 5 dias. Após, tomar 1⁄2 cp, via oral, uma vez ao dia, por 6 dias.',
+		gota_4_controle: 'Alopurinol 300mg __________ 30 cp. Tomar 1 cp, via oral, uma vez ao dia, por 30 dias.\nColchicina 0,5mg __________ 30 cp. Tomar 1 cp, via oral, uma vez ao dia, por 30 dias.',
+		h_pylori_1:
+			'Amoxicilina 500mg __________ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias.\nClaritromicina 500mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.\nOmeprazol 20mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.',
+		h_pylori_2_alergia_a_amoxicilina:
+			'Metronidazol 250mg __________ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias.\nClaritromicina 500mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.\nOmeprazol 20mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.',
+		hemorragia_nasal_epistaxe_leve_r04_0:
+			'**Uso Local**\n1) SF 0,9% gelado\n   Instilar no nariz e fazer compressão nasal por 10 minutos\n2) NAFAZOLINA spray nasal\n   Aplicar 1 jato em cada narina de 8/8h por até 03 dias\n\n**Na unidade**\n1) Compressão com algodão embebido em SF gelado + NAFAZOLINA spray',
+		hemorroida_i84_9:
+			'1) ÓLEO MINERAL\n   Tomar 15 mL via oral de 8/8h\n2) DAFLON (450mg + 50mg)\n   Tomar 01 cp via oral de 4/4h por 04 dias, depois 6/6h por 03 dias, depois 12/12h por 03 meses\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n4) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Uso Tópico**\n5) PROCTYL pomada\n   Aplicar fina camada na região anal de 2-3x/dia\n\n**Na unidade**\n1) DIPIRONA 1g IM + DECADRON 4mg IM',
+		herpes_simples_b00_9: '1) ACICLOVIR 400mg\n   Tomar 01 cp via oral de 8/8h por 07 dias (se gestante: 5 dias)\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor intensa local)',
+		hiperglicemia_descompensacao_do_dm2_e11_9: '**Na unidade**\n1) DIPIRONA 1g IM (se queixa de dor)\n2) SF 0,9% EV em 500 mL (caso de desidratação moderada)\n3) investigar causas secundárias ou aderência do paciente ao tratamento',
+		hiperplasia_prostata_1: 'Doxasozina 2mg __________ 30 cp. Tomar 1⁄2 cp, via oral, à noite, todos os dias, por 14 dias. Após, tomar 1 cp, via oral, à noite, todos os dias, por 21 dias e retornar ao médico para novo ajuste da dose.',
+		hiperplasia_prostata_2: 'Doxasozina 4mg __________ 60 cp. Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		hiperplasia_prostata_3: 'Tansulozina 0,4mg __________ 60 cp.\n   Tomar 1 cápsula, via oral, após o café da manhã, todos os dias.',
+		hiperplasia_prostata_4: 'Finasterida 5mg __________ 60 cp. Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		hiperplasia_prostata_5: 'Tansulozina 0,4mg __________ 60 cp.\n   Tomar 1 cápsula, via oral, após o café da manhã, todos os dias.\nFinasterida 5mg __________ 60 cp. Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		hipertensao_arterial_descompensada_i10: '**Na unidade**\n1) CAPTOPRIL 25mg VO + DIPIRONA 1g IM\n2) FUROSEMIDA 40mg tomar 01 cp via oral se houver congestão ou edema (avaliar se paciente é renal)\n3) retorno em 1h para reavaliar',
+		hipertireoidismo_1: 'Tiamazol 5mg (Tapazol) __________ 50 cp.\n   Tomar 1 comprimido, via oral, a cada 8 horas, por 15 dias e retornar ao médico para reavaliação.\nPropranolol 40mg __________ 30 cp. Tomar 1 cp, via oral, a cada 12 horas, por 15 dias.',
+		hipertireoidismo_2:
+			'Propiltiouracil 5mg (Propil) __________ 60 cp.\n   Tomar 1 comprimido, via oral, a cada 8 horas, por 20 dias e retornar ao médico para reavaliação.\nPropranolol 40mg __________ 40 cp. Tomar 1 cp, via oral, a cada 12 horas, por 20 dias.',
+		hipoglicemia_sintomatica_e16_2: '**Na unidade**\n1) GLICOSE 50% EV (01 ampola 20mL) em infundido lento (10-15min) diluída em 100mL de SF 0,9% EV (se paciente sintomático - tremores, queda de nível de consciência, sudorese).',
+		hipotireoidismo: 'Levotiroxina 50mcg __________ 60 cp.\n   Tomar 1 comprimido, via oral, em jejum, 60 minutos antes do café da manhã, todos os dias.',
+		impetigo_l01_0: '1) CEFALEXINA 500mg\n   Tomar 01 cp via oral de 6/6h por 07 dias\n**Uso Tópico**\n2) MUPIROCINA pomada\n   Aplicar fina camada nas lesões 3x ao dia por 07 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor local)',
+		impetigo_ou_ectima:
+			'**Uso Externo:**\nPenicilina G Benzatina 1.200.000 UI __________ 1 amp. Aplicar 1 ampola, via intramuscular, dose única.\nNeomicina + Bacitracina pomada __________ 1 tb.\n   Aplicar na lesão, após limpeza da pele e remoção das crostas com água morna e sabão, ou soro fisiológico, três vezes ao dia, por 7 dias.',
+		impetigo_ou_ectima_2:
+			'Eritromicina 250mg/5ml __________ 1 vd. Tomar 5 ml, via oral, a cada 6 horas, por 7 dias. (às 6, 12, 18 e 24 horas)\n**Uso Externo:**\nNeomicina + Bacitracina pomada __________ 1 tb.\n   Aplicar na lesão, após limpeza da pele e remoção das crostas com água morna e sabão, ou soro fisiológico, três vezes ao dia, por 7 dias.',
+		infeccao_de_urina_itu_n39_0:
+			'1) NITROFURANTOÍNA 100mg\n   Tomar 01 cp via oral de 6/6h por 07 dias\n   ou\n1) CIPROFLOXACINO 500mg\n   Tomar 01 cp via oral de 12/12h por 07 dias\n2) FENAZOPIRIDINA 200mg\n   Tomar 01 cp via oral de 8/8h por 03 dias\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n\nSe pielonefrite:\n4) CEFTRIAXONA 1g IM, dose única\n\n**Na unidade**\n1) DIPIRONA 1g IM + CEFTRIAXONA 1g IM',
+		insonia_leve_moderada_g47_0: '1) PASSIFLORA (extrato seco) 200mg\n   Tomar 01 cp via oral à noite, 30 minutos antes de dormir\n2) MELISSA + VALERIANA (fitoterápico composto)\n   Tomar 01 cp via oral à noite, se necessário\n\n**Na unidade**\nNão aplicável',
+		insuficiencia_venosa_cronica: '**Uso Externo:**\nMeia Compressiva Kendall – média compressão.\n   Calçar pela manhã, antes de levantar-se da cama. Usar durante todo o dia. Elevar as pernas por 15 minutos antes de calçar, se tiver de retirá-las.',
+		intoxicacao_alimentar_leve_t62_9_a05_9:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n2) METOCLOPRAMIDA 10mg\n   Tomar 01 cp via oral de 8/8h se náusea ou vômito, por até 3 dias\n3) SORO CASEIRO ou REIDRATANTE ORAL\n   Ingerir por via oral após cada evacuação líquida\n\n**Na unidade**\n1) METOCLOPRAMIDA 10mg IM (se náusea ou vômito ativo)',
+		labirintite_h81_0: '1) MECLIZINA 25mg\n   Tomar 01 cp via oral de 6/6h por 07 dias\n2) DRAMIN\n   Tomar 01 cp via oral de 8/8h se náusea ou vômito\n\n**Na unidade**\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		larva_migrans_1:
+			'18- Albendazol 400mg __________ 3 cp. Tomar 1 cp, via oral, uma vez ao dia, por 3 dias.\n**Uso Externo:**\nTiabendazol 50mg/g pomada (Foldan) __________ 45 g.\n   Aplicar nas lesões, friccionando a pomada nas trilhas escavadas pelo parasita na pele, três vezes ao dia, por 5 dias seguidos.',
+		larva_migrans_2:
+			'Ivermectina 6mg (Vermectil) __________ 2 cp. Tomar 2 comprimidos, via oral, em dose única.\n**Uso Externo:**\nTiabendazol 50mg/g pomada (Foldan) __________ 45 g.\n   Aplicar nas lesões, friccionando a pomada nas trilhas escavadas pelo parasita na pele, três vezes ao dia, por 5 dias seguidos.',
+		larva_migrans_criancas:
+			'19- Albendazol 400mg/10ml __________ 3 fr. Tomar o conteúdo de um frasco (10 ml), via oral, uma vez ao dia, por 3 dias.\n**Uso Externo:**\nTiabendazol 50mg/g pomada (Foldan) __________ 45 g.\n   Aplicar nas lesões, friccionando a pomada nas trilhas escavadas pelo parasita na pele, três vezes ao dia, por 5 dias seguidos.',
+		mastalgia_1: 'Tamoxifeno 10mg __________ 90 cp. Tomar 1 cp, via oral, uma vez ao dia, por 90 dias',
+		molusco_contagioso_b08_1:
+			'**Conduta Geral**\nOrientar conduta expectante (resolução espontânea em 6 a 12 meses)\nEvitar manipulação das lesões e compartilhar toalhas/objetos\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor local)\nEncaminhar para dermatologia se lesões extensas ou infeccionadas',
+		nauseas_e_vomitos_1_gestantes: '20- Dimenidrinato 50mg (Dramin B6) __________ 20 cp. + Piridoxina 10mg\n   Tomar 1 comprimido, via oral, a cada 8 horas, por 7 dias.',
+		nauseas_e_vomitos_severos_3: '21- Ondansetrona 8mg (Vonau Flash) __________ 10 cp. Tomar 1 comprimido, via oral, a cada 8 horas, por 3 dias.',
+		nefrolitiase_colica_renal_n20_0:
+			'1) ESCOPOLAMINA + DIPIRONA (10mg + 250mg)\n   Tomar 01 cp via oral de 6/6h se dor\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n3) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor\n4) BROMOPRIDA 10mg\n   Tomar 01 cp via oral 3x/dia se náusea\n5) HIDRATAÇÃO oral vigorosa com água\n\n**Na unidade**\n1) DIPIRONA + ESCOPOLAMINA 1AMP , ONDANSETRONA 01 AMP EM 100ML DE SF 0,9%\n2) REAVALIAR EM 1H',
+		onicomicose_1_maos_tinea_ungueum: 'Itraconazol 100mg __________ 28+ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias; uma vez ao mês, por 2 meses.',
+		onicomicose_2_maos_tinea_ungueum: 'Terbinafina 250mg __________ 56 cp. Tomar 1 cp, via oral, uma vez ao dia, por 56 dias.',
+		onicomicose_3_pes: 'Itraconazol 100mg __________ 28 + 28+ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias; uma vez ao mês, por 3 meses.',
+		onicomicose_4_pes: 'Terbinafina 250mg __________ 84 cp. Tomar 1 cp, via oral, uma vez ao dia, por 84 dias.',
+		osteoporose_1:
+			'Alendronato de Sódio 70mg __________ 8 cp.\n   Tomar 1 comprimido, via oral, pela manhã, em jejum, 40 minutos antes do café da manhã, uma vez na semana. Tomar com um copo cheio de água filtrada. Não se deitar até fazer a primeira refeição.\nCarbonato de Cálcio 600mg __________ 60 cp. + Vitamina D 400UI\n   Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		osteoporose_2:
+			'Risedronato de Sódio 35mg __________ 8 cp.\n   Tomar 1 comprimido, via oral, pela manhã, em jejum, 40 minutos antes do café da manhã, uma vez na semana. Tomar com um copo cheio de água filtrada. Não se deitar até fazer a primeira refeição.\nCarbonato de Cálcio 600mg __________ 60 cp. + Vitamina D 400UI\n   Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		osteoporose_3: 'Carbonato de Cálcio 600mg __________ 45 cp. + Vitamina D 400UI\n   Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		otite_externa_h60_3:
+			'1) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n2) CEFALEXINA 500mg\n   Tomar 01 cp via oral de 6/6h por 07 dias\n**Uso Tópico**\n3) OTOSPORIN (ou similar com Polimixina B + Neomicina + Hidrocortisona)\n   Instilar 3 gotas no ouvido afetado 3x/dia por 07 dias\n\n**Na unidade**\n1) DIPIRONA + DECADRON 1AMP CADA IM',
+		otite_media_aguda_h66_0:
+			'1) AMOXICILINA 500mg\n   Tomar 01 cp via oral de 8/8h por 10 dias\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n3) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Na unidade**\n1) DIPIRONA + DECADRON 1AMP CADA IM',
+		otite_media_cefuroxima:
+			'# Otite Média Aguda Bacteriana (Cefuroxima)\n## MEDICAÇÕES DE USO IMEDIATO\n\n Cefuroxima 500 mg (comprimido)\n - Tomar 1 comprimido, via oral, 12/12h, por 10 dias.\n\n Cetoprofeno 150 mg (comprimido)\n - Tomar 1 comprimido ao dia, pela manhã, durante 5 dias, com alimentos.\n\n Dipirona 1g (Novalgina®) ou Paracetamol 500mg (Tylenol®)\n Tomar 1 comprimido via oral a cada 6 horas, se necessário, para dor ou febre (temperatura axilar acima de 37,8°C).\n\n Digesan® (Bromoprida) 10 mg ou Ondansetrona (Vonau®) 4 mg\n Tomar 1 comprimido a cada 8 horas, via oral, em caso de enjoo ou vômito.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20 mL de soro fisiológico, 2 a 4 vezes ao dia, por 5 dias, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n- Retornar se os sintomas piorarem, mesmo com medicamentos.\n- Febre persistente por mais de 48h: temperatura acima de 37,8°C.\n- Piora do quadro por 72 horas, mesmo com uso de antibióticos.\n\n- INTERNAÇÃO HOSPITALAR\n\n- Indicada na presença de complicações como otomastoidite, complicações intracranianas, sepse ou otalgia resistente à antibioticoterapia.',
+		oxiuriase_1: 'Pamoato de Pirvínio 100mg __________ 12 dg.\n   Tomar 1dg/10kg (máx. 6 dg), via oral, em dose única. Repetir após 2 semanas.',
+		oxiuriase_criancas_2: 'Albendazol 400mg/10ml __________ 2 fr.\n   Tomar o conteúdo de um frasco (10 ml), via oral, em dose única.\n   Repetir após 7 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		pediculose_crianca_2_anos:
+			'Ivermectina 6mg (Vermectil) __________ 2 cp. Tomar 200mcg/kg comprimido, via oral, em dose única.\n**Uso Externo:**\nPermetrima 1% loção (Kwell) __________ 60 ml.\n   Lavar os cabelos com xampu, enxaguar bem e secar com toalha.\n   Aplicar a loção em todo o cabelo e couro cabeludo, com os cabelos ainda úmidos, principalmente na nuca e atrás das orelhas.\n   Deixe agir por 10 minutos.\n   Passe pente fino para remoção dos piolhos e lêndeas.\n   Enxague bem com água morna.\n   Repetir após 7 dias.',
+		pediculose_pubiana:
+			'Ivermectina 6mg (Vermectil) __________ 2 cp. Tomar 2 comprimidos, via oral, em dose única.\nDexclorfeniramina 2mg __________ 10 cp. Tomar 1 comprimido, via oral, a cada 8 horas, por 3 dias.\n**Uso Externo:**\nPermetrima 5% loção cremosa __________ 60 ml.\n   Aplicar nas áreas com pêlo, menos couro cabeludo, seguidos.\n   Remover com banho após 8 horas da aplicação.\n   Repetir procedimento após 7 dias.\n   Repetir tratamento no parceiro sexual.',
+		pep_profilaxia_pos_exposicao_sexual_z20_2:
+			'**Uso Oral (por 28 dias)**\n1) TENOFOVIR 300mg + LAMIVUDINA 300mg\n   Tomar 01 cp via oral 1x/dia\n2) DOLUTEGRAVIR 50mg\n   Tomar 01 cp via oral 1x/dia\n\nEncaminhar o paciente ao SAE/CTA para seguimento\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor associada)\n2) Início imediato do esquema acima, se disponível',
+		picada_de_inseto_com_reacao_inflamatoria_local_t63_4_l50_9:
+			'1) DEXCLORFENIRAMINA 0,5mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n2) PREDNISONA 20mg\n   Tomar 01 cp via oral 1x/dia por 03 dias\n3) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Na unidade**\n1) HIDROCORTISONA 100mg IM + DIPIRONA 1g IM',
+		pneumonias_pneumonia_broncopneumonia_bcp_j18_9:
+			'**Prescrição 01:**\nIndicado para pacientes com pneumonia adquirida na comunidade e sem fatores de risco para resistência bacteriana. Ideal em casos de intolerância ou contraindicação a betalactâmicos.\n1) AZITROMICINA 500mg Tomar 01 cp via oral uma vez ao dia por 05 dias\n2) PREDNISONA 20mg Tomar 01 cp via oral de 12/12h por 05 dias\n3) AMBROXOL 6mg/mL Tomar 05mL de 8/8h por 05 dias\n4) DIPIRONA 500mg Tomar 01 cp via oral de 6/6h se dor ou febre.\n\n**Prescrição 02:**\nPreferível em casos de pneumonia adquirida na comunidade com suspeita de infecção por *Streptococcus pneumoniae* ou outras bactérias suscetíveis. Indicado também para pacientes com risco de infecção por *Haemophilus influenzae*.\n\n1) AMOXICILINA + CLAVULANATO (500mg+125mg) Tomar 01 cp via oral de 8/8h por 07 dias\n2) PREDNISONA 20mg Tomar 01 cp via oral de 12/12h por 05 dias\n3) AMBROXOL 6mg/mL Tomar 05mL de 8/8h por 05 dias\n4) DIPIRONA 500mg Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Prescrição 03:**\nCombinação indicada para pacientes com pneumonia adquirida na comunidade, especialmente quando existe suspeita de infecção por *Mycoplasma pneumoniae*, *Chlamydia pneumoniae* ou *Legionella pneumophila*. A claritromicina pode ser usada como alternativa em caso de alergia à penicilina. Neste caso, realizar a seguinte prescrição:\n\n1) AMOXICILINA + CLAVULANATO (500mg+125mg) Tomar 01 cp via oral de 8/8h por 07 dias\n2) CLARITROMICINA 500mg Tomar 01 cp via oral de 12/12h por 07 dias\n3) PREDNISONA 20mg Tomar 01 cp via oral de 12/12h por 05 dias\n4) AMBROXOL 6mg/mL Tomar 05mL de 8/8h por 05 dias\n5) DIPIRONA 500mg Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Prescrição 04:**\nIndicado para pacientes com pneumonia grave, ou em casos onde há suspeita de resistência a antibióticos de primeira linha (ex: *Streptococcus pneumoniae* resistente à penicilina ou *Pseudomonas aeruginosa*). Preferível em pacientes com comorbidades, como diabetes, doenças pulmonares crônicas ou imunossupressão. (Mesma imagem utilizada no exemplo anterior + correlação clínica com o exemplo acima) Dito isso, prescrever:\n\n1) LEVOFLOXACINO 750mg Tomar 01 cp via oral uma vez ao dia por 07 dias\n2) PREDNISONA 20mg Tomar 01 cp via oral de 12/12h por 05 dias\n3) AMBROXOL 6mg/mL Tomar 05mL de 8/8h por 05 dias\n4) DIPIRONA 500mg Tomar 01 cp via oral de 6/6h se dor ou febre',
+		pre_natal_vitaminas:
+			'Ácido Fólico 5mg __________ 30 cp. Tomar 1 cp, via oral, uma vez ao dia, por 30 dias.\nSulfato Ferroso 300mg __________ 30 cp. Tomar 1 cp, via oral, uma vez ao dia, por 30 dias.\n\nObs: tomar com o estômago vazio, uma hora antes do almoço, com um pouco de água ou suco de laranja.\nNão tomar com leite.',
+		prostatite: 'Ciprofloxacino 500mg __________ 56 cp. Tomar 1 cp, via oral, a cada 12 horas, por 28 dias.\nIbuprofeno 600mg __________ 10 cp. Tomar 1 cp, via oral, a cada 8 horas, por 3 dias.',
+		psoriase_leve_l40_0:
+			'**Uso Tópico**\n1) ÁCIDO SALICÍLICO + UREIA creme\n   Aplicar fina camada 2x/dia sobre as placas\n2) HIDROCORTISONA creme\n   Aplicar 2x/dia nas áreas afetadas por 5 a 7 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor associada intensa)',
+		ptiriase_versicolor: 'Fluconazol 150mg __________ 3 cp.\n   Tomar 1 cápsula, via oral, uma vez por semana, por 3 semanas.\n**Uso Externo:**\nCetoconazol 2% creme __________ 30 g.\n   Aplicar na lesão, após limpeza da pele, a cada 8 horas, por 21 dias.',
+		queimadura_solar_leve_l55_0:
+			'**Uso Tópico**\n1) SULFADIAZINA DE PRATA creme\n   Aplicar fina camada nas áreas afetadas 2x/dia por 5 dias\n2) NEOMICINA + BACITRACINA pomada\n   Alternativa para pequenas lesões, aplicar 2x/dia\n\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 03 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM\n2) ORIENTAR medidas de hidratação e proteção solar',
+		rinite_alergica_j30_9:
+			'1) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 07 dias\n**Uso Tópico**\n2) SORO FISIOLÓGICO nasal 0,9%\n   Instilar 3-5 gotas em cada narina, 3x/dia\n\n**Na unidade**\n1) DEXCLORFENIRAMINA 5mg IM (se crise alérgica intensa)',
+		sangramento_uterino: 'Ácido Tranexâmico 250mg __________ 30 cp. Tomar 2 cp, via oral, a cada 8 horas, por 5 dias.\nÁcido Mefenâmico 500mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.',
+		sifilis_penicilina_benzatina: '**Uso Externo:**\nPenicilina Benzatina 1.200.000 UI __________ 12 amp.\n   Aplicar 2 ampolas, via intramuscular (uma em cada nádega), uma vez na semana, por 3 semanas.\n   Repetir tratamento no parceiro.',
+		sindrome_ansiosa_crise_de_ansiedade_leve_f41_0:
+			'1) PASSIFLORA EXTRATO SECO 200mg\n   Tomar 01 cp via oral 2x/dia\n2) VALERIANA + MELISSA (fitoterápico composto)\n   Tomar 01 cp via oral à noite, se necessário\n\n**Na unidade**\n1) DIAZEPAM 5mg IM (se crise aguda com agitação)',
+		sindrome_dispeptica:
+			'Omeprazol 20mg __________ 14 cp.\n   Tomar 1 cápsula, via oral, em jejum, imediatamente antes do café da manhã, por 14 dias.\nHidróxido de Alumínio suspensão __________ 1 vd. Tomar 10 ml, via oral, a cada 8 horas, por 4 dias.\nBromoprida 4mg/ml solução oral gotas __________ 1 fr. Tomar 60 gotas, via oral, a cada 8 horas, por 4 dias.',
+		sindrome_gripal_viral_simples_j11_1:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se febre ou dor\n2) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 05 dias\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 03 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM + ORIENTAR repouso e hidratação oral',
+		sinusite_aguda_j01_9:
+			'1) AMOXICILINA 500mg + CLAVULANATO 125mg\n   Tomar 01 cp via oral de 8/8h por 10 dias\n2) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 07 dias\n3) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Na unidade**\n1) DIPIRONA 1g IM + LAVAGEM NASAL com SF 0,9%',
+		teniase:
+			'Praziquantel 150mg __________ 12 cp.\n   Tomar 10mg/kg, via oral, durante o café da manhã, com um pouco de líquido, em dose única.\n**Observações:**\nFerver e/ou filtrar toda a água a ser consumida em casa.\nNão ingerir bebidas alcoólicas no dia do tratamento e no dia seguinte.',
+		tetano_conduta_para_ferimentos_a35:
+			'**Conduta na unidade**\n1) LIMPEZA E DEBRIDAMENTO da ferida com SF 0,9% + PVPI\n2) VACINA dT IM (se esquema vacinal incompleto ou desconhecido)\n3) IMUNOGLOBULINA ANTITETÂNICA IM (se ferimento de alto risco e esquema vacinal incerto)\n\n**Orientações**\nEncaminhar para continuidade da vacinação no posto\nAvaliar antibioticoterapia se sinais de infecção local.',
+		tinea_micose_de_pele_ou_couro_cabeludo_b35_0_b35_4:
+			'**Uso Tópico**\n1) CLOTRIMAZOL creme\n   Aplicar 2x/dia nas lesões por 14 dias\n**Uso Oral (casos extensos ou couro cabeludo)**\n2) GRISEOFULVINA 500mg\n   Tomar 01 cp via oral 1x/dia por 30 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se prurido ou dor local intensa)',
+		tonsilite: 'Amoxicilina 500mg __________ 21 cp. Tomar 1 cp, via oral, a cada 8 horas, por 7 dias. (às 6, 14, e 22 horas)\nDipirona 500mg/ml solução oral gotas __________ 1 fr. Tomar 40 gotas, via oral, a cada 8 horas, por 3 dias.',
+		tonsilite_2: '35- Amoxicilina + Clavulonato 875mg+125mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.\n36- Dipirona gotas __________ 1 fr. Tomar 40 gotas, via oral, a cada 8 horas, por 3 dias.',
+		tonsilite_criancas_1: 'Amoxicilina 250mg/5ml __________ 1 vd. Tomar kg/3 ml, via oral, a cada 8 horas, por 7 dias. (às 6, 14, e 22 horas)\nDipirona 500mg/ml solução oral gotas __________ 1 fr. Tomar kg gotas, via oral, a cada 8 horas, por 3 dias.',
+		tonsilite_criancas_2: 'Amoxicilina+Clavulonato 400mg+57mg/5ml __________ 1vd. Tomar __ ml, via oral, a cada 12 horas, por 7 dias.\nDipirona 500mg/ml solução oral gotas __________ 1 fr. Tomar __ gotas, via oral, a cada 8 horas, por 3 dias.',
+		tosse_seca_persistente_r05:
+			'1) BENZONATATO 100mg\n   Tomar 01 cp via oral de 8/8h por até 5 dias\n2) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 07 dias\n3) SORO FISIOLÓGICO 0,9%\n   Instilar em narinas 3x/dia\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor torácica associada à tosse)',
+		tricomoniase:
+			'Metronidazol 250mg __________ 16 cp.\n   Tomar 8 comprimidos, via oral, em dose única e repetir o tratamento no parceiro.\n**Uso Externo:**\nMetronidazol 0,75% gel vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 7 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		tricomoniase_2:
+			'Secnidazol 1000mg __________ 4 cp.\n   Tomar 2 cp, via oral, em dose única e repetir o tratamento no parceiro.\n**Uso Externo:**\nMetronidazol 0,75% gel vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 7 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas até 4 dias após o tratamento com secnidazol e manter abstinência sexual até o término do tratamento com o gel vaginal.',
+		ulcera_peptica_duodenal: 'Omeprazol 20mg __________ 42 cp.\n   Tomar 1 cápsula, via oral, em jejum, imediatamente antes do café da manhã, por 42 dias.',
+		urticaria:
+			'Dexclorfeniramina 2mg/5ml xarope __________ 1 vd. Tomar 10 ml, via oral, a cada 8 horas, por 4 dias.\nPrednisona 20mg __________ 10 cp. Tomar 1 cp, via oral, a cada 12 horas, por 5 dias.\n**Uso Externo:**\nAD 20ml + Hidrocortisona 500mg __________ 1 amp. Aplicar, via intravenosa, lento, dose única.\nEpinefrina 1:1000 __________ 1 amp. Aplicar 0,5 ml, via subcutânea, em dose única.',
+		urticaria_aguda_l50_9: '1) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 07 dias\n2) PREDNISONA 20mg\n   Tomar 01 cp via oral 1x/dia por 03 dias\n\n**Na unidade**\n1) HIDROCORTISONA 100mg IM + DEXCLORFENIRAMINA 5mg IM',
+		urticaria_criancas:
+			'Dexclorfeniramina 2mg/5ml xarope __________ 1 vd. Tomar __ ml, via oral, a cada 8 horas, por 5 dias.\nPrednisolona 3mg/ml xarope __________ 1 vd. Tomar __ ml, via oral, a cada 12 horas, por 5 dias.\n**Uso Externo:**\nEpinefrina 1:1000 __________ 1 amp. Aplicar 0,01ml/kg, via subcutânea, em dose única.',
+		vacinacao_antitetanica_a35:
+			'**Na unidade**\n1) AVALIAR ESQUEMA VACINAL do paciente (3 doses básicas + reforços)\n2) dT IM (Vacina dupla adulto)\n   Aplicar em caso de ferimentos com risco ou calendário desatualizado\n3) IMUNOGLOBULINA ANTITETÂNICA IM\n   Aplicar se ferimento de risco + vacinação incompleta/desconhecida\n\n**Orientação:**\nEncaminhar paciente à UBS para continuidade de esquema vacinal completo',
+		vaginite_mista: '**Uso Externo:**\nTioconazol+Tinidazol creme vaginal (Cartrax) __________ 35 g. (100mg+150mg/5g)\n   Aplicar uma dose, via vaginal, à noite, por 7 dias.',
+		vaginose_bacteriana:
+			'Metronidazol 250mg __________ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias.\n**Uso Externo:**\nMetronidazol 0,75% gel vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 7 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		vaginose_bacteriana_2:
+			'Metronidazol 250mg __________ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias.\n**Uso Externo:**\nClindamicina 2% creme vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 7 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		vaginose_bacteriana_3:
+			'Clindamicina 300mg __________ 28 cp. Tomar 1 cp, via oral, a cada 12 horas, por 14 dias.\n**Uso Externo:**\nMetronidazol 0,75% gel vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 14 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		varizes_dos_membros_inferiores_i83_9:
+			'1) FLAVONÓIDE (DAFLON® 500mg ou similar)\n   Tomar 01 cp via oral de 12/12h por 30 dias\n**Uso tópico (se dor local):**\n2) NITRATO DE MICONAZOL + HEPARINA (ex: Hirudoid®)\n   Aplicar fina camada 2x/dia nas pernas\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor local intensa)',
+		vermifugo_amplo_espectro_1:
+			'Mebendazol 100mg __________ 12 cp. Tomar 1 cp, via oral, a cada 12 horas, por 3 dias. Repetir após 7 dias.\nTiabendazol 500mg __________ 12 cp. Tomar 1 cp, via oral, a cada 12 horas, por 3 dias. Repetir após 7 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida em casa',
+		vermifugo_amplo_espectro_2: 'Nitazoxanida 500mg (Annita) __________ 6 cp.\n   Tomar 1 comprimido, via oral, a cada 12 horas, por 3 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida em casa.',
+		vermifugo_amplo_espectro_3: 'Albendazol 400mg __________ 6 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, por 3 dias. Repetir após 7 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida em casa.',
+		vermifugo_criancas_1:
+			'Albendazol 400mg/10ml __________ 2 fr.\n   Tomar o conteúdo de um frasco (10 ml), via oral, em dose única.\n   Repetir após 7 dias.\nSulfato Ferroso 25mg/ml gotas __________ 2 fr. Tomar __ gotas, via oral, uma vez ao dia, por 90 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		vermifugo_criancas_2:
+			'Albendazol 400mg/10ml __________ 2 fr.\n   Tomar o conteúdo de um frasco (10 ml), via oral, em dose única.\n   Repetir após 7 dias.\nUltrafer 50mg/ml gotas __________ 2 fr. Tomar 10 gotas, via oral, duas vezes ao dia, por 90 dias.\nObs: tomar uma hora antes do almoço e do jantar, com um pouco de água ou suco de laranja.\nNão tomar com leite.\nNutrinfan xarope pediátrico __________ 1 fr. Tomar 2,5ml, via oral, uma vez ao dia, por 24 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		vermifugo_criancas_3:
+			'Mebendazol 100mg/5ml __________ 2 vd.\n   Tomar 5 ml, via oral, a cada 12 horas, por 3 dias. Repetir após 7 dias.\nMetronidazol 4% suspensão __________ 1 vd. Tomar __ ml, via oral, a cada 12 horas, por 5 dias.\nSulfato Ferroso 25mg/ml gotas __________ 2 fr. Tomar __ gotas, via oral, uma vez ao dia, por 90 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		vertigem_1: '37- Meclizina 25mg (Meclin) __________ 15 cp. Tomar 1 comprimido, via oral, a cada 8 horas, por 5 dias.',
+		vertigem_aguda: '38- Dimenidrinato 50mg (Dramin B6) __________ 20 cp. + Piridoxina 10mg\n   Tomar 1 comprimido, via oral, a cada 6 horas, por 5 dias.',
+		virose_criancas:
+			'Dipirona gotas __________ 1 fr. Tomar 20 gotas, via oral, a cada 6 horas, por 3 dias.\nBromoprida gotas __________ 1 fr. Tomar 20 gotas, via oral, a cada 8 horas, por 3 dias.\n**Uso Externo:**\nSF 0,9% 250ml + Metoclopramida __________ 1⁄2 amp.\n   Aplicar, via endovenosa, lento, dose único.',
+	};
+
+  // ========================================
+  // METADATA PSF (informações clínicas)
+  // ========================================
+  const psf_metadata = {
+
+		abscesso_furunculo: {
+			title: 'Abscesso Furunculo',
+			symptoms: 'Tumoração dolorosa, eritema, calor local, flutuação.',
+			tips: '\\nDrenagem (se flutuação ou se julgar necessário) + analgesia com Dipirona 01 amp IM',
+		},
+		aftas: {
+			title: 'Aftas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		amenorreia_secundaria: {
+			title: 'Amenorreia Secundaria',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		amigdalite_j03_9: {
+			title: 'Amigdalite J03 9',
+			symptoms: 'Dor de garganta, febre, disfagia, hiperemia tonsilar, exsudato purulento.',
+			tips: '\\nPenicilina G benzatina 1.2M UI IM dose única + sintomáticos pra casa',
+		},
+		anemia_crianca: {
+			title: 'Anemia Crianca',
+			symptoms: 'Palidez cutâneo-mucosa, fadiga, astenia, taquicardia, dispneia aos esforços.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		anemia_ferropriva_sintomatica_d50_0: {
+			title: 'Anemia Ferropriva Sintomatica D50 0',
+			symptoms: 'Palidez cutâneo-mucosa, fadiga, astenia, taquicardia, dispneia aos esforços.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma: {
+			title: 'Asma',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_aguda_leve_moderada_j45_0: {
+			title: 'Asma Aguda Leve Moderada J45 0',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crianca_1: {
+			title: 'Asma Crianca 1',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crianca_2: {
+			title: 'Asma Crianca 2',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crianca_3: {
+			title: 'Asma Crianca 3',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crise_aguda: {
+			title: 'Asma Crise Aguda',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crise_aguda_2: {
+			title: 'Asma Crise Aguda 2',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		candidiase_vaginal_corrimento: {
+			title: 'Candidiase Vaginal Corrimento',
+			symptoms: 'Prurido vulvovaginal, corrimento branco grumoso, disúria, dispareunia.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		cefaleia_tensional_cefaleia_dor_de_cabeca_g44_2: {
+			title: 'Cefaleia Tensional Cefaleia Dor De Cabeca G44 2',
+			symptoms: 'Dor de cabeça (pressão, pulsátil), fotofobia, fonofobia, náuseas.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		cerume_impactado: {
+			title: 'Cerume Impactado',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		cervicite_e_uretrite: {
+			title: 'Cervicite E Uretrite',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		cinetose: {
+			title: 'Cinetose',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		colelitiase: {
+			title: 'Colelitiase',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		colica_biliar_litiase_biliar_pedra_nos_rins_k80_2: {
+			title: 'Colica Biliar Litiase Biliar Pedra Nos Rins K80 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) Dipirona 01 amp + Buscopan Composto 01 amp em SF 0,9% 100 mL EV\\n   SE PERSISTIR, REPETIR MAIS UMA RODADA DA PRESCRIÇÃO ACIMA. SE MESMO ASSIM PERSISTIR:\\n1) TRAMADOL 1 AMP EM SF 0,9% 100ML EV',
+		},
+		conjuntivite_h10_9: {
+			title: 'Conjuntivite H10 9',
+			symptoms: 'Olhos vermelhos, prurido, lacrimejamento, secreção, sensação de areia nos olhos.',
+			tips: '\\n1) Fazer compressas frias por 20 minutos no olho afetado\\n2) Evitar coçar os olhos e não usar soro fisiológico para lavar\\n3) Suspender o uso de lentes de contato durante o tratamento',
+		},
+		constipacao_funcional_k59_0: {
+			title: 'Constipacao Funcional K59 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFOSFATO DE SÓDIO (FLEET ENEMA) Aplicar 01 enema por via retal, dose única.<br><br>\\n1) Aumentar a ingestão de água (mínimo 2L/dia)\\n2) Aumentar fibras (frutas, verduras e cereais integrais)\\n3) Praticar atividade física regular\\n4) Evitar segurar vontade de evacuar\\n\\n',
+		},
+		crise_convulsiva_epilepsia_g40_9: {
+			title: 'Crise Convulsiva Epilepsia G40 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIAZEPAM 10mg (retal ou EV)\\n   Administrar 01 ampola via retal ou EV, dose única\\n2) OXIGÊNIO\\n   Administrar com máscara, se saturação < 94%\\n\\n',
+		},
+		crise_hipertensiva_i10_r03_0: {
+			title: 'Crise Hipertensiva I10 R03 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) CAPTOPRIL 25mg SL\\n   Administrar 01 cp sublingual, monitorar PA a cada 15 min\\n\\n<br><br>\\n1) Manter uso correto dos anti-hipertensivos\\n2) Retorno com clínico ou cardiologista para ajuste medicamentoso',
+		},
+		dengue: {
+			title: 'Dengue',
+			symptoms: 'Febre alta súbita, cefaleia, dor retro-orbital, mialgia, artralgia, prostração, exantema.',
+			tips: 'INTERNAÇÃO HOSPITALAR\\n\\n- Pacientes com sinais de alarme (grupo C) devem ser internados em hospital.\\n- Pacientes em estado grave com sinais de choque (grupo D) devem ser encaminhados à terapia intensiva.\\n- Internação é indicada também nas seguintes situações: recusa ou incapacidade de ingerir líquidos e alimentos; impossibilidade de acompanhamento ou retorno à unidade de saúde; descompensação de doença grave; plaquetas < 20.000/mm3.',
+		},
+		dengue_a90: {
+			title: 'Dengue A90',
+			symptoms: 'Febre alta súbita, cefaleia, dor retro-orbital, mialgia, artralgia, prostração, exantema.',
+			tips: '\\n1) Dipirona 01 amp + Ondansetrona 01 amp em SF 0,9% 250 mL EV<br><br>\\nNão usar anti-inflamatórios (ibuprofeno, diclofenaco, cetoprofeno, nimesulida, etc)\\nHidratação vigorosa (mínimo 80 mL/kg/dia)\\nAlimentação leve (caldos, sucos, água de côco). Não tomar refrigerantes, sucos artificiais, gorduras como salgadinho e alimentos pesados.\\nRetorno se: sangramentos, dor abdominal intensa, vômitos persistentes ou sonolência\\nSe febre persistir mesmo com dipirona, intercalar com paracetamol\\n\\n',
+		},
+		dermatite_de_contato_reacao_alergica_leve_l23_9: {
+			title: 'Dermatite De Contato Reacao Alergica Leve L23 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dermatite_seborreica_leve_l21_0: {
+			title: 'Dermatite Seborreica Leve L21 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se queixa de dor ou prurido intenso)',
+		},
+		dermatofitose_interdigital_pe_de_atleta_b35_3: {
+			title: 'Dermatofitose Interdigital Pe De Atleta B35 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor local intensa)<br><br>\\n→ Manter pés secos e arejados\\n→ Trocar meias diariamente\\n\\n',
+		},
+		dip_1: {
+			title: 'Dip 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dip_2_comprometimento_sistemico: {
+			title: 'Dip 2 Comprometimento Sistemico',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dismenorreia_1: {
+			title: 'Dismenorreia 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dismenorreia_2: {
+			title: 'Dismenorreia 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dispepsia_funcional_1: {
+			title: 'Dispepsia Funcional 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dispesia_funcional_2: {
+			title: 'Dispesia Funcional 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dor_muscular_lombalgia_algia_m54_5: {
+			title: 'Dor Muscular Lombalgia Algia M54 5',
+			symptoms: 'Dor na região lombar, rigidez, irradiação para glúteos ou coxas.',
+			tips: '\\n1) DIPIRONA 1g IM + DICLOFENACO 75mg IM, dose única',
+		},
+		dorsalgia_1: {
+			title: 'Dorsalgia 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dorsalgia_2: {
+			title: 'Dorsalgia 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dorsalgia_3: {
+			title: 'Dorsalgia 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dorsalgia_intensa: {
+			title: 'Dorsalgia Intensa',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dpoc_em_exacerbacao_j44_1: {
+			title: 'Dpoc Em Exacerbacao J44 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) Inalação com 5 gotas de Fenoterol + 5 gotas de Brometo de Ipratrópio em 5 mL de SF 0,9%\\n2) Hidrocortisona 100mg EV ou IM',
+		},
+		enterobiase_infestacao_por_oxiuros_b80: {
+			title: 'Enterobiase Infestacao Por Oxiuros B80',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se prurido anal intenso)<br><br>\\nLavar roupas de cama e higiene pessoal\\nTratar todos os contatos domiciliares\\n\\n',
+		},
+		enxaqueca_migranea_g43_9: {
+			title: 'Enxaqueca Migranea G43 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + DECADRON 4mg IM + ONDANSETRONA 01 amp IM',
+		},
+		erispela: {
+			title: 'Erispela',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + CEFTRIAXONA 1g IM',
+		},
+		escabiose_sarna_b86: {
+			title: 'Escabiose Sarna B86',
+			symptoms: 'Prurido intenso (pior à noite), pápulas escoriadas, túneis na pele.',
+			tips: '\\n1) DIPIRONA 1g IM (se prurido generalizado intenso)',
+		},
+		escoriacoes_feridas_leves_s00_8: {
+			title: 'Escoriacoes Feridas Leves S00 8',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM, dose única para analgesia local',
+		},
+		faringite_viral_faringoamigdalite_viral_j02_9: {
+			title: 'Faringite Viral Faringoamigdalite Viral J02 9',
+			symptoms: 'Dor de garganta, febre, disfagia, hiperemia tonsilar, exsudato purulento.',
+			tips: '\\n1) DIPIRONA 1g IM + ORIENTAR repouso, hidratação e evitar antibiótico desnecessário',
+		},
+		foliculite: {
+			title: 'Foliculite',
+			symptoms: 'Pústulas ou pápulas eritematosas ao redor do folículo piloso, prurido leve.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gases_em_bebes: {
+			title: 'Gases Em Bebes',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gastrite_drge_dispepsia_dor_no_estomago_k29_7_k21_9_k30: {
+			title: 'Gastrite Drge Dispepsia Dor No Estomago K29 7 K21 9 K30',
+			symptoms: 'Dor epigástrica, queimação, náuseas, plenitude pós-prandial.',
+			tips: '\\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		},
+		geca_gastroenterite_aguda_a09: {
+			title: 'Geca Gastroenterite Aguda A09',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		},
+		gota_1_crise: {
+			title: 'Gota 1 Crise',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gota_2_crise: {
+			title: 'Gota 2 Crise',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gota_3_crise: {
+			title: 'Gota 3 Crise',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gota_4_controle: {
+			title: 'Gota 4 Controle',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		h_pylori_1: {
+			title: 'H Pylori 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		h_pylori_2_alergia_a_amoxicilina: {
+			title: 'H Pylori 2 Alergia A Amoxicilina',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hemorragia_nasal_epistaxe_leve_r04_0: {
+			title: 'Hemorragia Nasal Epistaxe Leve R04 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) Compressão com algodão embebido em SF gelado + NAFAZOLINA spray',
+		},
+		hemorroida_i84_9: {
+			title: 'Hemorroida I84 9',
+			symptoms: 'Sangramento ao evacuar, dor anal, prolapso, prurido.',
+			tips: '\\n1) DIPIRONA 1g IM + DECADRON 4mg IM',
+		},
+		herpes_simples_b00_9: {
+			title: 'Herpes Simples B00 9',
+			symptoms: 'Vesículas agrupadas sobre base eritematosa, dor, ardor, prurido local.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor intensa local)',
+		},
+		hiperglicemia_descompensacao_do_dm2_e11_9: {
+			title: 'Hiperglicemia Descompensacao Do Dm2 E11 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se queixa de dor)\\n2) SF 0,9% EV em 500 mL (caso de desidratação moderada)\\n3) investigar causas secundárias ou aderência do paciente ao tratamento',
+		},
+		hiperplasia_prostata_1: {
+			title: 'Hiperplasia Prostata 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hiperplasia_prostata_2: {
+			title: 'Hiperplasia Prostata 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hiperplasia_prostata_3: {
+			title: 'Hiperplasia Prostata 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hiperplasia_prostata_4: {
+			title: 'Hiperplasia Prostata 4',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hiperplasia_prostata_5: {
+			title: 'Hiperplasia Prostata 5',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hipertensao_arterial_descompensada_i10: {
+			title: 'Hipertensao Arterial Descompensada I10',
+			symptoms: 'Geralmente assintomática. Cefaleia nucal, tontura, escotomas em crises.',
+			tips: '\\n1) CAPTOPRIL 25mg VO + DIPIRONA 1g IM\\n2) FUROSEMIDA 40mg tomar 01 cp via oral se houver congestão ou edema (avaliar se paciente é renal)\\n3) retorno em 1h para reavaliar',
+		},
+		hipertireoidismo_1: {
+			title: 'Hipertireoidismo 1',
+			symptoms: 'Perda de peso, intolerância ao calor, tremores, palpitações, insônia.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hipertireoidismo_2: {
+			title: 'Hipertireoidismo 2',
+			symptoms: 'Perda de peso, intolerância ao calor, tremores, palpitações, insônia.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hipoglicemia_sintomatica_e16_2: {
+			title: 'Hipoglicemia Sintomatica E16 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) GLICOSE 50% EV (01 ampola 20mL) em infundido lento (10-15min) diluída em 100mL de SF 0,9% EV (se paciente sintomático - tremores, queda de nível de consciência, sudorese).',
+		},
+		hipotireoidismo: {
+			title: 'Hipotireoidismo',
+			symptoms: 'Ganho de peso, intolerância ao frio, pele seca, constipação, astenia.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		impetigo_l01_0: {
+			title: 'Impetigo L01 0',
+			symptoms: 'Lesões vesico-pustulosas que rompem e formam crostas melicéricas.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor local)',
+		},
+		impetigo_ou_ectima: {
+			title: 'Impetigo Ou Ectima',
+			symptoms: 'Lesões vesico-pustulosas que rompem e formam crostas melicéricas.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		impetigo_ou_ectima_2: {
+			title: 'Impetigo Ou Ectima 2',
+			symptoms: 'Lesões vesico-pustulosas que rompem e formam crostas melicéricas.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		infeccao_de_urina_itu_n39_0: {
+			title: 'Infeccao De Urina Itu N39 0',
+			symptoms: 'Disúria, polaciúria, urgência miccional, dor suprapúbica, febre (pielonefrite).',
+			tips: '\\n1) DIPIRONA 1g IM + CEFTRIAXONA 1g IM',
+		},
+		insonia_leve_moderada_g47_0: {
+			title: 'Insonia Leve Moderada G47 0',
+			symptoms: 'Dificuldade para iniciar ou manter o sono, despertar precoce.',
+			tips: '\\nNão aplicável',
+		},
+		insuficiencia_venosa_cronica: {
+			title: 'Insuficiencia Venosa Cronica',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		intoxicacao_alimentar_leve_t62_9_a05_9: {
+			title: 'Intoxicacao Alimentar Leve T62 9 A05 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) METOCLOPRAMIDA 10mg IM (se náusea ou vômito ativo)',
+		},
+		labirintite_h81_0: {
+			title: 'Labirintite H81 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		},
+		larva_migrans_1: {
+			title: 'Larva Migrans 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		larva_migrans_2: {
+			title: 'Larva Migrans 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		larva_migrans_criancas: {
+			title: 'Larva Migrans Criancas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		mastalgia_1: {
+			title: 'Mastalgia 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		molusco_contagioso_b08_1: {
+			title: 'Molusco Contagioso B08 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor local)\\nEncaminhar para dermatologia se lesões extensas ou infeccionadas<br><br>\\nOrientar conduta expectante (resolução espontânea em 6 a 12 meses)\\nEvitar manipulação das lesões e compartilhar toalhas/objetos\\n\\n',
+		},
+		nauseas_e_vomitos_1_gestantes: {
+			title: 'Nauseas E Vomitos 1 Gestantes',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		nauseas_e_vomitos_severos_3: {
+			title: 'Nauseas E Vomitos Severos 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		nefrolitiase_colica_renal_n20_0: {
+			title: 'Nefrolitiase Colica Renal N20 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA + ESCOPOLAMINA 1AMP , ONDANSETRONA 01 AMP EM 100ML DE SF 0,9%\\n2) REAVALIAR EM 1H',
+		},
+		onicomicose_1_maos_tinea_ungueum: {
+			title: 'Onicomicose 1 Maos Tinea Ungueum',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		onicomicose_2_maos_tinea_ungueum: {
+			title: 'Onicomicose 2 Maos Tinea Ungueum',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		onicomicose_3_pes: {
+			title: 'Onicomicose 3 Pes',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		onicomicose_4_pes: {
+			title: 'Onicomicose 4 Pes',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		osteoporose_1: {
+			title: 'Osteoporose 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		osteoporose_2: {
+			title: 'Osteoporose 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		osteoporose_3: {
+			title: 'Osteoporose 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		otite_externa_h60_3: {
+			title: 'Otite Externa H60 3',
+			symptoms: 'Otalgia, febre, irritabilidade, hipoacusia, abaulamento de membrana timpânica.',
+			tips: '\\n1) DIPIRONA + DECADRON 1AMP CADA IM',
+		},
+		otite_media_aguda_h66_0: {
+			title: 'Otite Media Aguda H66 0',
+			symptoms: 'Otalgia, febre, irritabilidade, hipoacusia, abaulamento de membrana timpânica.',
+			tips: '\\n1) DIPIRONA + DECADRON 1AMP CADA IM',
+		},
+		otite_media_cefuroxima: {
+			title: 'Otite Media Cefuroxima',
+			symptoms: 'Otalgia, febre, irritabilidade, hipoacusia, abaulamento de membrana timpânica.',
+			tips: 'Retornar se os sintomas piorarem, mesmo com medicamentos.\\n- Febre persistente por mais de 48h: temperatura acima de 37,8°C.\\n- Piora do quadro por 72 horas, mesmo com uso de antibióticos.\\n\\n- INTERNAÇÃO HOSPITALAR\\n\\n- Indicada na presença de complicações como otomastoidite, complicações intracranianas, sepse ou otalgia resistente à antibioticoterapia.<br><br>INTERNAÇÃO HOSPITALAR\\n\\n- Indicada na presença de complicações como otomastoidite, complicações intracranianas, sepse ou otalgia resistente à antibioticoterapia.',
+		},
+		oxiuriase_1: {
+			title: 'Oxiuriase 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		oxiuriase_criancas_2: {
+			title: 'Oxiuriase Criancas 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		},
+		pediculose_crianca_2_anos: {
+			title: 'Pediculose Crianca 2 Anos',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		pediculose_pubiana: {
+			title: 'Pediculose Pubiana',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		pep_profilaxia_pos_exposicao_sexual_z20_2: {
+			title: 'Pep Profilaxia Pos Exposicao Sexual Z20 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor associada)\\n2) Início imediato do esquema acima, se disponível',
+		},
+		picada_de_inseto_com_reacao_inflamatoria_local_t63_4_l50_9: {
+			title: 'Picada De Inseto Com Reacao Inflamatoria Local T63 4 L50 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) HIDROCORTISONA 100mg IM + DIPIRONA 1g IM',
+		},
+		pneumonias_pneumonia_broncopneumonia_bcp_j18_9: {
+			title: 'Pneumonias Pneumonia Broncopneumonia Bcp J18 9',
+			symptoms: 'Tosse com expectoração, febre, dispneia, dor torácica ventilatório-dependente.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		pre_natal_vitaminas: {
+			title: 'Pre Natal Vitaminas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		prostatite: {
+			title: 'Prostatite',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		psoriase_leve_l40_0: {
+			title: 'Psoriase Leve L40 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor associada intensa)',
+		},
+		ptiriase_versicolor: {
+			title: 'Ptiriase Versicolor',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		queimadura_solar_leve_l55_0: {
+			title: 'Queimadura Solar Leve L55 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM\\n2) ORIENTAR medidas de hidratação e proteção solar',
+		},
+		rinite_alergica_j30_9: {
+			title: 'Rinite Alergica J30 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DEXCLORFENIRAMINA 5mg IM (se crise alérgica intensa)',
+		},
+		sangramento_uterino: {
+			title: 'Sangramento Uterino',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		sifilis_penicilina_benzatina: {
+			title: 'Sifilis Penicilina Benzatina',
+			symptoms: 'Cancro duro (primária), manchas avermelhadas (secundária), gomas/neurosífilis (terciária).',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		sindrome_ansiosa_crise_de_ansiedade_leve_f41_0: {
+			title: 'Sindrome Ansiosa Crise De Ansiedade Leve F41 0',
+			symptoms: 'Inquietação, taquicardia, sudorese, tremores, sensação de morte iminente.',
+			tips: '\\n1) DIAZEPAM 5mg IM (se crise aguda com agitação)',
+		},
+		sindrome_dispeptica: {
+			title: 'Sindrome Dispeptica',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		sindrome_gripal_viral_simples_j11_1: {
+			title: 'Sindrome Gripal Viral Simples J11 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + ORIENTAR repouso e hidratação oral',
+		},
+		sinusite_aguda_j01_9: {
+			title: 'Sinusite Aguda J01 9',
+			symptoms: 'Cefaleia frontal, congestão nasal, rinorreia purulenta, tosse, halitose.',
+			tips: '\\n1) DIPIRONA 1g IM + LAVAGEM NASAL com SF 0,9%',
+		},
+		teniase: {
+			title: 'Teniase',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida em casa.\\nNão ingerir bebidas alcoólicas no dia do tratamento e no dia seguinte.',
+		},
+		tetano_conduta_para_ferimentos_a35: {
+			title: 'Tetano Conduta Para Ferimentos A35',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nEncaminhar para continuidade da vacinação no posto\\nAvaliar antibioticoterapia se sinais de infecção local.<br><br>\\n1) LIMPEZA E DEBRIDAMENTO da ferida com SF 0,9% + PVPI\\n2) VACINA dT IM (se esquema vacinal incompleto ou desconhecido)\\n3) IMUNOGLOBULINA ANTITETÂNICA IM (se ferimento de alto risco e esquema vacinal incerto)\\n\\n',
+		},
+		tinea_micose_de_pele_ou_couro_cabeludo_b35_0_b35_4: {
+			title: 'Tinea Micose De Pele Ou Couro Cabeludo B35 0 B35 4',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se prurido ou dor local intensa)',
+		},
+		tonsilite: {
+			title: 'Tonsilite',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		tonsilite_2: {
+			title: 'Tonsilite 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		tonsilite_criancas_1: {
+			title: 'Tonsilite Criancas 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		tonsilite_criancas_2: {
+			title: 'Tonsilite Criancas 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		tosse_seca_persistente_r05: {
+			title: 'Tosse Seca Persistente R05',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor torácica associada à tosse)',
+		},
+		tricomoniase: {
+			title: 'Tricomoniase',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		},
+		tricomoniase_2: {
+			title: 'Tricomoniase 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nNão ingerir bebidas alcoólicas até 4 dias após o tratamento com secnidazol e manter abstinência sexual até o término do tratamento com o gel vaginal.',
+		},
+		ulcera_peptica_duodenal: {
+			title: 'Ulcera Peptica Duodenal',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		urticaria: {
+			title: 'Urticaria',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		urticaria_aguda_l50_9: {
+			title: 'Urticaria Aguda L50 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) HIDROCORTISONA 100mg IM + DEXCLORFENIRAMINA 5mg IM',
+		},
+		urticaria_criancas: {
+			title: 'Urticaria Criancas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		vacinacao_antitetanica_a35: {
+			title: 'Vacinacao Antitetanica A35',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) AVALIAR ESQUEMA VACINAL do paciente (3 doses básicas + reforços)\\n2) dT IM (Vacina dupla adulto)\\n   Aplicar em caso de ferimentos com risco ou calendário desatualizado\\n3) IMUNOGLOBULINA ANTITETÂNICA IM\\n   Aplicar se ferimento de risco + vacinação incompleta/desconhecida\\n\\n',
+		},
+		vaginite_mista: {
+			title: 'Vaginite Mista',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		vaginose_bacteriana: {
+			title: 'Vaginose Bacteriana',
+			symptoms: 'Corrimento branco-acinzentado, odor fétido (peixe podre), sem inflamação exuberante.',
+			tips: '\\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		},
+		vaginose_bacteriana_2: {
+			title: 'Vaginose Bacteriana 2',
+			symptoms: 'Corrimento branco-acinzentado, odor fétido (peixe podre), sem inflamação exuberante.',
+			tips: '\\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		},
+		vaginose_bacteriana_3: {
+			title: 'Vaginose Bacteriana 3',
+			symptoms: 'Corrimento branco-acinzentado, odor fétido (peixe podre), sem inflamação exuberante.',
+			tips: '\\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		},
+		varizes_dos_membros_inferiores_i83_9: {
+			title: 'Varizes Dos Membros Inferiores I83 9',
+			symptoms: 'Veias dilatadas e tortuosas, dor em peso, edema, cansaço nas pernas.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor local intensa)',
+		},
+		vermifugo_amplo_espectro_1: {
+			title: 'Vermifugo Amplo Espectro 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida em casa',
+		},
+		vermifugo_amplo_espectro_2: {
+			title: 'Vermifugo Amplo Espectro 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida em casa.',
+		},
+		vermifugo_amplo_espectro_3: {
+			title: 'Vermifugo Amplo Espectro 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida em casa.',
+		},
+		vermifugo_criancas_1: {
+			title: 'Vermifugo Criancas 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		},
+		vermifugo_criancas_2: {
+			title: 'Vermifugo Criancas 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		},
+		vermifugo_criancas_3: {
+			title: 'Vermifugo Criancas 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		},
+		vertigem_1: {
+			title: 'Vertigem 1',
+			symptoms: 'Sensação de rotação do ambiente ou do próprio corpo, náuseas, desequilíbrio.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		vertigem_aguda: {
+			title: 'Vertigem Aguda',
+			symptoms: 'Sensação de rotação do ambiente ou do próprio corpo, náuseas, desequilíbrio.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		virose_criancas: {
+			title: 'Virose Criancas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+	
+  };
+
+  // ========================================
+  // EXPORTAR PARA WINDOW (global scope)
+  // ========================================
+  
+  // Criar objeto global se não existir
+  if (typeof window.hotstrings === 'undefined') {
+    window.hotstrings = {};
+  }
+  
+  // Exportar cada categoria separadamente (acesso direto)
+  window.quick_hotstrings = quick_hotstrings;
+  window.psf_hotstrings = psf_hotstrings;
+  window.psf_metadata = psf_metadata;
+  
+  // Merge tudo em window.hotstrings (para compatibilidade com código legado que busca tudo num lugar só)
+  Object.assign(window.hotstrings, quick_hotstrings, psf_hotstrings);
+  
+  console.log('✅ Unified Hotstrings loaded successfully.');
+})();
+
+
+/* ==========================================
+   [2/25] apoioClinico/js/exames-module.js
+   ========================================== */
+(() => {
+	'use strict';
+
+	// ===============================
+	// 1) Dados (mantidos; com 1 correção: RFG -> TFG)
+	// ===============================
+	const examesPorCategoria = {
+		// --- LABORATÓRIO ---
+		anemia: ['HEMOGRAMA', 'FERRO SÉRICO', 'FERRITINA', 'TRANSFERRINA', 'ERITRÓCITOS'],
+
+		risco_cardiovascular: ['HEMOGRAMA', 'LIPIDOGRAMA', 'GLICEMIA JEJUM', 'ÁCIDO ÚRICO', 'TFG', 'EAS'],
+
+		controle_dm_tipo2: ['HEMOGRAMA', 'GLICEMIA JEJUM', 'HB GLICADA', 'LIPIDOGRAMA', 'TFG', 'EAS', 'RAC', 'ÁCIDO ÚRICO'],
+
+		controle_has: ['HEMOGRAMA', 'GLICEMIA JEJUM', 'ÁCIDO ÚRICO', 'LIPIDOGRAMA', 'TFG', 'K+', 'EAS'],
+
+		// Correção: 'RFG' -> 'TFG'
+		controle_has_dm_tipo2: ['HEMOGRAMA', 'GLICEMIA JEJUM', 'HB GLICADA', 'LIPIDOGRAMA', 'TFG', 'EAS', 'RAC', 'ÁCIDO ÚRICO', 'K+'],
+
+		hematuria_microscopica: ['EAS', 'DISMORFISMO ERITROCITÁRIO', 'UROCULTURA'],
+
+		hipotireoidismo: ['TSH', 'T4 LIVRE'],
+
+		investigacao_artrite_lupus: ['HEMOGRAMA', 'FAN, PCR, VHS', 'FATOR REUMETOIDE, ANTI CCP', 'ANTI SM, ANTI DNA', 'ANTI RO, ANTI LA', 'C3, C4', 'EAS'],
+
+		risco_cirurgico: ['HEMOGRAMA', 'GLICEMIA DE JEJUM', 'HB GLICADA', 'URÉIA, CREATININA', 'COAGULOGRAMA', 'EAS'],
+
+		seguimento_lupus: ['HEMOGRAMA', 'FAN', 'PCR, VHS', 'C3, C4', 'EAS'],
+
+		seguimento_dm_pos_medicacao: ['GLICEMIA JEJUM', 'HB GLICADA'],
+
+		verminoses: ['PSOF POSITIVO EM EXAME ANTERIOR', 'EPF', 'PSOF 3 AMOSTRAS'],
+
+		intolerancia_gluten_lactose: ['ANTI-TRANSGLUTAMINASE IGA, IGG', 'ANTI-ENDOMÁSIO', 'ANTI-GLIADINA', 'TESTE DE TOLERÂNCIA ORAL A LACTOSE 50G'],
+
+		arboviroses_covid: ['RT-PCR PARA ARBOVIROSES', 'RT-PCR COVID-19'],
+
+		// --- IMAGEM ---
+		dor_abdominal: ['ULTRASONOGRAFIA ABDOMEM TOTAL'],
+
+		retencao_urinaria: ['ULTRASONOGRAFIA DE PRÓSTATA'],
+
+		hernia_parede: ['ULTRASONOGRAFIA DE PAREDE'],
+
+		aterosclerose_carotidas: ['ECODOPPLER DE CARÓTIDAS'],
+
+		dor_claudicacao_varicoses: ['DUPLEX SCAN VENOSO DE MMII BILATERAL', 'DUPLEX SCAN VENOSO DE MMII E', 'DUPLEX SCAN VENOSO DE MMII D'],
+
+		dor_ombro: ['ULTRASONOGRAFIA DE OMBRO D', 'ULTRASONOGRAFIA DE OMBRO E'],
+
+		dor_joelho: ['ULTRASONOGRAFIA DE JOELHO D', 'ULTRASONOGRAFIA DE JOELHO E'],
+
+		hematuria_nefrolitiase: ['ULTRASONOGRAFIA DE RINS E VIAS URINÁRIAS'],
+
+		nodulo_tireoide: ['ULTRASONOGRAFIA COM DOPPLER DE TIREÓIDE'],
+
+		dor_torax_tosse: ['RX DE TÓRAX PA E PERFIL'],
+
+		dor_testicular: ['ULTRASONOGRAFIA BOLSA TESTICULAR COM DOPPLER'],
+
+		// --- SAÚDE DA MULHER ---
+		gestacao_1trimestre: ['HEMOGRAMA', 'GS/RH ; COOMBS INDIRETO', 'GLICEMIA JEJUM', 'TOXOPLASMOSE IGG/IGM', 'EAS + UROCULTURA', 'TSH', 'ELETROFORESE DE HEMOGLOBINA'],
+
+		gestacao_2trimestre: ['HEMOGRAMA', '[Se RH -]COOMBS INDIRETO', 'GLICEMIA JEJUM', 'TOXOPLASMOSE IGG/IGM Se Susceptível', 'EAS + UROCULTURA', 'TOTG - 75g - Jejum, 1 e 2 horas'],
+
+		gestacao_3trimestre: ['HEMOGRAMA', '[Se RH -]COOMBS INDIRETO', 'GLICEMIA JEJUM', 'TOXOPLASMOSE IGG/IGM Se Susceptível', 'EAS + UROCULTURA'],
+
+		swab_3trimestre: ['SWAB COM CULTURA PARA STREPTOCOCCUS DO GRUPO B'],
+
+		mamografia: ['MAMOGRAFIA BILATERAL'],
+
+		bi_rads_0: ['ULTRASONOGRAFIA DE MAMA BILATERAL'],
+
+		complemento_usg_mama: ['ULTRASONOGRAFIA DE AXILAS BILATERAL'],
+
+		preventivo: ['EXAME CITOPATOLÓGICO DE COLO DO ÚTERO'],
+
+		usg_obstetrico_1trimestre: ['ULTRASONOGRAFIA OBSTÉTRICA + TRANSLUSCÂNCIA NUCAL'],
+
+		usg_obstetrico_2trimestre: ['ULTRASONOGRAFIA OBSTÉTRICA - MORFOLÓGICO'],
+
+		usg_obstetrico: ['ULTRASONOGRAFIA OBSTÉTRICA'],
+
+		sangramento_uterino: ['ULTRASONOGRAFIA ENDOVAGINAL'],
+	};
+
+	// Labels (texto do select) -> key (categoria)
+	const opcoesSelect = {
+		// LAB
+		ANEMIA: 'anemia',
+		'AVALIAÇÃO DE RISCO CARDIOVASCULAR': 'risco_cardiovascular',
+		'CONTROLE DM TIPO 2': 'controle_dm_tipo2',
+		'CONTROLE HAS': 'controle_has',
+		'CONTROLE HAS E DM TIPO 2': 'controle_has_dm_tipo2',
+		'HEMATÚRIA MICROSCÓPICA EM EXAME ANTERIOR': 'hematuria_microscopica',
+		HIPOTIREOIDISMO: 'hipotireoidismo',
+		'INVESTIGAÇÃO ARTRITE REUMATOIDE E LUPUS': 'investigacao_artrite_lupus',
+		'RISCO CIRÚRGICO': 'risco_cirurgico',
+		'SEGUIMENTO DE ATIVIDADE DE DOENÇA DO LUPUS': 'seguimento_lupus',
+		'SEGUIMENTO DM TIPO 2 PÓS TROCA DE MEDICAÇÃO': 'seguimento_dm_pos_medicacao',
+		'VERMINOSES: PSOF POSITIVO EM EXAME ANTERIOR': 'verminoses',
+		'PESQUISA DE INTOLERÂNCIA A GLÚTEN E LACTOSE': 'intolerancia_gluten_lactose',
+		'ARBOVIROSES E COVID': 'arboviroses_covid',
+
+		// IMAGEM
+		'DOR ABDOMINAL DIFUSA COM CERCA DE 6 MESES DE EVOLUÇÃO': 'dor_abdominal',
+		'RETENÇÃO URINÁRIA / HISTÓRICO DE HPB / AUMENTO DE PSA+GOTEJAMENTO URINÁRIO': 'retencao_urinaria',
+		'HÉRNIA INGUINAL? / HÉRNIA UMBILICAL? / HÉRNIA DE PAREDE': 'hernia_parede',
+		'AVALIAÇÃO DE ATEROSCLEROSE DE CARÓTIDAS': 'aterosclerose_carotidas',
+		'DOR EM CLAUDICAÇÃO? VEIAS VARICOSAS? TVP ANTERIOR? QUANDO? CLASSIFICAÇÃO CEAPS': 'dor_claudicacao_varicoses',
+		'DOR E LIMITAÇÃO DE MOVIMENTO EM OMBRO COM CERCA DE 6 MESES DE EVOLUÇÃO': 'dor_ombro',
+		'DOR E EDEMA EM JOELHO D OU E COM CERCA DE 6 MESES DE EVOLUÇÃO': 'dor_joelho',
+		'HEMATÚRIA MICROSCÓPICA MANTIDA APÓS 2 EXAMES OU CONTROLE DE NEFROLITÍASE': 'hematuria_nefrolitiase',
+		'NÓDULO DE TIREÓIDE?': 'nodulo_tireoide',
+		'DOR TORÁXICA E TOSSE PRODUTIVA': 'dor_torax_tosse',
+		'DOR TESTICULAR - VARICOCELE?': 'dor_testicular',
+
+		// SAÚDE DA MULHER
+		'GESTAÇÃO 1º TRIMESTRE': 'gestacao_1trimestre',
+		'GESTAÇÃO 2º TRIMESTRE': 'gestacao_2trimestre',
+		'GESTAÇÃO 3º TRIMESTRE': 'gestacao_3trimestre',
+		'SWAB 3º TRIMESTRE': 'swab_3trimestre',
+		MAMOGRAFIA: 'mamografia',
+		'BI RADS 0 - ALTERAÇÃO EM MAMA': 'bi_rads_0',
+		'COMPLEMENTO DE ULTRASONOGRAFIA DE MAMA': 'complemento_usg_mama',
+		PREVENTIVO: 'preventivo',
+		'ULTRASONOGRAFIA OBSTÉTRICO: 1º TRIMESTRE ; TRANSLUSCÂNCIA NUCAL': 'usg_obstetrico_1trimestre',
+		'ULTRASONOGRAFIA OBSTÉTRICO: 2º TRIMESTRE': 'usg_obstetrico_2trimestre',
+		'ULTRASONOGRAFIA OBSTÉTRICO: ULTRASONOGRAFIA OBSTÉTRICA': 'usg_obstetrico',
+		'SANGRAMENTO UTERINO ANORMAL, DISPAREUNIA': 'sangramento_uterino',
+	};
+
+	// Grupos (para popular os 3 selects)
+	const grupoLab = new Set([
+		'anemia',
+		'risco_cardiovascular',
+		'controle_dm_tipo2',
+		'controle_has',
+		'controle_has_dm_tipo2',
+		'hematuria_microscopica',
+		'hipotireoidismo',
+		'investigacao_artrite_lupus',
+		'risco_cirurgico',
+		'seguimento_lupus',
+		'seguimento_dm_pos_medicacao',
+		'verminoses',
+		'intolerancia_gluten_lactose',
+		'arboviroses_covid',
+	]);
+
+	const grupoImg = new Set(['dor_abdominal', 'retencao_urinaria', 'hernia_parede', 'aterosclerose_carotidas', 'dor_claudicacao_varicoses', 'dor_ombro', 'dor_joelho', 'hematuria_nefrolitiase', 'nodulo_tireoide', 'dor_torax_tosse', 'dor_testicular']);
+
+	const grupoMulher = new Set([
+		'gestacao_1trimestre',
+		'gestacao_2trimestre',
+		'gestacao_3trimestre',
+		'swab_3trimestre',
+		'mamografia',
+		'bi_rads_0',
+		'complemento_usg_mama',
+		'preventivo',
+		'usg_obstetrico_1trimestre',
+		'usg_obstetrico_2trimestre',
+		'usg_obstetrico',
+		'sangramento_uterino',
+	]);
+
+	// ===============================
+	// 2) Utilitários (sem unidecode)
+	// ===============================
+	const $ = (id) => document.getElementById(id);
+
+	const on = (el, event, handler, options) => {
+		if (!el) return;
+		el.addEventListener(event, handler, options);
+	};
+
+	// remove acentos/diacríticos sem libs externas (equivalente básico ao "unidecode")
+	function stripDiacritics(input) {
+		if (input == null) return '';
+		const s = String(input);
+
+		// NFD separa acentos como marks combinantes
+		// removemos o range principal U+0300..U+036F
+		return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+	}
+
+	// normalização "canônica" para dedupe/comparação
+	function normKey(input) {
+		return stripDiacritics(String(input || ''))
+			.trim()
+			.replace(/\s+/g, ' ')
+			.toUpperCase();
+	}
+
+	function uniqKeepOrder(list) {
+		const seen = new Set();
+		const out = [];
+		for (const item of list) {
+			const k = normKey(item);
+			if (!k) continue;
+			if (seen.has(k)) continue;
+			seen.add(k);
+			out.push(item);
+		}
+		return out;
+	}
+
+	// cria elemento se não existir
+	function ensureEl(id, factory) {
+		let el = $(id);
+		if (el) return el;
+		el = factory();
+		el.id = id;
+		return el;
+	}
+
+	// ===============================
+	// 3) UI: Montagem do Formulário
+	// ===============================
+	function createFormStructure() {
+		const app = $('app');
+		if (!app) return;
+
+		app.innerHTML = '';
+
+		const header = document.createElement('div');
+		header.className = 'mt-2 grid grid-cols-12 gap-2 mb-0 border border-black border-b-0 pt-5';
+		header.innerHTML = `
+      <div class="col-span-4 rounded-md bg-slate-50 px-2 py-1 flex items-center gap-2">
+        <img id="logoSusExame"
+          src="https://static.cdnlogo.com/logos/s/74/sus-brasil.svg"
+          alt="Logo SUS"
+          class="w-28 h-28 object-contain" />
+        <div id="textoViaDigitalExame"
+          class="hidden text-center text-[11px] font-bold text-shadow-rs tracking-wide">VIA<br />DIGITAL</div>
+      </div>
+
+      <div class="col-span-8 rounded-md bg-slate-50 px-2 py-1 flex flex-col gap-1">
+        <input id="local1" name="local1" type="text" placeholder="Estabelecimento"
+          class="w-full h-8 rounded-md border border-slate-50 bg-white px-2 text-[12px] font-semibold text-center uppercase outline-none focus:ring-2 focus:ring-slate-400" />
+        <input id="local2" name="local2" type="text" placeholder="Estabelecimento"
+          class="w-full h-8 rounded-md border border-slate-50 bg-white px-2 text-[12px] font-semibold text-center uppercase outline-none focus:ring-2 focus:ring-slate-400" />
+        <input id="local3" name="local3" type="text" placeholder="Estabelecimento"
+          class="w-full h-8 rounded-md border border-slate-50 bg-white px-2 text-[12px] font-semibold text-center uppercase outline-none focus:ring-2 focus:ring-slate-400" />
+      </div>
+    `;
+		app.appendChild(header);
+
+		const table = document.createElement('table');
+		table.className = 'w-full border-collapse border border-black';
+		table.innerHTML = `
+      <tbody>
+        <tr>
+          <th colspan="4" class="border border-black p-1 bg-gray-200 text-center font-bold text-[12px]">REQUISIÇÃO DE EXAME</th>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="border border-black p-1">
+            <div class="grid grid-cols-12 gap-2 items-center">
+              <label class="col-span-12 sm:col-span-6 flex items-center gap-1">
+                <span class="text-[12px] font-semibold whitespace-nowrap">PACIENTE:</span>
+                <input id="paciente" name="paciente" type="text" placeholder="Nome completo"
+                  class="w-full rounded border border-gray-50 bg-white px-2 py-0.5 text-[12px] font-semibold uppercase outline-none focus:ring-1 focus:ring-slate-400" />
+              </label>
+
+              <label class="col-span-12 sm:col-span-3 flex items-center gap-1">
+                <span class="text-[12px] font-semibold whitespace-nowrap">DT. NASC.:</span>
+                <input id="nascimento" name="nascimento" type="date"
+                  class="w-full rounded border border-gray-50 bg-white px-2 py-0.5 text-[12px] font-semibold outline-none focus:ring-1 focus:ring-slate-400" />
+              </label>
+
+              <label class="col-span-12 sm:col-span-3 flex items-center justify-center gap-2">
+                <span class="text-[12px] font-semibold">SEXO:</span>
+                <label class="flex items-center">
+                  <input type="radio" name="sexo" value="F" class="accent-sky-600" />
+                  <span class="text-[12px] ml-1">F</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="radio" name="sexo" value="M" class="accent-sky-600" />
+                  <span class="text-[12px] ml-1">M</span>
+                </label>
+              </label>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="border border-black p-1">
+            <div class="grid grid-cols-12 gap-2 items-center">
+              <label class="col-span-12 sm:col-span-6 flex items-center gap-1">
+                <span class="text-[12px] font-semibold whitespace-nowrap">NOME DA MÃE:</span>
+                <input id="nomeMae" name="nomeMae" type="text"
+                  class="w-full rounded border border-gray-50 bg-white px-2 py-0.5 text-[12px] font-semibold uppercase outline-none focus:ring-1 focus:ring-slate-400" />
+              </label>
+
+              <label class="col-span-12 sm:col-span-3 flex items-center gap-1">
+                <span class="text-[12px] font-semibold whitespace-nowrap">CNS:</span>
+                <input id="cartaoSus" name="cartaoSus" type="text"
+                  class="w-full rounded border border-gray-50 bg-white px-2 py-0.5 text-[12px] font-semibold uppercase outline-none focus:ring-1 focus:ring-slate-400" />
+              </label>
+
+              <label class="col-span-12 sm:col-span-3 flex items-center gap-1">
+                <span class="text-[12px] font-semibold whitespace-nowrap">CPF:</span>
+                <input id="cpf" name="cpf" type="text"
+                  class="w-full rounded border border-gray-50 bg-white px-2 py-0.5 text-[12px] font-semibold uppercase outline-none focus:ring-1 focus:ring-slate-400" />
+              </label>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="border border-black p-1">
+            <div class="grid grid-cols-12 gap-2 items-center">
+              <label class="col-span-12 sm:col-span-9 flex items-center gap-1">
+                <span class="text-[12px] font-semibold whitespace-nowrap">ENDEREÇO:</span>
+                <input id="endereco" name="endereco" type="text"
+                  class="w-full rounded border border-gray-50 bg-white px-2 py-0.5 text-[12px] uppercase outline-none focus:ring-1 focus:ring-slate-400" />
+              </label>
+
+              <label class="col-span-12 sm:col-span-3 flex items-center gap-1">
+                <span class="text-[12px] font-semibold whitespace-nowrap">TELEFONE:</span>
+                <input id="telefone" name="telefone" type="text" placeholder="(00) 00000-0000"
+                  class="w-full rounded border border-gray-50 bg-white px-2 py-0.5 text-[12px] uppercase outline-none focus:ring-1 focus:ring-slate-400" />
+              </label>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="border border-black p-1 bg-gray-100 text-left font-bold text-[12px]">1 - DADOS CLÍNICOS</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="border border-black p-1">
+            <input type="text" class="w-full bg-white px-2 py-0.5 text-[12px] uppercase" />
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="border border-black p-1 bg-gray-100 text-left font-bold text-[12px]">02 - TIPO DE EXAME</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="border border-black p-1 text-[12px]">
+            <input type="checkbox" id="clinicalAnalysisCheckbox" class="accent-sky-600" />
+            <span>ANÁLISES CLÍNICAS</span>
+
+            <input type="checkbox" id="imageCheckbox" class="accent-sky-600 ml-4" />
+            <span>IMAGEM</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="border border-black p-1 bg-gray-100 text-left font-bold text-[12px]">3 - EXAMES SOLICITADOS</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="border border-black p-2">
+            <textarea 
+              id="examText" 
+              rows="12" 
+              spellcheck="false"
+              class="w-full resize-y rounded border border-slate-300 bg-white p-2 font-mono text-[12px] leading-relaxed uppercase outline-none focus:ring-2 focus:ring-slate-400"
+              placeholder="Digite solicitação de exames...&#10;(códigos + espaço) ou use os menus ao lado."></textarea>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" class="border border-black p-1 text-[12px]">
+            <span class="font-semibold">DATA:</span>
+            <input type="date" class="w-full rounded border border-gray-50 px-1 text-[12px]" />
+          </td>
+          <td colspan="2" class="border border-black p-1 text-[12px]">
+            <span class="font-semibold">CARIMBO/ASSINATURA:</span>
+            <input type="text" class="w-full text-[12px] font-semibold uppercase" />
+          </td>
+        </tr>
+      </tbody>
+    `;
+		app.appendChild(table);
+	}
+
+	// ===============================
+	// 3.1) Controles (cria se não existirem)
+	// ===============================
+	function ensureControls() {
+		const app = $('app');
+		if (!app) return;
+
+		// container de controles (só cria se não existir)
+		// let controls = $('examControls');
+		// if (!controls) {
+		// 	controls = document.createElement('div');
+		// 	controls.id = 'examControls';
+		// 	controls.className = 'mt-2 p-2 border border-black rounded-md bg-slate-50 flex flex-wrap gap-2 items-center';
+		// 	app.parentNode?.insertBefore(controls, app); 
+		// }
+
+		// toggle logo
+		ensureEl('toggleSusLogo', () => {
+			const wrap = document.createElement('label');
+			wrap.className = 'flex items-center gap-2 text-[12px] font-semibold';
+			const cb = document.createElement('input');
+			cb.type = 'checkbox';
+			cb.className = 'accent-sky-600';
+			const span = document.createElement('span');
+			span.textContent = 'Ocultar logo SUS (mostrar VIA DIGITAL)';
+			wrap.appendChild(cb);
+			wrap.appendChild(span);
+			controls.appendChild(wrap);
+			return cb;
+		});
+
+		// selects
+		ensureEl('laboratorySelect', () => {
+			const sel = document.createElement('select');
+			sel.className = 'border border-slate-300 rounded px-2 py-1 text-[12px] bg-white';
+			sel.appendChild(new Option('LAB: selecione…', ''));
+			controls.appendChild(sel);
+			return sel;
+		});
+
+		ensureEl('imageSelect', () => {
+			const sel = document.createElement('select');
+			sel.className = 'border border-slate-300 rounded px-2 py-1 text-[12px] bg-white';
+			sel.appendChild(new Option('IMAGEM: selecione…', ''));
+			controls.appendChild(sel);
+			return sel;
+		});
+
+		ensureEl('womanSelect', () => {
+			const sel = document.createElement('select');
+			sel.className = 'border border-slate-300 rounded px-2 py-1 text-[12px] bg-white';
+			sel.appendChild(new Option('MULHER: selecione…', ''));
+			controls.appendChild(sel);
+			return sel;
+		});
+
+		// botões
+		ensureEl('printBtnExam', () => {
+			const btn = document.createElement('button');
+			btn.type = 'button';
+			btn.textContent = 'Imprimir';
+			btn.className = 'border border-black rounded px-3 py-1 text-[12px] font-semibold bg-white';
+			controls.appendChild(btn);
+			return btn;
+		});
+
+		ensureEl('clearExamBtn', () => {
+			const btn = document.createElement('button');
+			btn.type = 'button';
+			btn.textContent = 'Limpar exames';
+			btn.className = 'border border-black rounded px-3 py-1 text-[12px] font-semibold bg-white';
+			controls.appendChild(btn);
+			return btn;
+		});
+
+		ensureEl('clearAllBtn', () => {
+			const btn = document.createElement('button');
+			btn.type = 'button';
+			btn.textContent = 'Limpar tudo';
+			btn.className = 'border border-black rounded px-3 py-1 text-[12px] font-semibold bg-white';
+			controls.appendChild(btn);
+			return btn;
+		});
+	}
+
+	// ===============================
+	// 4) Toggle Logo SUS / VIA DIGITAL (CORRIGIDO)
+	// ===============================
+	function syncSusLogoExame() {
+		const checkbox = $('toggleSusLogo');
+		const logo = $('logoSusExame');
+		const via = $('textoViaDigitalExame');
+		if (!checkbox || !logo || !via) return;
+
+		const ocultarLogo = !!checkbox.checked;
+		// CORRETO: se ocultarLogo = true -> esconde logo, mostra "VIA DIGITAL"
+		logo.classList.toggle('hidden', ocultarLogo);
+		via.classList.toggle('hidden', !ocultarLogo);
+	}
+
+	function bindSusLogoExame() {
+		const checkbox = $('toggleSusLogo');
+		if (!checkbox) return;
+
+		if (checkbox.dataset.bound === '1') return;
+		checkbox.dataset.bound = '1';
+
+		checkbox.addEventListener('change', syncSusLogoExame);
+	}
+
+	// ===============================
+	// 5) Máscaras
+	// ===============================
+	function maskCPF(value) {
+		return String(value || '')
+			.replace(/\D/g, '')
+			.replace(/(\d{3})(\d)/, '$1.$2')
+			.replace(/(\d{3})(\d)/, '$1.$2')
+			.replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+			.slice(0, 14);
+	}
+
+	function maskPhone(value) {
+		value = String(value || '').replace(/\D/g, '');
+
+		if (value.length <= 10) {
+			return value
+				.replace(/(\d{2})(\d)/, '($1) $2')
+				.replace(/(\d{4})(\d)/, '$1-$2')
+				.slice(0, 14);
+		}
+
+		return value
+			.replace(/(\d{2})(\d)/, '($1) $2')
+			.replace(/(\d{5})(\d)/, '$1-$2')
+			.slice(0, 15);
+	}
+
+	// ===============================
+	// 6) Exames: textarea (com dedupe)
+	// ===============================
+	function formatExamsInColumns() {
+		const textarea = $('examText');
+		if (!textarea) return;
+
+		const exams = textarea.value
+			.split('\n')
+			.map((x) => x.trim())
+			.filter((x) => x !== '');
+
+		const uniqueExams = uniqKeepOrder(exams);
+
+		if (uniqueExams.length <= 8) {
+			textarea.value = uniqueExams.join('\n');
+			return;
+		}
+
+		const midpoint = Math.ceil(uniqueExams.length / 2);
+		const col1 = uniqueExams.slice(0, midpoint);
+		const col2 = uniqueExams.slice(midpoint);
+
+		const maxLength = Math.max(...col1.map((x) => x.length));
+		const padding = 4;
+
+		const lines = [];
+		for (let i = 0; i < midpoint; i++) {
+			let line = col1[i] || '';
+			if (col2[i]) {
+				const spaces = Math.max(1, maxLength - line.length + padding);
+				line += ' '.repeat(spaces) + col2[i];
+			}
+			lines.push(line);
+		}
+
+		textarea.value = lines.join('\n');
+	}
+
+	function addExamsToTextarea(examsList) {
+		const textarea = $('examText');
+		if (!textarea || !Array.isArray(examsList)) return;
+
+		const currentLines = textarea.value
+			.split('\n')
+			.map((x) => x.trim())
+			.filter(Boolean);
+
+		const nextLines = currentLines.concat(examsList.map((x) => String(x || '').trim()).filter(Boolean));
+		textarea.value = uniqKeepOrder(nextLines).join('\n');
+		formatExamsInColumns();
+	}
+
+	// ===============================
+	// 7) Selects
+	// ===============================
+	function populateSelects() {
+		const lab = $('laboratorySelect');
+		const img = $('imageSelect');
+		const mulher = $('womanSelect');
+
+		// limpa mantendo placeholder (index 0)
+		if (lab) lab.length = 1;
+		if (img) img.length = 1;
+		if (mulher) mulher.length = 1;
+
+		for (const [label, key] of Object.entries(opcoesSelect)) {
+			if (!examesPorCategoria[key]) continue;
+
+			if (lab && grupoLab.has(key)) lab.add(new Option(label, key));
+			if (img && grupoImg.has(key)) img.add(new Option(label, key));
+			if (mulher && grupoMulher.has(key)) mulher.add(new Option(label, key));
+		}
+	}
+
+	function bindSelects() {
+		const lab = $('laboratorySelect');
+		const img = $('imageSelect');
+		const mulher = $('womanSelect');
+
+		const clinical = $('clinicalAnalysisCheckbox');
+		const image = $('imageCheckbox');
+
+		const binds = [lab, img, mulher].filter(Boolean);
+
+		binds.forEach((select) => {
+			if (select.dataset.bound === '1') return;
+			select.dataset.bound = '1';
+
+			on(select, 'change', function () {
+				const key = this.value;
+				if (key && examesPorCategoria[key]) {
+					addExamsToTextarea(examesPorCategoria[key]);
+
+					// auto-marca tipo (sem atrapalhar: só ajuda)
+					if (this.id === 'imageSelect') {
+						if (image) image.checked = true;
+						if (clinical) clinical.checked = false;
+					} else {
+						if (clinical) clinical.checked = true;
+						if (image) image.checked = false;
+					}
+				}
+				this.value = '';
+			});
+		});
+	}
+
+	// ===============================
+	// 8) Eventos Gerais
+	// ===============================
+	function bindFormEvents() {
+		// máscaras
+		on($('cpf'), 'input', (e) => (e.target.value = maskCPF(e.target.value)));
+		on($('telefone'), 'input', (e) => (e.target.value = maskPhone(e.target.value)));
+
+		// exclusividade do tipo de exame
+		const clinical = $('clinicalAnalysisCheckbox');
+		const image = $('imageCheckbox');
+
+		on(clinical, 'change', () => {
+			if (clinical && clinical.checked && image) image.checked = false;
+		});
+
+		on(image, 'change', () => {
+			if (image && image.checked && clinical) clinical.checked = false;
+		});
+
+		// botões
+		on($('printBtnExam'), 'click', () => window.print());
+
+		on($('clearExamBtn'), 'click', () => {
+			const t = $('examText');
+			if (t) t.value = '';
+		});
+
+		on($('clearAllBtn'), 'click', () => {
+			if (!confirm('Tem certeza que deseja limpar todos os campos?')) return;
+
+			const app = $('app');
+			if (app) {
+				app.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach((el) => (el.value = ''));
+				app.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach((el) => (el.checked = false));
+			}
+
+			const toggle = $('toggleSusLogo');
+			if (toggle) toggle.checked = false;
+
+			syncSusLogoExame();
+		});
+	}
+
+	// ===============================
+	// 9) Boot
+	// ===============================
+	function init() {
+		// evita re-init
+		if (window.ExamesModule && window.ExamesModule._initialized) return;
+
+		// precisa existir #app
+		if (!$('app')) return;
+
+		// cria UI base e garante controles
+		createFormStructure();
+		ensureControls();
+
+		// binds
+		bindSusLogoExame();
+		syncSusLogoExame();
+		populateSelects();
+		bindSelects();
+		bindFormEvents();
+
+		window.ExamesModule._initialized = true;
+	}
+
+	// expõe API
+	window.ExamesModule = {
+		init,
+		_initialized: false,
+		_utils: { stripDiacritics, normKey },
+	};
+
+	// auto-init robusto
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init, { once: true });
+	} else {
+		init();
+	}
+})();
+
+
+/* ==========================================
+   [3/25] geral/js/adm_drugs.js
+   ========================================== */
+(() => {
+	'use strict';
+
+	const ADM_ROUTES = [
+		{ value: 'USO ORAL', label: 'USO ORAL' },
+		{ value: 'USO IM', label: 'USO IM' },
+		{ value: 'USO EV', label: 'USO EV' },
+		{ value: 'USO SC', label: 'USO SC' },
+		{ value: 'USO INTRANASAL', label: 'USO INTRANASAL' },
+		{ value: 'USO INALATÓRIO', label: 'USO INALATÓRIO' },
+		{ value: 'USO RETAL', label: 'USO RETAL' },
+		{ value: 'USO SUBLINGUAL', label: 'USO SUBLINGUAL' },
+		{ value: 'USO TÓPICO', label: 'USO TÓPICO' },
+		{ value: 'USO OFTÁLMICO', label: 'USO OFTÁLMICO' },
+		{ value: 'USO OTOLÓGICO', label: 'USO OTOLÓGICO' },
+		{ value: 'USO VAGINAL', label: 'USO VAGINAL' },
+		{ value: 'USO TRANSDÉRMICO', label: 'USO TRANSDÉRMICO' },
+	];
+
+	const getRoute = (value) => ADM_ROUTES.find((r) => r.value === value.toUpperCase()) || null;
+	const getAll = () => ADM_ROUTES;
+	const getValues = () => ADM_ROUTES.map((r) => r.value);
+	const isValid = (value) => ADM_ROUTES.some((r) => r.value === value.toUpperCase());
+
+	function createSelect(options = {}) {
+		const {
+			id = 'adm_farmaco',
+			name = 'adm_farmaco',
+			title = 'select_poso',
+			placeholder = 'SELECIONE A VIA',
+			selectedValue = '',
+			includeEmpty = false,
+			className = 'mt-1 w-full h-[32px] rounded-md border border-slate-50 bg-white px-2 py-1 text-[12px] font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent print:outline-0 print:shadow-none print:appearance-none',
+		} = options;
+
+		const select = document.createElement('select');
+		select.id = id;
+		select.name = name;
+		select.title = title;
+		select.className = className;
+
+		if (includeEmpty) {
+			const optionEmpty = document.createElement('option');
+			optionEmpty.value = '';
+			optionEmpty.textContent = placeholder;
+			select.appendChild(optionEmpty);
+		}
+
+		ADM_ROUTES.forEach((route) => {
+			const option = document.createElement('option');
+			option.value = route.value;
+			option.textContent = route.label;
+			if (route.value === selectedValue) option.selected = true;
+			select.appendChild(option);
+		});
+
+		return select;
+	}
+
+	function renderSelect(container, options = {}) {
+		const element = typeof container === 'string' ? document.getElementById(container) : container;
+		if (!element) {
+			console.error('Container não encontrado:', container);
+			return null;
+		}
+		const select = createSelect(options);
+		element.innerHTML = '';
+		element.appendChild(select);
+		return select;
+	}
+
+	function renderLabelSelect(container, options = {}) {
+		const { labelText = '', labelClass = 'bg-transparent flex items-center gap-2', labelTextClass = 'text-[11px] font-bold tracking-wide whitespace-nowrap', ...selectOptions } = options;
+
+		const element = typeof container === 'string' ? document.getElementById(container) : container;
+		if (!element) {
+			console.error('Container não encontrado:', container);
+			return null;
+		}
+
+		const label = document.createElement('label');
+		label.className = labelClass;
+
+		const labelDiv = document.createElement('div');
+		labelDiv.className = labelTextClass;
+		labelDiv.textContent = labelText;
+
+		const select = createSelect(selectOptions);
+		label.appendChild(labelDiv);
+		label.appendChild(select);
+
+		element.innerHTML = '';
+		element.appendChild(label);
+
+		return select;
+	}
+
+	function generateHTMLSelect(options = {}) {
+		const {
+			id = 'adm_farmaco',
+			name = 'adm_farmaco',
+			title = 'select_poso',
+			placeholder = 'SELECIONE A VIA',
+			selectedValue = '',
+			includeEmpty = false,
+			className = 'mt-1 w-full h-[32px] rounded-md border border-slate-50 bg-transparent px-2 py-1 text-[12px] text-center font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent print:outline-0 print:shadow-none print:appearance-none',
+		} = options;
+
+		let html = `<select id="${id}" name="${name}" title="${title}" class="${className}">`;
+		if (includeEmpty) {
+			html += `<option value="">${placeholder}</option>`;
+		}
+		ADM_ROUTES.forEach((route) => {
+			const selected = route.value === selectedValue ? ' selected' : '';
+			html += `<option value="${route.value}"${selected}>${route.label}</option>`;
+		});
+		html += '</select>';
+		return html;
+	}
+
+	function generateHTMLLabelSelect(options = {}) {
+		const { labelText = '', labelClass = 'rounded-md bg-slate-50 px-2 py-1 flex items-center gap-2', labelTextClass = 'text-[11px] font-bold tracking-wide whitespace-nowrap', ...selectOptions } = options;
+
+		return `
+      <label class="${labelClass}">
+        <div class="${labelTextClass}">${labelText}</div>
+        ${generateHTMLSelect(selectOptions)}
+      </label>
+    `;
+	}
+
+	window.AdmDrugsModule = {
+		data: ADM_ROUTES,
+		getRoute: getRoute,
+		getAll: getAll,
+		getValues: getValues,
+		isValid: isValid,
+		createSelect: createSelect,
+		renderSelect: renderSelect,
+		renderLabelSelect: renderLabelSelect,
+		generateHTMLSelect: generateHTMLSelect,
+		generateHTMLLabelSelect: generateHTMLLabelSelect,
+		ADM_ROUTES: ADM_ROUTES,
+	};
+
+	console.log('✅ Adm Drugs Module carregado:', ADM_ROUTES.length, 'vias');
+})();
+
+
+/* ==========================================
+   [4/25] geral/js/ufs-brasil-module.js
+   ========================================== */
+(() => {
+  'use strict';
+
+  const UFS_BRASIL = [
+    { sigla: 'AC', nome: 'Acre', regiao: 'Norte' },
+    { sigla: 'AL', nome: 'Alagoas', regiao: 'Nordeste' },
+    { sigla: 'AP', nome: 'Amapá', regiao: 'Norte' },
+    { sigla: 'AM', nome: 'Amazonas', regiao: 'Norte' },
+    { sigla: 'BA', nome: 'Bahia', regiao: 'Nordeste' },
+    { sigla: 'CE', nome: 'Ceará', regiao: 'Nordeste' },
+    { sigla: 'DF', nome: 'Distrito Federal', regiao: 'Centro-Oeste' },
+    { sigla: 'ES', nome: 'Espírito Santo', regiao: 'Sudeste' },
+    { sigla: 'GO', nome: 'Goiás', regiao: 'Centro-Oeste' },
+    { sigla: 'MA', nome: 'Maranhão', regiao: 'Nordeste' },
+    { sigla: 'MT', nome: 'Mato Grosso', regiao: 'Centro-Oeste' },
+    { sigla: 'MS', nome: 'Mato Grosso do Sul', regiao: 'Centro-Oeste' },
+    { sigla: 'MG', nome: 'Minas Gerais', regiao: 'Sudeste' },
+    { sigla: 'PA', nome: 'Pará', regiao: 'Norte' },
+    { sigla: 'PB', nome: 'Paraíba', regiao: 'Nordeste' },
+    { sigla: 'PR', nome: 'Paraná', regiao: 'Sul' },
+    { sigla: 'PE', nome: 'Pernambuco', regiao: 'Nordeste' },
+    { sigla: 'PI', nome: 'Piauí', regiao: 'Nordeste' },
+    { sigla: 'RJ', nome: 'Rio de Janeiro', regiao: 'Sudeste' },
+    { sigla: 'RN', nome: 'Rio Grande do Norte', regiao: 'Nordeste' },
+    { sigla: 'RS', nome: 'Rio Grande do Sul', regiao: 'Sul' },
+    { sigla: 'RO', nome: 'Rondônia', regiao: 'Norte' },
+    { sigla: 'RR', nome: 'Roraima', regiao: 'Norte' },
+    { sigla: 'SC', nome: 'Santa Catarina', regiao: 'Sul' },
+    { sigla: 'SP', nome: 'São Paulo', regiao: 'Sudeste' },
+    { sigla: 'SE', nome: 'Sergipe', regiao: 'Nordeste' },
+    { sigla: 'TO', nome: 'Tocantins', regiao: 'Norte' },
+  ];
+
+  const getUF = (sigla) => UFS_BRASIL.find((uf) => uf.sigla === sigla.toUpperCase()) || null;
+  const getTodas = () => UFS_BRASIL;
+  const porRegiao = (regiao) => UFS_BRASIL.filter((uf) => uf.regiao === regiao);
+  const getSiglas = () => UFS_BRASIL.map((uf) => uf.sigla);
+  const isValidaUF = (sigla) => UFS_BRASIL.some((uf) => uf.sigla === sigla.toUpperCase());
+
+  function criarUfSelect(options = {}) {
+    const {
+      id = 'crmUf',
+      name = 'crmUf',
+      placeholder = 'UF',
+      selectedValue = '',
+      incluirVazio = true,
+      className = 'w-full rounded-md border border-slate-100 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400',
+      showNomeCompleto = false,
+    } = options;
+
+    const select = document.createElement('select');
+    select.id = id;
+    select.name = name;
+    select.className = className;
+
+    if (incluirVazio) {
+      const optionVazia = document.createElement('option');
+      optionVazia.value = '';
+      optionVazia.textContent = placeholder;
+      select.appendChild(optionVazia);
+    }
+
+    UFS_BRASIL.forEach((uf) => {
+      const option = document.createElement('option');
+      option.value = uf.sigla;
+      option.textContent = showNomeCompleto ? `${uf.sigla} - ${uf.nome}` : uf.sigla;
+      if (uf.sigla === selectedValue) option.selected = true;
+      select.appendChild(option);
+    });
+
+    return select;
+  }
+
+  function renderizarUfSelect(container, options = {}) {
+    const element = typeof container === 'string' ? document.getElementById(container) : container;
+    if (!element) {
+      console.error('Container não encontrado:', container);
+      return null;
+    }
+    const select = criarUfSelect(options);
+    element.innerHTML = '';
+    element.appendChild(select);
+    return select;
+  }
+
+  function renderizarLabelUfSelect(container, options = {}) {
+    const { 
+      labelText = 'UF:', 
+      labelClass = 'sm:col-span-2 print:col-span-2 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-2', 
+      labelTextClass = 'text-[10px] font-bold tracking-wide whitespace-nowrap', 
+      ...selectOptions 
+    } = options;
+
+    const element = typeof container === 'string' ? document.getElementById(container) : container;
+    if (!element) {
+      console.error('Container não encontrado:', container);
+      return null;
+    }
+
+    const label = document.createElement('label');
+    label.className = labelClass;
+
+    const labelDiv = document.createElement('div');
+    labelDiv.className = labelTextClass;
+    labelDiv.textContent = labelText;
+
+    const select = criarUfSelect(selectOptions);
+    label.appendChild(labelDiv);
+    label.appendChild(select);
+
+    element.innerHTML = '';
+    element.appendChild(label);
+
+    return select;
+  }
+
+  function gerarHTMLUfSelect(options = {}) {
+    const {
+      id = 'crmUf',
+      name = 'crmUf',
+      placeholder = 'UF',
+      selectedValue = '',
+      incluirVazio = true,
+      className = 'w-full rounded-md border border-slate-100 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400',
+      showNomeCompleto = false,
+    } = options;
+
+    let html = `<select id="${id}" name="${name}" class="${className}">`;
+    if (incluirVazio) {
+      html += `<option value="">${placeholder}</option>`;
+    }
+    UFS_BRASIL.forEach((uf) => {
+      const text = showNomeCompleto ? `${uf.sigla} - ${uf.nome}` : uf.sigla;
+      const selected = uf.sigla === selectedValue ? ' selected' : '';
+      html += `<option value="${uf.sigla}"${selected}>${text}</option>`;
+    });
+    html += '</select>';
+    return html;
+  }
+
+  function gerarHTMLLabelUfSelect(options = {}) {
+    const { 
+      labelText = 'UF:', 
+      labelClass = 'sm:col-span-2 print:col-span-2 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-2', 
+      labelTextClass = 'text-[10px] font-bold tracking-wide whitespace-nowrap', 
+      ...selectOptions 
+    } = options;
+
+    return `
+      <label class="${labelClass}">
+        <div class="${labelTextClass}">${labelText}</div>
+        ${gerarHTMLUfSelect(selectOptions)}
+      </label>
+    `;
+  }
+
+  window.UFsBrasilModule = {
+    data: UFS_BRASIL,
+    getUF: getUF,
+    getTodas: getTodas,
+    porRegiao: porRegiao,
+    getSiglas: getSiglas,
+    isValida: isValidaUF,
+    criarUfSelect: criarUfSelect,
+    renderizarUfSelect: renderizarUfSelect,
+    renderizarLabelUfSelect: renderizarLabelUfSelect,
+    gerarHTMLUfSelect: gerarHTMLUfSelect,
+    gerarHTMLLabelUfSelect: gerarHTMLLabelUfSelect,
+  };
+
+  console.log('✅ UFs Brasil Module carregado:', UFS_BRASIL.length, 'estados');
+})();
+
+
+/* ==========================================
+   [5/25] geral/components/api/js/functions-initial.js
+   ========================================== */
+// header_toolbar.js (BIND-ONLY)
+// O HTML da toolbar já existe no index.html.
+// Este script APENAS faz bind de eventos nos elementos existentes.
+// IDs esperados: printBtnrec, clearBtn, copyBtn,
+//   mostrarLogoSus, codesBtn, mostrarMedico, mostrarLocal
+(() => {
+  'use strict';
+
+  let abortController = null;
+
+  function init() {
+    if (!document.getElementById('printBtnrec')) {
+      console.warn('[Toolbar] #printBtnrec not found — skipping');
+      return;
+    }
+
+    if (abortController) abortController.abort();
+    abortController = new AbortController();
+    const signal = abortController.signal;
+
+    bindButtons(signal);
+    bindCheckboxes(signal);
+    registerComponent();
+    console.log('[Toolbar] ✅ Events bound');
+  }
+
+  // =========================================
+  // BUTTONS
+  // =========================================
+
+  function bindButtons(signal) {
+    document.getElementById('printBtnrec')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.print();
+    }, { signal });
+
+    document.getElementById('clearBtn')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!confirm('Tem certeza que deseja limpar a receita?')) return;
+
+      const api = window.__asideRegistry?.get('prescription-editor');
+      if (api?.clearContent) { api.clearContent(); }
+      else if (window.clearEditor) { window.clearEditor(); }
+      else {
+        const editor = document.getElementById('textArea');
+        if (editor) { editor.innerHTML = ''; editor.focus(); }
+      }
+    }, { signal });
+
+    document.getElementById('copyBtn')?.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const api = window.__asideRegistry?.get('prescription-editor');
+      let text = api?.getContent ? api.getContent() : (document.getElementById('textArea')?.innerText || '');
+
+      if (!text) { flashBtn(document.getElementById('copyBtn'), 'Vazio!'); return; }
+
+      try {
+        if (api?.copyContent) { await api.copyContent(); }
+        else { await navigator.clipboard.writeText(text); }
+        flashBtn(document.getElementById('copyBtn'), 'Copiado!');
+      } catch (err) { console.error('[Toolbar] Copy failed:', err); }
+    }, { signal });
+  }
+
+  // =========================================
+  // CHECKBOXES
+  // =========================================
+
+  function bindCheckboxes(signal) {
+    setupCheckbox('mostrarLogoSus', (checked) => {
+      const logo = document.getElementById('logoSus');
+      const texto = document.getElementById('textoViaDigital');
+      if (logo) logo.classList.toggle('hidden', !checked);
+      if (texto) texto.classList.toggle('hidden', checked);
+    }, signal);
+
+    setupCheckbox('codesBtn', (checked) => {
+      const panel = document.getElementById('codesPanel');
+      if (panel) panel.classList.toggle('hidden', !checked);
+    }, signal);
+
+    setupCheckbox('mostrarMedico', (checked) => {
+      const row = document.getElementById('rowMedico');
+      if (row) row.classList.toggle('hidden', !checked);
+    }, signal);
+
+    setupCheckbox('mostrarLocal', (checked) => {
+      const row = document.getElementById('rowLocal');
+      if (row) row.classList.toggle('hidden', !checked);
+    }, signal);
+  }
+
+  function setupCheckbox(id, callback, signal) {
+    const cb = document.getElementById(id);
+    if (!cb) return;
+    cb.addEventListener('change', (e) => callback(e.target.checked), { signal });
+    setTimeout(() => callback(cb.checked), 50);
+  }
+
+  // =========================================
+  // UTILS
+  // =========================================
+
+  function flashBtn(btn, text = 'OK!') {
+    if (!btn) return;
+    const orig = btn.innerHTML;
+    btn.textContent = text;
+    btn.classList.add('ring-2', 'ring-emerald-300');
+    setTimeout(() => {
+      btn.innerHTML = orig;
+      btn.classList.remove('ring-2', 'ring-emerald-300');
+    }, 1200);
+  }
+
+  // =========================================
+  // REGISTRY & LIFECYCLE
+  // =========================================
+
+  function registerComponent() {
+    window.__asideRegistry?.register('header-toolbar', { init, destroy });
+  }
+
+  function destroy() {
+    abortController?.abort();
+    abortController = null;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  window.renderHeaderToolbar = init;
+})();
+
+/* ==========================================
+   [6/25] geral/components/header/js/header_index.js
+   ========================================== */
+// header_index.js
+// Renderiza o shell do header dentro de #header-index
+// Estrutura EXATA da produção:
+//   #header-index
+//     div.flex.flex-col (inner header)
+//       div (logo)
+//       div#toolbar-prescricao (toolbar será preenchida por headerToolbar.js)
+//     div.w-full.max-w-5xl (tabs wrapper)
+//       div#toolboxContainer (tabs serão preenchidas por headerToolContainer.js)
+//
+// Expõe: window.renderHeaderIndex
+(() => {
+  'use strict';
+
+  let rendered = false;
+
+  function render() {
+    const container = document.getElementById('header-index');
+    if (!container) {
+      console.warn('[HeaderIndex] #header-index not found');
+      return;
+    }
+    if (rendered) return;
+
+    // ✅ Classes idênticas à produção
+    container.className = 'border-b border-slate-50 px-4 py-4 md:px-6 print:hidden';
+
+    // ✅ HTML EXATO da produção — IDs corretos
+    container.innerHTML = `
+      <div class="flex flex-col p-3 mb-8 bg-[#e0e5ec] rounded-[50px] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] gap-3 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-rounded region-icon text-4xl text-blue-500 mx-4">cognition</span>
+          <div class="text-xl font-bold text-slate-900 text-shadow-sm">Apoio clínico - GT-Medics ® - 2025</div>
+        </div>
+
+        <div id="toolbar-prescricao"
+          class="bg-gray-200 flex flex-wrap items-center gap-8 p-4 m-4 rounded-xl shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff]">
+        </div>
+      </div>
+
+      <div class="w-full max-w-5xl mx-auto">
+        <div id="toolboxContainer">
+        </div>
+      </div>
+    `;
+
+    rendered = true;
+    window.__asideRegistry?.register('header-index', { render, destroy });
+
+    // Renderiza filhos com retry
+    renderChildren();
+  }
+
+  function renderChildren() {
+    let done = 0;
+    const maxWait = 5000;
+    let elapsed = 0;
+
+    function tick() {
+      if (done >= 2) return;
+
+      // Toolbar: checa se já foi preenchida (tem botão dentro)
+      if (window.renderHeaderToolbar && !document.getElementById('printBtnrec')) {
+        window.renderHeaderToolbar();
+        done++;
+      }
+
+      // Tabs: checa se já foi preenchida (tem tabBtn dentro)
+      if (window.renderHeaderToolContainer && !document.querySelector('#toolboxContainer .tabBtn')) {
+        window.renderHeaderToolContainer();
+        done++;
+      }
+
+      if (done >= 2) {
+        console.log('[HeaderIndex] ✅ Header complete');
+        return;
+      }
+
+      elapsed += 100;
+      if (elapsed >= maxWait) {
+        console.warn('[HeaderIndex] ⚠️ Timeout — ' + done + '/2 children rendered');
+        if (window.renderHeaderToolbar) window.renderHeaderToolbar();
+        if (window.renderHeaderToolContainer) window.renderHeaderToolContainer();
+        return;
+      }
+
+      setTimeout(tick, 100);
+    }
+
+    tick();
+  }
+
+  function destroy() {
+    rendered = false;
+    const c = document.getElementById('header-index');
+    if (c) c.innerHTML = '';
+  }
+
+  // =========================================
+  // BOOTSTRAP — Aguarda DOM
+  // =========================================
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', render);
+  } else {
+    render();
+  }
+
+  window.renderHeaderIndex = render;
+})();
+
+/* ==========================================
+   [7/25] geral/components/header/js/header_tool_container.js
+   ========================================== */
+// header_tool_container.js
+// Renderiza tabs dentro do wrapper correto da produção.
+// Estrutura: #header-index > div.w-full > #toolboxContainer > div.flex > buttons
+// Este script preenche #toolboxContainer com os botões de tab.
+// Expõe: window.renderHeaderToolContainer
+(() => {
+	'use strict';
+
+	const TABS = [
+		{ id: 'prescricao', label: 'Prescrição', icon: 'edit_note' },
+		{ id: 'exames', label: 'Exames', icon: 'lab_profile' },
+		{ id: 'guias', label: 'Guias SUS', icon: 'description' },
+		{ id: 'apoio', label: 'Apoio', icon: 'info' },
+		{ id: 'psf', label: 'PSF', icon: 'groups' },
+	];
+
+	let rendered = false;
+	let abortCtrl = null;
+	let tabButtons = null;
+	let bus = null;
+
+	function render() {
+		const container = document.getElementById('toolboxContainer');
+		if (!container) {
+			console.warn('[Tabs] #toolboxContainer not found');
+			return;
+		}
+		if (rendered) return;
+
+		bus = window.__asideBus;
+		abortCtrl = new AbortController();
+		const signal = abortCtrl.signal;
+
+		// ✅ HTML idêntico à produção
+		container.innerHTML = `
+      <div class="flex flex-wrap gap-2 justify-around p-4 bg-[#e0e5ec] rounded-[30px] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] md:gap-4">
+        ${TABS.map(
+					(t) => `
+          <button type="button"
+            class="tabBtn inline-flex items-center gap-2 py-[1rem] px-4 border-none rounded-[50px] bg-[#e0e5ec] text-sm font-medium text-slate-800 drop-shadow-lg transition-all duration-300 hover:text-[#007BFF] hover:bg-gray-50 focus:outline-none"
+            data-tab="${t.id}">
+            <span class="material-symbols-outlined text-base">${t.icon}</span>
+            ${t.label}
+          </button>
+        `,
+				).join('')}
+      </div>
+    `;
+
+		tabButtons = container.querySelectorAll('.tabBtn[data-tab]');
+
+		tabButtons.forEach((btn) => {
+			btn.addEventListener('click', () => setActiveTab(btn.dataset.tab), { signal });
+		});
+
+		rendered = true;
+		window.__asideRegistry?.register('header-tabs', { render, destroy, setActiveTab, getActiveTab });
+
+		// Restaura tab salva
+		setTimeout(() => {
+			setActiveTab(localStorage.getItem('rx_active_tab') || 'prescricao');
+		}, 100);
+
+		console.log('[Tabs] ✅ Rendered (' + tabButtons.length + ' tabs)');
+	}
+
+	// =========================================
+	// TAB LOGIC
+	// =========================================
+
+	function setActiveTab(name) {
+		if (!tabButtons) return;
+
+		// Toggle toolbar prescrição (ID correto de produção)
+		const toolbar = document.getElementById('toolbar-prescricao');
+		if (toolbar) {
+			const show = name === 'prescricao';
+			toolbar.classList.toggle('hidden', !show);
+			toolbar.classList.toggle('flex', show);
+		}
+
+		// Toggle panels — suporta tanto tab-xxx (hyphen) quanto tab_xxx (underscore)
+		document.querySelectorAll('[id^="tab-"], [id^="tab_"]').forEach((panel) => {
+			const panelName = panel.id.replace(/^tab[-_]/, '');
+			panel.classList.toggle('hidden', panelName !== name);
+		});
+
+		// Toggle button states
+		tabButtons.forEach((btn) => {
+			const active = btn.dataset.tab === name;
+			btn.classList.toggle('text-[#007BFF]', active);
+			btn.classList.toggle('font-bold', active);
+			btn.classList.toggle('text-slate-800', !active);
+			btn.classList.toggle('font-medium', !active);
+		});
+
+		localStorage.setItem('rx_active_tab', name);
+		lazyInit(name);
+
+		bus?.emit('tabChanged', { tab: name });
+		window.dispatchEvent(new CustomEvent('tabChanged', { detail: { tab: name } }));
+	}
+
+	function lazyInit(name) {
+		if ((name === 'apoio' || name === 'psf') && window.EspecialidadesModule?.init && !window.EspecialidadesModule._initialized) {
+			window.EspecialidadesModule.init();
+			window.EspecialidadesModule._initialized = true;
+		}
+		if (name === 'exames' && window.ExamesModule?.init && !window.ExamesModule._initialized) {
+			window.ExamesModule.init();
+		}
+		if (name === 'psf' && window.ProtocolosModule?.init) {
+			window.ProtocolosModule.init();
+		}
+	}
+
+	function getActiveTab() {
+		return localStorage.getItem('rx_active_tab') || 'prescricao';
+	}
+
+	function destroy() {
+		abortCtrl?.abort();
+		abortCtrl = null;
+		tabButtons = null;
+		rendered = false;
+		const c = document.getElementById('toolboxContainer');
+		if (c) c.innerHTML = '';
+	}
+
+	window.renderHeaderToolContainer = render;
+})();
+
+
+/* ==========================================
+   [8/25] geral/components/header/js/header_toolbar.js
+   ========================================== */
+// header_toolbar.js
+// Renderiza botões + checkboxes dentro de #toolbar-prescricao
+// ID correto conforme HTML de produção: toolbar-prescricao (NÃO header-toolbar)
+// Expõe: window.renderHeaderToolbar
+(() => {
+	'use strict';
+
+	let rendered = false;
+	let abortCtrl = null;
+
+	function render() {
+		const container = document.getElementById('toolbar-prescricao');
+		if (!container) {
+			console.warn('[Toolbar] #toolbar-prescricao not found');
+			return;
+		}
+		if (rendered) return;
+
+		abortCtrl = new AbortController();
+		const signal = abortCtrl.signal;
+
+		container.className = 'bg-gray-200 flex flex-wrap items-center gap-8 p-4 m-4 rounded-xl shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff]';
+
+		// ✅ Conteúdo idêntico ao HTML de produção
+		container.innerHTML = `
+      <button id="printBtnrec" type="button"
+        class="inline-flex items-center gap-2 py-[1rem] px-4 border-none rounded-[50px] bg-[#e0e5ec] text-sm font-medium text-slate-800 drop-shadow-lg transition-all duration-300 hover:text-[#007BFF] hover:bg-gray-50 focus:outline-none">
+        <span class="material-symbols-outlined text-base">print</span>
+        Imprimir
+      </button>
+
+      <button id="clearBtn" type="button"
+        class="inline-flex items-center gap-2 py-[1rem] px-4 border-none rounded-[50px] bg-[#e0e5ec] text-sm font-medium text-slate-800 drop-shadow-lg transition-all duration-300 hover:text-[#007BFF] hover:bg-gray-50 focus:outline-none">
+        <span class="material-symbols-outlined text-base">ink_eraser</span>
+        Limpar
+      </button>
+
+      <button id="copyBtn" type="button"
+        class="inline-flex items-center gap-2 py-[1rem] px-4 border-none rounded-[50px] bg-[#e0e5ec] text-sm font-medium text-slate-800 drop-shadow-lg transition-all duration-300 hover:text-[#007BFF] hover:bg-gray-50 focus:outline-none">
+        <span class="material-symbols-outlined text-base">content_copy</span>
+        Copiar
+      </button>
+
+      <div>
+        <label class="flex items-center gap-2 mt-6 mb-2">
+          <input title="sus" type="checkbox" id="mostrarLogoSus" checked class="w-4 h-4" />
+          <span class="text-sm font-semibold">Logo do SUS</span>
+        </label>
+
+        <label class="flex items-center gap-2 mb-2">
+          <input title="code" type="checkbox" id="codesBtn" checked class="w-4 h-4" />
+          <span class="text-sm font-semibold">Códigos</span>
+        </label>
+
+        <label class="flex items-center gap-2 mb-2">
+          <input type="checkbox" id="mostrarMedico" class="w-4 h-4" />
+          <span class="text-sm font-semibold">Médico/CRM</span>
+        </label>
+
+        <label class="flex items-center gap-2 mb-2">
+          <input type="checkbox" id="mostrarLocal" checked class="w-4 h-4" />
+          <span class="text-sm font-semibold">Local/CNES</span>
+        </label>
+      </div>
+    `;
+
+		// ---- Bind events ----
+		document.getElementById('printBtnrec').addEventListener(
+			'click',
+			(e) => {
+				e.preventDefault();
+				window.print();
+			},
+			{ signal },
+		);
+
+		document.getElementById('clearBtn').addEventListener(
+			'click',
+			(e) => {
+				e.preventDefault();
+				if (!confirm('Tem certeza que deseja limpar a receita?')) return;
+				const api = window.__asideRegistry?.get('prescription-editor');
+				if (api?.clearContent) api.clearContent();
+				else {
+					const ed = document.getElementById('textArea');
+					if (ed) {
+						ed.innerHTML = '';
+						ed.focus();
+					}
+				}
+			},
+			{ signal },
+		);
+
+		document.getElementById('copyBtn').addEventListener(
+			'click',
+			async (e) => {
+				e.preventDefault();
+				const api = window.__asideRegistry?.get('prescription-editor');
+				const text = api?.getContent ? api.getContent() : document.getElementById('textArea')?.innerText || '';
+				if (!text) {
+					flashBtn(document.getElementById('copyBtn'), 'Vazio!');
+					return;
+				}
+				try {
+					if (api?.copyContent) await api.copyContent();
+					else await navigator.clipboard.writeText(text);
+					flashBtn(document.getElementById('copyBtn'), 'Copiado!');
+				} catch (err) {
+					console.error('[Toolbar]', err);
+				}
+			},
+			{ signal },
+		);
+
+		// ---- Checkboxes ----
+		bindCb(
+			'mostrarLogoSus',
+			(on) => {
+				const logo = document.getElementById('logoSus');
+				const txt = document.getElementById('textoViaDigital');
+				if (logo) logo.classList.toggle('hidden', !on);
+				if (txt) txt.classList.toggle('hidden', on);
+			},
+			signal,
+		);
+
+		bindCb(
+			'codesBtn',
+			(on) => {
+				const p = document.getElementById('codesPanel');
+				if (p) p.classList.toggle('hidden', !on);
+			},
+			signal,
+		);
+
+		bindCb(
+			'mostrarMedico',
+			(on) => {
+				const r = document.getElementById('rowMedico');
+				if (r) r.classList.toggle('hidden', !on);
+			},
+			signal,
+		);
+
+		bindCb(
+			'mostrarLocal',
+			(on) => {
+				const r = document.getElementById('rowLocal');
+				if (r) r.classList.toggle('hidden', !on);
+			},
+			signal,
+		);
+
+		rendered = true;
+		window.__asideRegistry?.register('header-toolbar', { render, destroy });
+		console.log('[Toolbar] ✅ Rendered');
+	}
+
+	function bindCb(id, cb, signal) {
+		const el = document.getElementById(id);
+		if (!el) return;
+		el.addEventListener('change', (e) => cb(e.target.checked), { signal });
+		setTimeout(() => cb(el.checked), 200);
+	}
+
+	function flashBtn(btn, text) {
+		if (!btn) return;
+		const orig = btn.innerHTML;
+		btn.textContent = text;
+		btn.classList.add('ring-2', 'ring-emerald-300');
+		setTimeout(() => {
+			btn.innerHTML = orig;
+			btn.classList.remove('ring-2', 'ring-emerald-300');
+		}, 1200);
+	}
+
+	function destroy() {
+		abortCtrl?.abort();
+		abortCtrl = null;
+		rendered = false;
+		const c = document.getElementById('toolbar-prescricao');
+		if (c) c.innerHTML = '';
+	}
+
+	window.renderHeaderToolbar = render;
+})();
+
+
+/* ==========================================
+   [9/25] geral/components/prescription/aside/js/aside_event_bus.js
+   ========================================== */
+// aside_event_bus.js — Barramento de eventos centralizado
+// Substitui window.addEventListener + window.dispatchEvent por um sistema controlado
+(() => {
+  'use strict';
+
+  /** @typedef {'cnesDataLoaded'|'cnesDataCleared'|'cnesError'|'ubsSelected'|'hotstringClicked'|'hotstringExpanded'|'formattingApplied'|'editorBlockedStateChanged'|'editorContentCopied'|'asideReady'|'componentReady'} AsideEvent */
+
+  class AsideEventBus {
+    /** @type {Map<string, Set<Function>>} */
+    #listeners = new Map();
+
+    /** @type {Map<string, AbortController>} */
+    #abortControllers = new Map();
+
+    /**
+     * Registra listener para um evento
+     * @param {AsideEvent} event
+     * @param {Function} callback
+     * @returns {() => void} Função de unsubscribe
+     */
+    on(event, callback) {
+      if (!this.#listeners.has(event)) {
+        this.#listeners.set(event, new Set());
+      }
+      this.#listeners.get(event).add(callback);
+
+      // Retorna unsubscribe
+      return () => this.off(event, callback);
+    }
+
+    /**
+     * Registra listener que executa apenas uma vez
+     * @param {AsideEvent} event
+     * @param {Function} callback
+     */
+    once(event, callback) {
+      const wrapper = (...args) => {
+        this.off(event, wrapper);
+        callback(...args);
+      };
+      this.on(event, wrapper);
+    }
+
+    /**
+     * Remove listener
+     * @param {AsideEvent} event
+     * @param {Function} callback
+     */
+    off(event, callback) {
+      this.#listeners.get(event)?.delete(callback);
+    }
+
+    /**
+     * Emite evento para todos os listeners
+     * @param {AsideEvent} event
+     * @param {*} [detail]
+     */
+    emit(event, detail = null) {
+      const listeners = this.#listeners.get(event);
+      if (!listeners?.size) {
+        console.debug(`[EventBus] No listeners for "${event}"`);
+        return;
+      }
+
+      for (const cb of listeners) {
+        try {
+          cb(detail);
+        } catch (err) {
+          console.error(`[EventBus] Error in "${event}" handler:`, err);
+        }
+      }
+    }
+
+    /**
+     * Cria AbortController vinculado a um namespace (para cleanup por componente)
+     * @param {string} namespace
+     * @returns {AbortSignal}
+     */
+    getSignal(namespace) {
+      if (this.#abortControllers.has(namespace)) {
+        this.#abortControllers.get(namespace).abort();
+      }
+      const controller = new AbortController();
+      this.#abortControllers.set(namespace, controller);
+      return controller.signal;
+    }
+
+    /**
+     * Remove TODOS os listeners de um namespace (componente)
+     * @param {string} namespace
+     */
+    destroyNamespace(namespace) {
+      if (this.#abortControllers.has(namespace)) {
+        this.#abortControllers.get(namespace).abort();
+        this.#abortControllers.delete(namespace);
+      }
+    }
+
+    /**
+     * Destrói todo o barramento
+     */
+    destroy() {
+      this.#listeners.clear();
+      for (const [, controller] of this.#abortControllers) {
+        controller.abort();
+      }
+      this.#abortControllers.clear();
+      console.log('[EventBus] Destroyed');
+    }
+
+    /**
+     * Debug: lista eventos e quantidade de listeners
+     */
+    debug() {
+      const info = {};
+      for (const [event, set] of this.#listeners) {
+        info[event] = set.size;
+      }
+      console.table(info);
+    }
+  }
+
+  // Singleton
+  if (!window.__asideBus) {
+    window.__asideBus = new AsideEventBus();
+  }
+
+  window.AsideEventBus = AsideEventBus;
+})();
+
+
+/* ==========================================
+   [10/25] geral/components/prescription/aside/js/aside_registry.js
+   ========================================== */
+// aside_registry.js — Registro de componentes com resolução por Promise
+// Elimina polling (setInterval) e race conditions
+(() => {
+  'use strict';
+
+  class AsideRegistry {
+    /** @type {Map<string, { render: Function, destroy?: Function }>} */
+    #components = new Map();
+
+    /** @type {Map<string, { resolve: Function, reject: Function }>} */
+    #pending = new Map();
+
+    /** @type {Map<string, Promise<void>>} */
+    #promises = new Map();
+
+    /** @type {string[]} */
+    #required = [];
+
+    /**
+     * Define quais componentes são obrigatórios
+     * @param {string[]} names
+     */
+    setRequired(names) {
+      this.#required = names;
+
+      // Cria promises para cada componente esperado
+      for (const name of names) {
+        if (!this.#promises.has(name)) {
+          this.#promises.set(
+            name,
+            new Promise((resolve, reject) => {
+              this.#pending.set(name, { resolve, reject });
+            })
+          );
+        }
+      }
+    }
+
+    /**
+     * Componente se auto-registra quando pronto
+     * @param {string} name
+     * @param {{ render: Function, destroy?: Function }} api
+     */
+    register(name, api) {
+      if (this.#components.has(name)) {
+        console.warn(`[Registry] "${name}" already registered, replacing`);
+        this.#components.get(name).destroy?.();
+      }
+
+      this.#components.set(name, api);
+
+      // Resolve a promise pendente
+      const pending = this.#pending.get(name);
+      if (pending) {
+        pending.resolve();
+        this.#pending.delete(name);
+      }
+
+      console.log(`[Registry] ✅ "${name}" registered`);
+    }
+
+    /**
+     * Aguarda todos os componentes obrigatórios
+     * @param {number} [timeoutMs=8000]
+     * @returns {Promise<{ ready: string[], missing: string[] }>}
+     */
+    async waitForAll(timeoutMs = 8000) {
+      const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Component registration timeout')), timeoutMs)
+      );
+
+      const results = await Promise.allSettled(
+        this.#required.map((name) =>
+          Promise.race([this.#promises.get(name) || Promise.reject(), timeout])
+        )
+      );
+
+      const ready = [];
+      const missing = [];
+
+      this.#required.forEach((name, i) => {
+        if (results[i].status === 'fulfilled') {
+          ready.push(name);
+        } else {
+          missing.push(name);
+        }
+      });
+
+      if (missing.length) {
+        console.warn(`[Registry] ⚠️ Missing components: ${missing.join(', ')}`);
+      }
+
+      return { ready, missing };
+    }
+
+    /**
+     * Retorna API de um componente
+     * @param {string} name
+     */
+    get(name) {
+      return this.#components.get(name) || null;
+    }
+
+    /**
+     * Verifica se componente está registrado
+     * @param {string} name
+     */
+    has(name) {
+      return this.#components.has(name);
+    }
+
+    /**
+     * Destrói todos os componentes
+     */
+    destroyAll() {
+      for (const [name, api] of this.#components) {
+        try {
+          api.destroy?.();
+          console.log(`[Registry] 🗑️ "${name}" destroyed`);
+        } catch (err) {
+          console.error(`[Registry] Error destroying "${name}":`, err);
+        }
+      }
+      this.#components.clear();
+      this.#pending.clear();
+      this.#promises.clear();
+    }
+  }
+
+  // Singleton
+  if (!window.__asideRegistry) {
+    window.__asideRegistry = new AsideRegistry();
+  }
+
+  window.AsideRegistry = AsideRegistry;
+})();
+
+
+/* ==========================================
+   [11/25] geral/components/prescription/js/prescription_header.js
+   ========================================== */
+// prescription_header.js (REFATORADO)
+// Dependências: aside_event_bus.js, aside_registry.js
+(() => {
+	'use strict';
+
+	/** @type {AbortController|null} */
+	let abortController = null;
+
+	// =========================================
+	// RENDER
+	// =========================================
+
+	function render() {
+		const container = document.getElementById('prescription_header');
+		if (!container) {
+			console.warn('[Header] Container #prescription_header not found');
+			return;
+		}
+
+		abortController = new AbortController();
+		const signal = abortController.signal;
+
+		container.innerHTML = `
+      <div class="mt-2 grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2">
+        <div class="md:col-span-4 print:col-span-4 rounded-md bg-slate-50 px-3 py-2 flex items-center gap-2">
+          <img id="logoSus" src="https://static.cdnlogo.com/logos/s/74/sus-brasil.svg" alt="Logo SUS"
+            class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 print:w-28 md:h-28 print:h-28 object-contain" />
+          <div id="textoViaDigital" class="hidden text-center text-[11px] font-bold text-shadow-rs tracking-wide">
+            VIA<br />DIGITAL
+          </div>
+        </div>
+
+        <div class="md:col-span-8 print:col-span-8 rounded-md bg-slate-50 px-2 py-1 flex flex-col gap-2">
+          <input id="local1" name="local1" type="text" placeholder="PREFEITURA DE ..."
+            class="w-full h-8 rounded-md border border-slate-50 bg-white px-2 text-xs sm:text-sm print:text-sm font-semibold text-center uppercase outline-none focus:ring-2 focus:ring-slate-400 print:placeholder:text-transparent" />
+          <input id="local2" name="local2" type="text" placeholder="SECRETARIA DE SAÚDE DE ..."
+            class="w-full h-8 rounded-md border border-slate-50 bg-white px-2 text-xs sm:text-sm print:text-sm font-semibold text-center uppercase outline-none focus:ring-2 focus:ring-slate-400 print:placeholder:text-transparent" />
+          <input id="local3" name="local3" type="text" placeholder="UBS ..."
+            class="w-full h-8 rounded-md border border-slate-50 bg-white px-2 text-xs sm:text-sm print:text-sm font-semibold text-center uppercase outline-none focus:ring-2 focus:ring-slate-400 print:placeholder:text-transparent" />
+        </div>
+      </div>
+
+      <label id="REC" type="text"
+        class="flex items-center justify-center w-full h-10 rounded-md border border-slate-50 bg-slate-200 px-2 text-base sm:text-lg print:text-lg font-semibold text-center mt-2">
+        RECEITA MÉDICA
+      </label>
+
+      <div class="mt-2 grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2">
+        <label class="md:col-span-8 print:col-span-8 rounded-md bg-slate-50 px-2 sm:px-3 print:px-3 py-2 flex flex-col sm:flex-row print:flex-row items-start sm:items-center print:items-center gap-1 sm:gap-2 print:gap-2">
+          <div class="text-[10px] font-bold tracking-wide whitespace-nowrap">PACIENTE:</div>
+          <input id="paciente" name="paciente" type="text" placeholder="Nome completo"
+            class="w-full rounded-md border border-slate-50 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400" />
+        </label>
+        <label class="md:col-span-4 print:col-span-4 rounded-md bg-slate-50 px-2 py-1 flex flex-col sm:flex-row print:flex-row items-start sm:items-center print:items-center gap-1 sm:gap-2 print:gap-2 print:bg-transparent">
+          <div class="text-[11px] font-bold text-shadow-rs tracking-wide whitespace-nowrap">DT. NASC.:</div>
+          <input id="nascimento" name="nascimento" type="date"
+            class="w-full rounded-md border border-slate-100 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent print:text-[11px]" />
+        </label>
+      </div>
+    `;
+
+		bindEvents(signal);
+		registerComponent();
+	}
+
+	// =========================================
+	// EVENTS
+	// =========================================
+
+	function bindEvents(signal) {
+		// Uppercase nos inputs de instituição
+		['local1', 'local2', 'local3'].forEach((id) => {
+			const input = document.getElementById(id);
+			input?.addEventListener(
+				'input',
+				(e) => {
+					const pos = e.target.selectionStart;
+					e.target.value = e.target.value.toUpperCase();
+					e.target.setSelectionRange(pos, pos);
+				},
+				{ signal },
+			);
+		});
+
+		// Title Case no nome do paciente (on blur)
+		const paciente = document.getElementById('paciente');
+		paciente?.addEventListener(
+			'blur',
+			(e) => {
+				e.target.value = toTitleCase(e.target.value);
+			},
+			{ signal },
+		);
+	}
+
+	// =========================================
+	// UTILS
+	// =========================================
+
+	function toTitleCase(str) {
+		return str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+	}
+
+	// =========================================
+	// API PÚBLICA
+	// =========================================
+
+	function getData() {
+		return {
+			local1: document.getElementById('local1')?.value || '',
+			local2: document.getElementById('local2')?.value || '',
+			local3: document.getElementById('local3')?.value || '',
+			titulo: document.getElementById('REC')?.textContent || 'RECEITA MÉDICA',
+			paciente: document.getElementById('paciente')?.value || '',
+			nascimento: document.getElementById('nascimento')?.value || '',
+		};
+	}
+
+	function setData(data) {
+		const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+		if (data.local1) set('local1', data.local1.toUpperCase());
+		if (data.local2) set('local2', data.local2.toUpperCase());
+		if (data.local3) set('local3', data.local3.toUpperCase());
+		if (data.titulo) { const el = document.getElementById('REC'); if (el) el.textContent = data.titulo; }
+		if (data.paciente) set('paciente', data.paciente);
+		if (data.nascimento) set('nascimento', data.nascimento);
+	}
+
+	function setInstitution(prefeitura, secretaria, ubs) {
+		const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+		if (prefeitura) set('local1', prefeitura.toUpperCase());
+		if (secretaria) set('local2', secretaria.toUpperCase());
+		if (ubs) set('local3', ubs.toUpperCase());
+	}
+
+	function setPatient(nome, dataNascimento) {
+		const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+		if (nome) set('paciente', nome);
+		if (dataNascimento) set('nascimento', dataNascimento);
+	}
+
+	function setTitle(titulo) {
+		const el = document.getElementById('REC');
+		if (el) el.textContent = titulo.toUpperCase();
+	}
+
+	function toggleSusLogo(visible) {
+		const logo = document.getElementById('logoSus');
+		const texto = document.getElementById('textoViaDigital');
+		if (logo) logo.classList.toggle('hidden', !visible);
+		if (texto) texto.classList.toggle('hidden', visible);
+	}
+
+	function clear() {
+		['local1', 'local2', 'local3', 'paciente', 'nascimento'].forEach((id) => {
+			const el = document.getElementById(id);
+			if (el) el.value = '';
+		});
+		const recEl = document.getElementById('REC');
+		if (recEl) recEl.textContent = 'RECEITA MÉDICA';
+		toggleSusLogo(true);
+	}
+
+	function getPatientAge() {
+		const val = document.getElementById('nascimento')?.value;
+		if (!val) return null;
+		const today = new Date();
+		const birth = new Date(val);
+		let age = today.getFullYear() - birth.getFullYear();
+		const m = today.getMonth() - birth.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+		return age;
+	}
+
+	// =========================================
+	// REGISTRO & LIFECYCLE
+	// =========================================
+
+	function registerComponent() {
+		window.__asideRegistry?.register('prescription-header', {
+			render,
+			destroy,
+			getData,
+			setData,
+			setInstitution,
+			setPatient,
+			setTitle,
+			toggleSusLogo,
+			clear,
+			getPatientAge,
+		});
+	}
+
+	function destroy() {
+		abortController?.abort();
+		abortController = null;
+		const container = document.getElementById('prescription_header');
+		if (container) container.innerHTML = '';
+	}
+
+	// Backward compat — orquestrador antigo e aside chamam essas globals
+	window.renderPrescriptionHeader = render;
+	window.getHeaderData = getData;
+	window.setHeaderData = setData;
+	window.setInstitutionData = setInstitution;
+	window.setPatientData = setPatient;
+	window.setDocumentTitle = setTitle;
+	window.toggleSusLogo = toggleSusLogo;
+	window.clearHeaderData = clear;
+	window.getPatientAge = getPatientAge;
+})();
+
+
+/* ==========================================
+   [12/25] geral/components/prescription/js/prescription_footer.js
+   ========================================== */
+// prescription_footer.js (REFATORADO)
+// Dependências: aside_event_bus.js, aside_registry.js
+(() => {
+  'use strict';
+
+  /** @type {AbortController|null} */
+  let abortController = null;
+
+  // =========================================
+  // RENDER
+  // =========================================
+
+  function render() {
+    const container = document.getElementById('prescription_footer');
+    if (!container) {
+      console.warn('[Footer] Container #prescription_footer not found');
+      return;
+    }
+
+    abortController = new AbortController();
+    const signal = abortController.signal;
+
+    container.innerHTML = `
+      <div class="mt-2 text-[12px]">
+        <div id="rowMedico" class="grid grid-cols-1 sm:grid-cols-12 print:grid-cols-12 gap-1 sm:gap-2 print:gap-1">
+          <label class="sm:col-span-7 print:col-span-7 gap-2 rounded-md bg-slate-50 flex items-center px-1 py-1">
+            <div class="text-[10px] font-bold tracking-wide whitespace-nowrap">MÉDICO(A):</div>
+            <input id="medico" name="medico" type="text" placeholder="Nome"
+              class="w-full rounded-md border border-slate-100 bg-white px-2 py-1 h-7 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400" />
+          </label>
+          <div class="grid grid-cols-2 gap-1 sm:contents print:contents">
+            <label class="sm:col-span-3 print:col-span-3 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-2">
+              <div class="text-[10px] font-bold text-shadow-rs tracking-wide whitespace-nowrap">CRM:</div>
+              <input id="crm" name="crm" type="text" placeholder="000000"
+                class="w-full rounded-md border border-slate-100 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400" />
+            </label>
+            <div id="ufContainer"
+              class="sm:col-span-2 print:col-span-2 rounded-md bg-slate-50 px-1 py-1 flex items-center justify-center">
+            </div>
+          </div>
+        </div>
+
+        <div id="rowLocal" class="grid grid-cols-1 sm:grid-cols-12 print:grid-cols-12 gap-1 sm:gap-2 print:gap-1">
+          <label class="sm:col-span-7 print:col-span-7 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-1 print:bg-transparent">
+            <div class="text-[10px] font-bold text-shadow-rs tracking-wide whitespace-nowrap">LOCAL:</div>
+            <input id="local" name="local" type="text" placeholder="Clínica / UBS / Consultório"
+              class="w-full tracking-wide rounded-md border border-slate-50 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent" />
+          </label>
+          <div class="grid grid-cols-2 gap-1 sm:contents print:contents">
+            <label class="sm:col-span-2 print:col-span-2 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-1 print:bg-transparent">
+              <div class="text-[10px] font-bold text-shadow-rs tracking-wide whitespace-nowrap">CNES:</div>
+              <input id="cnes" name="cnes" type="text" placeholder="—"
+                class="w-full rounded-md border border-slate-50 tracking-wide bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent" />
+            </label>
+            <label class="sm:col-span-3 print:col-span-3 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-1 print:bg-transparent">
+              <div class="text-[10px] font-bold tracking-wide whitespace-nowrap">FONE:</div>
+              <input id="telefone" name="telefone" type="text" placeholder="(00) 00000-0000"
+                class="w-full rounded-md border border-slate-50 tracking-wide bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 grid grid-cols-1 sm:grid-cols-12 print:grid-cols-12 gap-1 sm:gap-2 print:gap-1">
+        <label class="sm:col-span-4 print:col-span-4 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-1">
+          <div class="text-[10px] font-bold text-shadow-rs tracking-wide whitespace-nowrap">DATA:</div>
+          <input id="data" name="data" type="date"
+            class="w-full rounded-md border border-slate-50 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent print:outline-0 print:shadow-none print:appearance-none" />
+        </label>
+        <div class="hidden sm:block print:block w-full sm:col-span-8 print:col-span-8 border-b border-slate-500"></div>
+      </div>
+
+      <div class="flex justify-center items-end mt-4 sm:mt-0 print:mt-0">
+        <div class="text-[10px] sm:ml-48 print:ml-48 font-bold text-shadow-rs tracking-wide whitespace-nowrap">
+          ASSINATURA MÉDICO(A)</div>
+      </div>
+    `;
+
+    // Renderiza select de UF no container
+    if (window.UFsBrasilModule?.renderizarLabelUfSelect) {
+      window.UFsBrasilModule.renderizarLabelUfSelect('ufContainer', {
+        labelText: 'UF:',
+        incluirVazio: true,
+        placeholder: 'UF',
+      });
+    }
+
+    bindEvents(signal);
+    setTodayDate();
+    registerComponent();
+  }
+
+  // =========================================
+  // EVENTS
+  // =========================================
+
+  function bindEvents(signal) {
+    // Máscara telefone
+    document.getElementById('telefone')?.addEventListener('input', (e) => {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.length <= 11) {
+        v = v.replace(/^(\d{2})(\d)/g, '($1) $2');
+        v = v.replace(/(\d)(\d{4})$/, '$1-$2');
+      }
+      e.target.value = v;
+    }, { signal });
+
+    // CRM — apenas números
+    document.getElementById('crm')?.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '');
+    }, { signal });
+
+    // CNES — apenas números, max 7
+    document.getElementById('cnes')?.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 7);
+    }, { signal });
+  }
+
+  // =========================================
+  // UTILS
+  // =========================================
+
+  function setTodayDate() {
+    const input = document.getElementById('data');
+    if (input && !input.value) {
+      input.value = new Date().toISOString().split('T')[0];
+    }
+  }
+
+  // =========================================
+  // API PÚBLICA
+  // =========================================
+
+  function getData() {
+    return {
+      medico: document.getElementById('medico')?.value || '',
+      crm: document.getElementById('crm')?.value || '',
+      uf: document.getElementById('crmUf')?.value || '',
+      local: document.getElementById('local')?.value || '',
+      cnes: document.getElementById('cnes')?.value || '',
+      telefone: document.getElementById('telefone')?.value || '',
+      data: document.getElementById('data')?.value || '',
+    };
+  }
+
+  function setData(data) {
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+    if (data.medico) set('medico', data.medico);
+    if (data.crm) set('crm', data.crm);
+    if (data.uf) setUF(data.uf);
+    if (data.local) set('local', data.local);
+    if (data.cnes) set('cnes', data.cnes);
+    if (data.telefone) set('telefone', data.telefone);
+    if (data.data) set('data', data.data);
+  }
+
+  function setUF(uf) {
+    const el = document.getElementById('crmUf');
+    if (el) el.value = uf.toUpperCase();
+  }
+
+  function clear() {
+    ['medico', 'crm', 'local', 'cnes', 'telefone'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    const ufEl = document.getElementById('crmUf');
+    if (ufEl) ufEl.value = '';
+    setTodayDate();
+  }
+
+  // =========================================
+  // REGISTRO & LIFECYCLE
+  // =========================================
+
+  function registerComponent() {
+    window.__asideRegistry?.register('prescription-footer', {
+      render,
+      destroy,
+      getData,
+      setData,
+      setUF,
+      clear,
+    });
+  }
+
+  function destroy() {
+    abortController?.abort();
+    abortController = null;
+    const container = document.getElementById('prescription_footer');
+    if (container) container.innerHTML = '';
+  }
+
+  // Backward compat
+  window.renderPrescriptionFooter = render;
+  window.getDoctorData = getData;
+  window.setDoctorData = setData;
+  window.clearFooterData = clear;
+  window.setUF = setUF;
+})();
+
+
+/* ==========================================
+   [13/25] geral/components/prescription/box/js/apoiomed_prescription_box.js
+   ========================================== */
+//@ts-nocheck
+// apoiomed_prescription_box.js (VERSÃO FINAL PERFEITA)
+(() => {
+	'use strict';
+
+	/**
+	 * ✅ Configuração centralizada
+	 */
+	const EDITOR_CONFIG = {
+		maxFontSize: 12,
+		minFontSize: 7,
+		fontSizeStep: 0.5,
+		maxResizeAttempts: 20,
+		hotstringsCheckInterval: 500,
+	};
+
+	/**
+	 * ✅ Estado do editor encapsulado
+	 */
+	const editorState = {
+		element: null,
+		limitWarning: null,
+		isBlocked: false,
+		hotstringsRef: null,
+	};
+
+	function renderPrescriptionBox() {
+		// ✅ CORRETO: Busca APENAS o container específico do editor
+		const container = document.getElementById('apoiomed_prescription');
+
+		if (!container) {
+			console.error('Container #apoiomed_prescription não encontrado');
+			return;
+		}
+
+		// Evita re-renderizar se já existe
+		if (!document.getElementById('textArea')) {
+			container.innerHTML = `
+        <div class="mt-2 rounded-md border border-slate-50 p-0 sm:p-1 print:p-0 overflow-hidden print:overflow-visible bg-slate-50">
+          <div class="relative w-full bg-white">
+            <div 
+              id="textArea" 
+              contenteditable="true" 
+              spellcheck="false" 
+              role="textbox" 
+              aria-multiline="true"
+              aria-label="Área de prescrição médica"
+              class="w-full resize-none max-w-full rounded-md border border-slate-50 bg-white px-2 sm:px-3 print:px-3 py-2 sm:py-3 print:py-3 font-mono leading-relaxed outline-none focus:ring-2 focus:ring-slate-100 break-words overflow-wrap-anywhere h-[580px] overflow-hidden print:border-0"
+              style="white-space: pre-wrap; font-size: ${EDITOR_CONFIG.maxFontSize}px;"></div>
+
+            <div 
+              id="limitWarning"
+              class="hidden absolute bottom-2 left-2 right-2 bg-red-50 text-red-600 text-xs font-bold px-3 py-2 rounded shadow-sm border border-red-100 print:hidden z-20">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">warning</span>
+                Limite da página atingido.
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+		}
+
+		initializeEditorLogic();
+	}
+
+	function initializeEditorLogic() {
+		editorState.element = document.getElementById('textArea');
+		editorState.limitWarning = document.getElementById('limitWarning');
+
+		if (!editorState.element) {
+			console.warn('Elemento #textArea não encontrado');
+			return;
+		}
+
+		console.log('✅ Editor: Inicializando...');
+
+		// Event listeners
+		editorState.element.addEventListener('keydown', handleEditorKeydown);
+		editorState.element.addEventListener('beforeinput', handleBeforeInput);
+		editorState.element.addEventListener('input', adjustFontSize);
+		editorState.element.addEventListener('paste', handlePaste);
+
+		// Inicializa hotstrings
+		ensureHotstrings();
+		setInterval(ensureHotstrings, EDITOR_CONFIG.hotstringsCheckInterval);
+
+		// Ajuste inicial
+		adjustFontSize();
+
+		// API pública
+		setupGlobalAPI();
+
+		console.log('✅ Editor inicializado com sucesso');
+	}
+
+	/**
+	 * ✅ Garante referência aos hotstrings
+	 */
+	function ensureHotstrings() {
+		if (!editorState.hotstringsRef && window.hotstrings) {
+			editorState.hotstringsRef = window.hotstrings;
+			console.log('🔗 Hotstrings conectados ao editor');
+		}
+	}
+
+	/**
+	 * ✅ Ajuste automático de fonte
+	 */
+	function adjustFontSize() {
+		const editor = editorState.element;
+		if (!editor) return false;
+
+		const style = window.getComputedStyle(editor);
+		let currentSize = parseFloat(style.fontSize) || EDITOR_CONFIG.maxFontSize;
+
+		const isOverflowing = () => editor.scrollHeight > editor.clientHeight;
+
+		// Reduzir se estiver estourando
+		if (isOverflowing()) {
+			while (isOverflowing() && currentSize > EDITOR_CONFIG.minFontSize) {
+				currentSize -= EDITOR_CONFIG.fontSizeStep;
+				editor.style.fontSize = currentSize + 'px';
+			}
+		}
+		// Aumentar se tiver espaço
+		else if (currentSize < EDITOR_CONFIG.maxFontSize) {
+			let attempts = 0;
+
+			while (!isOverflowing() && currentSize < EDITOR_CONFIG.maxFontSize && attempts < EDITOR_CONFIG.maxResizeAttempts) {
+				const nextSize = currentSize + EDITOR_CONFIG.fontSizeStep;
+				editor.style.fontSize = nextSize + 'px';
+
+				if (isOverflowing()) {
+					editor.style.fontSize = currentSize + 'px';
+					break;
+				}
+
+				currentSize = nextSize;
+				attempts++;
+			}
+		}
+
+		// Atualiza estado de bloqueio
+		const hitLimit = isOverflowing() && currentSize <= EDITOR_CONFIG.minFontSize;
+		updateBlockedState(hitLimit);
+
+		return hitLimit;
+	}
+
+	/**
+	 * ✅ Atualiza estado de bloqueio
+	 */
+	function updateBlockedState(isBlocked) {
+		editorState.isBlocked = isBlocked;
+
+		if (editorState.limitWarning) {
+			editorState.limitWarning.classList.toggle('hidden', !isBlocked);
+			editorState.limitWarning.style.display = isBlocked ? 'block' : 'none';
+		}
+
+		// Dispara evento
+		window.dispatchEvent(
+			new CustomEvent('editorBlockedStateChanged', {
+				detail: { isBlocked },
+			}),
+		);
+	}
+
+	/**
+	 * ✅ Expande hotstring
+	 */
+	function tryExpandActiveWord() {
+		ensureHotstrings();
+		if (!editorState.hotstringsRef) return false;
+
+		const sel = window.getSelection();
+		if (!sel.rangeCount) return false;
+
+		const range = sel.getRangeAt(0);
+		const node = range.endContainer;
+
+		if (node.nodeType !== Node.TEXT_NODE) return false;
+
+		const text = node.textContent;
+		const caretPos = range.endOffset;
+		const textBefore = text.slice(0, caretPos);
+
+		const match = textBefore.match(/(\S+)$/);
+		if (!match) return false;
+
+		const code = match[0];
+		const content = editorState.hotstringsRef[code] || editorState.hotstringsRef[code.toLowerCase()];
+
+		if (content) {
+			const rangeToReplace = document.createRange();
+			rangeToReplace.setStart(node, match.index);
+			rangeToReplace.setEnd(node, caretPos);
+
+			sel.removeAllRanges();
+			sel.addRange(rangeToReplace);
+			document.execCommand('insertText', false, content);
+
+			editorState.element.focus();
+			adjustFontSize();
+
+			// Dispara evento
+			window.dispatchEvent(
+				new CustomEvent('hotstringExpanded', {
+					detail: { code, content },
+				}),
+			);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * ✅ Handler de teclado
+	 */
+	function handleEditorKeydown(e) {
+		const ALLOWED_KEYS = ['Backspace', 'Delete', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Tab'];
+
+		if (editorState.isBlocked) {
+			const isModifierKey = e.ctrlKey || e.metaKey || e.altKey;
+			const isAllowedKey = ALLOWED_KEYS.includes(e.key);
+
+			if (!isAllowedKey && !isModifierKey && e.key.length === 1) {
+				e.preventDefault();
+				return;
+			}
+		}
+
+		if (e.key === ' ' || e.key === 'Enter') {
+			if (tryExpandActiveWord()) {
+				e.preventDefault();
+			}
+		}
+	}
+
+	/**
+	 * ✅ Handler de input
+	 */
+	function handleBeforeInput(e) {
+		const BLOCKED_INPUT_TYPES = ['insertFromPaste', 'insertFromDrop', 'insertText', 'insertLineBreak', 'insertParagraph'];
+
+		if (editorState.isBlocked && BLOCKED_INPUT_TYPES.includes(e.inputType)) {
+			e.preventDefault();
+		}
+	}
+
+	/**
+	 * ✅ Handler de paste
+	 */
+	function handlePaste(e) {
+		if (editorState.isBlocked) {
+			e.preventDefault();
+		}
+	}
+
+	/**
+	 * ✅ API pública do editor
+	 */
+	function setupGlobalAPI() {
+		window.insertAtCursor = function (textOrCode) {
+			if (!textOrCode || editorState.isBlocked) return;
+
+			ensureHotstrings();
+			const expanded = editorState.hotstringsRef && (editorState.hotstringsRef[textOrCode] || editorState.hotstringsRef[textOrCode.toLowerCase()]);
+			const contentToInsert = expanded || textOrCode;
+
+			if (editorState.element) {
+				editorState.element.focus();
+				document.execCommand('insertText', false, contentToInsert);
+				adjustFontSize();
+			}
+		};
+
+		window.copyToClipboard = function () {
+			if (!editorState.element) return;
+
+			const text = editorState.element.innerText;
+			navigator.clipboard
+				.writeText(text)
+				.then(() => {
+					console.log('📋 Texto copiado para clipboard');
+
+					window.dispatchEvent(
+						new CustomEvent('editorContentCopied', {
+							detail: { text },
+						}),
+					);
+				})
+				.catch((err) => console.error('❌ Erro ao copiar:', err));
+		};
+
+		window.getEditorContent = function () {
+			return editorState.element?.innerText || '';
+		};
+
+		window.setEditorContent = function (content) {
+			if (editorState.element) {
+				editorState.element.innerText = content;
+				adjustFontSize();
+			}
+		};
+
+		window.clearEditor = function () {
+			if (editorState.element) {
+				editorState.element.innerText = '';
+				adjustFontSize();
+			}
+		};
+
+		window.isEditorBlocked = function () {
+			return editorState.isBlocked;
+		};
+	}
+
+	// Auto-executa
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderPrescriptionBox);
+	} else {
+		renderPrescriptionBox();
+	}
+
+	// API pública
+	window.renderPrescriptionBox = renderPrescriptionBox;
+	window.initializeEditorLogic = initializeEditorLogic;
+})();
+
+
+/* ==========================================
+   [14/25] geral/components/prescription/aside/js/aside_cnes_search.js
+   ========================================== */
+// aside_cnes_search.js (REFATORADO)
+// Dependências: aside_event_bus.js, aside_registry.js
+(() => {
+  'use strict';
+
+  const CONFIG = {
+    apiUrl: 'https://cnes-gtmedic.replit.app',
+    defaultCnes: '2189909',
+    toastDuration: 2500,
+  };
+
+  /** @type {AsideEventBus} */
+  let bus;
+  /** @type {AbortController|null} */
+  let abortController = null;
+
+  // =========================================
+  // RENDER
+  // =========================================
+
+  function render() {
+    const container = document.getElementById('aside_cnes_search');
+    if (!container) return;
+
+    bus = window.__asideBus;
+    abortController?.abort();
+    abortController = new AbortController();
+    const signal = abortController.signal;
+
+    container.innerHTML = `
+      <div class="rounded-2xl shadow-lg border border-slate-50 bg-white p-4 m-2 max-w-[340px] mb-4 relative z-10 print:hidden">
+        <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+          <span class="material-symbols-outlined">business</span>
+          Buscar Dados do CNES
+        </h3>
+
+        <div class="flex flex-col  gap-4 text-sm mt-8">
+          <div class="flex justify-center items-center gap-8 flex-wrap ">
+            <input 
+              type="text"
+              id="busca-cnes"
+              placeholder="CNES 7dig."
+              maxlength="7"
+              inputmode="numeric"
+              class="w-full max-w-[100px] shadow-lg px-3 py-3 rounded-lg border-2 border-slate-300 focus:border-blue-500 focus:outline-none" />
+            <button
+              id="btn-buscar-cnes"
+              class="w-full max-w-[100px] max-h-[44px] font-medium h-[44px] inline-flex shadow-xl items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors">
+              <span class="material-symbols-outlined text-sm">search</span>
+              Buscar
+            </button>
+          </div>
+
+          <div class="flex justify-center items-center gap-8  flex-wrap">
+            <button
+              id="btn-limpar-cnes"
+              class="inline-flex w-full max-w-[100px] max-h-[44px] h-[44px] font-medium shadow-lg items-center gap-2 px-3 py-2 bg-red-600/80 text-white rounded-lg hover:bg-red-300 text-sm transition-colors">
+              <i class="fa-solid fa-trash text-sm"></i>
+              Limpar
+            </button>
+            <button
+              id="btn-padrao-cnes"
+              class="inline-flex w-full max-w-[100px] max-h-[44px] h-[44px] shadow-lg items-center gap-2 px-3 py-2 bg-emerald-600 text-white rounded-lg hover:bg-green-600 text-sm transition-colors">
+              <i class="fa-solid fa-bolt text-sm"></i>
+              Padrão
+            </button>
+          </div>
+
+          <p class="text-xs text-gray-500">
+            💡 Os dados serão preenchidos automaticamente nos campos da receita
+          </p>
+        </div>
+      </div>
+    `;
+
+    bindEvents(signal);
+    registerComponent();
+  }
+
+  // =========================================
+  // EVENTS
+  // =========================================
+
+  function bindEvents(signal) {
+    const input = document.getElementById('busca-cnes');
+    const btnBuscar = document.getElementById('btn-buscar-cnes');
+    const btnLimpar = document.getElementById('btn-limpar-cnes');
+    const btnPadrao = document.getElementById('btn-padrao-cnes');
+
+    input?.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '');
+    }, { signal });
+
+    input?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        btnBuscar?.click();
+      }
+    }, { signal });
+
+    btnBuscar?.addEventListener('click', () => {
+      const cnes = input?.value.trim();
+      if (validateCNES(cnes)) searchCNES(cnes, btnBuscar);
+    }, { signal });
+
+    btnLimpar?.addEventListener('click', () => {
+      if (input) input.value = '';
+      bus?.emit('cnesDataCleared');
+      showNotification('Dados do CNES limpos', 'info');
+    }, { signal });
+
+    btnPadrao?.addEventListener('click', () => {
+      if (input) input.value = CONFIG.defaultCnes;
+      searchCNES(CONFIG.defaultCnes, btnPadrao);
+    }, { signal });
+  }
+
+  // =========================================
+  // VALIDAÇÃO
+  // =========================================
+
+  function validateCNES(cnes) {
+    if (!cnes) {
+      showNotification('Digite um código CNES', 'warning');
+      return false;
+    }
+    if (cnes.length !== 7) {
+      showNotification('CNES deve ter exatamente 7 dígitos', 'warning');
+      return false;
+    }
+    return true;
+  }
+
+  // =========================================
+  // BUSCA
+  // =========================================
+
+  async function searchCNES(cnes, button = null) {
+    const loadingState = setButtonLoading(button, true);
+
+    try {
+      const response = await fetch(`${CONFIG.apiUrl}/cnes/${cnes}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        signal: abortController?.signal,
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        throw new Error(error.detail || `HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const apiData = await response.json();
+      const transformed = transformCNESData(apiData, cnes);
+
+      bus?.emit('cnesDataLoaded', transformed);
+      showNotification('Dados carregados com sucesso!', 'success');
+    } catch (error) {
+      if (error.name === 'AbortError') return; // Componente destruído, ignora
+
+      console.error('[CNES] Fetch error:', error);
+      const msg = error.message || 'Erro ao buscar CNES';
+      showNotification(msg, 'error');
+      bus?.emit('cnesError', { cnes, error: msg });
+    } finally {
+      setButtonLoading(button, false, loadingState);
+    }
+  }
+
+  // =========================================
+  // TRANSFORM
+  // =========================================
+
+  function transformCNESData(apiData, cnes) {
+    return {
+      cnes,
+      nome: apiData.nome_fantasia || apiData.nome_empresarial || '',
+      telefone: formatPhone(apiData.telefone || ''),
+      municipio: apiData.municipio?.nome || '',
+      uf: apiData.uf || '',
+      endereco: apiData.endereco_estabelecimento || '',
+      local1: apiData.local1 || `PREFEITURA DE ${(apiData.municipio?.nome || '').toUpperCase()}`,
+      local2: apiData.local2 || 'SECRETARIA MUNICIPAL DE SAÚDE',
+      local3: apiData.local3 || (apiData.nome_fantasia || '').toUpperCase(),
+    };
+  }
+
+  function formatPhone(phone) {
+    const d = phone.replace(/\D/g, '');
+    if (d.length === 10) return d.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+    if (d.length === 11) return d.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    return phone;
+  }
+
+  // =========================================
+  // UI HELPERS
+  // =========================================
+
+  function setButtonLoading(button, isLoading, previousHTML = null) {
+    if (!button) return null;
+
+    if (isLoading) {
+      const original = button.innerHTML;
+      button.disabled = true;
+      button.innerHTML = `
+        <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Buscando...</span>
+      `;
+      return original;
+    }
+
+    button.disabled = false;
+    if (previousHTML) button.innerHTML = previousHTML;
+    return null;
+  }
+
+  function showNotification(message, type = 'info') {
+    if (typeof Swal !== 'undefined') {
+      Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: CONFIG.toastDuration,
+        timerProgressBar: true,
+        width: '300px',
+      }).fire({
+        icon: type,
+        title: message,
+      });
+      return;
+    }
+
+    // Fallback nativo
+    const colors = {
+      success: 'bg-green-500',
+      error: 'bg-red-500',
+      warning: 'bg-yellow-500',
+      info: 'bg-blue-500',
+    };
+
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.className = `fixed bottom-6 right-6 ${colors[type] || colors.info} text-white px-6 py-3 rounded-lg shadow-lg z-[9999] transition-opacity duration-300`;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, CONFIG.toastDuration);
+  }
+
+  // =========================================
+  // REGISTRO & LIFECYCLE
+  // =========================================
+
+  function registerComponent() {
+    window.__asideRegistry?.register('cnes-search', {
+      render,
+      search: searchCNES,
+      destroy,
+    });
+  }
+
+  function destroy() {
+    abortController?.abort();
+    abortController = null;
+    const container = document.getElementById('aside_cnes_search');
+    if (container) container.innerHTML = '';
+    console.log('[CNES] Destroyed');
+  }
+
+  // NÃO auto-executa: container #aside_cnes_search é criado por apoiomed_aside.js
+  // que chamará window.renderCNESSearch() após criar o DOM.
+  window.renderCNESSearch = render;
+  window.searchCNES = searchCNES;
+})();
+
+/* ==========================================
+   [15/25] geral/components/prescription/aside/js/aside_ubs_selector.js
+   ========================================== */
+// aside_ubs_selector.js (REFATORADO)
+// EXATO conforme código enviado pelo usuário.
+// Sem input de busca. Select + display CNES + botão Aplicar.
+(() => {
+	'use strict';
+
+	const UBS_CONTAGEM = [
+		{ cnes: '2190052', nome: 'UBS Água Branca', bairro: 'Água Branca' },
+		{ cnes: '7301189', nome: 'UBS Amazonas', bairro: 'Amazonas' },
+		{ cnes: '2190923', nome: 'UBS Amendoeiras', bairro: 'Amendoeiras' },
+		{ cnes: '2190427', nome: 'UBS Arpoador', bairro: 'Arpoador' },
+		{ cnes: '2190680', nome: 'UBS Bandeirantes', bairro: 'Bandeirantes' },
+		{ cnes: '2191040', nome: 'UBS Bela Vista', bairro: 'Bela Vista' },
+		{ cnes: '2190109', nome: 'UBS Campina Verde', bairro: 'Campina Verde' },
+		{ cnes: '6755976', nome: 'UBS Campo Alto', bairro: 'Campo Alto' },
+		{ cnes: '2190478', nome: 'UBS Canadá', bairro: 'Canadá' },
+		{ cnes: '2189968', nome: 'UBS Centro', bairro: 'Centro' },
+		{ cnes: '2190397', nome: 'UBS Chácaras', bairro: 'Chácaras' },
+		{ cnes: '2190591', nome: 'UBS Colorado', bairro: 'Colorado' },
+		{ cnes: '2190818', nome: 'UBS Darcy Ribeiro', bairro: 'Darcy Ribeiro' },
+		{ cnes: '2190451', nome: 'UBS Duque de Caxias', bairro: 'Duque de Caxias' },
+		{ cnes: '2190141', nome: 'UBS Durval de Barros', bairro: 'Durval de Barros' },
+		{ cnes: '2190095', nome: 'UBS Eldorado', bairro: 'Eldorado' },
+		{ cnes: '2190753', nome: 'UBS Estaleiro', bairro: 'Estaleiro' },
+		{ cnes: '7053355', nome: 'UBS Estâncias Imperiais', bairro: 'Estâncias Imperiais' },
+		{ cnes: '2190931', nome: 'UBS Estrela Dalva', bairro: 'Estrela Dalva' },
+		{ cnes: '2189909', nome: 'UBS Flamengo', bairro: 'Flamengo' },
+		{ cnes: '2220261', nome: 'UBS Funcionários', bairro: 'Funcionários' },
+		{ cnes: '2190826', nome: 'UBS Icaivera', bairro: 'Icaivera' },
+		{ cnes: '2190885', nome: 'UBS Ilda Efigênia', bairro: 'Ilda Efigênia' },
+		{ cnes: '4275454', nome: 'UBS Inconfidentes', bairro: 'Inconfidentes' },
+		{ cnes: '2189933', nome: 'UBS Industrial III Seção', bairro: 'Industrial III Seção' },
+		{ cnes: '2190788', nome: 'UBS Ipê Amarelo', bairro: 'Ipê Amarelo' },
+		{ cnes: '2190001', nome: 'UBS Jardim Bandeirantes', bairro: 'Jardim Bandeirantes' },
+		{ cnes: '2220245', nome: 'UBS Jardim Eldorado', bairro: 'Jardim Eldorado' },
+		{ cnes: '2189992', nome: 'UBS Jardim Industrial', bairro: 'Jardim Industrial' },
+		{ cnes: '2190214', nome: 'UBS João Evangelista', bairro: 'João Evangelista' },
+		{ cnes: '2190893', nome: 'UBS Joaquim Murtinho', bairro: 'Joaquim Murtinho' },
+		{ cnes: '2190184', nome: 'UBS Laguna', bairro: 'Laguna' },
+		{ cnes: '2190176', nome: 'UBS Linda Vista', bairro: 'Linda Vista' },
+		{ cnes: '2191059', nome: 'UBS Maria da Conceição', bairro: 'Maria da Conceição' },
+		{ cnes: '2189984', nome: 'UBS Moacir Pinto Moreira', bairro: 'Moacir Pinto Moreira' },
+		{ cnes: '2191199', nome: 'UBS Monte Castelo', bairro: 'Monte Castelo' },
+		{ cnes: '2191229', nome: 'UBS Morada Nova', bairro: 'Morada Nova' },
+		{ cnes: '2190222', nome: 'UBS Nacional', bairro: 'Nacional' },
+		{ cnes: '0181854', nome: 'UBS Nascentes Imperiais', bairro: 'Nascentes Imperiais' },
+		{ cnes: '2190834', nome: 'UBS Nova Contagem I', bairro: 'Nova Contagem I' },
+		{ cnes: '2190710', nome: 'UBS Nova Contagem II', bairro: 'Nova Contagem II' },
+		{ cnes: '2190605', nome: 'UBS Novo Boa Vista', bairro: 'Novo Boa Vista' },
+		{ cnes: '6557864', nome: 'UBS Novo Eldorado', bairro: 'Novo Eldorado' },
+		{ cnes: '2190567', nome: 'UBS Novo Progresso II', bairro: 'Novo Progresso II' },
+		{ cnes: '2190044', nome: 'UBS Novo Riacho', bairro: 'Novo Riacho' },
+		{ cnes: '2190877', nome: 'UBS Oitis', bairro: 'Oitis' },
+		{ cnes: '2190990', nome: 'UBS Parque São João', bairro: 'Parque São João' },
+		{ cnes: '2190494', nome: 'UBS Parque Turista', bairro: 'Parque Turista' },
+		{ cnes: '2190966', nome: 'UBS Perobas', bairro: 'Perobas' },
+		{ cnes: '2190206', nome: 'UBS Petrolândia', bairro: 'Petrolândia' },
+		{ cnes: '7110316', nome: 'UBS Praia', bairro: 'Praia' },
+		{ cnes: '2190869', nome: 'UBS Presidente Kennedy', bairro: 'Presidente Kennedy' },
+		{ cnes: '2190540', nome: 'UBS Retiro', bairro: 'Retiro' },
+		{ cnes: '2189844', nome: 'UBS Riacho', bairro: 'Riacho' },
+		{ cnes: '2190192', nome: 'UBS Sandoval de Azevedo', bairro: 'Sandoval de Azevedo' },
+		{ cnes: '4311833', nome: 'UBS Santa Cruz', bairro: 'Santa Cruz' },
+		{ cnes: '2190389', nome: 'UBS Santa Helena', bairro: 'Santa Helena' },
+		{ cnes: '2190486', nome: 'UBS São Joaquim', bairro: 'São Joaquim' },
+		{ cnes: '2190656', nome: 'UBS São Judas Tadeu', bairro: 'São Judas Tadeu' },
+		{ cnes: '2190524', nome: 'UBS São Luiz I', bairro: 'São Luiz I' },
+		{ cnes: '2190508', nome: 'UBS São Luiz II', bairro: 'São Luiz II' },
+		{ cnes: '2190435', nome: 'UBS Sapucaias', bairro: 'Sapucaias' },
+		{ cnes: '7116306', nome: 'UBS Tijuca', bairro: 'Tijuca' },
+		{ cnes: '2190400', nome: 'UBS Tropical II', bairro: 'Tropical II' },
+		{ cnes: '4696077', nome: 'UBS Unidade XVI', bairro: 'Unidade XVI' },
+		{ cnes: '2191202', nome: 'UBS Vila Diniz', bairro: 'Vila Diniz' },
+		{ cnes: '2190796', nome: 'UBS Vila Esperança', bairro: 'Vila Esperança' },
+		{ cnes: '2191024', nome: 'UBS Vila Itália', bairro: 'Vila Itália' },
+		{ cnes: '2190532', nome: 'UBS Vila Pérola', bairro: 'Vila Pérola' },
+		{ cnes: '2190648', nome: 'UBS Vila Renascer', bairro: 'Vila Renascer' },
+		{ cnes: '2190060', nome: 'UBS Vila São Paulo', bairro: 'Vila São Paulo' },
+		{ cnes: '2190729', nome: 'UBS Vila Soledade', bairro: 'Vila Soledade' },
+		{ cnes: '2190915', nome: 'UBS Xangrilá', bairro: 'Xangrilá' },
+		{ cnes: '2190087', nome: 'UBS XV', bairro: 'XV' },
+	].sort((a, b) => a.nome.localeCompare(b.nome));
+
+	let bus;
+	let abortController = null;
+
+	// =========================================
+	// RENDER
+	// =========================================
+
+	function render() {
+		const container = document.getElementById('aside_ubs_selector');
+		if (!container) return;
+
+		bus = window.__asideBus;
+		abortController?.abort();
+		abortController = new AbortController();
+		const signal = abortController.signal;
+
+		container.innerHTML = `
+      <div class="rounded-2xl shadow-lg border border-slate-50 bg-white p-4 m-2 max-w-[340px] mb-4 relative z-10 print:hidden">
+        <h3 class="text-lg justify-center font-bold mb-4 flex items-center gap-2">
+          <span class="material-symbols-outlined">apartment</span>
+          UBS's de Contagem/MG
+        </h3>
+
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-2 px-6">
+            <select
+              id="select-unidade"
+              class="w-full shadow-lg px-4 py-2 rounded-lg border-2 border-slate-300 focus:border-blue-500 focus:outline-none text-sm">
+              <option value="">Selecione a UBS</option>
+              ${buildOptions()}
+            </select>
+          </div>
+
+          <div id="ubs-cnes-display" class="hidden bg-slate-50 p-3 rounded-lg">
+						<div class="flex justify-self-center items-center gap-2 mb-6 ">
+							<i class="fa-solid fa-network-wired text-sm"></i>
+							<label class="text-center text-sm font-medium">CNES:</label>
+						</div>
+						<div class="flex items-center justify-between gap-2 px-4">
+							<div class="flex items-center gap-2 flex-1">
+                
+                <input
+                  type="text"
+                  id="ubs-cnes-value"
+                  readonly
+                  class="w-full  shadow-lg px-3 py-3 rounded-lg border-2 border-slate-300 bg-white text-sm font-mono cursor-default" />
+              </div>
+              <button
+                id="btn-aplicar-ubs"
+                class="inline-flex w-full max-w-[100px] max-h-[44px] h-[44px] font-medium shadow-lg items-center gap-2 px-3 py-2 bg-emerald-600 text-white rounded-lg hover:bg-green-600 text-sm transition-colors">
+                <i class="fa-solid fa-check text-sm"></i>
+                Aplicar
+              </button>
+            </div>
+          </div>
+
+          <p class="text-xs text-gray-500">
+            💡 Selecione sua unidade e clique em Aplicar
+          </p>
+        </div>
+      </div>
+    `;
+
+		bindEvents(signal);
+		registerComponent();
+	}
+
+	// =========================================
+	// EVENTS
+	// =========================================
+
+	function bindEvents(signal) {
+		const select = document.getElementById('select-unidade');
+		const displayContainer = document.getElementById('ubs-cnes-display');
+		const cnesValue = document.getElementById('ubs-cnes-value');
+		const btnAplicar = document.getElementById('btn-aplicar-ubs');
+
+		// Seleção mostra CNES
+		select?.addEventListener(
+			'change',
+			(e) => {
+				const cnes = e.target.value;
+				if (cnes) {
+					displayContainer?.classList.remove('hidden');
+					if (cnesValue) cnesValue.value = cnes;
+				} else {
+					displayContainer?.classList.add('hidden');
+				}
+			},
+			{ signal },
+		);
+
+		// Aplicar
+		btnAplicar?.addEventListener(
+			'click',
+			() => {
+				applySelection(select?.value);
+			},
+			{ signal },
+		);
+
+		// Duplo clique = aplicar
+		select?.addEventListener(
+			'dblclick',
+			() => {
+				if (select.value) applySelection(select.value);
+			},
+			{ signal },
+		);
+	}
+
+	// =========================================
+	// LOGIC
+	// =========================================
+
+	function buildOptions(filter = '') {
+		const list = filter ? UBS_CONTAGEM.filter((u) => u.nome.toLowerCase().includes(filter.toLowerCase()) || u.cnes.includes(filter)) : UBS_CONTAGEM;
+
+		return list.map((u) => `<option value="${u.cnes}">${u.nome}</option>`).join('');
+	}
+
+	function applySelection(cnes) {
+		if (!cnes) return;
+
+		const ubs = UBS_CONTAGEM.find((u) => u.cnes === cnes);
+		if (!ubs) return;
+
+		bus?.emit('ubsSelected', {
+			cnes,
+			nome: ubs.nome,
+			bairro: ubs.bairro,
+		});
+
+		showToast(`UBS ${ubs.nome} selecionada`, 'success');
+	}
+
+	function showToast(message, type) {
+		const colors = { success: 'bg-green-500', info: 'bg-blue-500' };
+		const toast = document.createElement('div');
+		toast.textContent = message;
+		toast.className = `fixed bottom-6 right-6 ${colors[type] || colors.info} text-white px-2  py-3 rounded-lg shadow-lg z-[9999] transition-opacity duration-300`;
+		document.body.appendChild(toast);
+		setTimeout(() => {
+			toast.style.opacity = '0';
+			setTimeout(() => toast.remove(), 300);
+		}, 2500);
+	}
+
+	// =========================================
+	// REGISTRO & LIFECYCLE
+	// =========================================
+
+	function registerComponent() {
+		window.__asideRegistry?.register('ubs-selector', {
+			render,
+			destroy,
+			getUBSList: () => UBS_CONTAGEM,
+		});
+	}
+
+	function destroy() {
+		abortController?.abort();
+		abortController = null;
+		const container = document.getElementById('aside_ubs_selector');
+		if (container) container.innerHTML = '';
+	}
+
+	window.renderUBSSelector = render;
+})();
+
+
+/* ==========================================
+   [16/25] geral/components/prescription/aside/js/aside_formatting_tools.js
+   ========================================== */
+// aside_formatting_tools.js (REFATORADO)
+// Dependências: aside_event_bus.js, aside_registry.js
+(() => {
+	'use strict';
+
+	const FORMAT_COMMANDS = {
+		fontSize: [
+			{ value: '1', label: 'Pequena', icon: 'format_size', iconSize: '12px' },
+			{ value: '3', label: 'Normal', icon: 'format_size', iconSize: '14px' },
+			{ value: '5', label: 'Grande', icon: 'format_size', iconSize: '16px' },
+		],
+		style: [
+			{ cmd: 'bold', label: 'Negrito', icon: 'format_bold', iconSize: '18px' },
+			{ cmd: 'italic', label: 'Itálico', icon: 'format_italic', iconSize: '18px' },
+			{ cmd: 'underline', label: 'Sublinhado', icon: 'format_underlined', iconSize: '18px' },
+		],
+		align: [
+			{ cmd: 'justifyLeft', label: 'Esquerda', icon: 'format_align_left', iconSize: '18px' },
+			{ cmd: 'justifyCenter', label: 'Centro', icon: 'format_align_center', iconSize: '18px' },
+			{ cmd: 'justifyFull', label: 'Justificado', icon: 'format_align_justify', iconSize: '18px' },
+		],
+	};
+
+	/** @type {AsideEventBus} */
+	let bus;
+	/** @type {AbortController|null} */
+	let abortController = null;
+
+	// =========================================
+	// RENDER
+	// =========================================
+
+	function render() {
+		const container = document.getElementById('aside_formatting_tools');
+		if (!container) return;
+
+		bus = window.__asideBus;
+		abortController = new AbortController();
+
+		container.innerHTML = `
+      <div class="rounded-2xl shadow-lg border border-slate-50 bg-white p-2 m-2 max-w-[340px] mb-4 relative z-10 print:hidden">
+        <div class="flex items-center justify-between mb-2 px-1 border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-slate-700 text-sm">edit_square</span>
+            <div class="text-sm font-bold text-slate-700">Formatação</div>
+          </div>
+          <div class="text-[10px] text-slate-400">Selecione o texto</div>
+        </div>
+
+        <div class="flex flex-wrap justify-between p-1 m-0">
+          ${renderGroup(FORMAT_COMMANDS.fontSize, true)}
+          ${separator()}
+          ${renderGroup(FORMAT_COMMANDS.style)}
+          ${separator()}
+          ${renderGroup(FORMAT_COMMANDS.align)}
+          ${separator()}
+          <button type="button" data-cmd="removeFormat"
+            class="fmt-btn p-1 hover:bg-red-50 text-slate-500 hover:text-red-500 rounded transition-colors"
+            title="Limpar formatação">
+            <i class="fa-solid fa-text-slash fa-xs"></i>
+          </button>
+        </div>
+      </div>
+    `;
+
+		bindEvents(abortController.signal);
+		registerComponent();
+	}
+
+	// =========================================
+	// HTML BUILDERS
+	// =========================================
+
+	function renderGroup(items, isFontSize = false) {
+		return items
+			.map((item) => {
+				const cmd = isFontSize ? 'fontSize' : item.cmd;
+				const value = isFontSize ? item.value : '';
+				const iconStyle = item.iconSize ? `style="font-size: ${item.iconSize}"` : 'class="text-[16px]"';
+
+				return `
+          <button type="button"
+            data-cmd="${cmd}"
+            ${value ? `data-value="${value}"` : ''}
+            class="fmt-btn p-1 hover:bg-slate-100 rounded text-slate-600 transition-colors"
+            title="${item.label}">
+            <span class="material-symbols-outlined" ${iconStyle}>${item.icon}</span>
+          </button>
+        `;
+			})
+			.join('');
+	}
+
+	function separator() {
+		return '<div class="w-px h-5 bg-slate-200 mx-0.5 self-center"></div>';
+	}
+
+	// =========================================
+	// EVENTS
+	// =========================================
+
+	function bindEvents(signal) {
+		// Delegate — um único listener no container
+		const container = document.getElementById('aside_formatting_tools');
+		if (!container) return;
+
+		container.addEventListener(
+			'click',
+			(e) => {
+				const button = e.target.closest('.fmt-btn');
+				if (!button || button.disabled) return;
+
+				const cmd = button.dataset.cmd;
+				const value = button.dataset.value || null;
+
+				execFormat(cmd, value);
+
+				// Flash visual
+				button.classList.add('bg-blue-100');
+				setTimeout(() => button.classList.remove('bg-blue-100'), 200);
+			},
+			{ signal },
+		);
+	}
+
+	// =========================================
+	// EXEC
+	// =========================================
+
+	function execFormat(command, value = null) {
+		// execCommand é deprecado mas ainda é a única forma viável para
+		// contenteditable sem framework rich-text. Quando migrar para
+		// Tiptap/ProseMirror/Slate, substituir por commands do editor.
+		try {
+			document.execCommand(command, false, value);
+		} catch (err) {
+			console.warn(`[Formatting] execCommand("${command}") failed:`, err);
+			return;
+		}
+
+		bus?.emit('formattingApplied', { command, value });
+	}
+
+	// =========================================
+	// REGISTRO & LIFECYCLE
+	// =========================================
+
+	function registerComponent() {
+		window.__asideRegistry?.register('formatting-tools', {
+			render,
+			destroy,
+			execFormat,
+		});
+	}
+
+	function destroy() {
+		abortController?.abort();
+		abortController = null;
+		const container = document.getElementById('aside_formatting_tools');
+		if (container) container.innerHTML = '';
+	}
+
+	// NÃO auto-executa: container criado por apoiomed_aside.js
+	window.renderFormattingTools = render;
+})();
+
+
+/* ==========================================
+   [17/25] geral/components/prescription/aside/js/aside_hotstrings_panel.js
+   ========================================== */
+// aside_hotstrings_panel.js (REFATORADO)
+// Sem favoritos (app aberta). Começa vazio — items aparecem conforme busca.
+// Counter mostra total disponível. max-w-[340px].
+(() => {
+  'use strict';
+
+  let bus;
+  let abortController = null;
+  let currentHotstrings = {};
+
+  // =========================================
+  // RENDER
+  // =========================================
+
+  function render() {
+    const container = document.getElementById('aside_hotstrings_panel');
+    if (!container) return;
+
+    bus = window.__asideBus;
+    abortController?.abort();
+    abortController = new AbortController();
+    const signal = abortController.signal;
+
+    // ✅ HTML da produção. IDs: codesPanel, codesCount, searchBox, hotstringItems
+    container.innerHTML = `
+      <aside id="codesPanel" class="rounded-2xl shadow-lg bg-white p-2 m-2 max-w-[340px] print:hidden">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-slate-900">code</span>
+            <div class="text-sm font-bold text-shadow-rs">Hotstrings</div>
+          </div>
+          <span id="codesCount"
+            class="rounded-full bg-slate-50 px-2 py-1 text-xs font-semibold text-slate-600">0</span>
+        </div>
+
+        <div class="mt-3">
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400">search</span>
+            <input id="searchBox" type="text" placeholder="Buscar código ou descrição..."
+              class="w-full rounded-xl border border-slate-100 bg-white py-2 pl-10 pr-3 text-sm outline-none focus:ring-2 focus:ring-slate-300" />
+          </div>
+        </div>
+
+        <div class="mt-3 max-h-[640px] overflow-auto rounded-xl">
+          <div id="hotstringItems" class="divide-y divide-slate-100"></div>
+        </div>
+
+        <div class="mt-3 text-xs text-slate-500">
+          Dica: clique em um item para inserir o <span class="font-mono">código</span> no cursor.
+        </div>
+      </aside>
+    `;
+
+    loadHotstrings();
+    bindEvents(signal);
+    registerComponent();
+  }
+
+  // =========================================
+  // EVENTS
+  // =========================================
+
+  function bindEvents(signal) {
+    const searchInput = document.getElementById('searchBox');
+    const itemsContainer = document.getElementById('hotstringItems');
+
+    // Busca com debounce — items só aparecem ao digitar
+    let timer;
+    searchInput?.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const term = searchInput.value.trim();
+        if (term.length >= 2) {
+          renderFilteredItems(term);
+        } else {
+          // Menos de 2 chars → limpa lista
+          clearItems();
+        }
+      }, 150);
+    }, { signal });
+
+    // Click delegation → insere hotstring no editor
+    itemsContainer?.addEventListener('click', (e) => {
+      const item = e.target.closest('[data-hotstring]');
+      if (!item) return;
+
+      const code = item.dataset.hotstring;
+      bus?.emit('hotstringClicked', { code });
+
+      // Backward compat
+      if (typeof window.insertAtCursor === 'function') {
+        window.insertAtCursor(code);
+      }
+    }, { signal });
+  }
+
+  // =========================================
+  // DATA
+  // =========================================
+
+  function loadHotstrings() {
+    currentHotstrings =
+      window.hotstrings ||
+      window.psf_hotstrings ||
+      window.quick_hotstrings ||
+      {};
+
+    const total = Object.keys(currentHotstrings).length;
+    updateCounter(total);
+
+    if (total) return; // dados já disponíveis, counter atualizado
+
+    // Aguarda hotstrings ficarem disponíveis (flag evita disparo duplo bus+timeout)
+    let hsLoaded = false;
+    bus?.once('hotstringDataReady', () => {
+      if (hsLoaded) return;
+      hsLoaded = true;
+      currentHotstrings = window.hotstrings || window.psf_hotstrings || {};
+      updateCounter(Object.keys(currentHotstrings).length);
+    });
+
+    // Fallback caso o evento nunca dispare
+    setTimeout(() => {
+      if (hsLoaded || Object.keys(currentHotstrings).length) return;
+      hsLoaded = true;
+      currentHotstrings = window.hotstrings || window.psf_hotstrings || {};
+      updateCounter(Object.keys(currentHotstrings).length);
+    }, 2000);
+  }
+
+  // =========================================
+  // RENDER ITEMS (só os filtrados)
+  // =========================================
+
+  function renderFilteredItems(term) {
+    const container = document.getElementById('hotstringItems');
+    if (!container) return;
+
+    const search = term.toLowerCase();
+    const entries = Object.entries(currentHotstrings);
+
+    const filtered = entries.filter(([code, text]) =>
+      code.toLowerCase().includes(search) || text.toLowerCase().includes(search)
+    );
+
+    if (!filtered.length) {
+      container.innerHTML = `
+        <div class="p-3 text-center text-xs text-slate-400">Nenhum resultado para "${escapeHTML(term)}"</div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filtered
+      .map(([code, text]) => {
+        const preview = text.substring(0, 60).replace(/\n/g, ' ');
+        return `
+          <div class="hotstring-item flex items-center gap-2 p-2 hover:bg-slate-100 cursor-pointer rounded transition-colors"
+            data-hotstring="${escapeAttr(code)}">
+            <span class="font-mono text-xs font-bold text-blue-600 flex-shrink-0">${escapeHTML(code)}</span>
+            <span class="text-xs text-slate-500 truncate flex-1">${escapeHTML(preview)}…</span>
+          </div>
+        `;
+      })
+      .join('');
+  }
+
+  function clearItems() {
+    const container = document.getElementById('hotstringItems');
+    if (container) container.innerHTML = '';
+  }
+
+  function updateCounter(count) {
+    const counter = document.getElementById('codesCount');
+    if (counter) counter.textContent = count;
+  }
+
+  // =========================================
+  // UTILS
+  // =========================================
+
+  function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function escapeAttr(str) {
+    return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  // =========================================
+  // REGISTRO & LIFECYCLE
+  // =========================================
+
+  function registerComponent() {
+    window.__asideRegistry?.register('hotstrings-panel', {
+      render, destroy, reload: loadHotstrings,
+    });
+  }
+
+  function destroy() {
+    abortController?.abort();
+    abortController = null;
+    const c = document.getElementById('aside_hotstrings_panel');
+    if (c) c.innerHTML = '';
+  }
+
+  window.renderHotstringsPanel = render;
+})();
+
+/* ==========================================
+   [18/25] geral/components/prescription/aside/js/apoiomed_aside.js
+   ========================================== */
+// apoiomed_aside.js — Orquestrador (REFATORADO)
+// Dependências: aside_event_bus.js, aside_registry.js (carregar antes)
+(() => {
+	'use strict';
+
+	const REQUIRED_COMPONENTS = ['cnes-search', 'ubs-selector', 'formatting-tools', 'hotstrings-panel'];
+
+	const KEYBOARD_SHORTCUTS = [
+		{ keys: { ctrl: true, shift: true, key: 'C' }, target: 'busca-cnes', label: 'Buscar CNES' },
+		{ keys: { ctrl: true, shift: true, key: 'U' }, target: 'select-unidade', label: 'Abrir UBS' },
+		{ keys: { ctrl: true, shift: true, key: 'H' }, target: 'hotstrings-search', label: 'Buscar Hotstring' },
+	];
+
+	/** @type {AsideEventBus} */
+	let bus;
+	/** @type {AsideRegistry} */
+	let registry;
+	/** @type {AbortController|null} */
+	let abortController = null;
+	let isRendered = false;
+
+	// =========================================
+	// RENDER
+	// =========================================
+
+	function renderAside() {
+		if (isRendered) return;
+
+		const container = document.getElementById('apoiomed_aside');
+		if (!container) {
+			console.warn('[Aside] Container #apoiomed_aside not found');
+			return;
+		}
+
+		bus = window.__asideBus;
+		registry = window.__asideRegistry;
+
+		if (!bus || !registry) {
+			console.error('[Aside] EventBus or Registry not found. Load dependencies first.');
+			return;
+		}
+
+		container.className = 'flex flex-col print:hidden';
+		container.innerHTML = `
+      <div id="aside_cnes_search"></div>
+      <div id="aside_ubs_selector"></div>
+      <div id="aside_formatting_tools"></div>
+      <div id="aside_hotstrings_panel"></div>
+    `;
+
+		isRendered = true;
+		abortController = new AbortController();
+
+		registry.setRequired(REQUIRED_COMPONENTS);
+
+		// ✅ Chama render de cada componente AGORA que os containers existem.
+		// Os scripts já carregaram e registraram window.renderXXX,
+		// mas falharam no auto-bootstrap porque os containers não existiam.
+		if (window.renderCNESSearch) window.renderCNESSearch();
+		if (window.renderUBSSelector) window.renderUBSSelector();
+		if (window.renderFormattingTools) window.renderFormattingTools();
+		if (window.renderHotstringsPanel) window.renderHotstringsPanel();
+
+		setupCommunication();
+		setupKeyboardShortcuts();
+		setupPersistence();
+
+		// Aguarda componentes e finaliza
+		registry.waitForAll(10000).then(({ ready, missing }) => {
+			if (missing.length) {
+				console.warn(`[Aside] Initialized with missing: ${missing.join(', ')}`);
+			}
+			console.log(`[Aside] ✅ Ready (${ready.length}/${REQUIRED_COMPONENTS.length} components)`);
+			bus.emit('asideReady');
+		});
+	}
+
+	// =========================================
+	// COMUNICAÇÃO ENTRE COMPONENTES
+	// =========================================
+
+	function setupCommunication() {
+		// CNES carregado → propaga para header/footer
+		bus.on('cnesDataLoaded', (data) => {
+			window.setInstitutionData?.(data.local1 || `PREFEITURA DE ${data.municipio.toUpperCase()}`, data.local2 || 'SECRETARIA MUNICIPAL DE SAÚDE', data.local3 || data.nome.toUpperCase());
+
+			window.setDoctorData?.({
+				local: data.local || data.nome,
+				cnes: data.cnes,
+				telefone: data.telefone,
+			});
+
+			window.setUF?.(data.uf);
+		});
+
+		// CNES limpo → limpa header/footer
+		bus.on('cnesDataCleared', () => {
+			window.clearHeaderData?.();
+			window.clearFooterData?.();
+		});
+
+		// UBS selecionada → busca CNES automaticamente
+		bus.on('ubsSelected', ({ cnes }) => {
+			const input = document.getElementById('busca-cnes');
+			if (input) input.value = cnes;
+
+			const cnesApi = registry.get('cnes-search');
+			cnesApi?.search?.(cnes);
+		});
+
+		// Hotstring clicada → insere no editor
+		bus.on('hotstringClicked', ({ code }) => {
+			window.insertAtCursor?.(code);
+		});
+
+		// Editor bloqueado → desabilita formatação
+		bus.on('editorBlockedStateChanged', ({ isBlocked }) => {
+			setFormattingEnabled(!isBlocked);
+		});
+
+		// Formatação aplicada → foca editor
+		bus.on('formattingApplied', () => {
+			document.getElementById('textArea')?.focus();
+		});
+	}
+
+	// =========================================
+	// FORMATAÇÃO — ENABLE/DISABLE
+	// =========================================
+
+	function setFormattingEnabled(enabled) {
+		const buttons = document.querySelectorAll('#aside_formatting_tools button[data-cmd]');
+		buttons.forEach((btn) => {
+			btn.disabled = !enabled;
+			btn.classList.toggle('opacity-50', !enabled);
+			btn.classList.toggle('cursor-not-allowed', !enabled);
+			if (!enabled) btn.title = 'Limite de página atingido';
+		});
+	}
+
+	// =========================================
+	// ATALHOS DE TECLADO
+	// =========================================
+
+	function setupKeyboardShortcuts() {
+		const signal = abortController?.signal;
+
+		document.addEventListener(
+			'keydown',
+			(e) => {
+				for (const shortcut of KEYBOARD_SHORTCUTS) {
+					const { keys, target } = shortcut;
+					const ctrlOrMeta = e.ctrlKey || e.metaKey;
+
+					if (ctrlOrMeta && e.shiftKey && e.key === keys.key) {
+						e.preventDefault();
+						const el = document.getElementById(target);
+						if (el) {
+							el.focus();
+							if ('select' in el) el.select();
+						}
+						return;
+					}
+				}
+			},
+			{ signal },
+		);
+	}
+
+	// =========================================
+	// PERSISTÊNCIA
+	// =========================================
+
+	function setupPersistence() {
+		bus.on('cnesDataLoaded', (data) => {
+			try {
+				localStorage.setItem('apoiomed_lastCNES', data.cnes);
+				localStorage.setItem('apoiomed_lastCNESData', JSON.stringify(data));
+			} catch {
+				// quota exceeded ou private browsing — silencia
+			}
+		});
+
+		// Restaura último CNES (aguarda componente estar pronto)
+		bus.once('asideReady', () => {
+			const lastCNES = localStorage.getItem('apoiomed_lastCNES');
+			if (lastCNES) {
+				const input = document.getElementById('busca-cnes');
+				if (input) {
+					input.value = lastCNES;
+					input.placeholder = `Último: ${lastCNES}`;
+				}
+			}
+		});
+	}
+
+	// =========================================
+	// API PÚBLICA
+	// =========================================
+
+	function clearAside() {
+		const input = document.getElementById('busca-cnes');
+		if (input) input.value = '';
+
+		const ubsSelect = document.getElementById('select-unidade');
+		if (ubsSelect) ubsSelect.value = '';
+
+		const hotstringSearch = document.getElementById('hotstrings-search');
+		if (hotstringSearch) {
+			hotstringSearch.value = '';
+			hotstringSearch.dispatchEvent(new Event('input'));
+		}
+
+		bus.emit('cnesDataCleared');
+	}
+
+	function showAsideLoading(show) {
+		const container = document.getElementById('apoiomed_aside');
+		if (!container) return;
+		container.style.opacity = show ? '0.5' : '1';
+		container.style.pointerEvents = show ? 'none' : 'auto';
+	}
+
+	function destroyAside() {
+		abortController?.abort();
+		abortController = null;
+		bus?.destroy();
+		registry?.destroyAll();
+		isRendered = false;
+
+		const container = document.getElementById('apoiomed_aside');
+		if (container) container.innerHTML = '';
+
+		console.log('[Aside] 🗑️ Destroyed');
+	}
+
+	// =========================================
+	// BOOTSTRAP
+	// =========================================
+
+	function bootstrap() {
+		renderAside();
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', bootstrap);
+	} else {
+		bootstrap();
+	}
+
+	// Exporta API mínima
+	window.renderAside = renderAside;
+	window.clearAside = clearAside;
+	window.destroyAside = destroyAside;
+	window.showAsideLoading = showAsideLoading;
+})();
+
+
+/* ==========================================
+   [19/25] geral/components/prescription/tabs/js/tab_receituario.js
+   ========================================== */
+// tab_receituario.js (REFATORADO)
+// Dependências: aside_event_bus.js, aside_registry.js
+(() => {
+	'use strict';
+
+	const REQUIRED = ['prescription-header', 'prescription-footer', 'prescription-editor'];
+	const OPTIONAL = ['cnes-search', 'ubs-selector', 'formatting-tools', 'hotstrings-panel'];
+
+	/** @type {AsideRegistry} */
+	let registry;
+
+	// =========================================
+	// RENDER
+	// =========================================
+
+	function renderReceituarioTab() {
+		const container = document.getElementById('tab-prescricao');
+		if (!container) {
+			console.error('[Tab] Container #tab-prescricao not found');
+			return;
+		}
+
+		registry = window.__asideRegistry;
+
+		container.innerHTML = `
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-2">
+
+        <!-- COLUNA ESQUERDA: Formulário de Prescrição (3/4) -->
+        <div class="lg:col-span-3 w-full overflow-x-auto print:overflow-visible">
+          <form id="rxForm" class="p-0 m-0 bg-white rounded-xl print:shadow-none w-full max-w-full md:max-w-[210mm] print:max-w-[210mm] mx-auto">
+            <div class="relative h-full px-2 sm:px-4 md:px-6 print:px-2 pb-2 pt-2 w-full">
+
+              <!-- 1. Header -->
+              <div id="prescription_header"></div>
+
+              <!-- 2. Via de Administração -->
+              <div class="flex justify-self-center w-fit mt-2">
+                <div id="adm_farmaco_container"></div>
+              </div>
+
+              <!-- 3. Editor -->
+              <div id="apoiomed_prescription"></div>
+
+              <!-- 4. Footer -->
+              <div id="prescription_footer"></div>
+
+            </div>
+          </form>
+        </div>
+
+        <!-- COLUNA DIREITA: Sidebar (1/4) -->
+        <aside id="apoiomed_aside" class="lg:col-span-1 flex flex-col min-w-[360px] print:hidden"></aside>
+
+      </div>
+    `;
+
+		// Renderiza componentes
+		initializeComponents();
+	}
+
+	// =========================================
+	// INICIALIZAÇÃO
+	// =========================================
+
+	async function initializeComponents() {
+		console.log('[Tab] Initializing prescription components...');
+
+		// Renderiza componentes obrigatórios
+		// Os scripts já fazem auto-render, mas se container foi recriado, precisamos re-chamar
+		window.renderPrescriptionHeader?.();
+		window.renderPrescriptionFooter?.();
+		window.renderPrescriptionBox?.();
+
+		// Aside (se disponível)
+		if (typeof window.renderAside === 'function') {
+			window.renderAside();
+		}
+
+		// Opcional: AdmDrugs (via de administração)
+		if (window.AdmDrugsModule?.renderLabelSelect) {
+			window.AdmDrugsModule.renderLabelSelect('adm_farmaco_container', {
+				labelText: '',
+				includeEmpty: true,
+			});
+		}
+
+		// Aguarda registro no Registry (se disponível)
+		if (registry) {
+			try {
+				const { ready, missing } = await registry.waitForAll(8000);
+				if (missing.length) {
+					console.warn(`[Tab] Missing components: ${missing.join(', ')}`);
+				}
+				console.log(`[Tab] ✅ Ready (${ready.length} components)`);
+			} catch (err) {
+				console.warn('[Tab] Registry wait failed:', err.message);
+			}
+		}
+
+		// Sinaliza que a tab está pronta
+		window.__asideBus?.emit('receituarioReady');
+		window.dispatchEvent(new CustomEvent('receituarioReady'));
+
+		console.log('[Tab] ✅ Receituário tab mounted');
+	}
+
+	// =========================================
+	// ERROR HANDLING
+	// =========================================
+
+	function showError(message) {
+		const container = document.getElementById('tab-prescricao');
+		if (!container) return;
+		container.innerHTML = `
+      <div class="p-8 bg-red-50 border border-red-200 rounded-lg text-center">
+        <h3 class="text-lg font-bold text-red-700 mb-2">Erro ao carregar prescrição</h3>
+        <p class="text-sm text-red-600 mb-4">${message}</p>
+        <button onclick="window.location.reload()"
+          class="px-4 py-2 bg-white border border-red-300 text-red-700 rounded hover:bg-red-50">
+          Recarregar Página
+        </button>
+      </div>
+    `;
+	}
+
+	// =========================================
+	// EXPORT
+	// =========================================
+
+	window.renderReceituarioTab = renderReceituarioTab;
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderReceituarioTab);
+	} else {
+		renderReceituarioTab();
+	}
+})();
+
+
+/* ==========================================
+   [20/25] geral/components/prescription/tabs/js/tab_exames.js
+   ========================================== */
+//@ts-nocheck
+// tab_exames.js
+(() => {
+	'use strict';
+
+	/**
+	 * Renderiza a aba de Exames
+	 * Layout: grid com formulário (#app) à esquerda e sidebar à direita.
+	 * A lógica (form, selects, bindings) é delegada ao ExamesModule (exames-module.js)
+	 * que se liga aos IDs criados aqui no sidebar.
+	 */
+	function renderExamesTab() {
+		const container = document.getElementById('tab_exames');
+
+		if (!container) {
+			console.error('[Exames] Container #tab_exames não encontrado');
+			return;
+		}
+
+		container.innerHTML = `
+      <section id="tab-exames" class="tabPanel hidden">
+        <div class="grid gap-4 lg:grid-cols-[1fr_260px]">
+          <div class="container w-full max-w-6xl bg-white p-5 shadow-lg rounded-lg flex flex-col lg:flex-row">
+            <div id="app" class="w-full"></div>
+          </div>
+
+          <!-- ASIDES EXAMES -->
+          <div class="sidebar w-full max-w-60 flex flex-col p-6 ml-4 rounded-xl shadow-xl bg-white print:hidden">
+            <div class="button-group bg-gray-200 p-4 mb-5 rounded-xl shadow-xl">
+              <button type="button"
+                class="text-[12px] font-semibold w-full mb-2 p-2.5 bg-sky-600 text-white rounded-xl shadow-xl hover:bg-sky-700 transition-colors cursor-pointer"
+                id="clearAllBtn">LIMPAR TUDO</button>
+              <button type="button"
+                class="text-[12px] font-semibold w-full mb-2 p-2.5 bg-sky-600 text-white rounded-xl shadow-xl hover:bg-sky-700 transition-colors cursor-pointer"
+                id="printBtnExam">IMPRIMIR</button>
+              <button type="button"
+                class="text-[12px] font-semibold w-full mb-2 p-2.5 bg-sky-600 text-white rounded-xl shadow-xl hover:bg-sky-700 transition-colors cursor-pointer"
+                id="clearExamBtn">LIMPAR EXAMES</button>
+
+              <div class="flex items-center gap-2">
+                <input type="checkbox" id="toggleSusLogo" class="accent-sky-600" checked />
+                <label for="toggleSusLogo" class="text-[12px] font-semibold cursor-pointer">Ocultar Logo SUS</label>
+              </div>
+            </div>
+
+            <div class="select-group bg-gray-200 p-4 mb-5 rounded-xl shadow-xl">
+              <select title="lab" id="laboratorySelect"
+                class="w-full mb-2.5 p-1 border border-gray-50 rounded-xl shadow-xl text-[12px]">
+                <option value="">LABORATÓRIO</option>
+              </select>
+
+              <select title="img" id="imageSelect"
+                class="w-full mb-2.5 p-1 border border-gray-50 rounded-xl shadow-xl text-[12px]">
+                <option value="">IMAGEM</option>
+              </select>
+
+              <select title="sdmulher" id="womanSelect"
+                class="w-full mb-2.5 p-1 border border-gray-50 rounded-xl shadow-xl text-[12px]">
+                <option value="">SAÚDE DA MULHER</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    `;
+
+		// ExamesModule (exames-module.js) encontra os IDs do sidebar
+		// (#clearAllBtn, #printBtnExam, #toggleSusLogo, #laboratorySelect, etc.)
+		// e faz o binding automaticamente via ensureControls + bindFormEvents.
+		if (window.ExamesModule && typeof window.ExamesModule.init === 'function') {
+			window.ExamesModule._initialized = false;
+			window.ExamesModule.init();
+		}
+
+		console.log('[Exames] Aba Exames renderizada e inicializada');
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderExamesTab);
+	} else {
+		renderExamesTab();
+	}
+
+	window.renderExamesTab = renderExamesTab;
+})();
+
+
+/* ==========================================
+   [21/25] geral/components/prescription/tabs/js/tab_guias.js
+   ========================================== */
+//@ts-nocheck
+// tab_guias.js — Aba Guias SUS
+// Renderiza menu de guias + carrega modulos sob demanda (lazy load)
+// Padrao identico ao tab_psf.js — neuromorfico + CDNLoader
+(() => {
+	'use strict';
+
+	const GUIAS_CDN = 'https://cdn.gtmedics.com/geral/js';
+
+	// Guias SUS — cada uma com script futuro para lazy-load via CDNLoader
+	const guiasTools = [
+		{ key: 'lme', name: 'LME', icon: 'lab_profile', script: 'guia_lme.js', containerId: 'guia_lme', renderFn: 'renderGuiaLme', description: 'Servico Auxiliar de Diagnostico e Terapia' },
+		{ key: 'consulta', name: 'Consulta', icon: 'stethoscope', script: 'guia_consulta.js', containerId: 'guia_consulta', renderFn: 'renderGuiaConsulta', description: 'Guia de Consulta' },
+		{ key: 'internacao', name: 'Internacao', icon: 'hotel', script: 'guia_internacao.js', containerId: 'guia_internacao', renderFn: 'renderGuiaInternacao', description: 'Guia de Internacao Hospitalar' },
+		{ key: 'sp_sadt', name: 'SP/SADT', icon: 'healing', script: 'guia_sp_sadt.js', containerId: 'guia_sp_sadt', renderFn: 'renderGuiaSpSadt', description: 'Solicitacao de Procedimento/SADT' },
+		{ key: 'resumo_internacao', name: 'Resumo Int.', icon: 'description', script: 'guia_resumo_internacao.js', containerId: 'guia_resumo_internacao', renderFn: 'renderGuiaResumoInt', description: 'Resumo de Internacao' },
+	];
+
+	let loaderGuias = null;
+	const loadedScripts = new Set();
+
+	/**
+	 * Renderiza a aba Guias SUS
+	 */
+	function renderGuiasTab() {
+		const container = document.getElementById('tab_guias');
+		if (!container) {
+			console.error('[Guias] Container #tab_guias nao encontrado');
+			return;
+		}
+
+		container.innerHTML = `
+      <section id="tab-guias" class="tabPanel hidden print:hidden">
+        <div class="w-full max-w-7xl">
+          <div
+            class="rounded-[20px] bg-[#e0e5ec] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+
+            <!-- Header -->
+            <header class="flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-slate-800">description</span>
+                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Guias SUS</h1>
+                </div>
+              </div>
+
+              <div class="px-6 pb-2">
+                <div
+                  class="rounded-2xl bg-[#e0e5ec] p-4 text-sm text-slate-800 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+                  <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
+                    <div class="space-y-1">
+                      <div class="font-semibold text-[#2d3748]">Material de apoio — Guias gerais de uso no SUS.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <!-- Menu de Selecao de Guias -->
+            <div id="menu-guias" class="px-6 pb-4 flex flex-wrap gap-3"></div>
+
+            <!-- Content -->
+            <section class="p-4 pt-2">
+              <div class="bg-gray-200 overflow-hidden rounded-xl border border-gray-300">
+                <div id="guias-content" class="min-h-[400px]"></div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </section>
+    `;
+
+		initializeGuiasTab();
+	}
+
+	/**
+	 * Inicializa menu + placeholder
+	 */
+	function initializeGuiasTab() {
+		// CDNLoader para modulos de guias (quando existirem)
+		if (typeof CDNLoader !== 'undefined') {
+			try {
+				loaderGuias = new CDNLoader(GUIAS_CDN);
+			} catch (e) {
+				loaderGuias = null;
+			}
+		}
+
+		const menuContainer = document.getElementById('menu-guias');
+
+		if (menuContainer) {
+			menuContainer.innerHTML = guiasTools
+				.map(
+					(tool) => `
+				<button data-guia-key="${tool.key}"
+					class="guia-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
+					title="${tool.description}">
+					<span class="material-symbols-outlined text-base">${tool.icon}</span>
+					${tool.name}
+				</button>
+			`,
+				)
+				.join('');
+
+			menuContainer.addEventListener('click', (e) => {
+				const btn = e.target.closest('[data-guia-key]');
+				if (btn) switchGuia(btn.dataset.guiaKey);
+			});
+		}
+
+		// Auto-seleciona a primeira guia
+		switchGuia(guiasTools[0].key);
+		console.log('[Guias] Aba renderizada e inicializada');
+	}
+
+	/**
+	 * Alterna entre guias SUS
+	 */
+	// Alterna entre guias SUS
+	async function switchGuia(key) {
+		const tool = guiasTools.find((t) => t.key === key);
+		if (!tool) return;
+
+		const guiasContent = document.getElementById('guias-content');
+
+		// Highlight botao ativo
+		document.querySelectorAll('.guia-menu-btn').forEach((btn) => {
+			const isActive = btn.dataset.guiaKey === key;
+			if (isActive) {
+				btn.classList.add('text-[#007BFF]');
+				btn.style.boxShadow = 'inset 4px 4px 8px #c1c9d2, inset -4px -4px 8px #ffffff';
+			} else {
+				btn.classList.remove('text-[#007BFF]');
+				btn.style.boxShadow = '6px 6px 12px #c1c9d2, -6px -6px 12px #ffffff';
+			}
+		});
+
+		if (guiasContent) {
+			guiasContent.innerHTML = `<div id="${tool.containerId}"></div>`;
+		}
+
+		// Prioriza funcao ja carregada (bundle)
+		if (window[tool.renderFn]) {
+			window[tool.renderFn]();
+		}
+		// Senao tenta carregar via CDNLoader
+		else if (loaderGuias && !loadedScripts.has(tool.script)) {
+			try {
+				await loaderGuias.load(tool.script);
+				loadedScripts.add(tool.script);
+			} catch (err) {
+				console.warn('[Guias] Modulo ' + tool.script + ' ainda nao disponivel');
+				showPlaceholder(tool);
+			}
+		} else {
+			showPlaceholder(tool);
+		}
+	}
+
+	/**
+	 * Exibe placeholder para modulos ainda nao implementados
+	 */
+	function showPlaceholder(tool) {
+		const container = document.getElementById(tool.containerId);
+		if (!container) return;
+
+		container.innerHTML = `
+			<div class="flex flex-col items-center justify-center py-16 text-slate-500">
+				<span class="material-symbols-outlined text-6xl mb-4 text-slate-300">construction</span>
+				<h3 class="text-lg font-bold text-[#2d3748] mb-2">${tool.name}</h3>
+				<p class="text-sm text-slate-500">${tool.description}</p>
+				<p class="text-xs text-slate-400 mt-4">Modulo em desenvolvimento — em breve disponivel.</p>
+			</div>
+		`;
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderGuiasTab);
+	} else {
+		renderGuiasTab();
+	}
+
+	window.renderGuiasTab = renderGuiasTab;
+	window.switchGuia = switchGuia;
+})();
+
+
+/* ==========================================
+   [22/25] geral/js/guia_lme.js
+   ========================================== */
+/**
+ * Guia LME (Laudo de Solicitação de Medicamentos)
+ * Convertido de LME2.html
+ */
+(function () {
+	'use strict';
+
+	const API_URL = 'https://sigtap.gtmedics.com';
+
+	function injectLmeStyles() {
+		if (document.getElementById('guia-lme-styles')) return;
+		const s = document.createElement('style');
+		s.id = 'guia-lme-styles';
+		s.textContent = `
+            /* =========================================================
+            CHECKBOX (padroniza TODOS como "bonitos" / nativos)
+            - mantém tamanho 12px
+            - aparência nativa (igual w-3 h-3)
+             ========================================================= */
+            #guia_lme .pdf-box {
+                width: 12px;
+                height: 12px;
+                appearance: auto;
+                -webkit-appearance: auto;
+                background: initial;
+                border: initial;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            /* =========================================================
+            PÁGINA / A4
+            ========================================================= */
+            #guia_lme .a4 {
+                width: 210mm;
+                min-height: 297mm;
+            }
+
+            #guia_lme * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            /* =========================================================
+            PRINT
+            ========================================================= */
+            @media print {
+                html, body {
+                    background: white !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+
+                /* Ocultar elementos da interface geral na impressão */
+                #header, #sidebar, #tab-guias > div > header, #menu-guias {
+                    display: none !important;
+                }
+
+                /* Ocultar botão de limpar na impressão */
+                #guia_lme aside {
+                    display: none !important;
+                }
+
+                /* Esconder placeholders na impressão */
+                #guia_lme ::-webkit-input-placeholder { color: transparent !important; opacity: 0 !important; }
+                #guia_lme :-moz-placeholder { color: transparent !important; opacity: 0 !important; }
+                #guia_lme ::-moz-placeholder { color: transparent !important; opacity: 0 !important; }
+                #guia_lme :-ms-input-placeholder { color: transparent !important; opacity: 0 !important; }
+                #guia_lme ::placeholder { color: transparent !important; opacity: 0 !important; }
+
+                /* Remove bordas APENAS de inputs "de texto" e textarea */
+                #guia_lme input:not([type="checkbox"]):not([type="radio"]),
+                #guia_lme textarea {
+                    border-color: transparent !important;
+                }
+
+                /* Remove controles do input date na impressão */
+                #guia_lme input[type="date"]::-webkit-calendar-picker-indicator,
+                #guia_lme input[type="date"]::-webkit-inner-spin-button,
+                #guia_lme input[type="date"]::-webkit-clear-button {
+                    display: none !important;
+                    -webkit-appearance: none !important;
+                }
+
+                #guia_lme input[type="date"] {
+                    border: none !important;
+                    background: transparent !important;
+                    outline: none !important;
+                    box-shadow: none !important;
+                    -webkit-appearance: none !important;
+                    -moz-appearance: none !important;
+                    appearance: none !important;
+                    color: inherit !important;
+                    padding: 0 !important;
+                }
+
+                #guia_lme section#laudo-ceaf {
+                    box-shadow: none !important;
+                    border: none !important;
+                    margin: 0 !important;
+                    max-width: 100% !important;
+                }
+            }
+		`;
+		document.head.appendChild(s);
+	}
+
+	// Função para mascara de data manual
+	function maskDateBR(input) {
+		let v = input.value.replace(/\D/g, '');
+		if (v.length > 8) v = v.substring(0, 8);
+
+		if (v.length >= 5) {
+			input.value = v.substring(0, 2) + '/' + v.substring(2, 4) + '/' + v.substring(4);
+		} else if (v.length >= 3) {
+			input.value = v.substring(0, 2) + '/' + v.substring(2);
+		} else {
+			input.value = v;
+		}
+	}
+
+	function renderGuiaLme() {
+		const container = document.getElementById('guia_lme');
+		if (!container) {
+			console.error('[Guia LME] Container #guia_lme não encontrado');
+			return;
+		}
+
+		injectLmeStyles();
+
+		container.innerHTML = `
+            <div class="bg-gray-100 min-h-screen py-8 text-sm relative">
+
+                <!-- ASIDE (fora do A4) -->
+                <aside class="fixed top-20 right-4 z-50 flex flex-col gap-2 print:hidden">
+                    <button id="lme_btnLimpar"
+                        class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow transition-colors">
+                        Limpar Campos
+                    </button>
+
+                    <button id="lme_btnCarregar"
+                        class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">cloud_download</span>
+                        Carregar Selects
+                    </button>
+                </aside>
+
+                 <!-- Wrapper: scroll no mobile, normal no print -->
+                <div class="w-full overflow-x-auto print:overflow-visible">
+                    <!-- A4 sheet -->
+                    <section id="laudo-ceaf" class="bg-white w-full max-w-full md:max-w-[210mm] print:max-w-[210mm] mx-auto
+                        rounded-xl print:rounded-none
+                        shadow-sm print:shadow-none  
+                        ring-1 ring-black/5 print:ring-0">
+
+                        <div class="relative px-2 sm:px-4 md:px-6 print:px-2 py-4">
+                            <!-- FORMULARIO -->
+
+                            <div class="w-full max-w-5xl mx-auto bg-white p-4 relative">
+
+                                <!-- Header -->
+                                <div class="flex justify-center items-center">
+                                    <div class="flex items-center">
+                                        <div class="rounded-md px-3 flex items-center">
+                                            <img id="logoSus" src="https://static.cdnlogo.com/logos/s/74/sus-brasil.svg"
+                                                alt="Logo SUS"
+                                                class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 print:w-28 md:h-28 print:h-28 object-contain" />
+                                        </div>
+                                    </div>
+                                    <div class="text-sm font-semibold">
+                                        <p>Sistema Único de Saúde</p>
+                                        <p>Ministério da Saúde</p>
+                                        <p>Secretaria de Estado da Saúde</p>
+                                    </div>
+                                </div>
+
+                                <!-- Title -->
+                                <div class="text-center font-bold text-sm border-l border-r border-b border-t border-black">
+                                    <p>COMPONENTE ESPECIALIZADO DA ASSISTÊNCIA FARMACÊUTICA</p>
+                                    <p>LAUDO DE SOLICITAÇÃO, AVALIAÇÃO E AUTORIZAÇÃO DE MEDICAMENTO(S)</p>
+                                    <p>SOLICITAÇÃO DE MEDICAMENTO(S)</p>
+                                </div>
+
+                                <!-- Main Form -->
+                                <div class="mb-4">
+                                    <div class="text-[9px] font-bold">
+                                        CAMPOS DE PREENCHIMENTO EXCLUSIVO PELO MÉDICO SOLICITANTE
+                                    </div>
+
+                                    <!-- BOX 1 -->
+                                    <div id="box1" class="border border-black mb-1 leading-none">
+                                        <!-- Row 1 -->
+                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                                            <div class="w-1/2 border-r border-black relative h-full px-2 overflow-hidden">
+                                                <label for="lme_cnes"
+                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                                                    1. Número do CNES*
+                                                </label>
+                                                <input id="lme_cnes" type="text"
+                                                    class="absolute left-2 right-2 bottom-[2px] h-[20px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                                            </div>
+
+                                            <div class="w-1/2 relative h-full px-2 overflow-hidden">
+                                                <label for="lme_estabelecimento"
+                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                                                    2. Nome do Estabelecimento de Saúde Solicitante
+                                                </label>
+                                                <input id="lme_estabelecimento" type="text"
+                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 2 -->
+                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                                            <div class="w-full relative h-full px-2 overflow-hidden">
+                                                <label for="lme_nomePaciente"
+                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                                                    3. Nome completo do Paciente*
+                                                </label>
+                                                <input id="lme_nomePaciente" type="text"
+                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 3 -->
+                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                                            <div class="w-1/2 relative h-full px-2 overflow-hidden">
+                                                <label for="lme_nomeSocial"
+                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                                                    3.1. Nome Social do Paciente
+                                                </label>
+                                                <input id="lme_nomeSocial" type="text"
+                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+
+                                            <div class="w-1/4 border-r border-black relative h-full px-2 overflow-hidden"></div>
+
+                                            <div class="w-1/4 relative h-full px-2 overflow-hidden">
+                                                <label for="lme_peso"
+                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                                                    5. Peso do Paciente (kg)*
+                                                </label>
+                                                <input id="lme_peso" type="text"
+                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 4 -->
+                                        <div class="flex h-[36px] text-[10px] leading-none">
+                                            <div class="w-3/4 border-r border-black relative h-full px-2 overflow-hidden">
+                                                <label for="lme_nomeMae"
+                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                                                    4. Nome da Mãe do Paciente*
+                                                </label>
+                                                <input id="lme_nomeMae" type="text" value="ELIETE DO CARMO CORNELIO ROSA"
+                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+
+                                            <div class="w-1/4 relative h-full px-2 overflow-hidden">
+                                                <label for="lme_altura"
+                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                                                    6. Altura do Paciente (cm)*
+                                                </label>
+                                                <input id="lme_altura" type="text"
+                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- BOX 2 — BLOCO 5 (Medicamentos) -->
+                                    <div id="box2" class="border border-black mb-1 leading-none">
+                                        <div class="">
+                                            <!-- HEADER -->
+                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] grid-rows-[18px_18px]">
+                                                <!-- 7 -->
+                                                <div
+                                                    class="col-span-2 row-span-2 border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
+                                                    7. Medicamentos*
+                                                </div>
+                                                <!-- 8 -->
+                                                <div
+                                                    class="col-span-6 border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
+                                                    8. Quantidade Solicitada*
+                                                </div>
+                                                <!-- Meses -->
+                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">1º mês</div>
+                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">2º mês</div>
+                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">3º mês</div>
+                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">4º mês</div>
+                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">5º mês</div>
+                                                <div class="border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">6º mês</div>
+                                            </div>
+
+                                            <!-- LINHA 1 -->
+                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
+                                                <div class="border-r border-black flex items-center justify-center font-semibold">1</div>
+                                                <div class="border-r border-black overflow-hidden">
+                                                    <select id="lme_med1" class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
+                                                        <option value="">Selecione...</option>
+                                                        <option value="OLANZAPINA 10.00 MG COMPRIMIDO">OLANZAPINA 10.00 MG COMPRIMIDO</option>
+                                                        <option value="QUETIAPINA 25 MG COMPRIMIDO">QUETIAPINA 25 MG COMPRIMIDO</option>
+                                                        <option value="RISPERIDONA 2 MG COMPRIMIDO">RISPERIDONA 2 MG COMPRIMIDO</option>
+                                                    </select>
+                                                </div>
+                                                <div class="border-r border-black"><input id="lme_q1_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q1_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q1_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q1_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q1_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div><input id="lme_q1_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                            </div>
+
+                                            <!-- LINHA 2 -->
+                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
+                                                <div class="border-r border-black flex items-center justify-center font-semibold">2</div>
+                                                <div class="border-r border-black overflow-hidden">
+                                                    <select id="lme_med2" class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
+                                                        <option value="">Selecione...</option>
+                                                    </select>
+                                                </div>
+                                                <div class="border-r border-black"><input id="lme_q2_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q2_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q2_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q2_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q2_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div><input id="lme_q2_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                            </div>
+
+                                            <!-- LINHA 3 -->
+                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] text-[10px] leading-none">
+                                                <div class="border-r border-black flex items-center justify-center font-semibold">3</div>
+                                                <div class="border-r border-black overflow-hidden">
+                                                    <input id="lme_med3" class="w-full h-full border-0 px-1 text-left text-[10px] leading-none" />
+                                                </div>
+                                                <div class="border-r border-black"><input id="lme_q3_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q3_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q3_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q3_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div class="border-r border-black"><input id="lme_q3_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                                <div><input id="lme_q3_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- BOX 3 — BLOCO 9 a 12 -->
+                                    <div id="box3" class="border border-black mb-1 text-[10px] leading-none">
+                                        <!-- Row 9/10 -->
+                                        <div class="grid grid-cols-[120px_1fr] h-9 border-b border-black">
+                                            <div class="relative border-r border-black px-2 overflow-hidden">
+                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">9. CID-10*</div>
+                                                <input id="lme_cid" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                            <div class="relative px-2 overflow-hidden">
+                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">10. Diagnóstico</div>
+                                                <input id="lme_diagnostico" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 11 -->
+                                        <div class="relative border-b border-black h-[60px] px-2 overflow-hidden">
+                                            <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">11. Anamnese*</div>
+                                            <textarea id="lme_anamnese" class="absolute left-2 right-2 top-[18px] bottom-[2px] border-0 bg-transparent resize-none focus:ring-0 focus:outline-none"></textarea>
+                                        </div>
+
+                                        <!-- Row 12 (Tratamento Prévio) -->
+                                        <div class="relative h-12 px-2 overflow-hidden">
+                                            <div class="absolute top-[2px] left-2 right-2 font-semibold">12. Paciente realizou tratamento prévio ou está em tratamento na doença?*</div>
+                                            <div class="absolute left-2 right-2 bottom-[4px] flex items-center gap-4">
+                                                <label class="flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>NÃO</span></label>
+                                                <label class="flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>SIM. Relatar:</span></label>
+                                                <input type="text" class="flex-1 min-w-0 h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- BOX 3B - BLOCO 13 (Atestado) -->
+                                    <div id="box3-b" class="border border-black mb-1 text-[10px] leading-none">
+                                        <div class="h-5 flex items-center justify-center font-semibold tracking-[0.3px] whitespace-nowrap">13. Atestado de Capacidade*</div>
+                                        <div class="px-4 py-1 text-[11px] leading-tight">
+                                            A solicitação do medicamento deverá ser realizada pelo paciente. Entretanto, fica dispensada a obrigatoriedade da presença física do paciente considerado incapaz de acordo com os artigos 3º e 4º do Código Civil. O paciente é considerado incapaz?
+                                        </div>
+                                        <div class="grid grid-cols-5 h-12 ">
+                                            <div class="col-span-3 relative px-4 overflow-hidden">
+                                                <div class="absolute left-2 top-[4px] grid-rows-[36px_36px] right-2 flex items-center gap-6 text-[8px] leading-none">
+                                                    <div class="row-1 flex gap-8">
+                                                        <label class="flex items-center gap-1 shrink-0"><input type="checkbox" class="w-3 h-3" /> <span class="text-wrap text-[11px]">NÃO</span></label>
+                                                        <label class="flex items-center gap-1 min-w-0 "><input type="checkbox" class="w-3 h-3" /><span class="text-wrap text-[11px] text-justify">SIM. Indicar o nome do responsável pelo paciente, o qual</span></label>
+                                                    </div>
+                                                    <div class="absolute left-20 top-[14px] right-2 row-2 flex items-center gap-6 text-[8px] leading-none">
+                                                        <label class=" mt-1.5"><span class="text-wrap text-[11px] text-justify">poderá realizar a solicitação do medicamento</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2 relative px-2 overflow-hidden">
+                                                <input type="text" class="absolute left-0.5 right-0.5 top-[8px] h-4 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                                                <div class="absolute left-0.5 right-2.5 bottom-[11px] text-center text-[9px]">Nome do Responsável</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- BOX 4 - BLOCO 14 - 17 (Médico) -->
+                                    <div id="box4" class="border border-black mb-1 text-[10px] leading-none">
+                                        <div class="grid grid-cols-[1fr_140px_220px] grid-rows-[36px_36px]">
+                                            <!-- 14 -->
+                                            <div class="relative border-b border-black px-2 overflow-hidden">
+                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">14. Nome do médico solicitante*</div>
+                                                <input id="lme_nomeMedico" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                            <!-- coluna vazia -->
+                                            <div class="border-r border-b border-black"></div>
+                                            <!-- 17 -->
+                                            <div class="relative row-span-2 px-2 overflow-hidden">
+                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">17. Assinatura e carimbo do médico*</div>
+                                                <div class="absolute left-2 right-2 top-[16px] bottom-[4px]"></div>
+                                            </div>
+                                            <!-- 15 -->
+                                            <div class="relative border-r border-black px-2 overflow-hidden h-[36px]">
+                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">15. Nº do Cartão Nacional de Saúde (CNS) do médico solicitante*</div>
+                                                <input id="lme_cnsMedico" type="text" class="absolute left-2 right-2 bottom-[2px] focus:ring-0 focus:outline-none" />
+                                            </div>
+                                            <!-- 16 -->
+                                            <div class="relative border-r border-black px-2 overflow-hidden">
+                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">16. Data da Solicitação*</div>
+                                                <input id="lme_dataSolicitacao" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10"
+                                                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- BOX 5 - BLOCO 18 (Campos preenchidos por) -->
+                                    <div id="box5" class="border border-black text-[10px] leading-none">
+                                        <div class="px-2 py-1 border-b border-black mb-2">
+                                            <div class="flex flex-row gap-x-3 gap-y-1 mt-1 text-[9px]">
+                                                <div class="font-semibold">18. CAMPOS ABAIXO PREENCHIDOS POR*:</div>
+                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Paciente</label></div>
+                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Mãe do Paciente</label></div>
+                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Responsável <span class="text-[8px]">(Descrito no item 13)</span></label></div>
+                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Médico Solicitante</label></div>
+                                            </div>
+                                            <div class="flex items-center gap-2 mt-1 text-[9px]">
+                                                <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Outro, informar nome:</label>
+                                                <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                                                <span>e CPF:</span>
+                                                <input type="text" class="w-[140px] h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-[2fr_1fr] border-b border-black h-[72px] text-[10px] leading-none">
+                                            <div class="relative border-r border-black px-2 overflow-hidden">
+                                                <div class="absolute top-[2px] left-2 right-2 font-semibold">19. Raça/Cor/Etnia informado pelo Paciente Responsável*</div>
+                                                <div class="absolute left-2 right-2 top-[22px] flex items-center gap-6 whitespace-nowrap">
+                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Branca</span></label>
+                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Amarela</span></label>
+                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Indígena. Informar Etnia:</span></label>
+                                                    <input type="text" class="flex-1 min-w-0 h-[14px] border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                                                </div>
+                                                <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
+                                                    <label class="inline-flex items-center gap-2 w-[74px]"><input type="checkbox" class="pdf-box" /><span>Preta</span></label>
+                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Parda</span></label>
+                                                </div>
+                                            </div>
+                                            <div class="relative px-2 overflow-hidden">
+                                                <div class="absolute top-[2px] left-2 right-2 font-semibold">20. Telefone(s) para contato do paciente</div>
+                                                <div class="absolute left-2 right-2 top-[26px] flex items-center whitespace-nowrap">
+                                                    <span class="mr-1">(</span><input type="text" class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span class="ml-1">)</span>
+                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                                                </div>
+                                                <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
+                                                    <span class="mr-1">(</span><input type="text" class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span class="ml-1">)</span>
+                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-[1fr_1fr] grid-rows-[36px_36px]">
+                                            <div class="border-r border-b border-black px-2 py-1 overflow-hidden">
+                                                <div class="font-semibold">21. Número do documento do Paciente</div>
+                                                <div class="flex items-center gap-3 mt-1 text-[9px]">
+                                                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CPF</label>
+                                                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CNS:</label>
+                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                                                </div>
+                                            </div>
+                                            <div class="row-span-2 px-2 py-1">
+                                                <div class="font-semibold">23. Assinatura do responsável pelo preenchimento*</div>
+                                            </div>
+                                            <div class="border-r border-black px-2 py-1 overflow-hidden">
+                                                <div class="font-semibold">22. Correio Eletrônico do paciente</div>
+                                                <input type="email" class="mt-1 w-full h-3.5 bg-transparent focus:ring-0 focus:outline-none" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        `;
+
+		// ===============================
+		//  LOGICA
+		// ===============================
+
+		// Mascara de data no input
+		const dataInput = document.getElementById('lme_dataSolicitacao');
+		if (dataInput) {
+			dataInput.addEventListener('input', function () {
+				maskDateBR(this);
+			});
+		}
+
+		// Carregar Selects
+		async function carregarLMECompleto(btnElement) {
+			let originalContent = '';
+
+			if (btnElement) {
+				originalContent = btnElement.innerHTML;
+				btnElement.disabled = true;
+				btnElement.innerHTML = `
+                    <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Baixando...</span>`;
+			}
+
+			try {
+				const response = await fetch(`${API_URL}/farmacos_lme/lista_simples`);
+				const data = await response.json();
+
+				const optionsHtml = ['<option value="">Selecione um medicamento...</option>'];
+				data.forEach((item) => {
+					optionsHtml.push(`<option value="${item.value}">${item.label}</option>`);
+				});
+				const finalHtml = optionsHtml.join('');
+
+				['lme_med1', 'lme_med2'].forEach((id) => {
+					const el = document.getElementById(id);
+					if (el) el.innerHTML = finalHtml;
+				});
+
+				// Toast simples se Swal nao estiver disponivel, ou console
+				if (typeof Swal !== 'undefined') {
+					Swal.fire({
+						toast: true,
+						position: 'top-end',
+						icon: 'success',
+						title: `${data.length} medicamentos carregados!`,
+						showConfirmButton: false,
+						timer: 2500,
+					});
+				} else {
+					alert(`${data.length} medicamentos carregados!`);
+				}
+			} catch (error) {
+				console.error('Erro ao carregar:', error);
+				alert('Erro ao carregar lista de medicamentos.');
+			} finally {
+				if (btnElement) {
+					btnElement.disabled = false;
+					btnElement.innerHTML = originalContent;
+				}
+			}
+		}
+
+		// Limpar Formulario
+		function limparFormulario() {
+			const wrapper = document.getElementById('guia_lme');
+			if (!wrapper) return;
+
+			const inputs = wrapper.querySelectorAll('input[type="text"], input[type="date"], input[type="email"]');
+			inputs.forEach((input) => {
+				if (input.id === 'lme_nomeMae') {
+					input.value = 'ELIETE DO CARMO CORNELIO ROSA';
+				} else {
+					input.value = '';
+				}
+			});
+
+			['lme_med1', 'lme_med2', 'lme_med3'].forEach((id) => {
+				const select = document.getElementById(id);
+				if (select) select.selectedIndex = 0;
+			});
+
+			const anamnese = document.getElementById('lme_anamnese');
+			if (anamnese) anamnese.value = '';
+
+			const radios = wrapper.querySelectorAll('input[type="radio"]');
+			radios.forEach((r) => (r.checked = false));
+
+			const checkboxes = wrapper.querySelectorAll('input[type="checkbox"]');
+			checkboxes.forEach((c) => (c.checked = false));
+		}
+
+		// Bind events manually after render
+		const btnCarregar = container.querySelector('#lme_btnCarregar');
+		if (btnCarregar) {
+			btnCarregar.addEventListener('click', function () {
+				carregarLMECompleto(this);
+			});
+		}
+
+		const btnLimpar = container.querySelector('#lme_btnLimpar');
+		if (btnLimpar) {
+			btnLimpar.addEventListener('click', limparFormulario);
+		}
+
+		console.log('[Guia LME] Renderizada com sucesso');
+	}
+
+	window.renderGuiaLme = renderGuiaLme;
+})();
+window.renderGuiaLme = renderGuiaLme;
+
+
+/* ==========================================
+   [23/25] geral/components/prescription/tabs/js/tab_apoio.js
+   ========================================== */
+//@ts-nocheck
+// tab_apoio.js — Aba Apoio Clínico por Especialidade
+// Renderiza menu de especialidades + carrega módulos sob demanda (lazy load)
+// Padrão idêntico ao tab_psf.js — neumórfico + CDNLoader
+(() => {
+	'use strict';
+
+	const APOIO_CDN = 'https://cdn.gtmedics.com/apoioClinico';
+
+	// Ferramentas de Apoio — cada uma com scripts e scaffold próprio
+	const apoioTools = [
+		{ key: 'clinica',     name: 'Clínica Médica',  icon: 'cardiology',   description: 'Protocolos clínicos e prescrições por patologia' },
+		{ key: 'emergencia',  name: 'Emergência',      icon: 'emergency',    description: 'Protocolos de emergência por especialidade' },
+		{ key: 'pediatria',   name: 'Pediatria',       icon: 'pediatrics',   description: 'Calculadora de fármacos pediátricos por peso' },
+		{ key: 'gineco',      name: 'Ginecologia',     icon: 'pregnancy',    description: 'Protocolos ginecológicos (em breve)' },
+		{ key: 'psiquiatria', name: 'Psiquiatria',     icon: 'psychology',   description: 'Protocolos psiquiátricos (em breve)' },
+	];
+
+	let loaderApoio = null;
+	const loadedScripts = new Set();
+
+	// ============================================
+	// RENDER PRINCIPAL
+	// ============================================
+	function renderApoioTab() {
+		const container = document.getElementById('tab_apoio');
+		if (!container) {
+			console.error('[Apoio] Container #tab_apoio não encontrado');
+			return;
+		}
+
+		container.innerHTML = `
+      <section id="tab-apoio" class="tabPanel hidden print:hidden">
+        <div class="w-full max-w-7xl">
+          <div
+            class="rounded-[20px] bg-[#e0e5ec] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+
+            <!-- Header -->
+            <header class="flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-slate-800">library_books</span>
+                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Apoio clínico por especialidade</h1>
+                </div>
+                <p class="mt-1 text-sm text-slate-800">
+                  Selecione a especialidade para ver protocolos, prescrições e ferramentas clínicas.
+                </p>
+              </div>
+
+              <div class="px-6 pb-2">
+                <div
+                  class="rounded-2xl bg-[#e0e5ec] p-4 text-sm text-slate-800 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+                  <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
+                    <div class="space-y-1">
+                      <div class="font-semibold text-[#2d3748]">Material de apoio. Validar com protocolo institucional.</div>
+                      <div>
+                        Especialmente em gestação/lactação, insuficiência renal/hepática, interações, alergias e IST.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <!-- Menu de Especialidades -->
+            <div id="menu-apoio" class="px-6 pb-4 flex flex-wrap gap-3"></div>
+
+            <!-- Content -->
+            <section class="p-4 pt-2">
+              <div class="bg-gray-200 overflow-hidden rounded-xl border border-gray-300">
+                <div id="apoio-content" class="min-h-[400px]"></div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </section>
+    `;
+
+		initializeApoioTab();
+	}
+
+	// ============================================
+	// INICIALIZAÇÃO
+	// ============================================
+	function initializeApoioTab() {
+		loaderApoio = new CDNLoader(APOIO_CDN);
+		const menuContainer = document.getElementById('menu-apoio');
+
+		if (menuContainer) {
+			menuContainer.innerHTML = apoioTools.map(tool => `
+				<button data-apoio-key="${tool.key}"
+					class="apoio-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
+					title="${tool.description}">
+					<span class="material-symbols-outlined text-base">${tool.icon}</span>
+					${tool.name}
+				</button>
+			`).join('');
+
+			menuContainer.addEventListener('click', (e) => {
+				const btn = e.target.closest('[data-apoio-key]');
+				if (btn) switchApoio(btn.dataset.apoioKey);
+			});
+		}
+
+		// Auto-seleciona a primeira especialidade
+		switchApoio(apoioTools[0].key);
+		console.log('[Apoio] Aba renderizada e inicializada');
+	}
+
+	// ============================================
+	// SWITCH ENTRE ESPECIALIDADES
+	// ============================================
+	async function switchApoio(key) {
+		const tool = apoioTools.find(t => t.key === key);
+		if (!tool) return;
+
+		const apoioContent = document.getElementById('apoio-content');
+
+		// Highlight botão ativo
+		document.querySelectorAll('.apoio-menu-btn').forEach(btn => {
+			const isActive = btn.dataset.apoioKey === key;
+			if (isActive) {
+				btn.classList.add('text-[#007BFF]');
+				btn.style.boxShadow = 'inset 4px 4px 8px #c1c9d2, inset -4px -4px 8px #ffffff';
+			} else {
+				btn.classList.remove('text-[#007BFF]');
+				btn.style.boxShadow = '6px 6px 12px #c1c9d2, -6px -6px 12px #ffffff';
+			}
+		});
+
+		if (!apoioContent) return;
+
+		// Render por especialidade
+		switch (key) {
+			case 'clinica':
+				await renderClinica(apoioContent);
+				break;
+			case 'pediatria':
+				await renderPediatria(apoioContent);
+				break;
+			case 'emergencia':
+				await renderEmergencia(apoioContent);
+				break;
+			default:
+				showPlaceholder(apoioContent, tool);
+				break;
+		}
+	}
+
+	// ============================================
+	// HELPER: Carregar script via CDNLoader
+	// ============================================
+	async function loadScript(scriptName) {
+		if (loadedScripts.has(scriptName)) return true;
+		try {
+			await loaderApoio.load(scriptName);
+			loadedScripts.add(scriptName);
+			return true;
+		} catch (err) {
+			console.error(`[Apoio] Erro ao carregar ${scriptName}:`, err);
+			return false;
+		}
+	}
+
+	// ============================================
+	// CLÍNICA MÉDICA
+	// ============================================
+	async function renderClinica(contentEl) {
+		// Scaffold DOM que clinica.js espera
+		contentEl.innerHTML = `
+			<div class="p-6 bg-[#e0e5ec]">
+				<div class="flex flex-col md:flex-row gap-6">
+					<!-- Sidebar: dropdown de patologias -->
+					<div class="w-full md:w-1/3">
+						<div class="rounded-[20px] bg-[#e0e5ec] p-4 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+							<h3 class="text-sm font-bold text-[#2d3748] mb-3 flex items-center gap-2">
+								<span class="material-symbols-outlined text-sm">search</span>
+								Selecione a patologia
+							</h3>
+							<select id="entitySelect"
+								class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none">
+								<option value="">— Selecione —</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- Viewer: card do protocolo -->
+					<div class="w-full md:w-2/3">
+						<div id="protocolCard"
+							class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[300px]">
+							<div class="text-center py-12 text-[#25282e]">
+								<span class="material-symbols-outlined text-5xl mb-4 text-[#5f6775]">library_books</span>
+								<h3 class="text-xl font-medium text-[#2d3748]">Selecione uma patologia</h3>
+								<p class="text-[#25282e] mt-2">Escolha um item na lista à esquerda para ver o protocolo clínico e prescrição.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Toast -->
+				<div id="toast" class="hidden fixed bottom-4 right-4 z-50 rounded-2xl bg-[#e0e5ec] px-6 py-3 text-sm font-bold text-green-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+					<div>Copiado!</div>
+				</div>
+			</div>
+		`;
+
+		// Carrega dados + UI
+		const dataOk = await loadScript('protocolos-completo.js');
+		if (!dataOk) {
+			contentEl.innerHTML = errorMsg('Clínica Médica');
+			return;
+		}
+
+		const uiOk = await loadScript('clinica.js');
+		if (!uiOk) {
+			contentEl.innerHTML = errorMsg('Clínica Médica');
+			return;
+		}
+
+		// clinica.js auto-inicia via DOMContentLoaded ou detecção direta
+		// Se já carregou antes, precisamos re-init manualmente
+		if (window.ProtocolosModule && window.ProtocolosModule.init) {
+			window.ProtocolosModule.init();
+		}
+	}
+
+	// ============================================
+	// PEDIATRIA (Calculadora de Fármacos)
+	// ============================================
+	async function renderPediatria(contentEl) {
+		// Scaffold DOM que farmacos_completo.js espera
+		contentEl.innerHTML = `
+			<div class="p-6 bg-[#e0e5ec]">
+				<div class="flex flex-col gap-6">
+					<!-- Seleção + Inputs -->
+					<div class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+						<h3 class="text-lg font-bold text-[#2d3748] mb-4 flex items-center gap-2">
+							<span class="material-symbols-outlined">pediatrics</span>
+							Calculadora Farmacológica Pediátrica
+						</h3>
+
+						<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+							<!-- Fármaco -->
+							<div class="md:col-span-2">
+								<label for="selectFarmaco" class="block text-xs font-bold text-[#2d3748] mb-1">Fármaco</label>
+								<select id="selectFarmaco"
+									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none">
+									<option value="">— Selecione o fármaco —</option>
+								</select>
+							</div>
+
+							<!-- Peso -->
+							<div>
+								<label for="inputPeso" class="block text-xs font-bold text-[#2d3748] mb-1">Peso (kg)</label>
+								<input id="inputPeso" type="number" step="0.1" min="0.5" placeholder="ex: 12.5"
+									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+							</div>
+
+							<!-- Idade -->
+							<div>
+								<label for="inputIdadeMeses" class="block text-xs font-bold text-[#2d3748] mb-1">Idade (meses)</label>
+								<input id="inputIdadeMeses" type="number" min="0" placeholder="ex: 36"
+									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+							</div>
+						</div>
+
+						<!-- Botões -->
+						<div class="flex gap-3 mt-4">
+							<button id="btnCalcular"
+								class="inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-5 py-2.5 text-sm font-bold text-[#007BFF] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
+								<span class="material-symbols-outlined text-sm">calculate</span>
+								Calcular
+							</button>
+							<button id="btnCopiarRx"
+								class="inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-5 py-2.5 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
+								<span class="material-symbols-outlined text-sm">content_copy</span>
+								Copiar Rx
+							</button>
+							<span id="copyStatus" class="text-xs text-green-600 self-center"></span>
+						</div>
+					</div>
+
+					<!-- Resultado -->
+					<div id="medicationCard"
+						class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[200px] font-mono text-sm text-[#25282e] whitespace-pre-wrap">
+						<div class="text-center py-8 text-[#5f6775]">
+							<span class="material-symbols-outlined text-4xl mb-3">medication</span>
+							<p>Selecione um fármaco e insira o peso para calcular a dose.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		`;
+
+		// Carrega farmacos_completo.js
+		const ok = await loadScript('farmacos_completo.js');
+		if (!ok) {
+			contentEl.innerHTML = errorMsg('Pediatria');
+			return;
+		}
+
+		// Popula dropdown de fármacos a partir da API global
+		populateFarmacoSelect();
+
+		// farmacos_completo.js usa DOMContentLoaded → já disparou.
+		// Precisamos re-vincular os event listeners manualmente
+		bindPediatriaEvents();
+	}
+
+	/**
+	 * Popula <select id="selectFarmaco"> com optgroups por categoria
+	 */
+	function populateFarmacoSelect() {
+		const select = document.getElementById('selectFarmaco');
+		const data = window.farmacosData;
+		if (!select || !data) return;
+
+		const categorias = data.getCategorias();
+		categorias.forEach(catKey => {
+			const items = data.getByCategoria(catKey);
+			if (!items || !Object.keys(items).length) return;
+
+			const optgroup = document.createElement('optgroup');
+			optgroup.label = catKey.charAt(0).toUpperCase() + catKey.slice(1);
+
+			Object.keys(items).forEach(itemKey => {
+				const item = items[itemKey];
+				const opt = document.createElement('option');
+				opt.value = catKey + '.' + itemKey;
+				opt.textContent = item.name || itemKey;
+				optgroup.appendChild(opt);
+			});
+
+			select.appendChild(optgroup);
+		});
+	}
+
+	/**
+	 * Vincula eventos de Calcular/Copiar para Pediatria
+	 * (replicando a lógica de farmacos_completo.js que só roda no DOMContentLoaded)
+	 */
+	function bindPediatriaEvents() {
+		const btnCalc = document.getElementById('btnCalcular');
+		const btnCopy = document.getElementById('btnCopiarRx');
+		const statusEl = document.getElementById('copyStatus');
+		const cardEl = document.getElementById('medicationCard');
+		let currentRxText = '';
+
+		function setStatus(msg) {
+			if (!statusEl) return;
+			statusEl.textContent = msg;
+			setTimeout(() => { statusEl.textContent = ''; }, 1500);
+		}
+
+		function getSelectedItem() {
+			const select = document.getElementById('selectFarmaco');
+			const path = select?.value;
+			const farmacos = window.farmacosData?.farmacos;
+			if (!path || !farmacos) return null;
+			return path.split('.').reduce((acc, k) => (acc ? acc[k] : null), farmacos);
+		}
+
+		function getCtx() {
+			const pesoEl = document.getElementById('inputPeso');
+			const idadeEl = document.getElementById('inputIdadeMeses');
+			const weight = pesoEl ? Number(pesoEl.value) : NaN;
+			const ageMonths = idadeEl?.value ? Number(idadeEl.value) : null;
+			return { weight, ageMonths };
+		}
+
+		function stripHtml(s) {
+			return String(s ?? '').replace(/<[^>]*>/g, '').trim();
+		}
+
+		function normalizeSpaces(s) {
+			return String(s ?? '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+		}
+
+		function buildRxText(item, ctx) {
+			if (!item || isNaN(ctx.weight) || ctx.weight <= 0) return '';
+			const calc = item.calculate ? item.calculate(ctx.weight, ctx.ageMonths) : null;
+			const drugLine = `${item.name} — ${item.presentation || ''}`;
+
+			if (calc?.rxText) return normalizeSpaces(stripHtml(calc.rxText));
+			if (calc?.practicalDose) {
+				const pos = normalizeSpaces(stripHtml(calc.practicalDose));
+				return normalizeSpaces(`${drugLine}\n${pos}`);
+			}
+			if (calc?.details) return normalizeSpaces(`${drugLine}\n${stripHtml(calc.details)}`);
+			return normalizeSpaces(drugLine);
+		}
+
+		if (btnCalc) {
+			btnCalc.addEventListener('click', () => {
+				const item = getSelectedItem();
+				if (!item) return setStatus('Selecione um fármaco.');
+
+				const ctx = getCtx();
+				if (isNaN(ctx.weight) || ctx.weight <= 0) return setStatus('Insira o peso.');
+
+				currentRxText = buildRxText(item, ctx);
+
+				if (!currentRxText) return setStatus('Sem prescrição.');
+
+				if (cardEl) {
+					// Render resultado formatado
+					const calc = item.calculate ? item.calculate(ctx.weight, ctx.ageMonths) : null;
+					let html = `<div class="space-y-3">`;
+					html += `<h4 class="text-base font-bold text-[#2d3748]">${item.name}</h4>`;
+					html += `<p class="text-xs text-[#5f6775]">${item.presentation || ''}</p>`;
+					html += `<p class="text-xs"><strong>Dose:</strong> ${item.dose || ''}</p>`;
+					if (item.practicalRule) html += `<p class="text-xs"><strong>Regra prática:</strong> ${item.practicalRule}</p>`;
+					if (calc?.dailyDose) html += `<p class="text-xs"><strong>Dose diária:</strong> ${calc.dailyDose}</p>`;
+					if (calc?.singleDose) html += `<p class="text-xs"><strong>Dose unitária:</strong> ${calc.singleDose}</p>`;
+					if (calc?.practicalDose) html += `<p class="text-xs"><strong>Prática:</strong> ${calc.practicalDose}</p>`;
+					if (calc?.details) html += `<div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs">${calc.details}</div>`;
+					if (item.renalAdjustment) html += `<p class="text-xs text-amber-700 mt-2"><strong>Ajuste renal:</strong> ${item.renalAdjustment}</p>`;
+					if (item.maxDose) html += `<p class="text-xs text-red-600"><strong>${item.maxDose}</strong></p>`;
+					if (item.notes) html += `<p class="text-xs text-slate-500 mt-1"><strong>Obs:</strong> ${item.notes}</p>`;
+					html += `</div>`;
+					cardEl.innerHTML = html;
+					cardEl.dataset.copy = currentRxText;
+				}
+
+				setStatus('Calculado ✅');
+			});
+		}
+
+		if (btnCopy) {
+			btnCopy.addEventListener('click', async () => {
+				const text = currentRxText || cardEl?.dataset?.copy || '';
+				if (!text) return setStatus('Calcule primeiro.');
+
+				try {
+					await navigator.clipboard.writeText(text);
+					setStatus('Copiado ✅');
+				} catch {
+					// Fallback
+					const ta = document.createElement('textarea');
+					ta.value = text;
+					document.body.appendChild(ta);
+					ta.select();
+					document.execCommand('copy');
+					ta.remove();
+					setStatus('Copiado (fallback) ✅');
+				}
+			});
+		}
+	}
+
+	// ============================================
+	// EMERGÊNCIA (Protocolos Data Module)
+	// ============================================
+	async function renderEmergencia(contentEl) {
+		contentEl.innerHTML = `
+			<div class="p-6 bg-[#e0e5ec]">
+				<div class="flex flex-col md:flex-row gap-6">
+					<!-- Sidebar: categorias -->
+					<div class="w-full md:w-1/3">
+						<div id="emerg-sidebar" class="rounded-[20px] bg-[#e0e5ec] p-4 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+							<h3 class="text-sm font-bold text-[#2d3748] mb-3 flex items-center gap-2">
+								<span class="material-symbols-outlined text-sm">emergency</span>
+								Categorias
+							</h3>
+							<div id="emerg-categories" class="flex flex-col gap-2">
+								<div class="text-center py-4 text-[#5f6775] text-sm">Carregando...</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Viewer -->
+					<div class="w-full md:w-2/3">
+						<div id="emerg-viewer"
+							class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[400px]">
+							<div class="text-center py-12 text-[#25282e]">
+								<span class="material-symbols-outlined text-5xl mb-4 text-[#5f6775]">emergency</span>
+								<h3 class="text-xl font-medium text-[#2d3748]">Protocolos de Emergência</h3>
+								<p class="text-[#25282e] mt-2">Selecione uma categoria à esquerda para ver os protocolos.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		`;
+
+		// Carrega protocolos-data-module.js
+		const ok = await loadScript('protocolos-data-module.js');
+		if (!ok) {
+			contentEl.innerHTML = errorMsg('Emergência');
+			return;
+		}
+
+		const PDM = window.ProtocolosDataModule;
+		if (!PDM) {
+			contentEl.innerHTML = errorMsg('Emergência');
+			return;
+		}
+
+		// Render categorias na sidebar
+		const categoriesEl = document.getElementById('emerg-categories');
+		if (!categoriesEl) return;
+
+		const categorias = PDM.getCategorias();
+		categoriesEl.innerHTML = categorias.map(cat => `
+			<button data-emerg-cat="${cat.key}"
+				class="emerg-cat-btn flex items-center justify-between rounded-[15px] bg-[#e0e5ec] px-4 py-2.5 text-xs font-bold text-slate-700 shadow-[4px_4px_8px_#c1c9d2,-4px_-4px_8px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_3px_3px_6px_#c1c9d2,inset_-3px_-3px_6px_#ffffff] transition-all text-left cursor-pointer">
+				<span>${cat.name}</span>
+				<span class="text-[10px] text-slate-400">${cat.count}</span>
+			</button>
+		`).join('');
+
+		// Event: clicar em categoria
+		categoriesEl.addEventListener('click', (e) => {
+			const btn = e.target.closest('[data-emerg-cat]');
+			if (!btn) return;
+
+			const catKey = btn.dataset.emergCat;
+
+			// Highlight categoria ativa
+			categoriesEl.querySelectorAll('.emerg-cat-btn').forEach(b => {
+				if (b.dataset.emergCat === catKey) {
+					b.classList.add('text-[#007BFF]');
+					b.style.boxShadow = 'inset 3px 3px 6px #c1c9d2, inset -3px -3px 6px #ffffff';
+				} else {
+					b.classList.remove('text-[#007BFF]');
+					b.style.boxShadow = '4px 4px 8px #c1c9d2, -4px -4px 8px #ffffff';
+				}
+			});
+
+			// Render lista de protocolos da categoria
+			renderEmergCategory(catKey, PDM);
+		});
+	}
+
+	/**
+	 * Renderiza lista de protocolos de uma categoria de emergência
+	 */
+	function renderEmergCategory(catKey, PDM) {
+		const viewer = document.getElementById('emerg-viewer');
+		if (!viewer) return;
+
+		const protocolos = PDM.getProtocolosPorCategoria(catKey);
+		if (!protocolos.length) {
+			viewer.innerHTML = `<div class="text-center py-8 text-[#5f6775]"><p>Nenhum protocolo nesta categoria.</p></div>`;
+			return;
+		}
+
+		let html = `<div class="space-y-3">`;
+		html += `<h3 class="text-base font-bold text-[#2d3748] mb-3">${protocolos[0]?.categoriaNome || catKey}</h3>`;
+
+		protocolos.forEach(p => {
+			html += `
+				<button data-emerg-proto="${p.key}" data-emerg-cat="${catKey}"
+					class="emerg-proto-btn w-full text-left rounded-[15px] bg-[#e0e5ec] px-4 py-3 text-sm font-medium text-[#25282e] shadow-[4px_4px_8px_#c1c9d2,-4px_-4px_8px_#ffffff] border-none hover:text-[#007BFF] hover:shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] active:shadow-[inset_3px_3px_6px_#c1c9d2,inset_-3px_-3px_6px_#ffffff] transition-all cursor-pointer">
+					<span class="material-symbols-outlined text-sm mr-2 align-middle text-indigo-400">article</span>
+					${p.title}
+				</button>
+			`;
+		});
+
+		html += `</div>`;
+		viewer.innerHTML = html;
+
+		// Event: clicar em protocolo
+		viewer.addEventListener('click', (e) => {
+			const btn = e.target.closest('[data-emerg-proto]');
+			if (!btn) return;
+
+			const proto = PDM.getProtocolo(btn.dataset.emergCat, btn.dataset.emergProto);
+			if (proto) renderEmergProtocol(proto);
+		});
+	}
+
+	/**
+	 * Renderiza um protocolo de emergência individual
+	 */
+	function renderEmergProtocol(proto) {
+		const viewer = document.getElementById('emerg-viewer');
+		if (!viewer) return;
+
+		let html = `
+			<div class="space-y-4">
+				<div class="flex items-center justify-between">
+					<h3 class="text-lg font-bold text-[#2d3748] flex items-center gap-2">
+						<span class="material-symbols-outlined text-indigo-500">emergency</span>
+						${proto.title}
+					</h3>
+					<button id="emerg-back-btn"
+						class="inline-flex items-center gap-1 rounded-full bg-[#e0e5ec] px-3 py-1.5 text-xs font-bold text-slate-600 shadow-[4px_4px_8px_#c1c9d2,-4px_-4px_8px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_3px_3px_6px_#c1c9d2,inset_-3px_-3px_6px_#ffffff] transition-all cursor-pointer">
+						<span class="material-symbols-outlined text-sm">arrow_back</span>
+						Voltar
+					</button>
+				</div>
+
+				<!-- Conteúdo do protocolo -->
+				<div class="rounded-[15px] bg-white bg-opacity-80 p-4 shadow-sm border border-gray-200 overflow-auto max-h-[500px] text-sm">
+					${proto.content || '<p class="text-slate-500">Sem conteúdo disponível.</p>'}
+				</div>
+		`;
+
+		// Prescrição
+		if (proto.rx_text) {
+			html += `
+				<div class="mt-4 p-5 bg-blue-50 border border-blue-200 rounded-[15px]">
+					<div class="flex justify-between items-center mb-3">
+						<h4 class="text-sm font-bold text-blue-800 flex items-center">
+							<span class="material-symbols-outlined mr-2 text-sm">description</span>
+							Sugestão de Prescrição
+						</h4>
+						<button id="emerg-copy-rx"
+							class="rounded-[15px] bg-white shadow-sm text-blue-600 px-3 py-1.5 text-xs font-bold hover:text-blue-800 hover:shadow-md transition-all active:scale-95 border border-blue-100 flex items-center gap-1 cursor-pointer">
+							<span class="material-symbols-outlined text-sm">content_copy</span>
+							Copiar Rx
+						</button>
+					</div>
+					<div class="bg-white p-4 rounded-[15px] shadow-[inset_2px_2px_5px_#e2e8f0,inset_-2px_-2px_5px_#ffffff] font-mono text-xs text-slate-600 whitespace-pre-wrap leading-relaxed border border-slate-100">${proto.rx_text}</div>
+				</div>
+			`;
+		}
+
+		html += `</div>`;
+		viewer.innerHTML = html;
+
+		// Botão voltar
+		const backBtn = document.getElementById('emerg-back-btn');
+		if (backBtn) {
+			backBtn.addEventListener('click', () => {
+				renderEmergCategory(proto.categoria, window.ProtocolosDataModule);
+			});
+		}
+
+		// Botão copiar Rx
+		const copyBtn = document.getElementById('emerg-copy-rx');
+		if (copyBtn && proto.rx_text) {
+			copyBtn.addEventListener('click', async () => {
+				try {
+					await navigator.clipboard.writeText(proto.rx_text);
+					copyBtn.textContent = 'Copiado ✅';
+					setTimeout(() => { copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx'; }, 1500);
+				} catch {
+					const ta = document.createElement('textarea');
+					ta.value = proto.rx_text;
+					document.body.appendChild(ta);
+					ta.select();
+					document.execCommand('copy');
+					ta.remove();
+					copyBtn.textContent = 'Copiado ✅';
+					setTimeout(() => { copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx'; }, 1500);
+				}
+			});
+		}
+	}
+
+	// ============================================
+	// PLACEHOLDER
+	// ============================================
+	function showPlaceholder(contentEl, tool) {
+		contentEl.innerHTML = `
+			<div class="flex flex-col items-center justify-center py-16 text-slate-500">
+				<span class="material-symbols-outlined text-6xl mb-4 text-slate-300">construction</span>
+				<h3 class="text-lg font-bold text-[#2d3748] mb-2">${tool.name}</h3>
+				<p class="text-sm text-slate-500">${tool.description}</p>
+				<p class="text-xs text-slate-400 mt-4">Módulo em desenvolvimento — em breve disponível.</p>
+			</div>
+		`;
+	}
+
+	// ============================================
+	// ERROR MSG HELPER
+	// ============================================
+	function errorMsg(moduleName) {
+		return `<div class="p-8 text-center text-red-500">
+			<span class="material-symbols-outlined text-4xl mb-2">error</span>
+			<p>Erro ao carregar módulo: ${moduleName}</p>
+		</div>`;
+	}
+
+	// ============================================
+	// BOOT
+	// ============================================
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderApoioTab);
+	} else {
+		renderApoioTab();
+	}
+
+	window.renderApoioTab = renderApoioTab;
+	window.switchApoio = switchApoio;
+})();
+
+
+/* ==========================================
+   [24/25] geral/components/prescription/tabs/js/tab_psf.js
+   ========================================== */
+//@ts-nocheck
+// tab_psf.js — Aba PSF (Estratégia Saúde da Família)
+// Renderiza menu de ferramentas + carrega módulos sob demanda (lazy load)
+(() => {
+	'use strict';
+
+	const PSF_CDN = 'https://cdn.gtmedics.com/geral/components/prescription/tabs/psf';
+	const APOIO_CDN = 'https://cdn.gtmedics.com/apoioClinico';
+
+	// Ferramentas PSF — cada uma com tipo de renderização
+	const psfTools = [
+		{ key: 'home',       name: 'PSF',                          icon: 'healing',        script: 'index.js',     containerId: 'psf_home',       renderFn: 'renderPsfHome' },
+		{ key: 'patologias', name: 'Patologias Comuns',            icon: 'healing',        script: 'psf-app.js',   containerId: 'psf_patologias', renderFn: 'renderPsfPatologias', cdn: APOIO_CDN },
+		{ key: 'marevan',    name: 'Anticoagulação com Varfarina', icon: 'blood_pressure', script: 'marevan.js',   containerId: 'tab_marevan',    renderFn: 'renderMarevanTab' },
+		{ key: 'radio',      name: 'Incidências de RX',           icon: 'glucose',        script: 'inc_radio.js', containerId: 'tab_radio',      renderFn: 'renderRadioTab' },
+	];
+
+	let loaderPsf = null;
+	let loaderApoio = null;
+	const loadedScripts = new Set();
+
+	/**
+	 * Renderiza a aba PSF
+	 */
+	function renderPsfTab() {
+		const container = document.getElementById('tab_psf');
+		if (!container) {
+			console.error('[PSF] Container #tab_psf não encontrado');
+			return;
+		}
+
+		container.innerHTML = `
+      <section id="tab-psf" class="tabPanel hidden print:hidden">
+        <div class="w-full max-w-7xl">
+          <div
+            class="rounded-[20px] bg-[#e0e5ec] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+
+            <!-- Header -->
+            <header class="flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-slate-800">groups</span>
+                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Estratégia Saúde da Família (PSF)</h1>
+                </div>
+              </div>
+
+              <div class="px-6 pb-2">
+                <div
+                  class="rounded-2xl bg-[#e0e5ec] p-4 text-sm text-slate-800 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+                  <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
+                    <div class="space-y-1">
+                      <div class="font-semibold text-[#2d3748]">Protocolos e Ferramentas da Atenção Primária.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <!-- Menu de Seleção PSF -->
+            <div id="menu-psf" class="px-6 pb-4 flex flex-wrap gap-3"></div>
+
+            <!-- Content -->
+            <section class="p-4 pt-2">
+              <div class="bg-gray-200 overflow-hidden rounded-xl border border-gray-300">
+                <div id="psf-content" class="min-h-[400px]"></div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </section>
+    `;
+
+		initializePsfTab();
+	}
+
+	/**
+	 * Inicializa menu + carrega primeiro tool
+	 */
+	function initializePsfTab() {
+		loaderPsf = new CDNLoader(PSF_CDN);
+		loaderApoio = new CDNLoader(APOIO_CDN);
+		const menuContainer = document.getElementById('menu-psf');
+
+		if (menuContainer) {
+			menuContainer.innerHTML = psfTools.map(tool => `
+				<button data-psf-key="${tool.key}"
+					class="psf-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none">
+					<span class="material-symbols-outlined text-base">${tool.icon}</span>
+					${tool.name}
+				</button>
+			`).join('');
+
+			menuContainer.addEventListener('click', (e) => {
+				const btn = e.target.closest('[data-psf-key]');
+				if (btn) switchTool(btn.dataset.psfKey);
+			});
+		}
+
+		// Auto-load primeiro tool (PSF Home)
+		switchTool(psfTools[0].key);
+		console.log('[PSF] Aba renderizada e inicializada');
+	}
+
+	/**
+	 * Alterna entre ferramentas PSF
+	 */
+	async function switchTool(key) {
+		const tool = psfTools.find(t => t.key === key);
+		if (!tool) return;
+
+		const psfContent = document.getElementById('psf-content');
+
+		// Highlight botão ativo
+		document.querySelectorAll('.psf-menu-btn').forEach(btn => {
+			const isActive = btn.dataset.psfKey === key;
+			if (isActive) {
+				btn.classList.add('text-[#007BFF]');
+				btn.style.boxShadow = 'inset 4px 4px 8px #c1c9d2, inset -4px -4px 8px #ffffff';
+			} else {
+				btn.classList.remove('text-[#007BFF]');
+				btn.style.boxShadow = '6px 6px 12px #c1c9d2, -6px -6px 12px #ffffff';
+			}
+		});
+
+		if (psfContent) {
+			psfContent.innerHTML = `<div id="${tool.containerId}"></div>`;
+		}
+
+		// Seleciona loader correto (apoioClinico ou PSF tabs)
+		const loader = tool.cdn ? loaderApoio : loaderPsf;
+
+		// Carrega script se ainda não carregou (lazy load)
+		if (!loadedScripts.has(tool.script)) {
+			try {
+				await loader.load(tool.script);
+				loadedScripts.add(tool.script);
+			} catch (err) {
+				console.error(`[PSF] Erro ao carregar ${tool.script}:`, err);
+				if (psfContent) psfContent.innerHTML = `<div class="p-8 text-center text-red-500">Erro ao carregar módulo: ${tool.name}</div>`;
+				return;
+			}
+		}
+
+		// Renderiza no container (primeiro load + re-renderizações)
+		if (window[tool.renderFn]) {
+			window[tool.renderFn]();
+		}
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderPsfTab);
+	} else {
+		renderPsfTab();
+	}
+
+	window.renderPsfTab = renderPsfTab;
+	window.switchPsfTool = switchTool;
+})();
+
+
+/* ==========================================
+   [25/25] geral/components/prescription/js/page_controller.js
+   ========================================== */
+// page_controller.js (FINAL)
+// Responsabilidades EXCLUSIVAS:
+//   - Codes panel (sidebar busca rápida hotstrings)
+//   - Editor Table CRUD (aba editar hotstrings)
+//   - Import/Export/Reset hotstrings
+//   - Convert Text modal
+//   - Hotstring expansion em textareas (examText)
+//   - Backward compat stubs (CNES inline onclick)
+//
+// MIGRADO para header_toolbar.js:     print/clear/copy buttons, checkboxes (SUS/codes/medico/local)
+// MIGRADO para header_tool_container.js: tab navigation, lazy-init módulos
+// MIGRADO para prescription_box.js:    insertAtCursor, adjustFontSize, tryExpandActiveWord
+// MIGRADO para aside_cnes_search.js:   preencherCNES, limparCamposCNES
+(() => {
+  'use strict';
+
+  const el = (id) => document.getElementById(id);
+  const on = (node, evt, fn, opts) => { if (node) node.addEventListener(evt, fn, opts); };
+
+  const safeFirstLine = (text) => {
+    const first = String(text || '').split('\n')[0] || '';
+    return first.length > 80 ? first.slice(0, 80) + '…' : first;
+  };
+
+  // =========================================
+  // HOTSTRINGS DATA
+  // =========================================
+
+  const getHotstringsData = () => {
+    if (window.HotstringsModule?.data) return window.HotstringsModule.data;
+    return typeof window.hotstrings === 'object' && window.hotstrings ? window.hotstrings : {};
+  };
+
+  let hotstringsRef = getHotstringsData();
+
+  if (!Object.keys(hotstringsRef).length) {
+    const retry = setInterval(() => {
+      const data = getHotstringsData();
+      if (Object.keys(data).length) {
+        hotstringsRef = data;
+        renderHotstringsList(el('searchBox')?.value || '');
+        renderEditorTable();
+        clearInterval(retry);
+      }
+    }, 500);
+    setTimeout(() => clearInterval(retry), 10000);
+  }
+
+  const DEFAULT_HOTSTRINGS = JSON.parse(JSON.stringify(hotstringsRef));
+
+  // =========================================
+  // TAB CHANGE LISTENER
+  // =========================================
+
+  const bus = window.__asideBus;
+
+  function onTabChanged(tab) {
+    if (tab === 'editar') {
+      hotstringsRef = getHotstringsData();
+      renderEditorTable();
+    }
+  }
+
+  bus?.on('tabChanged', ({ tab }) => onTabChanged(tab));
+  window.addEventListener('tabChanged', (e) => onTabChanged(e.detail?.tab));
+
+  // =========================================
+  // CODES PANEL
+  // =========================================
+
+  const searchBox = el('searchBox');
+
+  function renderHotstringsList(filter = '') {
+    const container = el('hotstringItems');
+    const counter = el('codesCount');
+    if (!container || !counter) return;
+
+    container.innerHTML = '';
+    const entries = Object.entries(hotstringsRef).sort((a, b) => a[0].localeCompare(b[0], 'pt-BR'));
+    counter.textContent = String(entries.length);
+
+    const term = filter.trim().toLowerCase();
+    if (!term) {
+      container.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-8 text-slate-400 opacity-60">
+          <span class="material-symbols-outlined text-4xl mb-2">manage_search</span>
+          <span class="text-xs font-medium">Digite para buscar...</span>
+        </div>`;
+      return;
+    }
+
+    let count = 0;
+    const LIMIT = 50;
+    const fragment = document.createDocumentFragment();
+
+    for (const [code, text] of entries) {
+      if (!code.toLowerCase().includes(term)) continue;
+      if (count >= LIMIT) {
+        const more = document.createElement('div');
+        more.className = 'text-center text-xs text-slate-400 py-2 italic border-t border-slate-100 mt-2';
+        more.textContent = '...e mais resultados. Refine sua busca.';
+        fragment.appendChild(more);
+        break;
+      }
+
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'w-full text-left px-3 py-2 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300 rounded-lg transition-colors group mb-1';
+      row.innerHTML = `
+        <div class="flex items-start justify-between gap-3">
+          <div class="min-w-0">
+            <div class="font-mono text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors bg-slate-100 inline-block px-1.5 rounded text-[11px] mb-1">${code}</div>
+            <div class="text-[11px] text-slate-600 leading-snug line-clamp-2 text-justify">${safeFirstLine(text)}</div>
+          </div>
+          <span class="material-symbols-outlined text-slate-300 text-[16px] group-hover:text-blue-500 transition-colors mt-1">input</span>
+        </div>`;
+
+      on(row, 'click', () => {
+        const api = window.__asideRegistry?.get('prescription-editor');
+        if (api?.insertAtCursor) { api.insertAtCursor(code + ' '); }
+        else if (window.insertAtCursor) { window.insertAtCursor(code + ' '); }
+      });
+
+      fragment.appendChild(row);
+      count++;
+    }
+
+    if (!count) {
+      container.innerHTML = '<div class="py-6 text-center text-sm text-slate-500">Nenhum resultado encontrado.</div>';
+    } else {
+      container.appendChild(fragment);
+    }
+  }
+
+  on(searchBox, 'input', () => renderHotstringsList(searchBox.value));
+
+  // =========================================
+  // HOTSTRING EXPANSION — Exames textarea only
+  // =========================================
+
+  function tryExpandInTextarea(textarea) {
+    if (!textarea || !hotstringsRef) return;
+    const cursorPos = textarea.selectionStart ?? textarea.value.length;
+    const before = textarea.value.slice(0, cursorPos);
+    if (!/\s$/.test(before)) return;
+
+    const trimmed = before.trimEnd();
+    const match = trimmed.match(/(\S+)$/);
+    if (!match) return;
+
+    const word = match[1];
+    let key = word;
+    if (!Object.prototype.hasOwnProperty.call(hotstringsRef, word)) {
+      key = Object.keys(hotstringsRef).find((k) => k.toLowerCase() === word.toLowerCase());
+    }
+    if (!key) return;
+
+    const expansion = hotstringsRef[key];
+    const newBefore = trimmed.slice(0, trimmed.length - word.length) + expansion + ' ';
+    textarea.value = newBefore + textarea.value.slice(cursorPos);
+    textarea.setSelectionRange(newBefore.length, newBefore.length);
+  }
+
+  document.addEventListener('input', (e) => {
+    if (e.target?.id === 'examText') tryExpandInTextarea(e.target);
+  });
+
+  // =========================================
+  // EDITOR TABLE — CRUD
+  // =========================================
+
+  let editorCurrentPage = 1;
+  let editorItemsPerPage = 10;
+  let editorFilter = '';
+
+  const editorHotstringsList = el('editorHotstringsList');
+  const searchEditorInput = el('searchEditorInput');
+  const itemsPerPageSelect = el('itemsPerPageSelect');
+  const prevPageBtn = el('prevPageBtn');
+  const nextPageBtn = el('nextPageBtn');
+  const pageNumbers = el('pageNumbers');
+  const totalItemsSpan = el('totalItems');
+  const gotoPageInput = el('gotoPageInput');
+
+  const hotstringModal = el('hotstringModal');
+  const modalCodeInput = el('modalCodeInput');
+  const modalTextInput = el('modalTextInput');
+  const modalTitle = el('modalTitle');
+  const modalSaveBtn = el('modalSaveBtn');
+  const modalCancelBtn = el('modalCancelBtn');
+  let editingOriginalCode = null;
+
+  function getFilteredSorted() {
+    const entries = Object.entries(hotstringsRef);
+    const term = editorFilter.trim().toLowerCase();
+    let filtered = term
+      ? entries.filter(([c, t]) => c.toLowerCase().includes(term) || t.toLowerCase().includes(term))
+      : entries;
+    return filtered.sort((a, b) => a[0].localeCompare(b[0], 'pt-BR'));
+  }
+
+  function renderEditorTable() {
+    if (!editorHotstringsList) return;
+    const all = getFilteredSorted();
+    const total = all.length;
+    if (totalItemsSpan) totalItemsSpan.textContent = total;
+
+    const totalPages = Math.ceil(total / editorItemsPerPage) || 1;
+    editorCurrentPage = Math.max(1, Math.min(editorCurrentPage, totalPages));
+
+    const start = (editorCurrentPage - 1) * editorItemsPerPage;
+    const page = all.slice(start, start + editorItemsPerPage);
+
+    editorHotstringsList.innerHTML = '';
+
+    if (!page.length) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td colspan="3" class="px-6 py-4 text-center text-slate-500">Nenhum item encontrado</td>';
+      editorHotstringsList.appendChild(tr);
+    } else {
+      for (const [code, text] of page) {
+        const tr = document.createElement('tr');
+        tr.className = 'group transition-colors hover:bg-black/5 text-slate-800 border-b border-transparent hover:border-slate-200';
+        const display = text.length > 60 ? text.slice(0, 60) + '...' : text;
+        tr.innerHTML = `
+          <td class="px-6 py-4 font-mono font-bold align-top select-all">${code}</td>
+          <td class="px-6 py-4 whitespace-pre-wrap align-top text-xs">${display}</td>
+          <td class="px-6 py-4 align-top text-right">
+            <div class="flex items-center justify-end gap-2 opacity-50 group-hover:opacity-100 transition-opacity">
+              <button type="button" class="btn-edit p-2 rounded-full hover:bg-blue-100 text-slate-500 hover:text-blue-600 transition-colors" title="Editar"><span class="material-symbols-outlined text-lg">edit</span></button>
+              <button type="button" class="btn-delete p-2 rounded-full hover:bg-red-100 text-slate-500 hover:text-red-600 transition-colors" title="Excluir"><span class="material-symbols-outlined text-lg">delete</span></button>
+            </div>
+          </td>`;
+        tr.querySelector('.btn-edit').onclick = () => openModal(code, text);
+        tr.querySelector('.btn-delete').onclick = () => deleteHotstring(code);
+        editorHotstringsList.appendChild(tr);
+      }
+    }
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages) {
+    if (pageNumbers) {
+      pageNumbers.innerHTML = '';
+      const info = document.createElement('span');
+      info.className = 'text-sm font-semibold text-slate-800 self-center';
+      info.textContent = `${editorCurrentPage} / ${totalPages}`;
+      pageNumbers.appendChild(info);
+    }
+    if (prevPageBtn) prevPageBtn.disabled = editorCurrentPage <= 1;
+    if (nextPageBtn) nextPageBtn.disabled = editorCurrentPage >= totalPages;
+    if (gotoPageInput) gotoPageInput.value = editorCurrentPage;
+  }
+
+  function openModal(code = null, text = null) {
+    if (hotstringModal) hotstringModal.classList.remove('hidden');
+    editingOriginalCode = code;
+    if (modalTitle) modalTitle.textContent = code ? 'Editar Hotstring' : 'Adicionar Hotstring';
+    if (modalCodeInput) modalCodeInput.value = code || '';
+    if (modalTextInput) modalTextInput.value = text || '';
+    modalCodeInput?.focus();
+  }
+
+  function closeModal() {
+    if (hotstringModal) hotstringModal.classList.add('hidden');
+    editingOriginalCode = null;
+  }
+
+  function saveHotstring() {
+    const code = modalCodeInput?.value.trim();
+    const text = modalTextInput?.value;
+    if (!code) return alert('Código é obrigatório!');
+    if (hotstringsRef[code] && (editingOriginalCode !== code || !editingOriginalCode)) {
+      if (!confirm(`"${code}" já existe. Sobrescrever?`)) return;
+    }
+    if (editingOriginalCode && code !== editingOriginalCode) delete hotstringsRef[editingOriginalCode];
+    hotstringsRef[code] = text;
+    closeModal();
+    renderHotstringsList();
+    renderEditorTable();
+  }
+
+  function deleteHotstring(code) {
+    if (confirm(`Excluir "${code}"?`)) {
+      delete hotstringsRef[code];
+      renderHotstringsList();
+      renderEditorTable();
+    }
+  }
+
+  on(el('addNewHotstringBtn'), 'click', () => openModal());
+  on(modalCancelBtn, 'click', closeModal);
+  on(modalSaveBtn, 'click', saveHotstring);
+  on(searchEditorInput, 'input', (e) => { editorFilter = e.target.value; editorCurrentPage = 1; renderEditorTable(); });
+  on(itemsPerPageSelect, 'change', (e) => { editorItemsPerPage = parseInt(e.target.value); editorCurrentPage = 1; renderEditorTable(); });
+  on(prevPageBtn, 'click', () => { if (editorCurrentPage > 1) { editorCurrentPage--; renderEditorTable(); } });
+  on(nextPageBtn, 'click', () => { const tp = Math.ceil(getFilteredSorted().length / editorItemsPerPage) || 1; if (editorCurrentPage < tp) { editorCurrentPage++; renderEditorTable(); } });
+  on(gotoPageInput, 'change', (e) => { const v = parseInt(e.target.value); if (v > 0) { editorCurrentPage = v; renderEditorTable(); } });
+
+  // =========================================
+  // CONVERT TEXT MODAL
+  // =========================================
+
+  const convertTextModal = el('convertTextModal');
+  const convertCodeInput = el('convertCodeInput');
+  const convertTextInput = el('convertTextInput');
+
+  on(el('convertTextBtn'), 'click', () => { if (convertTextModal) convertTextModal.classList.remove('hidden'); if (convertCodeInput) convertCodeInput.value = ''; if (convertTextInput) convertTextInput.value = ''; });
+  on(el('convertCancelBtn'), 'click', () => { if (convertTextModal) convertTextModal.classList.add('hidden'); });
+  on(el('convertSaveBtn'), 'click', () => {
+    const code = convertCodeInput?.value.trim();
+    const text = convertTextInput?.value;
+    if (!code) return alert('Código necessário');
+    if (hotstringsRef[code] && !confirm('Sobrescrever?')) return;
+    hotstringsRef[code] = text;
+    if (convertTextModal) convertTextModal.classList.add('hidden');
+    renderHotstringsList();
+    renderEditorTable();
+  });
+
+  // =========================================
+  // RESET / EXPORT / IMPORT
+  // =========================================
+
+  on(el('resetBtn'), 'click', () => {
+    if (!confirm('Restaurar hotstrings para o padrão original?')) return;
+    for (const k of Object.keys(hotstringsRef)) delete hotstringsRef[k];
+    Object.assign(hotstringsRef, DEFAULT_HOTSTRINGS);
+    renderHotstringsList();
+    renderEditorTable();
+    alert('Restaurado para o padrão.');
+  });
+
+  on(el('exportBtn'), 'click', () => {
+    const a = document.createElement('a');
+    a.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(hotstringsRef, null, 2));
+    a.download = 'hotstrings_backup.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+
+  on(el('importInput'), 'change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const obj = JSON.parse(evt.target.result);
+        if (obj && typeof obj === 'object') {
+          if (!confirm('Importar substituirá a lista atual. Continuar?')) return;
+          for (const k of Object.keys(hotstringsRef)) delete hotstringsRef[k];
+          Object.assign(hotstringsRef, obj);
+          renderHotstringsList();
+          renderEditorTable();
+          alert('Importado com sucesso!');
+        } else { alert('Arquivo inválido.'); }
+      } catch (err) { alert('Erro ao ler JSON: ' + err.message); }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
+  // =========================================
+  // BACKWARD COMPAT STUBS
+  // =========================================
+
+  window.mostrarCNES = function () {
+    const select = el('select-unidade'), container = el('cnes-container'), input = el('input-cnes');
+    if (!select) return;
+    const cnes = select.value;
+    if (input) input.value = cnes;
+    if (container) container.style.display = cnes ? 'flex' : 'none';
+  };
+
+  window.inserirCNES = function () {
+    const cnes = el('input-cnes')?.value;
+    if (!cnes) return;
+    const api = window.__asideRegistry?.get('cnes-search');
+    if (api?.search) api.search(cnes);
+    else if (window.searchCNES) window.searchCNES(cnes);
+  };
+
+  window.limparCamposCNES = function () { window.__asideBus?.emit('cnesDataCleared'); };
+  window.preencherCNES = function (cnes, btn) { if (window.searchCNES) window.searchCNES(cnes, btn); };
+
+  // =========================================
+  // INIT
+  // =========================================
+
+  renderHotstringsList();
+  renderEditorTable();
+})();
+

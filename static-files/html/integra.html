@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apoio médico (Para profissionais de saúde)</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Material Symbols -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,200..700,0..1,-50..200" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,400,0,0&icon_names=cognition" />
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Estilos Globais -->
+  <link rel="stylesheet" href="https://cdn.gtmedics.com/geral/css/styles.min.css">
+  <!-- <script src="https://cdn.gtmedics.com/geral/js/bundle.js?v=2.0.0"></script> -->
+  <!-- Limpeza ao fechar o navegador -->
+  <script>
+    window.addEventListener('beforeunload', function (e) {
+      localStorage.clear();
+      sessionStorage.clear();
+      document.cookie.split(";").forEach(function (c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+      });
+    });
+  </script>
+
+
+</head>
+
+<body class="min-h-screen bg-white text-slate-900">
+  <div class="mx-auto w-full max-w-[1400px] p-4 md:p-6">
+    <!-- APP SHELL -->
+    <div
+      class="rounded-[20px] bg-[#e0e5ec] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+      <!-- HEADER -->
+      <div id="header-index"></div>
+
+      <!-- PAINEL DE TABS -->
+      <div class="p-2 md:p-4">
+        <!-- RECEITUÁRIO -->
+        <section id="tab-prescricao" class="tabPanel p-4">
+          <!-- Conteúdo renderizado por JS -->
+        </section>
+        <!-- EXAMES -->
+        <section id="tab_exames" class="hidden">
+          <!-- Conteúdo renderizado por JS -->
+        </section>
+        <!-- GUIAS SUS -->
+        <section id="tab_guias" class="hidden">
+          <!-- Conteúdo renderizado por JS -->
+        </section>
+        <!-- EDITAR -->
+        <section id="tab_editar" class="hidden">
+          <!-- Conteúdo renderizado por JS -->
+        </section>
+        <!-- APOIO -->
+        <section id="tab_apoio" class="hidden">
+          <!-- Conteúdo renderizado por JS -->
+        </section>
+        <!-- CALCULADORAS -->
+        <section id="tab_calculadoras" class="hidden">
+          <!-- Conteúdo renderizado por JS -->
+        </section>
+        <!-- PSF -->
+        <section id="tab_psf" class="hidden">
+          <!-- Conteúdo renderizado por JS -->
+        </section>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center text-[11px] font-semibold text-slate-900 print:hidden">
+      GT-Medics - 2025 ®
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCRIPTS DO CDN (ORDEM CORRIGIDA)
+       ============================================ -->
+
+  <!-- 1️⃣ DADOS E UTILITÁRIOS (carregam primeiro) -->
+  <script src="https://cdn.gtmedics.com/apoioClinico/js/unified_hotstrings.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/js/adm_drugs.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/js/ufs-brasil-module.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/api/js/functions-initial.js?v=2.0.0"></script>
+
+  <!-- 2️⃣ HEADER (ordem: Index → ToolContainer → Toolbar) -->
+  <script src="https://cdn.gtmedics.com/geral/components/header/js/header_index.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/header/js/header_tool_container.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/header/js/header_toolbar.js?v=2.0.0"></script>
+
+  <!-- 3️⃣ Infraestrutura (Event Bus & Registry) -->
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/aside/js/aside_event_bus.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/aside/js/aside_registry.js?v=2.0.0"></script>
+
+  <!-- 4️⃣ Componentes de Prescrição -->
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/js/prescription_header.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/js/prescription_footer.js?v=2.0.0"></script>
+  <script
+    src="https://cdn.gtmedics.com/geral/components/prescription/box/js/apoiomed_prescription_box.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/aside/js/aside_cnes_search.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/aside/js/aside_ubs_selector.js?v=2.0.0"></script>
+  <script
+    src="https://cdn.gtmedics.com/geral/components/prescription/aside/js/aside_formatting_tools.js?v=2.0.0"></script>
+  <script
+    src="https://cdn.gtmedics.com/geral/components/prescription/aside/js/aside_hotstrings_panel.js?v=2.0.0"></script>
+
+  <!-- 3. Orquestradores -->
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/aside/js/apoiomed_aside.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/tabs/js/tab_receituario.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/tabs/js/tab_exames.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/tabs/js/tab_guias.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/tabs/js/tab_apoio.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/tabs/js/tab_calculadora.js?v=2.0.0"></script>
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/tabs/js/tab_psf.js?v=2.0.0"></script>
+
+  <!-- 4. Page controller (por último) -->
+  <script src="https://cdn.gtmedics.com/geral/components/prescription/js/page_controller.js?v=2.0.0"></script>
+
+  <script>
+    console.log('✅ Todos os scripts CDN carregados com sucesso!');
+    console.log('📦 Componentes disponíveis:', Object.keys(window).filter(k => k.startsWith('render')));
+  </script>
+</body>
+
+</html>

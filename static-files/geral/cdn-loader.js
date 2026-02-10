@@ -1,7 +1,8 @@
 class CDNLoader {
-	constructor(baseUrl) {
+	constructor(baseUrl, { subDir = 'js' } = {}) {
 		// Remove barra final do baseUrl se existir
 		this.baseUrl = baseUrl.replace(/\/$/, '');
+		this.subDir = subDir;
 		this.manifestPromise = null;
 	}
 
@@ -28,9 +29,13 @@ class CDNLoader {
 		try {
 			const manifest = await this.getManifest();
 			// Se achar no manifest, usa o hash; senão, usa o nome original
-			const hashed = manifest[logicalName] || logicalName;
+			const hashed = manifest[logicalName];
+			if (!hashed) {
+				console.warn(`CDNLoader: "${logicalName}" não encontrado no manifest, usando fallback sem hash.`);
+			}
+			const resolved = hashed || logicalName;
 
-			return this.injectScript(hashed, opts);
+			return this.injectScript(resolved, opts);
 		} catch (error) {
 			console.error(`CDNLoader: Falha ao carregar ${logicalName}`, error);
 			throw error;
@@ -80,8 +85,8 @@ class CDNLoader {
 			}
 		}
 
-		// 3. Padrão: assume que está na pasta /js/
-		return `${this.baseUrl}/js/${fileOrPath}`;
+		// 3. Padrão: usa subDir configurado no construtor (default: 'js')
+		return `${this.baseUrl}/${this.subDir}/${fileOrPath}`;
 	}
 }
 

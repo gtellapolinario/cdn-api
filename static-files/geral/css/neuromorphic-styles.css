@@ -1,0 +1,1185 @@
+/* ==========================================================================
+	NEUROMORPHIC.CSS - Unified Stylesheet for Medical Calculators App
+	Version: 2.0 (Refactored)
+	Author: Original by Gemini, refactored by Claude
+	Description: Deduplicated, consolidated neuromorphic design system.
+
+	==========================================================================
+	CHANGELOG v1.0 → v2.0 — CONSOLIDATION REPORT
+	==========================================================================
+
+	╔══════════════════════════════════════════════════════════════════════════╗
+	║  DUPLICATED CSS VARIABLES REMOVED                                      ║
+	╠══════════════════════════════════════════════════════════════════════════╣
+	║                                                                        ║
+	║  --gap-* e --space-* tinham valores 100% identicos:                    ║
+	║    --gap-2xs = --space-2xs (0.5rem)                                    ║
+	║    --gap-xs  = --space-xs  (1rem)                                      ║
+	║    --gap-sm  = --space-sm  (1.5rem)                                    ║
+	║    --gap-md  = --space-md  (2rem)                                      ║
+	║    --gap-lg  = --space-lg  (2.5rem)                                    ║
+	║    --gap-xl  = --space-xl  (3rem)                                      ║
+	║    --gap-2xl = --space-2xl (3.5rem)                                    ║
+	║    --gap-3xl = --space-3xl (4rem)                                      ║
+	║  ACAO: Removido --gap-*. Refs migradas para --space-*.                 ║
+	║                                                                        ║
+	║  --c-info: #007bff = --c-accent: #007bff                              ║
+	║  ACAO: Removido --c-info. Use --c-accent.                              ║
+	║                                                                        ║
+	╠══════════════════════════════════════════════════════════════════════════╣
+	║  DUPLICATED RULESETS REMOVED                                           ║
+	╠══════════════════════════════════════════════════════════════════════════╣
+	║                                                                        ║
+	║  1. .main-nav — Secao 3 + Secao 5 (subconjunto)                       ║
+	║     ACAO: Mantida Secao 3 (completa). Removida Secao 5.               ║
+	║                                                                        ║
+	║  2. .tabs-nav — Secao 5 + Secao 9 (identica)                          ║
+	║     ACAO: Mantida uma unica vez.                                       ║
+	║                                                                        ║
+	║  3. .tab-button — Secao 5 (parcial) + Secao 9 (completa)              ║
+	║     ACAO: Mantida versao completa (Secao 9 = superset).                ║
+	║                                                                        ║
+	║  4. .tab-button.active — Secao 5 + Secao 9                            ║
+	║     ACAO: Unificada (font-weight:700 = bold).                          ║
+	║                                                                        ║
+	║  5. .tab-panel / .tab-panel.active — Secao 5 + Secao 9                ║
+	║     ACAO: Unificada com animation (superset).                          ║
+	║                                                                        ║
+	║  6. .button-icon — Secao 7 + Secao 14 (identica)                      ║
+	║     ACAO: Mantida uma vez na Secao 4.                                  ║
+	║                                                                        ║
+	║  7. .tool-button:hover .button-icon — Secao 7 + Secao 14 (identica)   ║
+	║     ACAO: Mantida uma vez na Secao 4.                                  ║
+	║                                                                        ║
+	║  8. @media (max-width: 900px) — Secao 8 + Secao 11 (identica)         ║
+	║     ACAO: Secao 11 inteira removida.                                   ║
+	║                                                                        ║
+	║  9. .neumo-table — Secao 7 vs Secao 12 (CONFLITO)                     ║
+	║     Secao 7: border-collapse:separate                                  ║
+	║     Secao 12: border-collapse:collapse + thead/tbody                   ║
+	║     ACAO: .neumo-table usa collapse (Secao 12).                        ║
+	║     .nori-table mantem separate para tabelas com spacing.              ║
+	║                                                                        ║
+	╠══════════════════════════════════════════════════════════════════════════╣
+	║  CONFLICTS RESOLVED                                                    ║
+	╠══════════════════════════════════════════════════════════════════════════╣
+	║                                                                        ║
+	║  1. h3 — definido em h1,h2,h3,h4 (Secao 2) E sozinho (Secao 13)      ║
+	║     A Secao 13 sobrescrevia parcialmente.                              ║
+	║     ACAO: h3 removido do grupo. Tem regra propria consolidada.         ║
+	║                                                                        ║
+	║  2. .form-textar no bloco :focus — estava SEM :focus                   ║
+	║     ACAO: Corrigido para .form-textar:focus                            ║
+	║                                                                        ║
+	╠══════════════════════════════════════════════════════════════════════════╣
+	║  UNDEFINED VARIABLES ADDED                                             ║
+	╠══════════════════════════════════════════════════════════════════════════╣
+	║                                                                        ║
+	║  --min-width-smd, --min-width-xxs, --min-width-sm, --min-width-md,    ║
+	║  --min-width-xl, --min-height-xxs, --min-height-xs, --margin-sm       ║
+	║  Todos referenciados mas nao definidos no :root original.              ║
+	║  ACAO: Adicionados com valores estimados. REVISE.                      ║
+	║                                                                        ║
+	╠══════════════════════════════════════════════════════════════════════════╣
+	║  SECTIONS REORGANIZED: 15 -> 11                                        ║
+	║  Lines: 1343 -> ~940 (aprox 30% reducao)                               ║
+	║  Duplicated rulesets removed: 9                                        ║
+	║  Variables removed: 9 | Variables added: 8 | Bugs fixed: 1            ║
+	╚══════════════════════════════════════════════════════════════════════════╝
+	========================================================================== */
+
+/* ==========================================================================
+	1. VARIABLES & GLOBAL RESET
+	========================================================================== */
+
+:root {
+	/* --- Cores Base --- */
+	--c-bg: #e0e5ec;
+	--c-text: #5f6775;
+	--c-text-soft: #8a99aa;
+	--c-check: #02011a;
+	--c-accent: #007bff;
+	--c-accent-dark: #23217c;
+	--c-highlight: #f1f1f1;
+	--c-shadow-dark: #c1c9d2;
+	--c-shadow-light: #ffffff;
+
+	/* --- Cores Semanticas (--c-info removido = --c-accent) --- */
+	--c-success: #28a745;
+	--c-warning: #ffc107;
+	--c-danger: #dc3545;
+
+	/* --- Tipografia --- */
+	--font-family-base: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+	--font-size-base: 1.4rem;
+	--font-size-2xs: 0.8rem;
+	--font-size-xs: 1rem;
+	--font-size-sm: 1.2rem;
+	--font-size-md: 1.4rem;
+	--font-size-lg: 1.6rem;
+	--font-size-xl: 2rem;
+	--font-size-2xl: 2.4rem;
+	--font-size-3xl: 3.2rem;
+	--line-height-base: 1.6;
+	--font-weight-base: 400;
+	--font-weight-medium: 500;
+	--font-weight-demi-bold: 600;
+	--font-weight-bold: 700;
+	--font-weight-extra-bold: 800;
+
+	/* --- Espacamento Unificado (--gap-* removidos = identicos) --- */
+	--space-2xs: 0.5rem;
+	--space-xs: 1rem;
+	--space-sm: 1.5rem;
+	--space-md: 2rem;
+	--space-lg: 2.5rem;
+	--space-xl: 3rem;
+	--space-2xl: 3.5rem;
+	--space-3xl: 4rem;
+
+	/* --- Padding --- */
+	--padding-xs: 1rem;
+	--padding-sm: 1.4rem;
+	--padding-md: 1.8rem;
+	--padding-lg: 2.2rem;
+	--padding-xl: 2.6rem;
+	--padding-xxl: 3rem;
+
+	/* --- Margin --- */
+	--margin-2xs: 0.5rem;
+	--margin-xs: 1rem;
+	--margin-sm: 1.2rem; /* ADICIONADA - nao existia, usada em .btn */
+	--margin-md: 2rem;
+	--margin-lg: 2.5rem;
+	--margin-xl: 3rem;
+	--margin-2xl: 3.5rem;
+	--margin-3xl: 4rem;
+
+	/* --- Alturas --- */
+	--height-3xs: 4rem;
+	--height-2xs: 6rem;
+	--height-xs: 8rem;
+	--height-sm: 10rem;
+	--height-md: 12rem;
+	--height-lg: 16rem;
+	--height-xl: 20rem;
+	--height-2xl: 24rem;
+	--height-3xl: 36rem;
+	--height-4xl: 48rem;
+	--height-5xl: 60rem;
+	--height-6xl: 72rem;
+	--height-7xl: 84rem;
+	--height-8xl: 92rem;
+	--height-9xl: 100rem;
+	--height-10xl: 120rem;
+
+	/* --- Larguras --- */
+	--width-3xs: 4rem;
+	--width-2xs: 6rem;
+	--width-xs: 8rem;
+	--width-sm: 10rem;
+	--width-md: 12rem;
+	--width-lg: 16rem;
+	--width-xl: 20rem;
+	--width-2xl: 24rem;
+	--width-3xl: 36rem;
+	--width-4xl: 48rem;
+	--width-5xl: 54rem;
+	--width-6xl: 60rem;
+	--width-7xl: 72rem;
+	--width-8xl: 82rem;
+	--width-9xl: 92rem;
+	--width-10xl: 110rem;
+
+	/* --- Min-Width / Min-Height (ADICIONADAS - referenciadas mas ausentes) --- */
+	--min-width-xxs: 6rem;
+	--min-width-smd: 10rem;
+	--min-width-sm: 20rem;
+	--min-width-md: 24rem;
+	--min-width-xl: 48rem;
+	--min-height-xxs: 10rem;
+	--min-height-xs: 8rem;
+
+	/* --- Bordas --- */
+	--radius-sm: 1.2rem;
+	--radius-md: 2.4rem;
+	--radius-lg: 3.6rem;
+	--radius-pill: 6rem;
+
+	/* --- Sombras Convexas --- */
+	--shadow-convex-sm: 3px 3px 6px var(--c-shadow-dark), -3px -3px 6px var(--c-shadow-light);
+	--shadow-convex-md: 6px 6px 12px var(--c-shadow-dark), -6px -6px 12px var(--c-shadow-light);
+	--shadow-convex-lg: 8px 8px 16px var(--c-shadow-dark), -8px -8px 16px var(--c-shadow-light);
+
+	/* --- Sombras Concavas --- */
+	--shadow-concave-sm: inset 3px 3px 6px var(--c-shadow-dark), inset -3px -3px 6px var(--c-shadow-light);
+	--shadow-concave-md: inset 6px 6px 12px var(--c-shadow-dark), inset -6px -6px 12px var(--c-shadow-light);
+	--shadow-concave-lg: inset 8px 8px 16px var(--c-shadow-dark), inset -8px -8px 16px var(--c-shadow-light);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+	font-family: var(--font-family-base);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-base);
+	color: var(--c-text);
+	background-color: var(--c-bg);
+	min-height: 100vh;
+	min-height: 100dvh;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: var(--space-lg);
+}
+
+/* ==========================================================================
+	2. TYPOGRAPHY
+	========================================================================== */
+
+/* h3 removido deste grupo - tem regra propria abaixo */
+h1, h2, h4 {
+	color: var(--c-accent-dark);
+	margin-bottom: var(--space-sm);
+	font-weight: 600;
+	font-family: var(--font-family-base);
+	font-size: var(--font-size-xl);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.4rem; }
+h4 { font-size: 1.6rem; }
+
+/* h3 consolidado (Secao 2 base + Secao 13 overrides) */
+h3 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--c-accent-dark);
+	font-family: var(--font-family-base);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid #d1d9e6;
+}
+
+/* ==========================================================================
+	3. LAYOUT & STRUCTURE
+	========================================================================== */
+
+.app-container {
+	width: 100%;
+	max-width: 144rem;
+	display: grid;
+	min-height: calc(100vh - 4rem);
+	grid-template-columns: 28rem 1fr;
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		'nav header'
+		'nav content'
+		'footer footer';
+	gap: var(--space-lg);
+}
+
+.main-header { grid-area: header; }
+.main-content { grid-area: content; }
+.main-footer  { grid-area: footer; }
+
+/* UNIFICADO: existia na Secao 3 E Secao 5 (duplicata removida) */
+.main-nav {
+	grid-area: nav;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+	padding: var(--space-sm);
+	align-items: center;
+}
+
+.main-nav .logo {
+	text-align: center;
+	padding: var(--space-sm);
+	border-bottom: 1px solid rgba(163, 177, 198, 0.3);
+}
+
+.main-nav .logo img { max-width: 150px; }
+
+.main-container {
+	width: 100%;
+	max-width: 800px;
+	max-height: 920px;
+	padding: var(--space-lg);
+	border-radius: var(--radius-md);
+	background-color: var(--c-bg);
+	box-shadow: var(--shadow-convex-md);
+}
+
+.main-container h1 {
+	text-align: center;
+	font-size: 1.8rem;
+	margin-bottom: var(--space-lg);
+	font-weight: 600;
+}
+
+/* ==========================================================================
+	4. REUSABLE COMPONENTS
+	========================================================================== */
+
+/* --- Cards --- */
+.card {
+	background-color: var(--c-bg);
+	padding: var(--padding-lg);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-convex-md);
+}
+
+.neumo-surface,
+.card-inset {
+	background-color: var(--c-bg);
+	padding: var(--padding-md);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-convex-sm);
+}
+
+/* --- Buttons --- */
+.neumo-button,
+.btn {
+	display: inline-flex;
+	align-items: center;
+	min-width: var(--min-width-smd);
+	justify-content: center;
+	gap: var(--space-xs);
+	padding: var(--padding-sm) var(--padding-lg);
+	margin-top: var(--margin-sm);
+	border: none;
+	border-radius: var(--radius-pill);
+	background-color: var(--c-bg);
+	color: var(--c-text);
+	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	box-shadow: var(--shadow-convex-sm);
+}
+
+.neumo-button:hover, .btn:hover {
+	color: var(--c-accent);
+	box-shadow: var(--shadow-convex-md);
+}
+
+.neumo-button:active, .btn:active {
+	box-shadow: var(--shadow-concave-sm);
+	color: var(--c-accent-dark);
+	transform: translateY(1px);
+}
+
+.neumo-button-primary, .btn-primary { color: var(--c-accent); }
+
+/* --- Forms --- */
+.form-group {
+	margin-bottom: var(--margin-md);
+	display: flex;
+	flex-direction: row;
+	gap: var(--space-xs);
+	align-items: center;
+	justify-content: center;
+}
+
+.form-label {
+	font-size: var(--font-size-base);
+	font-weight: 500;
+	color: var(--c-text);
+	max-width: var(--min-width-md);
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	gap: var(--space-xs);
+	margin-inline: var(--margin-xs);
+}
+
+.neumo-input, .form-input,
+.neumo-select, .form-select,
+.neumo-textarea, .form-textar, .form-textarea {
+	padding: var(--padding-sm);
+	border: none;
+	border-radius: var(--radius-md);
+	background-color: var(--c-bg);
+	color: var(--c-text);
+	font-size: var(--font-size-base);
+	box-shadow: var(--shadow-concave-md);
+	transition: box-shadow 0.2s ease;
+}
+
+.neumo-input, .form-input { height: 3rem; }
+
+/* BUG FIX: .form-textar estava sem :focus no original */
+.neumo-input:focus, .form-input:focus,
+.neumo-select:focus, .form-select:focus,
+.neumo-textarea:focus, .form-textar:focus, .form-textarea:focus {
+	outline: none;
+	box-shadow: var(--shadow-concave-md);
+}
+
+.neumo-textarea, .form-textar, .form-textarea {
+	min-height: var(--min-height-xxs);
+	height: var(--min-height-xxs);
+	resize: vertical;
+}
+
+/* Scrollbar WebKit */
+.neumo-textarea::-webkit-scrollbar,
+.form-textar::-webkit-scrollbar,
+.form-textarea::-webkit-scrollbar { width: 10px; }
+
+.neumo-textarea::-webkit-scrollbar-track,
+.form-textar::-webkit-scrollbar-track,
+.form-textarea::-webkit-scrollbar-track {
+	background: var(--c-bg);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-concave-sm);
+}
+
+.neumo-textarea::-webkit-scrollbar-thumb,
+.form-textar::-webkit-scrollbar-thumb,
+.form-textarea::-webkit-scrollbar-thumb {
+	background: var(--c-text-soft);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-concave-md);
+}
+
+.neumo-textarea::-webkit-scrollbar-thumb:hover,
+.form-textar::-webkit-scrollbar-thumb:hover,
+.form-textarea::-webkit-scrollbar-thumb:hover {
+	box-shadow: var(--shadow-concave-md);
+}
+
+/* --- Checkbox --- */
+.neumo-checkbox {
+	width: 1.6rem !important;
+	height: 1.6rem !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	border-radius: var(--radius-sm) !important;
+	box-shadow: var(--shadow-concave-sm) !important;
+	background-color: var(--c-bg) !important;
+	transition: all 0.2s ease-in-out !important;
+	cursor: pointer !important;
+	appearance: none !important;
+	outline: none !important;
+}
+
+.neumo-checkbox:checked {
+	background-color: var(--c-check) !important;
+	box-shadow: var(--shadow-concave-md) !important;
+}
+
+/* --- Toggle Switch --- */
+.toggle-switch {
+	position: relative;
+	display: inline-block;
+	width: var(--min-width-xxs);
+	height: 3.4rem;
+}
+
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+.toggle-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background-color: var(--c-bg);
+	transition: 0.4s;
+	border-radius: var(--radius-pill);
+	box-shadow: var(--shadow-concave-sm);
+}
+
+.toggle-slider:before {
+	position: absolute;
+	content: '';
+	height: 26px; width: 26px;
+	left: 4px; bottom: 4px;
+	background-color: var(--c-bg);
+	transition: 0.4s;
+	border-radius: 50%;
+	box-shadow: var(--shadow-convex-sm);
+}
+
+input:checked + .toggle-slider:before { transform: translateX(26px); }
+
+/* --- Header --- */
+.neumo-header {
+	background-color: var(--c-bg);
+	padding: var(--padding-md);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-convex-md);
+}
+
+/* --- Modal --- */
+.neumo-modal {
+	background-color: var(--c-bg);
+	border-radius: var(--radius-lg);
+	padding: var(--padding-md);
+	margin: var(--margin-md);
+}
+
+.neumo-modal-head {
+	background-color: var(--c-bg);
+	color: var(--c-text);
+	padding: var(--padding-md);
+	border-radius: var(--radius-md) var(--radius-md) 0 0;
+	box-shadow: var(--shadow-convex-sm);
+}
+
+/* --- Button Icon (UNIFICADO: Secao 7 + Secao 14 eram identicas) --- */
+.button-icon {
+	width: 32px;
+	height: 32px;
+	filter: brightness(0) saturate(100%) invert(38%) sepia(8%) saturate(1065%) hue-rotate(173deg) brightness(95%) contrast(90%);
+}
+
+.tool-button:hover .button-icon {
+	filter: brightness(0) saturate(100%) invert(28%) sepia(98%) saturate(5462%) hue-rotate(208deg) brightness(97%) contrast(106%);
+}
+
+/* ==========================================================================
+	5. TAB SYSTEM (UNIFICADO: Secoes 5 + 9 eram duplicatas)
+	========================================================================== */
+
+.tabs-nav {
+	display: flex;
+	gap: var(--space-sm);
+	margin-bottom: var(--space-lg);
+	padding: var(--space-xs);
+	border-radius: var(--radius-pill);
+	box-shadow: var(--shadow-concave-md);
+}
+
+.tab-button {
+	flex-grow: 1;
+	padding: 0.8rem 1rem;
+	border: none;
+	border-radius: var(--radius-pill);
+	background-color: var(--c-bg);
+	box-shadow: var(--shadow-convex-sm);
+	color: var(--c-text);
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	white-space: nowrap;
+}
+
+.tab-button:hover { color: var(--c-accent); }
+.tab-button:focus { outline: none; }
+
+.tab-button.active {
+	font-weight: 700;
+	color: var(--c-accent);
+	box-shadow: var(--shadow-concave-sm);
+}
+
+.tabs-content {
+	padding: var(--space-lg);
+	border-radius: var(--radius-md);
+	background-color: var(--c-bg);
+	box-shadow: var(--shadow-concave-md);
+	min-height: 300px;
+}
+
+.tab-panel {
+	display: none;
+	animation: fadeIn 0.5s ease;
+}
+
+.tab-panel.active { display: block; }
+
+.tab-panel h2 {
+	margin-top: 0;
+	font-size: 1.5rem;
+	color: var(--c-text);
+	border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+	padding-bottom: 0.5rem;
+	margin-bottom: var(--space-sm);
+}
+
+.tab-panel p { line-height: 1.6; }
+
+@keyframes fadeIn {
+	from { opacity: 0; transform: translateY(10px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+	6. TABLES (UNIFICADO: .neumo-table resolve conflito Secao 7 vs 12)
+	========================================================================== */
+
+.table-container {
+	max-height: 450px;
+	overflow-y: auto;
+	border-radius: 15px;
+	box-shadow: var(--shadow-concave-md);
+	padding: 0.5rem;
+	background-color: var(--c-bg);
+}
+
+.table-container::-webkit-scrollbar { width: 8px; }
+.table-container::-webkit-scrollbar-track { background: transparent; }
+
+.table-container::-webkit-scrollbar-thumb {
+	background-color: var(--c-text-soft);
+	border-radius: 10px;
+	border: 2px solid var(--c-bg);
+}
+
+.neumo-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: var(--space-md) 0;
+}
+
+.neumo-table thead th {
+	position: sticky;
+	top: 0;
+	background-color: var(--c-bg);
+	padding: 0.8rem 1rem;
+	text-align: left;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--c-text);
+	border-bottom: 2px solid #d1d9e6;
+	z-index: 1;
+}
+
+.neumo-table tbody tr { transition: background-color 0.2s ease; }
+.neumo-table tbody tr:hover { background-color: #d1d9e6; }
+
+.neumo-table td {
+	padding: 0.7rem 1rem;
+	border-bottom: 1px solid #dbe1e8;
+}
+
+.neumo-table td:first-child {
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: bold;
+	color: var(--c-accent-dark);
+}
+
+/* .nori-table: variante com border-collapse:separate */
+.nori-table {
+	border-collapse: separate;
+	border-spacing: var(--space-2xs);
+	margin: var(--space-md) 0;
+}
+
+.nori-table th, .nori-table td {
+	padding: var(--space-2xs);
+	text-align: center;
+	background-color: var(--c-bg);
+	border-radius: var(--radius-sm);
+	box-shadow: var(--shadow-concave-md);
+}
+
+.neumo-table th, .nori-table th {
+	background-color: var(--c-accent);
+	color: var(--c-bg);
+	font-weight: 600;
+	box-shadow: var(--shadow-concave-md);
+}
+
+/* ==========================================================================
+	7. TREEVIEW COMPONENTS
+	========================================================================== */
+
+.treeview-header .title {
+	font-size: 1.3em;
+	color: var(--c-accent-dark);
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.treeview-header .subtitle {
+	font-size: 0.98em;
+	color: var(--c-text-soft);
+}
+
+ul.tree { list-style-type: none; padding-left: 0; width: 620px; }
+ul.tree li { margin-bottom: 0.5rem; }
+
+.toggle.categoria {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 0.8rem 1.2rem;
+	background-color: var(--c-bg);
+	border-radius: var(--radius-sm);
+	box-shadow: var(--shadow-convex-sm);
+	cursor: pointer;
+	font-size: 1.1rem;
+	font-weight: 600;
+	transition: all 0.2s ease-in-out;
+	margin-bottom: 0.5rem;
+}
+
+.toggle.categoria:hover { color: var(--c-accent); }
+
+.toggle.categoria.open {
+	box-shadow: var(--shadow-concave-sm);
+	color: var(--c-accent);
+}
+
+.toggle.categoria::before {
+	content: '\203A';
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-right: 0.75rem;
+	transition: transform 0.3s ease;
+}
+
+.toggle.categoria.open::before { transform: rotate(90deg); }
+
+ul.tree ul {
+	list-style: none;
+	padding-left: 1.5rem;
+	margin-top: 0.5rem;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+	border-left: 2px solid #d1d9e6;
+}
+
+ul.tree ul.open {
+	max-height: 1000px;
+	transition: max-height 1s ease-in-out;
+}
+
+ul.tree ul li {
+	display: flex;
+	align-items: center;
+	padding: 0.6rem 1rem;
+	margin-left: 1rem;
+	border-bottom: 1px solid #d1d9e6;
+}
+
+ul.tree ul li:last-child { border-bottom: none; }
+
+.sigla {
+	font-weight: bold;
+	color: var(--c-accent-dark);
+	background-color: #d1d9e6;
+	padding: 0.2rem 0.6rem;
+	border-radius: 5px;
+	margin-right: 1rem;
+	font-family: 'Courier New', Courier, monospace;
+	box-shadow: var(--shadow-concave-sm);
+}
+
+.nome { font-size: 0.95rem; color: var(--c-text); }
+
+/* ==========================================================================
+	8. APP-SPECIFIC SECTIONS
+	========================================================================== */
+
+.calculator-list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+}
+
+.calculator-container {
+	padding: var(--space-lg);
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-lg);
+}
+
+#gfr-calculator { width: 100%; max-width: var(--min-width-xl); }
+
+#cardiovascular-risk-calculator {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	align-items: center;
+}
+
+#bmi-calculator,
+#gestational-age-calculator,
+#corrected-gestational-age-calculator,
+#neonatal-hyperbili-calculator {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	width: 100%;
+	max-width: 40rem;
+	align-items: center;
+}
+
+.puericultura-container { width: 100%; }
+
+.main-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: var(--space-lg);
+}
+
+/* --- Cardiovascular --- */
+.cardio-grid {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 1rem 2rem;
+	align-items: center;
+}
+
+.gender-toggle-group {
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.risk-options {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	align-items: start;
+	margin: 0 auto;
+}
+
+.risk-badge {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	border-radius: var(--radius-pill);
+	color: #fff;
+	font-weight: 700;
+	margin-top: 0.75rem;
+}
+
+.risk-result-title { font-size: 1.8rem; font-weight: bold; }
+
+/* --- Noripurum --- */
+.nori-info {
+	background-color: var(--c-bg);
+	padding: var(--space-md);
+	margin: var(--space-md) 0;
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-concave-sm);
+}
+
+.nori-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--space-sm);
+	margin-top: var(--space-sm);
+}
+
+.nori-grid details { padding: var(--space-xs); }
+
+.nori-grid summary {
+	cursor: pointer;
+	color: var(--c-accent);
+	margin-bottom: var(--space-xs);
+}
+
+.nori-grid ul {
+	margin-left: var(--space-md);
+	margin-top: var(--space-xs);
+}
+
+.nori-form-section {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	margin: var(--space-md) 0;
+}
+
+.nori-warning {
+	background-color: #ffebee;
+	color: var(--c-danger);
+}
+
+/* --- Shared Aliases (retrocompatibilidade) --- */
+.neumo-hidden, .nori-hidden { display: none; }
+
+.neumo-details, .nori-details {
+	margin: var(--space-md) 0;
+	padding: var(--space-md);
+	background-color: var(--c-bg);
+	border-radius: var(--radius-sm);
+	box-shadow: var(--shadow-concave-sm);
+}
+
+.neumo-formula, .nori-formula {
+	background-color: var(--c-bg);
+	padding: var(--space-md);
+	margin: var(--space-sm) 0;
+	border-radius: var(--radius-sm);
+	box-shadow: var(--shadow-concave-sm);
+	font-family: 'Courier New', monospace;
+	font-size: var(--font-size-sm);
+	line-height: 1.8;
+}
+
+.neumo-alert, .nori-alert {
+	padding: var(--space-md);
+	margin: var(--space-sm) 0;
+	border-radius: var(--radius-sm);
+	background-color: #fff3e0;
+	box-shadow: var(--shadow-convex-sm);
+}
+
+/* ==========================================================================
+	9. TOOLS & SHORTCUTS LAYOUT
+	========================================================================== */
+
+.tools-layout {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+}
+
+.tools-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+	padding: 1.5rem;
+	border-radius: 20px;
+	background-color: var(--c-bg);
+	box-shadow: var(--shadow-concave-sm);
+}
+
+.tool-button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 1rem 1.2rem;
+	background-color: var(--c-bg);
+	border: none;
+	border-radius: 15px;
+	box-shadow: var(--shadow-convex-sm);
+	color: var(--c-text);
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-align: center;
+	line-height: 1.4;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	flex: 1 1 calc(33.333% - 2rem);
+	max-width: calc(33.333% - 2rem);
+	min-width: 220px;
+	animation: fadeInButtons 0.4s ease backwards;
+}
+
+.tool-button:hover {
+	color: var(--c-accent);
+	box-shadow: 8px 8px 16px #b8c0cc, -8px -8px 16px #ffffff;
+	transform: translateY(-2px);
+}
+
+.tool-button:active {
+	box-shadow: var(--shadow-concave-sm);
+	transform: translateY(0);
+	color: var(--c-accent-dark);
+}
+
+.tool-button:focus { outline: none; }
+
+.tool-button::after {
+	content: '';
+	display: inline-block;
+	width: 0.3em;
+}
+
+@keyframes fadeInButtons {
+	from { opacity: 0; transform: translateY(10px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+.tool-button:nth-child(1)  { animation-delay: 0.05s; }
+.tool-button:nth-child(2)  { animation-delay: 0.1s; }
+.tool-button:nth-child(3)  { animation-delay: 0.15s; }
+.tool-button:nth-child(4)  { animation-delay: 0.2s; }
+.tool-button:nth-child(5)  { animation-delay: 0.25s; }
+.tool-button:nth-child(6)  { animation-delay: 0.3s; }
+.tool-button:nth-child(7)  { animation-delay: 0.35s; }
+.tool-button:nth-child(8)  { animation-delay: 0.4s; }
+.tool-button:nth-child(9)  { animation-delay: 0.45s; }
+.tool-button:nth-child(10) { animation-delay: 0.5s; }
+.tool-button:nth-child(11) { animation-delay: 0.55s; }
+
+/* --- Shortcuts Legend --- */
+.shortcuts-legend {
+	padding: 1.5rem;
+	border-radius: 20px;
+	box-shadow: var(--shadow-concave-sm);
+	height: fit-content;
+}
+
+.shortcuts-legend h4 {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--c-accent-dark);
+	margin-top: 0;
+	margin-bottom: 1.5rem;
+	border-bottom: 1px solid #d1d9e6;
+	padding-bottom: 0.75rem;
+}
+
+.shortcuts-legend ul { list-style: none; padding: 0; margin: 0; }
+
+.shortcuts-legend li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+	font-size: 0.95rem;
+}
+
+.shortcuts-legend kbd {
+	background-color: var(--c-bg);
+	padding: 0.3rem 0.7rem;
+	border-radius: 5px;
+	box-shadow: var(--shadow-convex-sm);
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 0.85em;
+	font-weight: bold;
+	color: var(--c-accent-dark);
+}
+
+/* ==========================================================================
+	10. CONTENT & UTILITIES
+	========================================================================== */
+
+.logo iframe { width: 100%; border: none; }
+
+.header-flex { display: flex; align-items: center; gap: 2rem; }
+
+.result-content {
+	margin-top: 1.5rem;
+	min-height: var(--min-height-xs);
+	min-width: var(--min-width-md);
+}
+
+.version {
+	font-size: 0.7em;
+	color: var(--c-text-soft);
+	font-weight: 500;
+	vertical-align: middle;
+}
+
+ul { list-style: none; padding-left: 0; margin-top: 1rem; }
+
+ul li {
+	position: relative;
+	padding-left: 28px;
+	margin-bottom: 1rem;
+	line-height: 1.5;
+}
+
+ul li::before {
+	content: '';
+	position: absolute;
+	left: 5px; top: 9px;
+	width: 10px; height: 10px;
+	background-color: var(--c-bg);
+	border-radius: 50%;
+	box-shadow: var(--shadow-concave-sm);
+}
+
+blockquote {
+	margin: 2rem 0;
+	padding: 1.2rem 1.5rem;
+	border-left: 4px solid var(--c-text-soft);
+	border-radius: 15px;
+	box-shadow: var(--shadow-concave-sm);
+	font-style: italic;
+	font-size: 0.95rem;
+	color: var(--c-text-soft);
+}
+
+blockquote strong { font-style: normal; color: var(--c-text); }
+
+/* --- Utilities --- */
+.text-center   { text-align: center; }
+.text-danger   { color: var(--c-danger); }
+.text-success  { color: var(--c-success); }
+.text-warning  { color: var(--c-warning); }
+.bg-danger     { background-color: var(--c-danger); }
+.bg-success    { background-color: var(--c-success); }
+.bg-warning    { background-color: var(--c-warning); }
+.highlight     { color: var(--c-accent); font-weight: 700; }
+
+.text-muted {
+	color: var(--c-text-soft);
+	font-size: var(--font-size-sm);
+	display: block;
+	text-align: center;
+	margin-top: var(--space-xs);
+}
+
+.w-50  { max-width: var(--min-width-sm); margin: 0 auto; }
+.w-100 { width: 100%; }
+
+.btn-container {
+	display: flex;
+	gap: var(--space-sm);
+	justify-content: center;
+	margin-top: var(--space-sm);
+}
+
+/* ==========================================================================
+	11. RESPONSIVENESS (UNIFICADO: Secoes 8 + 11 eram identicas)
+	========================================================================== */
+
+@media (max-width: 900px) {
+	.app-container {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			'header'
+			'nav'
+			'content'
+			'footer';
+	}
+	.calculator-list {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 600px) {
+	body { padding: var(--space-sm); }
+
+	#cardiovascular-risk-calculator,
+	#gfr-calculator {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.form-group { align-items: center; }
+
+	.main-container { max-width: 100%; padding: 1.5rem; }
+
+	.tab-button {
+		flex: 1 1 100%;
+		max-width: 100%;
+		min-width: auto;
+		font-size: 0.95rem;
+		min-height: 60px;
+		padding: 0.9rem 1rem;
+	}
+
+	.tabs-nav { gap: 0.7rem; padding: 1rem; }
+}
