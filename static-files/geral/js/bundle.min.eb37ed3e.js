@@ -151,7 +151,10 @@
         <div class="${n}">${e}</div>
         ${r(i)}
       </label>
-    `}},console.log("✅ UFs Brasil Module carregado:",c.length,"estados")})(),(()=>{let o=null;function n(){var a,e;document.getElementById("printBtnrec")?(o&&o.abort(),a=(o=new AbortController).signal,e=a,document.getElementById("printBtnrec")?.addEventListener("click",a=>{a.preventDefault(),window.print()},{signal:e}),document.getElementById("clearBtn")?.addEventListener("click",a=>{a.preventDefault(),confirm("Tem certeza que deseja limpar a receita?")&&((a=window.__asideRegistry?.get("prescription-editor"))?.clearContent?a.clearContent():window.clearEditor?window.clearEditor():(a=document.getElementById("textArea"))&&(a.innerHTML="",a.focus()))},{signal:e}),document.getElementById("copyBtn")?.addEventListener("click",async a=>{a.preventDefault();var a=window.__asideRegistry?.get("prescription-editor"),e=a?.getContent?a.getContent():document.getElementById("textArea")?.innerText||"";if(e)try{a?.copyContent?await a.copyContent():await navigator.clipboard.writeText(e),r(document.getElementById("copyBtn"),"Copiado!")}catch(a){console.error("[Toolbar] Copy failed:",a)}else r(document.getElementById("copyBtn"),"Vazio!")},{signal:e}),i("mostrarLogoSus",a=>{var e=document.getElementById("logoSus"),o=document.getElementById("textoViaDigital");e&&e.classList.toggle("hidden",!a),o&&o.classList.toggle("hidden",a)},e=a),i("codesBtn",a=>{var e=document.getElementById("codesPanel");e&&e.classList.toggle("hidden",!a)},e),i("mostrarMedico",a=>{var e=document.getElementById("rowMedico");e&&e.classList.toggle("hidden",!a)},e),i("mostrarLocal",a=>{var e=document.getElementById("rowLocal");e&&e.classList.toggle("hidden",!a)},e),window.__asideRegistry?.register("header-toolbar",{init:n,destroy:s}),console.log("[Toolbar] ✅ Events bound")):console.warn("[Toolbar] #printBtnrec not found — skipping")}function i(a,e,o){let n=document.getElementById(a);n&&(n.addEventListener("change",a=>e(a.target.checked),{signal:o}),setTimeout(()=>e(n.checked),50))}function r(e,o="OK!"){if(e){let a=e.innerHTML;e.textContent=o,e.classList.add("ring-2","ring-emerald-300"),setTimeout(()=>{e.innerHTML=a,e.classList.remove("ring-2","ring-emerald-300")},1200)}}function s(){o?.abort(),o=null}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",n):n(),window.renderHeaderToolbar=n})(),(()=>{let e=!1;function o(){var a=document.getElementById("header-index");if(a){if(!e){a.className="border-b border-slate-50 px-4 py-4 md:px-6 print:hidden",a.innerHTML=`
+    `}},console.log("✅ UFs Brasil Module carregado:",c.length,"estados")})(),(()=>{async function s(a){if(!a||a.length<2)return[];try{var e,o=await fetch("https://api-cid.gtmedics.com/cid/search?q="+encodeURIComponent(a));if(o.ok)return e=await o.json(),Array.isArray(e)?e:e&&Array.isArray(e.results)?e.results:[];throw new Error("Erro na busca: "+o.statusText)}catch(a){return console.error("Erro ao buscar CID:",a),[]}}window.Cid10Module={searchCid:s,setupCidSearch:function(a,e){let i="string"==typeof a?document.getElementById(a):a,r="string"==typeof e?document.getElementById(e):e;if(i){i.parentNode&&(i.parentNode.style.position="relative");let o=document.createElement("div");o.className="absolute z-[9999] bg-white border border-gray-300 w-[300px] max-h-48 overflow-y-auto shadow-lg hidden",o.style.top="100%",o.style.left="0",i.parentNode&&i.parentNode.appendChild(o);let n;console.log("SetupCidSearch anexado a:",i.id),i.addEventListener("input",a=>{let e=a.target.value;clearTimeout(n),e.length<2?(o.innerHTML="",o.classList.add("hidden")):n=setTimeout(async()=>{o.innerHTML='<div class="p-2 text-[10px] text-gray-500">Buscando...</div>',o.classList.remove("hidden");var a=await s(e);o.innerHTML="",a&&0!==a.length?a.forEach(a=>{var e=document.createElement("div");e.className="p-2 hover:bg-blue-50 cursor-pointer text-[10px] border-b border-gray-100 flex flex-col",e.innerHTML=`
+                            <span class="font-bold text-blue-700">${a.code}</span>
+                            <span class="text-gray-600 truncate">${a.description||a.nome||""}</span>
+                        `,e.onclick=()=>{i.value=a.code,r&&(r.value=a.description||a.nome||""),o.innerHTML="",o.classList.add("hidden")},o.appendChild(e)}):o.innerHTML='<div class="p-2 text-[10px] text-gray-500">Nenhum resultado</div>'},300)}),document.addEventListener("click",a=>{i.contains(a.target)||o.contains(a.target)||o.classList.add("hidden")})}else console.warn("Input CID não encontrado:",a)}},console.log("✅ CID-10 Module carregado")})(),(()=>{let o=null;function n(){var a,e;document.getElementById("printBtnrec")?(o&&o.abort(),a=(o=new AbortController).signal,e=a,document.getElementById("printBtnrec")?.addEventListener("click",a=>{a.preventDefault(),window.print()},{signal:e}),document.getElementById("clearBtn")?.addEventListener("click",a=>{a.preventDefault(),confirm("Tem certeza que deseja limpar a receita?")&&((a=window.__asideRegistry?.get("prescription-editor"))?.clearContent?a.clearContent():window.clearEditor?window.clearEditor():(a=document.getElementById("textArea"))&&(a.innerHTML="",a.focus()))},{signal:e}),document.getElementById("copyBtn")?.addEventListener("click",async a=>{a.preventDefault();var a=window.__asideRegistry?.get("prescription-editor"),e=a?.getContent?a.getContent():document.getElementById("textArea")?.innerText||"";if(e)try{a?.copyContent?await a.copyContent():await navigator.clipboard.writeText(e),r(document.getElementById("copyBtn"),"Copiado!")}catch(a){console.error("[Toolbar] Copy failed:",a)}else r(document.getElementById("copyBtn"),"Vazio!")},{signal:e}),i("mostrarLogoSus",a=>{var e=document.getElementById("logoSus"),o=document.getElementById("textoViaDigital");e&&e.classList.toggle("hidden",!a),o&&o.classList.toggle("hidden",a)},e=a),i("codesBtn",a=>{var e=document.getElementById("codesPanel");e&&e.classList.toggle("hidden",!a)},e),i("mostrarMedico",a=>{var e=document.getElementById("rowMedico");e&&e.classList.toggle("hidden",!a)},e),i("mostrarLocal",a=>{var e=document.getElementById("rowLocal");e&&e.classList.toggle("hidden",!a)},e),window.__asideRegistry?.register("header-toolbar",{init:n,destroy:s}),console.log("[Toolbar] ✅ Events bound")):console.warn("[Toolbar] #printBtnrec not found — skipping")}function i(a,e,o){let n=document.getElementById(a);n&&(n.addEventListener("change",a=>e(a.target.checked),{signal:o}),setTimeout(()=>e(n.checked),50))}function r(e,o="OK!"){if(e){let a=e.innerHTML;e.textContent=o,e.classList.add("ring-2","ring-emerald-300"),setTimeout(()=>{e.innerHTML=a,e.classList.remove("ring-2","ring-emerald-300")},1200)}}function s(){o?.abort(),o=null}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",n):n(),window.renderHeaderToolbar=n})(),(()=>{let e=!1;function o(){var a=document.getElementById("header-index");if(a){if(!e){a.className="border-b border-slate-50 px-4 py-4 md:px-6 print:hidden",a.innerHTML=`
       <div class="flex flex-col p-3 mb-8 bg-[#e0e5ec] rounded-[50px] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] gap-3 md:flex-row md:items-center md:justify-between">
         <div class="flex items-center gap-3">
           <span class="material-symbols-rounded region-icon text-4xl text-blue-500 mx-4">cognition</span>
@@ -167,7 +170,7 @@
         <div id="toolboxContainer">
         </div>
       </div>
-    `,e=!0,window.__asideRegistry?.register("header-index",{render:o,destroy:n});{let e=0,o=0;!function a(){2<=e||(window.renderHeaderToolbar&&!document.getElementById("printBtnrec")&&(window.renderHeaderToolbar(),e++),window.renderHeaderToolContainer&&!document.querySelector("#toolboxContainer .tabBtn")&&(window.renderHeaderToolContainer(),e++),2<=e?console.log("[HeaderIndex] ✅ Header complete"):5e3<=(o+=100)?(console.warn("[HeaderIndex] ⚠️ Timeout — "+e+"/2 children rendered"),window.renderHeaderToolbar&&window.renderHeaderToolbar(),window.renderHeaderToolContainer&&window.renderHeaderToolContainer()):setTimeout(a,100))}()}}}else console.warn("[HeaderIndex] #header-index not found")}function n(){e=!1;var a=document.getElementById("header-index");a&&(a.innerHTML="")}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",o):o(),window.renderHeaderIndex=o})(),(()=>{let n=[{id:"prescricao",label:"Prescrição",icon:"edit_note"},{id:"exames",label:"Exames",icon:"lab_profile"},{id:"guias",label:"Guias SUS",icon:"description"},{id:"apoio",label:"Apoio",icon:"info"},{id:"psf",label:"PSF",icon:"groups"}],i=!1,r=null,s=null,t=null;function d(o){var a,e;s&&((e=document.getElementById("toolbar-prescricao"))&&(e.classList.toggle("hidden",!(a="prescricao"===o)),e.classList.toggle("flex",a)),document.querySelectorAll('[id^="tab-"], [id^="tab_"]').forEach(a=>{var e=a.id.replace(/^tab[-_]/,"");a.classList.toggle("hidden",e!==o)}),s.forEach(a=>{var e=a.dataset.tab===o;a.classList.toggle("text-[#007BFF]",e),a.classList.toggle("font-bold",e),a.classList.toggle("text-slate-800",!e),a.classList.toggle("font-medium",!e)}),localStorage.setItem("rx_active_tab",o),"apoio"!==(e=o)&&"psf"!==e||!window.EspecialidadesModule?.init||window.EspecialidadesModule._initialized||(window.EspecialidadesModule.init(),window.EspecialidadesModule._initialized=!0),"exames"===e&&window.ExamesModule?.init&&!window.ExamesModule._initialized&&window.ExamesModule.init(),"psf"===e&&window.ProtocolosModule?.init&&window.ProtocolosModule.init(),t?.emit("tabChanged",{tab:o}),window.dispatchEvent(new CustomEvent("tabChanged",{detail:{tab:o}})))}function c(){return localStorage.getItem("rx_active_tab")||"prescricao"}function l(){r?.abort(),r=null,s=null,i=!1;var a=document.getElementById("toolboxContainer");a&&(a.innerHTML="")}window.renderHeaderToolContainer=function a(){var o=document.getElementById("toolboxContainer");if(o){if(!i){t=window.__asideBus;let e=(r=new AbortController).signal;o.innerHTML=`
+    `,e=!0,window.__asideRegistry?.register("header-index",{render:o,destroy:n});{let e=0,o=0;!function a(){2<=e||(window.renderHeaderToolbar&&!document.getElementById("printBtnrec")&&(window.renderHeaderToolbar(),e++),window.renderHeaderToolContainer&&!document.querySelector("#toolboxContainer .tabBtn")&&(window.renderHeaderToolContainer(),e++),2<=e?console.log("[HeaderIndex] ✅ Header complete"):5e3<=(o+=100)?(console.warn("[HeaderIndex] ⚠️ Timeout — "+e+"/2 children rendered"),window.renderHeaderToolbar&&window.renderHeaderToolbar(),window.renderHeaderToolContainer&&window.renderHeaderToolContainer()):setTimeout(a,100))}()}}}else console.warn("[HeaderIndex] #header-index not found")}function n(){e=!1;var a=document.getElementById("header-index");a&&(a.innerHTML="")}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",o):o(),window.renderHeaderIndex=o})(),(()=>{let n=[{id:"prescricao",label:"Prescrição",icon:"edit_note"},{id:"exames",label:"Exames",icon:"lab_profile"},{id:"guias",label:"Guias SUS",icon:"description"},{id:"apoio",label:"Apoio",icon:"info"},{id:"psf",label:"PSF",icon:"groups"}],i=!1,r=null,s=null,t=null;function d(o){var a,e;s&&((e=document.getElementById("toolbar-prescricao"))&&(e.classList.toggle("hidden",!(a="prescricao"===o)),e.classList.toggle("flex",a)),document.querySelectorAll('[id^="tab-"], [id^="tab_"]').forEach(a=>{var e=a.id.replace(/^tab[-_]/,"");a.classList.toggle("hidden",e!==o)}),s.forEach(a=>{var e=a.dataset.tab===o;a.classList.toggle("text-[#007BFF]",e),a.classList.toggle("font-bold",e),a.classList.toggle("text-slate-800",!e),a.classList.toggle("font-medium",!e)}),sessionStorage.setItem("rx_active_tab",o),"apoio"!==(e=o)&&"psf"!==e||!window.EspecialidadesModule?.init||window.EspecialidadesModule._initialized||(window.EspecialidadesModule.init(),window.EspecialidadesModule._initialized=!0),"exames"===e&&window.ExamesModule?.init&&!window.ExamesModule._initialized&&window.ExamesModule.init(),"psf"===e&&window.ProtocolosModule?.init&&window.ProtocolosModule.init(),t?.emit("tabChanged",{tab:o}),window.dispatchEvent(new CustomEvent("tabChanged",{detail:{tab:o}})))}function c(){return sessionStorage.getItem("rx_active_tab")||"prescricao"}function l(){r?.abort(),r=null,s=null,i=!1;var a=document.getElementById("toolboxContainer");a&&(a.innerHTML="")}window.renderHeaderToolContainer=function a(){var o=document.getElementById("toolboxContainer");if(o){if(!i){t=window.__asideBus;let e=(r=new AbortController).signal;o.innerHTML=`
       <div class="flex flex-wrap gap-2 justify-around p-4 bg-[#e0e5ec] rounded-[30px] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] md:gap-4">
         ${n.map(a=>`
           <button type="button"
@@ -178,7 +181,7 @@
           </button>
         `).join("")}
       </div>
-    `,(s=o.querySelectorAll(".tabBtn[data-tab]")).forEach(a=>{a.addEventListener("click",()=>d(a.dataset.tab),{signal:e})}),i=!0,window.__asideRegistry?.register("header-tabs",{render:a,destroy:l,setActiveTab:d,getActiveTab:c}),setTimeout(()=>{d(localStorage.getItem("rx_active_tab")||"prescricao")},100),console.log("[Tabs] ✅ Rendered ("+s.length+" tabs)")}}else console.warn("[Tabs] #toolboxContainer not found")}})(),(()=>{let n=!1,i=null;function r(a,e,o){let n=document.getElementById(a);n&&(n.addEventListener("change",a=>e(a.target.checked),{signal:o}),setTimeout(()=>e(n.checked),200))}function s(e,o){if(e){let a=e.innerHTML;e.textContent=o,e.classList.add("ring-2","ring-emerald-300"),setTimeout(()=>{e.innerHTML=a,e.classList.remove("ring-2","ring-emerald-300")},1200)}}function t(){i?.abort(),i=null,n=!1;var a=document.getElementById("toolbar-prescricao");a&&(a.innerHTML="")}window.renderHeaderToolbar=function a(){var e,o=document.getElementById("toolbar-prescricao");o?n||(e=(i=new AbortController).signal,o.className="bg-gray-200 flex flex-wrap items-center gap-8 p-4 m-4 rounded-xl shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff]",o.innerHTML=`
+    `,(s=o.querySelectorAll(".tabBtn[data-tab]")).forEach(a=>{a.addEventListener("click",()=>d(a.dataset.tab),{signal:e})}),i=!0,window.__asideRegistry?.register("header-tabs",{render:a,destroy:l,setActiveTab:d,getActiveTab:c}),setTimeout(()=>{d(sessionStorage.getItem("rx_active_tab")||"prescricao")},100),console.log("[Tabs] ✅ Rendered ("+s.length+" tabs)")}}else console.warn("[Tabs] #toolboxContainer not found")}})(),(()=>{let n=!1,i=null;function r(a,e,o){let n=document.getElementById(a);n&&(n.addEventListener("change",a=>e(a.target.checked),{signal:o}),setTimeout(()=>e(n.checked),200))}function s(e,o){if(e){let a=e.innerHTML;e.textContent=o,e.classList.add("ring-2","ring-emerald-300"),setTimeout(()=>{e.innerHTML=a,e.classList.remove("ring-2","ring-emerald-300")},1200)}}function t(){i?.abort(),i=null,n=!1;var a=document.getElementById("toolbar-prescricao");a&&(a.innerHTML="")}window.renderHeaderToolbar=function a(){var e,o=document.getElementById("toolbar-prescricao");o?n||(e=(i=new AbortController).signal,o.className="bg-gray-200 flex flex-wrap items-center gap-8 p-4 m-4 rounded-xl shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff]",o.innerHTML=`
       <button id="printBtnrec" type="button"
         class="inline-flex items-center gap-2 py-[1rem] px-4 border-none rounded-[50px] bg-[#e0e5ec] text-sm font-medium text-slate-800 drop-shadow-lg transition-all duration-300 hover:text-[#007BFF] hover:bg-gray-50 focus:outline-none">
         <span class="material-symbols-outlined text-base">print</span>
@@ -499,7 +502,7 @@
       <div id="aside_ubs_selector"></div>
       <div id="aside_formatting_tools"></div>
       <div id="aside_hotstrings_panel"></div>
-    `,s=!0,e=new AbortController,r.setRequired(o),window.renderCNESSearch&&window.renderCNESSearch(),window.renderUBSSelector&&window.renderUBSSelector(),window.renderFormattingTools&&window.renderFormattingTools(),window.renderHotstringsPanel&&window.renderHotstringsPanel(),i.on("cnesDataLoaded",a=>{window.setInstitutionData?.(a.local1||"PREFEITURA DE "+a.municipio.toUpperCase(),a.local2||"SECRETARIA MUNICIPAL DE SAÚDE",a.local3||a.nome.toUpperCase()),window.setDoctorData?.({local:a.local||a.nome,cnes:a.cnes,telefone:a.telefone}),window.setUF?.(a.uf)}),i.on("cnesDataCleared",()=>{window.clearHeaderData?.(),window.clearFooterData?.()}),i.on("ubsSelected",({cnes:a})=>{var e=document.getElementById("busca-cnes");e&&(e.value=a),r.get("cnes-search")?.search?.(a)}),i.on("hotstringClicked",({code:a})=>{window.insertAtCursor?.(a)}),i.on("editorBlockedStateChanged",({isBlocked:a})=>{var e;e=!a,document.querySelectorAll("#aside_formatting_tools button[data-cmd]").forEach(a=>{a.disabled=!e,a.classList.toggle("opacity-50",!e),a.classList.toggle("cursor-not-allowed",!e),e||(a.title="Limite de página atingido")})}),i.on("formattingApplied",()=>{document.getElementById("textArea")?.focus()}),a=e?.signal,document.addEventListener("keydown",a=>{for(var e of n){var{keys:e,target:o}=e;if((a.ctrlKey||a.metaKey)&&a.shiftKey&&a.key===e.key)return a.preventDefault(),void((e=document.getElementById(o))&&(e.focus(),"select"in e)&&e.select())}},{signal:a}),i.on("cnesDataLoaded",a=>{try{localStorage.setItem("apoiomed_lastCNES",a.cnes),localStorage.setItem("apoiomed_lastCNESData",JSON.stringify(a))}catch{}}),i.once("asideReady",()=>{var a,e=localStorage.getItem("apoiomed_lastCNES");e&&(a=document.getElementById("busca-cnes"))&&(a.value=e,a.placeholder="Último: "+e)}),r.waitForAll(1e4).then(({ready:a,missing:e})=>{e.length&&console.warn("[Aside] Initialized with missing: "+e.join(", ")),console.log(`[Aside] ✅ Ready (${a.length}/${o.length} components)`),i.emit("asideReady")})):console.error("[Aside] EventBus or Registry not found. Load dependencies first.")):console.warn("[Aside] Container #apoiomed_aside not found"))}function t(){a()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",t):t(),window.renderAside=a,window.clearAside=function(){var a=document.getElementById("busca-cnes");a&&(a.value=""),(a=document.getElementById("select-unidade"))&&(a.value=""),(a=document.getElementById("hotstrings-search"))&&(a.value="",a.dispatchEvent(new Event("input"))),i.emit("cnesDataCleared")},window.destroyAside=function(){e?.abort(),e=null,i?.destroy(),r?.destroyAll(),s=!1;var a=document.getElementById("apoiomed_aside");a&&(a.innerHTML=""),console.log("[Aside] 🗑️ Destroyed")},window.showAsideLoading=function(a){var e=document.getElementById("apoiomed_aside");e&&(e.style.opacity=a?"0.5":"1",e.style.pointerEvents=a?"none":"auto")}})(),(()=>{let o;function a(){var a=document.getElementById("tab-prescricao");a?(o=window.__asideRegistry,a.innerHTML=`
+    `,s=!0,e=new AbortController,r.setRequired(o),window.renderCNESSearch&&window.renderCNESSearch(),window.renderUBSSelector&&window.renderUBSSelector(),window.renderFormattingTools&&window.renderFormattingTools(),window.renderHotstringsPanel&&window.renderHotstringsPanel(),i.on("cnesDataLoaded",a=>{window.setInstitutionData?.(a.local1||"PREFEITURA DE "+a.municipio.toUpperCase(),a.local2||"SECRETARIA MUNICIPAL DE SAÚDE",a.local3||a.nome.toUpperCase()),window.setDoctorData?.({local:[a.nome,a.endereco,a.municipio,a.uf].filter(Boolean).join(" - "),cnes:a.cnes,telefone:a.telefone}),window.setUF?.(a.uf)}),i.on("cnesDataCleared",()=>{window.clearHeaderData?.(),window.clearFooterData?.()}),i.on("ubsSelected",({cnes:a})=>{var e=document.getElementById("busca-cnes");e&&(e.value=a),r.get("cnes-search")?.search?.(a)}),i.on("hotstringClicked",({code:a})=>{window.insertAtCursor?.(a)}),i.on("editorBlockedStateChanged",({isBlocked:a})=>{var e;e=!a,document.querySelectorAll("#aside_formatting_tools button[data-cmd]").forEach(a=>{a.disabled=!e,a.classList.toggle("opacity-50",!e),a.classList.toggle("cursor-not-allowed",!e),e||(a.title="Limite de página atingido")})}),i.on("formattingApplied",()=>{document.getElementById("textArea")?.focus()}),a=e?.signal,document.addEventListener("keydown",a=>{for(var e of n){var{keys:e,target:o}=e;if((a.ctrlKey||a.metaKey)&&a.shiftKey&&a.key===e.key)return a.preventDefault(),void((e=document.getElementById(o))&&(e.focus(),"select"in e)&&e.select())}},{signal:a}),i.on("cnesDataLoaded",a=>{try{localStorage.setItem("apoiomed_lastCNES",a.cnes),localStorage.setItem("apoiomed_lastCNESData",JSON.stringify(a))}catch{}}),i.once("asideReady",()=>{var a,e=localStorage.getItem("apoiomed_lastCNES");e&&(a=document.getElementById("busca-cnes"))&&(a.value=e,a.placeholder="Último: "+e)}),r.waitForAll(1e4).then(({ready:a,missing:e})=>{e.length&&console.warn("[Aside] Initialized with missing: "+e.join(", ")),console.log(`[Aside] ✅ Ready (${a.length}/${o.length} components)`),i.emit("asideReady")})):console.error("[Aside] EventBus or Registry not found. Load dependencies first.")):console.warn("[Aside] Container #apoiomed_aside not found"))}function t(){a()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",t):t(),window.renderAside=a,window.clearAside=function(){var a=document.getElementById("busca-cnes");a&&(a.value=""),(a=document.getElementById("select-unidade"))&&(a.value=""),(a=document.getElementById("hotstrings-search"))&&(a.value="",a.dispatchEvent(new Event("input"))),i.emit("cnesDataCleared")},window.destroyAside=function(){e?.abort(),e=null,i?.destroy(),r?.destroyAll(),s=!1;var a=document.getElementById("apoiomed_aside");a&&(a.innerHTML=""),console.log("[Aside] 🗑️ Destroyed")},window.showAsideLoading=function(a){var e=document.getElementById("apoiomed_aside");e&&(e.style.opacity=a?"0.5":"1",e.style.pointerEvents=a?"none":"auto")}})(),(()=>{let o;function a(){var a=document.getElementById("tab-prescricao");a?(o=window.__asideRegistry,a.innerHTML=`
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-2">
 
         <!-- COLUNA ESQUERDA: Formulário de Prescrição (3/4) -->
@@ -575,530 +578,555 @@
 
         </div>
       </section>
-    `,window.ExamesModule&&"function"==typeof window.ExamesModule.init&&(window.ExamesModule._initialized=!1,window.ExamesModule.init()),console.log("[Exames] Aba Exames renderizada e inicializada")):console.error("[Exames] Container #tab_exames não encontrado")}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",a):a(),window.renderExamesTab=a})(),(()=>{let e="https://cdn.gtmedics.com/geral/js",n=[{key:"lme",name:"LME",icon:"lab_profile",script:"guia_lme.js",containerId:"guia_lme",renderFn:"renderGuiaLme",description:"Servico Auxiliar de Diagnostico e Terapia"},{key:"consulta",name:"Consulta",icon:"stethoscope",script:"guia_consulta.js",containerId:"guia_consulta",renderFn:"renderGuiaConsulta",description:"Guia de Consulta"},{key:"internacao",name:"Internacao",icon:"hotel",script:"guia_internacao.js",containerId:"guia_internacao",renderFn:"renderGuiaInternacao",description:"Guia de Internacao Hospitalar"},{key:"sp_sadt",name:"SP/SADT",icon:"healing",script:"guia_sp_sadt.js",containerId:"guia_sp_sadt",renderFn:"renderGuiaSpSadt",description:"Solicitacao de Procedimento/SADT"},{key:"resumo_internacao",name:"Resumo Int.",icon:"description",script:"guia_resumo_internacao.js",containerId:"guia_resumo_internacao",renderFn:"renderGuiaResumoInt",description:"Resumo de Internacao"}],i=null,r=new Set;function a(){var a=document.getElementById("tab_guias");if(a){if(a.innerHTML=`
-      <section id="tab-guias" class="tabPanel hidden print:hidden">
-        <div class="w-full max-w-7xl">
-          <div
-            class="rounded-[20px] bg-[#e0e5ec] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+    `,window.ExamesModule&&"function"==typeof window.ExamesModule.init&&(window.ExamesModule._initialized=!1,window.ExamesModule.init()),console.log("[Exames] Aba Exames renderizada e inicializada")):console.error("[Exames] Container #tab_exames não encontrado")}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",a):a(),window.renderExamesTab=a})(),(()=>{let n="https://cdn.gtmedics.com/geral/js",i=(window.GuiasModules=window.GuiasModules||{},[{key:"lme",name:"LME",icon:"lab_profile",script:"guia_lme.js",containerId:"guia_lme",renderFn:"renderGuiaLme",description:"Servico Auxiliar de Diagnostico e Terapia",actions:[{action:"loadSelects",label:"CARREGAR SELECTS",icon:"cloud_download"}]},{key:"consulta",name:"Consulta",icon:"stethoscope",script:"guia_consulta.js",containerId:"guia_consulta",renderFn:"renderGuiaConsulta",description:"Guia de Consulta",actions:[]},{key:"internacao",name:"Internacao",icon:"hotel",script:"guia_internacao.js",containerId:"guia_internacao",renderFn:"renderGuiaInternacao",description:"Guia de Internacao Hospitalar",actions:[]},{key:"sp_sadt",name:"SP/SADT",icon:"healing",script:"guia_sp_sadt.js",containerId:"guia_sp_sadt",renderFn:"renderGuiaSpSadt",description:"Solicitacao de Procedimento/SADT",actions:[]},{key:"resumo_internacao",name:"Resumo Int.",icon:"description",script:"guia_resumo_internacao.js",containerId:"guia_resumo_internacao",renderFn:"renderGuiaResumoInt",description:"Resumo de Internacao",actions:[]}]),r=null,s=new Set,t=null,d=null;function a(){var a=document.getElementById("tab_guias");if(a){if(a.innerHTML=`
+  <section id="tab-guias" class="tabPanel hidden">
+    <div class="grid gap-4 lg:grid-cols-[1fr_260px]">
 
-            <!-- Header -->
-            <header class="flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-slate-800">description</span>
-                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Guias SUS</h1>
-                </div>
+      <!-- MAIN -->
+      <div class="w-full max-w-7xl">
+        <div
+          class="rounded-[20px] bg-[#e0e5ec] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+
+          <header class="flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-slate-800">description</span>
+                <h1 class="text-xl font-semibold tracking-tight text-[#2d3748]">Guias SUS</h1>
               </div>
+            </div>
 
-              <div class="px-6 pb-2">
-                <div
-                  class="rounded-2xl bg-[#e0e5ec] p-4 text-sm text-slate-800 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
-                  <div class="flex items-start gap-3">
-                    <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
-                    <div class="space-y-1">
-                      <div class="font-semibold text-[#2d3748]">Material de apoio — Guias gerais de uso no SUS.</div>
-                    </div>
+            <div class="px-6 pb-2">
+              <div
+                class="rounded-2xl bg-[#e0e5ec] p-4 text-sm text-slate-800 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
+                  <div class="space-y-1">
+                    <div class="font-semibold text-[#2d3748]">Material de apoio — Guias gerais de uso no SUS.</div>
                   </div>
                 </div>
               </div>
-            </header>
+            </div>
+          </header>
 
-            <!-- Menu de Selecao de Guias -->
-            <div id="menu-guias" class="px-6 pb-4 flex flex-wrap gap-3"></div>
+          <div id="menu-guias" class="px-6 pb-4 flex flex-wrap gap-3 border-b border-slate-300"></div>
 
-            <!-- Content -->
-            <section class="p-4 pt-2">
-              <div class="bg-gray-200 overflow-hidden rounded-xl border border-gray-300">
+          
+            <!-- Toolbar zoom -->
+            <div
+              class="flex items-center justify-self-end gap-2 p-4 rounded-3xl  bg-slate-300 w-fit shadow-2xl m-4 print:hidden">
+              <button id="guiasZoomOut"
+                class="px-3 py-1 shadow-xl rounded-2xl bg-slate-200 hover:bg-slate-400">−</button>
+              <div id="guiasZoomLabel"
+                class="!bg-white p-2 rounded-2xl shadow inset-shadow-lg text-sm font-semibold text-shadow-sm w-16 text-center">
+                100%</div>
+              <button id="guiasZoomIn"
+                class="px-3 py-1 shadow-xl rounded-2xl bg-slate-200 hover:bg-slate-400">+</button>
+              <button id="guiasZoomReset"
+                class="px-3 py-1 shadow-xl rounded-2xl bg-slate-200 hover:bg-slate-400">Reset</button>
+            </div>
+            
+						<div id="menu-guias" class="px-6 pb-4 flex flex-wrap gap-3 border-b border-slate-300"></div>
+            
+						<!-- Área do documento: cresce conforme conteúdo -->
+            <div class="p-3">
+              <!-- Este wrapper é o ALVO do zoom -->
+              <div id="guiasZoomTarget" class="origin-top-center w-fit">
                 <div id="guias-content" class="min-h-[400px]"></div>
               </div>
-            </section>
+            </div>
+        
+        </div>
+      </div>
 
+      <!-- ASIDE -->
+      <aside class="sidebar w-full max-w-60 flex flex-col p-6 rounded-xl shadow-xl bg-white print:hidden">
+        <div class="button-group bg-gray-200 p-4 mb-5 rounded-xl shadow-xl">
+          <button type="button"
+            class="text-[12px] font-semibold w-full mb-2 p-2.5 bg-sky-600 text-white rounded-xl shadow-xl hover:bg-sky-700 transition-colors cursor-pointer"
+            id="guias_clearBtn">LIMPAR GUIA</button>
+
+          <button type="button"
+            class="text-[12px] font-semibold w-full mb-2 p-2.5 bg-sky-600 text-white rounded-xl shadow-xl hover:bg-sky-700 transition-colors cursor-pointer"
+            id="guias_printBtn">IMPRIMIR</button>
+
+          <div class="mt-3 pt-3 border-t border-slate-300/60">
+            <div class="text-[11px] font-semibold text-slate-700 mb-2">Ações desta guia</div>
+            <div id="guias_extraActions" class="space-y-2"></div>
+          </div>
+
+          <div class="mt-3 text-[11px] text-slate-600">
+            <span class="font-semibold">Ativa:</span> <span id="guias_activeName">—</span>
           </div>
         </div>
-      </section>
-    `,"undefined"!=typeof CDNLoader)try{i=new CDNLoader(e)}catch(a){i=null}a=document.getElementById("menu-guias");a&&(a.innerHTML=n.map(a=>`
-				<button data-guia-key="${a.key}"
-					class="guia-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
-					title="${a.description}">
-					<span class="material-symbols-outlined text-base">${a.icon}</span>
-					${a.name}
-				</button>
-			`).join(""),a.addEventListener("click",a=>{a=a.target.closest("[data-guia-key]");a&&o(a.dataset.guiaKey)})),o(n[0].key),console.log("[Guias] Aba renderizada e inicializada")}else console.error("[Guias] Container #tab_guias nao encontrado")}async function o(e){var o=n.find(a=>a.key===e);if(o){var a=document.getElementById("guias-content");if(document.querySelectorAll(".guia-menu-btn").forEach(a=>{a.dataset.guiaKey===e?(a.classList.add("text-[#007BFF]"),a.style.boxShadow="inset 4px 4px 8px #c1c9d2, inset -4px -4px 8px #ffffff"):(a.classList.remove("text-[#007BFF]"),a.style.boxShadow="6px 6px 12px #c1c9d2, -6px -6px 12px #ffffff")}),a&&(a.innerHTML=`<div id="${o.containerId}"></div>`),i&&!r.has(o.script))try{await i.load(o.script),r.add(o.script)}catch(a){console.warn("[Guias] Modulo "+o.script+" ainda nao disponivel"),s(o)}else window[o.renderFn]?window[o.renderFn]():s(o)}}function s(a){var e=document.getElementById(a.containerId);e&&(e.innerHTML=`
-			<div class="flex flex-col items-center justify-center py-16 text-slate-500">
-				<span class="material-symbols-outlined text-6xl mb-4 text-slate-300">construction</span>
-				<h3 class="text-lg font-bold text-[#2d3748] mb-2">${a.name}</h3>
-				<p class="text-sm text-slate-500">${a.description}</p>
-				<p class="text-xs text-slate-400 mt-4">Modulo em desenvolvimento — em breve disponivel.</p>
-			</div>
-		`)}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",a):a(),window.renderGuiasTab=a,window.switchGuia=o})(),window.renderGuiaLme=function(){var a,e,o=document.getElementById("guia_lme");o?(document.getElementById("guia-lme-styles")||((a=document.createElement("style")).id="guia-lme-styles",a.textContent=`
-            /* =========================================================
-            CHECKBOX (padroniza TODOS como "bonitos" / nativos)
-            - mantém tamanho 12px
-            - aparência nativa (igual w-3 h-3)
-             ========================================================= */
-            #guia_lme .pdf-box {
-                width: 12px;
-                height: 12px;
-                appearance: auto;
-                -webkit-appearance: auto;
-                background: initial;
-                border: initial;
-                display: inline-block;
-                vertical-align: middle;
-            }
+      </aside>
 
-            /* =========================================================
-            PÁGINA / A4
-            ========================================================= */
-            #guia_lme .a4 {
-                width: 210mm;
-                min-height: 297mm;
-            }
-
-            #guia_lme * {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            @page {
-                size: A4;
-                margin: 0;
-            }
-
-            /* =========================================================
-            PRINT
-            ========================================================= */
-            @media print {
-                html, body {
-                    background: white !important;
-                    margin: 0 !important;
-                    padding: 0 !important;
-                }
-
-                /* Ocultar elementos da interface geral na impressão */
-                #header, #sidebar, #tab-guias > div > header, #menu-guias {
-                    display: none !important;
-                }
-
-                /* Ocultar botão de limpar na impressão */
-                #guia_lme aside {
-                    display: none !important;
-                }
-
-                /* Esconder placeholders na impressão */
-                #guia_lme ::-webkit-input-placeholder { color: transparent !important; opacity: 0 !important; }
-                #guia_lme :-moz-placeholder { color: transparent !important; opacity: 0 !important; }
-                #guia_lme ::-moz-placeholder { color: transparent !important; opacity: 0 !important; }
-                #guia_lme :-ms-input-placeholder { color: transparent !important; opacity: 0 !important; }
-                #guia_lme ::placeholder { color: transparent !important; opacity: 0 !important; }
-
-                /* Remove bordas APENAS de inputs "de texto" e textarea */
-                #guia_lme input:not([type="checkbox"]):not([type="radio"]),
-                #guia_lme textarea {
-                    border-color: transparent !important;
-                }
-
-                /* Remove controles do input date na impressão */
-                #guia_lme input[type="date"]::-webkit-calendar-picker-indicator,
-                #guia_lme input[type="date"]::-webkit-inner-spin-button,
-                #guia_lme input[type="date"]::-webkit-clear-button {
-                    display: none !important;
-                    -webkit-appearance: none !important;
-                }
-
-                #guia_lme input[type="date"] {
-                    border: none !important;
-                    background: transparent !important;
-                    outline: none !important;
-                    box-shadow: none !important;
-                    -webkit-appearance: none !important;
-                    -moz-appearance: none !important;
-                    appearance: none !important;
-                    color: inherit !important;
-                    padding: 0 !important;
-                }
-
-                #guia_lme section#laudo-ceaf {
-                    box-shadow: none !important;
-                    border: none !important;
-                    margin: 0 !important;
-                    max-width: 100% !important;
-                }
-            }
-		`,document.head.appendChild(a)),o.innerHTML=`
-            <div class="bg-gray-100 min-h-screen py-8 text-sm relative">
-
-                <!-- ASIDE (fora do A4) -->
-                <aside class="fixed top-20 right-4 z-50 flex flex-col gap-2 print:hidden">
-                    <button id="lme_btnLimpar"
-                        class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow transition-colors">
-                        Limpar Campos
-                    </button>
-
-                    <button id="lme_btnCarregar"
-                        class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sm">cloud_download</span>
-                        Carregar Selects
-                    </button>
-                </aside>
-
-                 <!-- Wrapper: scroll no mobile, normal no print -->
-                <div class="w-full overflow-x-auto print:overflow-visible">
-                    <!-- A4 sheet -->
-                    <section id="laudo-ceaf" class="bg-white w-full max-w-full md:max-w-[210mm] print:max-w-[210mm] mx-auto
-                        rounded-xl print:rounded-none
-                        shadow-sm print:shadow-none  
-                        ring-1 ring-black/5 print:ring-0">
-
-                        <div class="relative px-2 sm:px-4 md:px-6 print:px-2 py-4">
-                            <!-- FORMULARIO -->
-
-                            <div class="w-full max-w-5xl mx-auto bg-white p-4 relative">
-
-                                <!-- Header -->
-                                <div class="flex justify-center items-center">
-                                    <div class="flex items-center">
-                                        <div class="rounded-md px-3 flex items-center">
-                                            <img id="logoSus" src="https://static.cdnlogo.com/logos/s/74/sus-brasil.svg"
-                                                alt="Logo SUS"
-                                                class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 print:w-28 md:h-28 print:h-28 object-contain" />
-                                        </div>
-                                    </div>
-                                    <div class="text-sm font-semibold">
-                                        <p>Sistema Único de Saúde</p>
-                                        <p>Ministério da Saúde</p>
-                                        <p>Secretaria de Estado da Saúde</p>
-                                    </div>
-                                </div>
-
-                                <!-- Title -->
-                                <div class="text-center font-bold text-sm border-l border-r border-b border-t border-black">
-                                    <p>COMPONENTE ESPECIALIZADO DA ASSISTÊNCIA FARMACÊUTICA</p>
-                                    <p>LAUDO DE SOLICITAÇÃO, AVALIAÇÃO E AUTORIZAÇÃO DE MEDICAMENTO(S)</p>
-                                    <p>SOLICITAÇÃO DE MEDICAMENTO(S)</p>
-                                </div>
-
-                                <!-- Main Form -->
-                                <div class="mb-4">
-                                    <div class="text-[9px] font-bold">
-                                        CAMPOS DE PREENCHIMENTO EXCLUSIVO PELO MÉDICO SOLICITANTE
-                                    </div>
-
-                                    <!-- BOX 1 -->
-                                    <div id="box1" class="border border-black mb-1 leading-none">
-                                        <!-- Row 1 -->
-                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
-                                            <div class="w-1/2 border-r border-black relative h-full px-2 overflow-hidden">
-                                                <label for="lme_cnes"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    1. Número do CNES*
-                                                </label>
-                                                <input id="lme_cnes" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[20px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
-                                            </div>
-
-                                            <div class="w-1/2 relative h-full px-2 overflow-hidden">
-                                                <label for="lme_estabelecimento"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    2. Nome do Estabelecimento de Saúde Solicitante
-                                                </label>
-                                                <input id="lme_estabelecimento" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 2 -->
-                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
-                                            <div class="w-full relative h-full px-2 overflow-hidden">
-                                                <label for="lme_nomePaciente"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    3. Nome completo do Paciente*
-                                                </label>
-                                                <input id="lme_nomePaciente" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 3 -->
-                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
-                                            <div class="w-1/2 relative h-full px-2 overflow-hidden">
-                                                <label for="lme_nomeSocial"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    3.1. Nome Social do Paciente
-                                                </label>
-                                                <input id="lme_nomeSocial" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-
-                                            <div class="w-1/4 border-r border-black relative h-full px-2 overflow-hidden"></div>
-
-                                            <div class="w-1/4 relative h-full px-2 overflow-hidden">
-                                                <label for="lme_peso"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    5. Peso do Paciente (kg)*
-                                                </label>
-                                                <input id="lme_peso" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 4 -->
-                                        <div class="flex h-[36px] text-[10px] leading-none">
-                                            <div class="w-3/4 border-r border-black relative h-full px-2 overflow-hidden">
-                                                <label for="lme_nomeMae"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    4. Nome da Mãe do Paciente*
-                                                </label>
-                                                <input id="lme_nomeMae" type="text" value="ELIETE DO CARMO CORNELIO ROSA"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-
-                                            <div class="w-1/4 relative h-full px-2 overflow-hidden">
-                                                <label for="lme_altura"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    6. Altura do Paciente (cm)*
-                                                </label>
-                                                <input id="lme_altura" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 2 — BLOCO 5 (Medicamentos) -->
-                                    <div id="box2" class="border border-black mb-1 leading-none">
-                                        <div class="">
-                                            <!-- HEADER -->
-                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] grid-rows-[18px_18px]">
-                                                <!-- 7 -->
-                                                <div
-                                                    class="col-span-2 row-span-2 border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
-                                                    7. Medicamentos*
-                                                </div>
-                                                <!-- 8 -->
-                                                <div
-                                                    class="col-span-6 border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
-                                                    8. Quantidade Solicitada*
-                                                </div>
-                                                <!-- Meses -->
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">1º mês</div>
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">2º mês</div>
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">3º mês</div>
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">4º mês</div>
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">5º mês</div>
-                                                <div class="border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">6º mês</div>
-                                            </div>
-
-                                            <!-- LINHA 1 -->
-                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
-                                                <div class="border-r border-black flex items-center justify-center font-semibold">1</div>
-                                                <div class="border-r border-black overflow-hidden">
-                                                    <select id="lme_med1" class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
-                                                        <option value="">Selecione...</option>
-                                                        <option value="OLANZAPINA 10.00 MG COMPRIMIDO">OLANZAPINA 10.00 MG COMPRIMIDO</option>
-                                                        <option value="QUETIAPINA 25 MG COMPRIMIDO">QUETIAPINA 25 MG COMPRIMIDO</option>
-                                                        <option value="RISPERIDONA 2 MG COMPRIMIDO">RISPERIDONA 2 MG COMPRIMIDO</option>
-                                                    </select>
-                                                </div>
-                                                <div class="border-r border-black"><input id="lme_q1_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q1_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q1_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q1_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q1_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div><input id="lme_q1_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                            </div>
-
-                                            <!-- LINHA 2 -->
-                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
-                                                <div class="border-r border-black flex items-center justify-center font-semibold">2</div>
-                                                <div class="border-r border-black overflow-hidden">
-                                                    <select id="lme_med2" class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
-                                                        <option value="">Selecione...</option>
-                                                    </select>
-                                                </div>
-                                                <div class="border-r border-black"><input id="lme_q2_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q2_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q2_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q2_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q2_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div><input id="lme_q2_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                            </div>
-
-                                            <!-- LINHA 3 -->
-                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] text-[10px] leading-none">
-                                                <div class="border-r border-black flex items-center justify-center font-semibold">3</div>
-                                                <div class="border-r border-black overflow-hidden">
-                                                    <input id="lme_med3" class="w-full h-full border-0 px-1 text-left text-[10px] leading-none" />
-                                                </div>
-                                                <div class="border-r border-black"><input id="lme_q3_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q3_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q3_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q3_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q3_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div><input id="lme_q3_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 3 — BLOCO 9 a 12 -->
-                                    <div id="box3" class="border border-black mb-1 text-[10px] leading-none">
-                                        <!-- Row 9/10 -->
-                                        <div class="grid grid-cols-[120px_1fr] h-9 border-b border-black">
-                                            <div class="relative border-r border-black px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">9. CID-10*</div>
-                                                <input id="lme_cid" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                            <div class="relative px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">10. Diagnóstico</div>
-                                                <input id="lme_diagnostico" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 11 -->
-                                        <div class="relative border-b border-black h-[60px] px-2 overflow-hidden">
-                                            <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">11. Anamnese*</div>
-                                            <textarea id="lme_anamnese" class="absolute left-2 right-2 top-[18px] bottom-[2px] border-0 bg-transparent resize-none focus:ring-0 focus:outline-none"></textarea>
-                                        </div>
-
-                                        <!-- Row 12 (Tratamento Prévio) -->
-                                        <div class="relative h-12 px-2 overflow-hidden">
-                                            <div class="absolute top-[2px] left-2 right-2 font-semibold">12. Paciente realizou tratamento prévio ou está em tratamento na doença?*</div>
-                                            <div class="absolute left-2 right-2 bottom-[4px] flex items-center gap-4">
-                                                <label class="flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>NÃO</span></label>
-                                                <label class="flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>SIM. Relatar:</span></label>
-                                                <input type="text" class="flex-1 min-w-0 h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 3B - BLOCO 13 (Atestado) -->
-                                    <div id="box3-b" class="border border-black mb-1 text-[10px] leading-none">
-                                        <div class="h-5 flex items-center justify-center font-semibold tracking-[0.3px] whitespace-nowrap">13. Atestado de Capacidade*</div>
-                                        <div class="px-4 py-1 text-[11px] leading-tight">
-                                            A solicitação do medicamento deverá ser realizada pelo paciente. Entretanto, fica dispensada a obrigatoriedade da presença física do paciente considerado incapaz de acordo com os artigos 3º e 4º do Código Civil. O paciente é considerado incapaz?
-                                        </div>
-                                        <div class="grid grid-cols-5 h-12 ">
-                                            <div class="col-span-3 relative px-4 overflow-hidden">
-                                                <div class="absolute left-2 top-[4px] grid-rows-[36px_36px] right-2 flex items-center gap-6 text-[8px] leading-none">
-                                                    <div class="row-1 flex gap-8">
-                                                        <label class="flex items-center gap-1 shrink-0"><input type="checkbox" class="w-3 h-3" /> <span class="text-wrap text-[11px]">NÃO</span></label>
-                                                        <label class="flex items-center gap-1 min-w-0 "><input type="checkbox" class="w-3 h-3" /><span class="text-wrap text-[11px] text-justify">SIM. Indicar o nome do responsável pelo paciente, o qual</span></label>
-                                                    </div>
-                                                    <div class="absolute left-20 top-[14px] right-2 row-2 flex items-center gap-6 text-[8px] leading-none">
-                                                        <label class=" mt-1.5"><span class="text-wrap text-[11px] text-justify">poderá realizar a solicitação do medicamento</span></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-2 relative px-2 overflow-hidden">
-                                                <input type="text" class="absolute left-0.5 right-0.5 top-[8px] h-4 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                <div class="absolute left-0.5 right-2.5 bottom-[11px] text-center text-[9px]">Nome do Responsável</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 4 - BLOCO 14 - 17 (Médico) -->
-                                    <div id="box4" class="border border-black mb-1 text-[10px] leading-none">
-                                        <div class="grid grid-cols-[1fr_140px_220px] grid-rows-[36px_36px]">
-                                            <!-- 14 -->
-                                            <div class="relative border-b border-black px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">14. Nome do médico solicitante*</div>
-                                                <input id="lme_nomeMedico" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                            <!-- coluna vazia -->
-                                            <div class="border-r border-b border-black"></div>
-                                            <!-- 17 -->
-                                            <div class="relative row-span-2 px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">17. Assinatura e carimbo do médico*</div>
-                                                <div class="absolute left-2 right-2 top-[16px] bottom-[4px]"></div>
-                                            </div>
-                                            <!-- 15 -->
-                                            <div class="relative border-r border-black px-2 overflow-hidden h-[36px]">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">15. Nº do Cartão Nacional de Saúde (CNS) do médico solicitante*</div>
-                                                <input id="lme_cnsMedico" type="text" class="absolute left-2 right-2 bottom-[2px] focus:ring-0 focus:outline-none" />
-                                            </div>
-                                            <!-- 16 -->
-                                            <div class="relative border-r border-black px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">16. Data da Solicitação*</div>
-                                                <input id="lme_dataSolicitacao" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 5 - BLOCO 18 (Campos preenchidos por) -->
-                                    <div id="box5" class="border border-black text-[10px] leading-none">
-                                        <div class="px-2 py-1 border-b border-black mb-2">
-                                            <div class="flex flex-row gap-x-3 gap-y-1 mt-1 text-[9px]">
-                                                <div class="font-semibold">18. CAMPOS ABAIXO PREENCHIDOS POR*:</div>
-                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Paciente</label></div>
-                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Mãe do Paciente</label></div>
-                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Responsável <span class="text-[8px]">(Descrito no item 13)</span></label></div>
-                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Médico Solicitante</label></div>
-                                            </div>
-                                            <div class="flex items-center gap-2 mt-1 text-[9px]">
-                                                <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Outro, informar nome:</label>
-                                                <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                <span>e CPF:</span>
-                                                <input type="text" class="w-[140px] h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <div class="grid grid-cols-[2fr_1fr] border-b border-black h-[72px] text-[10px] leading-none">
-                                            <div class="relative border-r border-black px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 right-2 font-semibold">19. Raça/Cor/Etnia informado pelo Paciente Responsável*</div>
-                                                <div class="absolute left-2 right-2 top-[22px] flex items-center gap-6 whitespace-nowrap">
-                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Branca</span></label>
-                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Amarela</span></label>
-                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Indígena. Informar Etnia:</span></label>
-                                                    <input type="text" class="flex-1 min-w-0 h-[14px] border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                </div>
-                                                <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
-                                                    <label class="inline-flex items-center gap-2 w-[74px]"><input type="checkbox" class="pdf-box" /><span>Preta</span></label>
-                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Parda</span></label>
-                                                </div>
-                                            </div>
-                                            <div class="relative px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 right-2 font-semibold">20. Telefone(s) para contato do paciente</div>
-                                                <div class="absolute left-2 right-2 top-[26px] flex items-center whitespace-nowrap">
-                                                    <span class="mr-1">(</span><input type="text" class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span class="ml-1">)</span>
-                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                </div>
-                                                <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
-                                                    <span class="mr-1">(</span><input type="text" class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span class="ml-1">)</span>
-                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="grid grid-cols-[1fr_1fr] grid-rows-[36px_36px]">
-                                            <div class="border-r border-b border-black px-2 py-1 overflow-hidden">
-                                                <div class="font-semibold">21. Número do documento do Paciente</div>
-                                                <div class="flex items-center gap-3 mt-1 text-[9px]">
-                                                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CPF</label>
-                                                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CNS:</label>
-                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                </div>
-                                            </div>
-                                            <div class="row-span-2 px-2 py-1">
-                                                <div class="font-semibold">23. Assinatura do responsável pelo preenchimento*</div>
-                                            </div>
-                                            <div class="border-r border-black px-2 py-1 overflow-hidden">
-                                                <div class="font-semibold">22. Correio Eletrônico do paciente</div>
-                                                <input type="email" class="mt-1 w-full h-3.5 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+    </div>
+  </section>
+    `,"undefined"!=typeof CDNLoader)try{r=new CDNLoader(n)}catch(a){r=null}var a=document.getElementById("menu-guias"),a=(a&&(a.innerHTML=i.map(a=>`
+        <button data-guia-key="${a.key}"
+          class="guia-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-semibold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
+          title="${a.description}">
+          <span class="material-symbols-outlined text-base">${a.icon}</span>
+          ${a.name}
+        </button>
+      `).join(""),a.addEventListener("click",a=>{a=a.target.closest("[data-guia-key]");a&&l(a.dataset.guiaKey)})),document.getElementById("guias_clearBtn")),e=document.getElementById("guias_printBtn"),o=document.getElementById("guias_extraActions");a&&a.addEventListener("click",()=>{var a=c();if(a&&"function"==typeof a.clear)return a.clear();(a=document.getElementById(d?.containerId||""))&&(a.querySelectorAll('input[type="text"], input[type="email"], input[type="date"]').forEach(a=>a.value=""),a.querySelectorAll("textarea").forEach(a=>a.value=""),a.querySelectorAll("select").forEach(a=>a.selectedIndex=0),a.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(a=>a.checked=!1))}),e&&e.addEventListener("click",()=>{{var o=document.getElementById(d?.containerId||"");if(o){let a=(a=>{let e=new Map,o=(o,a)=>{e.has(o)||e.set(o,o.getAttribute("style")),Object.entries(a).forEach(([a,e])=>{o.style.setProperty(a,e,"important")})},n=(o(document.body,{visibility:"hidden"}),o(a,{visibility:"visible",position:"absolute",left:"0",top:"0",width:"100%",background:"white"}),a.querySelectorAll("*").forEach(a=>{o(a,{visibility:"visible"})}),a.parentElement);for(;n&&n!==document.body;)o(n,{visibility:"visible",overflow:"visible"}),n=n.parentElement;return()=>{e.forEach((a,e)=>{null==a?e.removeAttribute("style"):e.setAttribute("style",a)})}})(o),e=()=>{try{a()}catch(a){}};window.addEventListener("afterprint",e,{once:!0}),window.print(),setTimeout(e,800)}else window.print()}}),o&&o.addEventListener("click",async a=>{var e,o,a=a.target.closest("[data-action]");a&&(e=a.dataset.action,(o=c())&&"function"==typeof o[e]?await o[e](a):console.warn(`[Guias] Ação "${e}" não implementada para a guia ativa`))}),l(i[0].key),console.log("[Guias] Aba renderizada e inicializada");{let i=document.getElementById("guiasZoomTarget"),e=document.getElementById("guiasZoomIn"),o=document.getElementById("guiasZoomOut"),r=document.getElementById("guiasZoomReset"),s=document.getElementById("guiasZoomLabel");if(i&&e&&o&&r&&s){let n=1,a=(e.addEventListener("click",()=>t(n+.1)),o.addEventListener("click",()=>t(n-.1)),r.addEventListener("click",()=>t(1)),{zoom:1});function t(a){var e,o;n=(e=.6,o=1.8,Math.max(e,Math.min(o,a))),i.style.zoom=String(n),s.textContent=Math.round(100*n)+"%"}window.addEventListener("beforeprint",()=>{a.zoom=n,i.style.zoom="1",s.textContent="100%"}),window.addEventListener("afterprint",()=>t(a.zoom)),t(1)}}}else console.error("[Guias] Container #tab_guias nao encontrado")}function c(){return t&&window.GuiasModules?.[t]||null}async function l(e){var o=i.find(a=>a.key===e);if(o){t=e,d=o,document.querySelectorAll(".guia-menu-btn").forEach(a=>{a.dataset.guiaKey===e?(a.classList.add("text-[#007BFF]"),a.style.boxShadow="inset 4px 4px 8px #c1c9d2, inset -4px -4px 8px #ffffff"):(a.classList.remove("text-[#007BFF]"),a.style.boxShadow="6px 6px 12px #c1c9d2, -6px -6px 12px #ffffff")}),a=o,(n=document.getElementById("guias_activeName"))&&(n.textContent=a?.name||"—"),n=o,(a=document.getElementById("guias_extraActions"))&&((n=n?.actions||[]).length?a.innerHTML=n.map(a=>{var e=a.icon?`<span class="material-symbols-outlined text-sm">${a.icon}</span>`:"";return`
+          <button type="button"
+            data-action="${a.action}"
+            class="text-[12px] font-semibold w-full p-2.5 bg-slate-700 text-white rounded-xl shadow-xl hover:bg-slate-800 transition-colors cursor-pointer flex items-center justify-center gap-2">
+            ${e}${a.label}
+          </button>
+        `}).join(""):a.innerHTML='<div class="text-[11px] text-slate-500">Sem ações específicas.</div>');var a,n=document.getElementById("guias-content");if(n&&(n.innerHTML=`<div id="${o.containerId}"></div>`),window[o.renderFn])window[o.renderFn]();else{if(r&&!s.has(o.script))try{if(await r.load(o.script),s.add(o.script),window[o.renderFn])return void window[o.renderFn]()}catch(a){console.warn("[Guias] Modulo "+o.script+" ainda nao disponivel")}a=o,(n=document.getElementById(a.containerId))&&(n.innerHTML=`
+      <div class="flex flex-col items-center justify-center py-16 text-slate-500">
+        <span class="material-symbols-outlined text-6xl mb-4 text-slate-300">construction</span>
+        <h3 class="text-lg font-semibold text-[#2d3748] mb-2">${a.name}</h3>
+        <p class="text-sm text-slate-500">${a.description}</p>
+        <p class="text-xs text-slate-400 mt-4">Modulo em desenvolvimento — em breve disponivel.</p>
+      </div>
+    `)}}}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",a):a(),window.renderGuiasTab=a,window.switchGuia=l})(),window.GuiasModules=window.GuiasModules||{},window.GuiasModules.lme={clear:function(){var a=document.getElementById("guia_lme");if(a){let e=new Set(["lme_cnes","lme_estabelecimento","lme_nomeMedico","lme_cnsMedico"]);a.querySelectorAll('input[type="text"], input[type="date"], input[type="email"]').forEach(a=>{e.has(a.id)||(a.value="")}),["lme_med1","lme_med2"].forEach(a=>{a=document.getElementById(a);a&&(a.selectedIndex=0)});var o=document.getElementById("lme_anamnese");o&&(o.value=""),a.querySelectorAll('input[type="radio"]').forEach(a=>a.checked=!1),a.querySelectorAll('input[type="checkbox"]').forEach(a=>a.checked=!1)}},loadSelects:async function(a){try{var n=await(await fetch("https://sigtap.gtmedics.com/farmacos_lme/lista_simples")).json();let e=['<option value="">Selecione um medicamento...</option>'],o=(n.forEach(a=>e.push(`<option value="${a.value}">${a.label}</option>`)),e.join(""));["lme_med1","lme_med2"].forEach(a=>{a=document.getElementById(a);a&&(a.innerHTML=o)}),"undefined"!=typeof Swal?Swal.fire({toast:!0,position:"top-end",icon:"success",title:n.length+" medicamentos carregados!",showConfirmButton:!1,timer:2500}):alert(n.length+" medicamentos carregados!")}catch(a){console.error("[Guia LME] Erro ao carregar:",a),alert("Erro ao carregar lista de medicamentos.")}}},window.renderGuiaLme=function(){var a=document.getElementById("guia_lme");a?(a.innerHTML=`
+  <div class="lg:col-span-3 w-full overflow-x-auto print:overflow-visible">
+    <!-- A4 sheet -->
+    <form id="laudo-ceaf"
+      class="p-0 m-0 bg-white rounded-xl print:shadow-none w-full max-w-full md:max-w-[210mm] print:max-w-[210mm] mx-auto">
+      <div class="relative h-full px-2 sm:px-4 md:px-6 print:px-2 pb-2 pt-2 w-full">
+        <!-- FORMULARIO -->
+        <div class="w-full max-w-5xl mx-auto bg-white p-4 relative">
+          <!-- Header -->
+          <div class="flex justify-center items-center">
+            <div class="flex items-center">
+              <div class="rounded-md px-3 flex items-center">
+                <img id="logoSus" src="https://static.cdnlogo.com/logos/s/74/sus-brasil.svg" alt="Logo SUS"
+                  class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 print:w-28 md:h-28 print:h-28 object-contain" />
+              </div>
             </div>
-        `,(a=document.getElementById("lme_dataSolicitacao"))&&a.addEventListener("input",function(){{var e=this;let a=e.value.replace(/\D/g,"");5<=(a=8<a.length?a.substring(0,8):a).length?e.value=a.substring(0,2)+"/"+a.substring(2,4)+"/"+a.substring(4):3<=a.length?e.value=a.substring(0,2)+"/"+a.substring(2):e.value=a}}),(e=o.querySelector("#lme_btnCarregar"))&&e.addEventListener("click",function(){(async a=>{let e="";a&&(e=a.innerHTML,a.disabled=!0,a.innerHTML=`
-                    <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span>Baixando...</span>`);try{var n=await(await fetch("https://sigtap.gtmedics.com/farmacos_lme/lista_simples")).json();let e=['<option value="">Selecione um medicamento...</option>'],o=(n.forEach(a=>{e.push(`<option value="${a.value}">${a.label}</option>`)}),e.join(""));["lme_med1","lme_med2"].forEach(a=>{a=document.getElementById(a);a&&(a.innerHTML=o)}),"undefined"!=typeof Swal?Swal.fire({toast:!0,position:"top-end",icon:"success",title:n.length+" medicamentos carregados!",showConfirmButton:!1,timer:2500}):alert(n.length+" medicamentos carregados!")}catch(a){console.error("Erro ao carregar:",a),alert("Erro ao carregar lista de medicamentos.")}finally{a&&(a.disabled=!1,a.innerHTML=e)}})(this)}),(e=o.querySelector("#lme_btnLimpar"))&&e.addEventListener("click",function(){var a,e=document.getElementById("guia_lme");e&&(e.querySelectorAll('input[type="text"], input[type="date"], input[type="email"]').forEach(a=>{"lme_nomeMae"===a.id?a.value="ELIETE DO CARMO CORNELIO ROSA":a.value=""}),["lme_med1","lme_med2","lme_med3"].forEach(a=>{a=document.getElementById(a);a&&(a.selectedIndex=0)}),(a=document.getElementById("lme_anamnese"))&&(a.value=""),e.querySelectorAll('input[type="radio"]').forEach(a=>a.checked=!1),e.querySelectorAll('input[type="checkbox"]').forEach(a=>a.checked=!1))}),console.log("[Guia LME] Renderizada com sucesso")):console.error("[Guia LME] Container #guia_lme não encontrado")},window.renderGuiaLme=renderGuiaLme,(()=>{let e="https://cdn.gtmedics.com/apoioClinico",s=[{key:"clinica",name:"Clínica Médica",icon:"cardiology",description:"Protocolos clínicos e prescrições por patologia"},{key:"emergencia",name:"Emergência",icon:"emergency",description:"Protocolos de emergência por especialidade"},{key:"pediatria",name:"Pediatria",icon:"pediatrics",description:"Calculadora de fármacos pediátricos por peso"},{key:"gineco",name:"Ginecologia",icon:"pregnancy",description:"Protocolos ginecológicos (em breve)"},{key:"psiquiatria",name:"Psiquiatria",icon:"psychology",description:"Protocolos psiquiátricos (em breve)"}],o=null,a=new Set;function n(){var a=document.getElementById("tab_apoio");a?(a.innerHTML=`
+            <div class="text-sm font-semibold">
+              <p>Sistema Único de Saúde</p>
+              <p>Ministério da Saúde</p>
+              <p>Secretaria de Estado da Saúde</p>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <div class="text-center font-bold text-sm border-l border-r border-b border-t border-black">
+            <p>COMPONENTE ESPECIALIZADO DA ASSISTÊNCIA FARMACÊUTICA</p>
+            <p>LAUDO DE SOLICITAÇÃO, AVALIAÇÃO E AUTORIZAÇÃO DE MEDICAMENTO(S)</p>
+            <p>SOLICITAÇÃO DE MEDICAMENTO(S)</p>
+          </div>
+
+          <!-- Main Form -->
+          <div class="mb-4">
+            <div class="text-[9px] font-bold">
+              CAMPOS DE PREENCHIMENTO EXCLUSIVO PELO MÉDICO SOLICITANTE
+            </div>
+
+            <!-- BOX 1 -->
+            <div id="box1" class="border border-black mb-1 leading-none">
+              <!-- Row 1 -->
+              <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                <div class="w-1/2 border-r border-black relative h-full px-2 overflow-hidden">
+                  <label for="lme_cnes"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    1. Número do CNES*
+                  </label>
+                  <input id="lme_cnes" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[20px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                </div>
+
+                <div class="w-1/2 relative h-full px-2 overflow-hidden">
+                  <label for="lme_estabelecimento"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    2. Nome do Estabelecimento de Saúde Solicitante
+                  </label>
+                  <input id="lme_estabelecimento" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                <div class="w-full relative h-full px-2 overflow-hidden">
+                  <label for="lme_nomePaciente"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    3. Nome completo do Paciente*
+                  </label>
+                  <input id="lme_nomePaciente" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                <div class="w-1/2 relative h-full px-2 overflow-hidden">
+                  <label for="lme_nomeSocial"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    3.1. Nome Social do Paciente
+                  </label>
+                  <input id="lme_nomeSocial" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+
+                <div class="w-1/4 border-r border-black relative h-full px-2 overflow-hidden"></div>
+
+                <div class="w-1/4 relative h-full px-2 overflow-hidden">
+                  <label for="lme_peso"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    5. Peso do Paciente (kg)*
+                  </label>
+                  <input id="lme_peso" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <!-- Row 4 -->
+              <div class="flex h-[36px] text-[10px] leading-none">
+                <div class="w-3/4 border-r border-black relative h-full px-2 overflow-hidden">
+                  <label for="lme_nomeMae"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    4. Nome da Mãe do Paciente*
+                  </label>
+                  <input id="lme_nomeMae" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+
+                <div class="w-1/4 relative h-full px-2 overflow-hidden">
+                  <label for="lme_altura"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    6. Altura do Paciente (cm)*
+                  </label>
+                  <input id="lme_altura" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 2 — BLOCO 5 (Medicamentos) -->
+            <div id="box2" class="border border-black mb-1 leading-none">
+              <div class="">
+                <!-- HEADER -->
+                <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] grid-rows-[18px_18px]">
+                  <!-- 7 -->
+                  <div
+                    class="col-span-2 row-span-2 border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
+                    7. Medicamentos*
+                  </div>
+                  <!-- 8 -->
+                  <div
+                    class="col-span-6 border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
+                    8. Quantidade Solicitada*
+                  </div>
+                  <!-- Meses -->
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    1º mês</div>
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    2º mês</div>
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    3º mês</div>
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    4º mês</div>
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    5º mês</div>
+                  <div
+                    class="border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    6º mês</div>
+                </div>
+
+                <!-- LINHA 1 -->
+                <div
+                  class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
+                  <div class="border-r border-black flex items-center justify-center font-semibold">1</div>
+                  <div class="border-r border-black overflow-hidden">
+                    <select id="lme_med1"
+                      class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
+                      <option value="">Selecione...</option>
+                    </select>
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_1"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_2"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_3"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_4"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_5"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div><input id="lme_q1_6"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+
+                <!-- LINHA 2 -->
+                <div
+                  class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
+                  <div class="border-r border-black flex items-center justify-center font-semibold">2</div>
+                  <div class="border-r border-black overflow-hidden">
+                    <select id="lme_med2"
+                      class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
+                      <option value="">Selecione...</option>
+                    </select>
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_1"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_2"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_3"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_4"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_5"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div><input id="lme_q2_6"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+
+                <!-- LINHA 3 -->
+                <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] text-[10px] leading-none">
+                  <div class="border-r border-black flex items-center justify-center font-semibold">3</div>
+                  <div class="border-r border-black overflow-hidden">
+                    <input id="lme_med3" class="w-full h-full border-0 px-1 text-left text-[10px] leading-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_1"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_2"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_3"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_4"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_5"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div><input id="lme_q3_6"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 3 — BLOCO 9 a 12 -->
+            <div id="box3" class="border border-black mb-1 text-[10px] leading-none">
+              <!-- Row 9/10 -->
+              <div class="grid grid-cols-[120px_1fr] h-9 border-b border-black">
+                <div class="relative border-r border-black px-2">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">9. CID-10*
+                  </div>
+                  <input id="lme_cid" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+                <div class="relative px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">10.
+                    Diagnóstico</div>
+                  <input id="lme_diagnostico" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <!-- Row 11 -->
+              <div class="relative border-b border-black h-[60px] px-2 overflow-hidden">
+                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">11. Anamnese*
+                </div>
+                <textarea id="lme_anamnese"
+                  class="absolute left-2 right-2 top-[18px] bottom-[2px] border-0 bg-transparent resize-none focus:ring-0 focus:outline-none"></textarea>
+              </div>
+
+              <!-- Row 12 (Tratamento Prévio) -->
+              <div class="relative h-12 px-2 overflow-hidden">
+                <div class="absolute top-[2px] left-2 right-2 font-semibold">12. Paciente realizou tratamento prévio
+                  ou está em tratamento na doença?*</div>
+                <div class="absolute left-2 right-2 bottom-[4px] flex items-center gap-4">
+                  <label class="flex items-center gap-2"><input type="checkbox"
+                      class="pdf-box" /><span>NÃO</span></label>
+                  <label class="flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>SIM.
+                      Relatar:</span></label>
+                  <input type="text"
+                    class="flex-1 min-w-0 h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 3B - BLOCO 13 (Atestado) -->
+            <div id="box3-b" class="border border-black mb-1 text-[10px] leading-none">
+              <div class="h-5 flex items-center justify-center font-semibold tracking-[0.3px] whitespace-nowrap">13.
+                Atestado de Capacidade*</div>
+              <div class="px-4 py-1 text-[11px] leading-tight">
+                A solicitação do medicamento deverá ser realizada pelo paciente. Entretanto, fica dispensada a
+                obrigatoriedade da presença física do paciente considerado incapaz de acordo com os artigos 3º e 4º do
+                Código Civil. O paciente é considerado incapaz?
+              </div>
+              <div class="grid grid-cols-5 h-12 ">
+                <div class="col-span-3 relative px-4 overflow-hidden">
+                  <div
+                    class="absolute left-2 top-[4px] grid-rows-[36px_36px] right-2 flex items-center gap-6 text-[8px] leading-none">
+                    <div class="row-1 flex gap-8">
+                      <label class="flex items-center gap-1 shrink-0"><input type="checkbox" class="w-3 h-3" /> <span
+                          class="text-wrap text-[11px]">NÃO</span></label>
+                      <label class="flex items-center gap-1 min-w-0 "><input type="checkbox" class="w-3 h-3" /><span
+                          class="text-wrap text-[11px] text-justify">SIM. Indicar o nome do responsável pelo paciente,
+                          o qual</span></label>
+                    </div>
+                    <div
+                      class="absolute left-20 top-[14px] right-2 row-2 flex items-center gap-6 text-[8px] leading-none">
+                      <label class=" mt-1.5"><span class="text-wrap text-[11px] text-justify">poderá realizar a
+                          solicitação do medicamento</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-2 relative px-2 overflow-hidden">
+                  <input type="text"
+                    class="absolute left-0.5 right-0.5 top-[8px] h-4 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  <div class="absolute left-0.5 right-2.5 bottom-[11px] text-center text-[9px]">Nome do Responsável
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 4 - BLOCO 14 - 17 (Médico) -->
+            <div id="box4" class="border border-black mb-1 text-[10px] leading-none">
+              <div class="grid grid-cols-[1fr_140px_220px] grid-rows-[36px_36px]">
+                <!-- 14 -->
+                <div class="relative border-b border-black px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">14. Nome do
+                    médico solicitante*</div>
+                  <input id="lme_nomeMedico" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+                <!-- coluna vazia -->
+                <div class="border-r border-b border-black"></div>
+                <!-- 17 -->
+                <div class="relative row-span-2 px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">17.
+                    Assinatura e carimbo do médico*</div>
+                  <div class="absolute left-2 right-2 top-[16px] bottom-[4px]"></div>
+                </div>
+                <!-- 15 -->
+                <div class="relative border-r border-black px-2 overflow-hidden h-[36px]">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">15. Nº do
+                    Cartão Nacional de Saúde (CNS) do médico solicitante*</div>
+                  <input id="lme_cnsMedico" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] focus:ring-0 focus:outline-none" />
+                </div>
+                <!-- 16 -->
+                <div class="relative border-r border-black px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">16. Data da
+                    Solicitação*</div>
+                  <input id="lme_dataSolicitacao" type="text" inputmode="numeric" placeholder="dd/mm/aaaa"
+                    maxlength="10"
+                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 5 - BLOCO 18 (Campos preenchidos por) -->
+            <div id="box5" class="border border-black text-[10px] leading-none">
+              <div class="px-2 py-1 border-b border-black mb-2">
+                <div class="flex flex-row gap-x-3 gap-y-1 mt-1 text-[9px]">
+                  <div class="font-semibold">18. CAMPOS ABAIXO PREENCHIDOS POR*:</div>
+                  <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox"
+                        class="w-3 h-3" /> Paciente</label></div>
+                  <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox"
+                        class="w-3 h-3" /> Mãe do Paciente</label></div>
+                  <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox"
+                        class="w-3 h-3" /> Responsável <span class="text-[8px]">(Descrito no item 13)</span></label>
+                  </div>
+                  <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox"
+                        class="w-3 h-3" /> Médico Solicitante</label></div>
+                </div>
+                <div class="flex items-center gap-2 mt-1 text-[9px]">
+                  <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Outro, informar
+                    nome:</label>
+                  <input type="text"
+                    class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  <span>e CPF:</span>
+                  <input type="text"
+                    class="w-[140px] h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-[2fr_1fr] border-b border-black h-[72px] text-[10px] leading-none">
+                <div class="relative border-r border-black px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 right-2 font-semibold">19. Raça/Cor/Etnia informado pelo
+                    Paciente Responsável*</div>
+                  <div class="absolute left-2 right-2 top-[22px] flex items-center gap-6 whitespace-nowrap">
+                    <label class="inline-flex items-center gap-2"><input type="checkbox"
+                        class="pdf-box" /><span>Branca</span></label>
+                    <label class="inline-flex items-center gap-2"><input type="checkbox"
+                        class="pdf-box" /><span>Amarela</span></label>
+                    <label class="inline-flex items-center gap-2"><input type="checkbox"
+                        class="pdf-box" /><span>Indígena. Informar Etnia:</span></label>
+                    <input type="text"
+                      class="flex-1 min-w-0 h-[14px] border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
+                    <label class="inline-flex items-center gap-2 w-[74px]"><input type="checkbox"
+                        class="pdf-box" /><span>Preta</span></label>
+                    <label class="inline-flex items-center gap-2"><input type="checkbox"
+                        class="pdf-box" /><span>Parda</span></label>
+                  </div>
+                </div>
+                <div class="relative px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 right-2 font-semibold">20. Telefone(s) para contato do
+                    paciente</div>
+                  <div class="absolute left-2 right-2 top-[26px] flex items-center whitespace-nowrap">
+                    <span class="mr-1">(</span><input type="text"
+                      class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span
+                      class="ml-1">)</span>
+                    <input type="text"
+                      class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
+                    <span class="mr-1">(</span><input type="text"
+                      class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span
+                      class="ml-1">)</span>
+                    <input type="text"
+                      class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-[1fr_1fr] grid-rows-[36px_36px]">
+                <div class="border-r border-b border-black px-2 py-1 overflow-hidden">
+                  <div class="font-semibold">21. Número do documento do Paciente</div>
+                  <div class="flex items-center gap-3 mt-1 text-[9px]">
+                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CPF</label>
+                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CNS:</label>
+                    <input type="text"
+                      class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+                <div class="row-span-2 px-2 py-1">
+                  <div class="font-semibold">23. Assinatura do responsável pelo preenchimento*</div>
+                </div>
+                <div class="border-r border-black px-2 py-1 overflow-hidden">
+                  <div class="font-semibold">22. Correio Eletrônico do paciente</div>
+                  <input type="email" class="mt-1 w-full h-3.5 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+        `,(a=document.getElementById("lme_dataSolicitacao"))&&a.addEventListener("input",function(){{var e=this;let a=e.value.replace(/\D/g,"");5<=(a=8<a.length?a.substring(0,8):a).length?e.value=a.substring(0,2)+"/"+a.substring(2,4)+"/"+a.substring(4):3<=a.length?e.value=a.substring(0,2)+"/"+a.substring(2):e.value=a}}),window.Cid10Module&&"function"==typeof window.Cid10Module.setupCidSearch?window.Cid10Module.setupCidSearch("lme_cid","lme_diagnostico"):console.warn("Cid10Module não carregado ou setupCidSearch indisponível."),console.log("[Guia LME] Renderizada (controles via aside externo)")):console.error("[Guia LME] Container #guia_lme não encontrado")},(()=>{let e="https://cdn.gtmedics.com/apoioClinico",s=[{key:"clinica",name:"Clínica Médica",icon:"cardiology",description:"Protocolos clínicos e prescrições por patologia"},{key:"emergencia",name:"Emergência",icon:"emergency",description:"Protocolos de emergência por especialidade"},{key:"pediatria",name:"Pediatria",icon:"pediatrics",description:"Calculadora de fármacos pediátricos por peso"},{key:"gineco",name:"Ginecologia",icon:"pregnancy",description:"Protocolos ginecológicos (em breve)"},{key:"psiquiatria",name:"Psiquiatria",icon:"psychology",description:"Protocolos psiquiátricos (em breve)"}],o=null,a=new Set;function n(){var a=document.getElementById("tab_apoio");a?(a.innerHTML=`
       <section id="tab-apoio" class="tabPanel hidden print:hidden">
         <div class="w-full max-w-7xl">
           <div
@@ -1109,7 +1137,7 @@
               <div>
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-slate-800">library_books</span>
-                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Apoio clínico por especialidade</h1>
+                  <h1 class="text-xl font-semibold tracking-tight text-slate-800">Apoio clínico por especialidade</h1>
                 </div>
                 <p class="mt-1 text-sm text-slate-800">
                   Selecione a especialidade para ver protocolos, prescrições e ferramentas clínicas.
@@ -1122,7 +1150,7 @@
                   <div class="flex items-start gap-3">
                     <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
                     <div class="space-y-1">
-                      <div class="font-semibold text-[#2d3748]">Material de apoio. Validar com protocolo institucional.</div>
+                      <div class="font-semibold text-slate-800">Material de apoio. Validar com protocolo institucional.</div>
                       <div>
                         Especialmente em gestação/lactação, insuficiência renal/hepática, interações, alergias e IST.
                       </div>
@@ -1137,7 +1165,7 @@
 
             <!-- Content -->
             <section class="p-4 pt-2">
-              <div class="bg-gray-200 overflow-hidden rounded-xl border border-gray-300">
+              <div class="bg-gray-200  overflow-hidden rounded-xl border border-gray-300">
                 <div id="apoio-content" class="min-h-[400px]"></div>
               </div>
             </section>
@@ -1147,7 +1175,7 @@
       </section>
     `,o=new CDNLoader(e),(a=document.getElementById("menu-apoio"))&&(a.innerHTML=s.map(a=>`
 				<button data-apoio-key="${a.key}"
-					class="apoio-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
+					class="apoio-menu-btn inline-flex items-center cursor-pointer gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-semibold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
 					title="${a.description}">
 					<span class="material-symbols-outlined text-base">${a.icon}</span>
 					${a.name}
@@ -1189,61 +1217,69 @@
 			</div>
 		`,await!(await l("protocolos-completo.js")&&await l("clinica.js")?window.ProtocolosModule&&window.ProtocolosModule.init&&window.ProtocolosModule.init():n.innerHTML=p("Clínica Médica"));break;case"pediatria":var n=o,i=(n.innerHTML=`
 			<div class="p-6 bg-[#e0e5ec]">
-				<div class="flex flex-col gap-6">
-					<!-- Seleção + Inputs -->
-					<div class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
-						<h3 class="text-lg font-bold text-[#2d3748] mb-4 flex items-center gap-2">
-							<span class="material-symbols-outlined">pediatrics</span>
-							Calculadora Farmacológica Pediátrica
-						</h3>
+				<div class="flex flex-col md:flex-row gap-6">
+					<!-- Sidebar: Controles (1/3) -->
+					<div class="w-full md:w-1/3">
+						<div class="rounded-[20px] bg-[#e0e5ec] p-4 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+							<h3 class="text-sm font-bold text-[#2d3748] mb-3 flex items-center gap-2">
+								<span class="material-symbols-outlined text-sm">pediatrics</span>
+								Parâmetros
+							</h3>
 
-						<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-							<!-- Fármaco -->
-							<div class="md:col-span-2">
-								<label for="selectFarmaco" class="block text-xs font-bold text-[#2d3748] mb-1">Fármaco</label>
-								<select id="selectFarmaco"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none">
-									<option value="">— Selecione o fármaco —</option>
-								</select>
+							<div class="flex flex-col gap-3">
+								<!-- Fármaco -->
+								<div>
+									<label for="selectFarmaco" class="block text-xs font-bold text-[#2d3748] mb-1">Fármaco</label>
+									<select id="selectFarmaco"
+										class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none">
+										<option value="">— Selecione —</option>
+									</select>
+								</div>
+
+								<div class="grid grid-cols-2 gap-3">
+									<!-- Peso -->
+									<div>
+										<label for="inputPeso" class="block text-xs font-bold text-[#2d3748] mb-1">Peso (kg)</label>
+										<input id="inputPeso" type="number" step="0.1" min="0.5" placeholder="ex: 12"
+											class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+									</div>
+									<!-- Idade -->
+									<div>
+										<label for="inputIdadeMeses" class="block text-xs font-bold text-[#2d3748] mb-1">Idade (mes)</label>
+										<input id="inputIdadeMeses" type="number" min="0" placeholder="ex: 36"
+											class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+									</div>
+								</div>
 							</div>
 
-							<!-- Peso -->
-							<div>
-								<label for="inputPeso" class="block text-xs font-bold text-[#2d3748] mb-1">Peso (kg)</label>
-								<input id="inputPeso" type="number" step="0.1" min="0.5" placeholder="ex: 12.5"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+							<!-- Botões -->
+							<div class="flex flex-col gap-2 mt-4">
+								<button id="btnCalcular"
+									class="w-full inline-flex justify-center items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-[#007BFF] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
+									<span class="material-symbols-outlined text-sm">calculate</span>
+									Calcular
+								</button>
+								<div class="flex items-center gap-2">
+									<button id="btnCopiarRx"
+										class="flex-1 inline-flex justify-center items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-xs font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
+										<span class="material-symbols-outlined text-sm">content_copy</span>
+										Copiar
+									</button>
+									<span id="copyStatus" class="text-[10px] text-green-600 w-16 text-center"></span>
+								</div>
 							</div>
-
-							<!-- Idade -->
-							<div>
-								<label for="inputIdadeMeses" class="block text-xs font-bold text-[#2d3748] mb-1">Idade (meses)</label>
-								<input id="inputIdadeMeses" type="number" min="0" placeholder="ex: 36"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
-							</div>
-						</div>
-
-						<!-- Botões -->
-						<div class="flex gap-3 mt-4">
-							<button id="btnCalcular"
-								class="inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-5 py-2.5 text-sm font-bold text-[#007BFF] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
-								<span class="material-symbols-outlined text-sm">calculate</span>
-								Calcular
-							</button>
-							<button id="btnCopiarRx"
-								class="inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-5 py-2.5 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
-								<span class="material-symbols-outlined text-sm">content_copy</span>
-								Copiar Rx
-							</button>
-							<span id="copyStatus" class="text-xs text-green-600 self-center"></span>
 						</div>
 					</div>
 
-					<!-- Resultado -->
-					<div id="medicationCard"
-						class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[200px] font-mono text-sm text-[#25282e] whitespace-pre-wrap">
-						<div class="text-center py-8 text-[#5f6775]">
-							<span class="material-symbols-outlined text-4xl mb-3">medication</span>
-							<p>Selecione um fármaco e insira o peso para calcular a dose.</p>
+					<!-- Content: Resultado (2/3) -->
+					<div class="w-full md:w-2/3">
+						<div id="medicationCard"
+							class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[300px] font-mono text-sm text-[#25282e] whitespace-pre-wrap h-full">
+							<div class="text-center py-12 text-[#5f6775]">
+								<span class="material-symbols-outlined text-5xl mb-3 opacity-50">medication_liquid</span>
+								<h3 class="text-lg font-medium text-[#2d3748]">Calculadora Pediátrica</h3>
+								<p class="text-sm mt-2">Configure os parâmetros à esquerda para calcular.</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -1345,7 +1381,7 @@
               <div>
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-slate-800">groups</span>
-                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Estratégia Saúde da Família (PSF)</h1>
+                  <h1 class="text-xl font-semibold tracking-tight text-[#2d3748]">Estratégia Saúde da Família (PSF)</h1>
                 </div>
               </div>
 
@@ -1377,8 +1413,8 @@
       </section>
     `,r=new CDNLoader(e),s=new CDNLoader(o),(a=document.getElementById("menu-psf"))&&(a.innerHTML=i.map(a=>`
 				<button data-psf-key="${a.key}"
-					class="psf-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none">
-					<span class="material-symbols-outlined text-base">${a.icon}</span>
+					class="psf-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-semibold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none">
+					<span class="material-symbols-outlined text-sm">${a.icon}</span>
 					${a.name}
 				</button>
 			`).join(""),a.addEventListener("click",a=>{a=a.target.closest("[data-psf-key]");a&&n(a.dataset.psfKey)})),n(i[0].key),console.log("[PSF] Aba renderizada e inicializada")):console.error("[PSF] Container #tab_psf não encontrado")}async function n(e){var o=i.find(a=>a.key===e);if(o){var n=document.getElementById("psf-content"),a=(document.querySelectorAll(".psf-menu-btn").forEach(a=>{a.dataset.psfKey===e?(a.classList.add("text-[#007BFF]"),a.style.boxShadow="inset 4px 4px 8px #c1c9d2, inset -4px -4px 8px #ffffff"):(a.classList.remove("text-[#007BFF]"),a.style.boxShadow="6px 6px 12px #c1c9d2, -6px -6px 12px #ffffff")}),n&&(n.innerHTML=`<div id="${o.containerId}"></div>`),o.cdn?s:r);if(!t.has(o.script))try{await a.load(o.script),t.add(o.script)}catch(a){return console.error(`[PSF] Erro ao carregar ${o.script}:`,a),void(n&&(n.innerHTML=`<div class="p-8 text-center text-red-500">Erro ao carregar módulo: ${o.name}</div>`))}window[o.renderFn]&&window[o.renderFn]()}}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",a):a(),window.renderPsfTab=a,window.switchPsfTool=n})(),(()=>{let t=a=>document.getElementById(a),d=(a,e,o,n)=>{a&&a.addEventListener(e,o,n)},c=a=>{a=String(a||"").split("\n")[0]||"";return 80<a.length?a.slice(0,80)+"…":a},o=()=>window.HotstringsModule?.data?window.HotstringsModule.data:"object"==typeof window.hotstrings&&window.hotstrings?window.hotstrings:{},l=o();if(!Object.keys(l).length){let e=setInterval(()=>{var a=o();Object.keys(a).length&&(l=a,r(t("searchBox")?.value||""),w(),clearInterval(e))},500);setTimeout(()=>clearInterval(e),1e4)}let e=JSON.parse(JSON.stringify(l));function n(a){"editar"===a&&(l=o(),w())}window.__asideBus?.on("tabChanged",({tab:a})=>n(a)),window.addEventListener("tabChanged",a=>n(a.detail?.tab));let a=t("searchBox");function r(a=""){var e=t("hotstringItems"),o=t("codesCount");if(e&&o){e.innerHTML="";var n=Object.entries(l).sort((a,e)=>a[0].localeCompare(e[0],"pt-BR")),i=(o.textContent=String(n.length),a.trim().toLowerCase());if(i){let o=0;var r=document.createDocumentFragment();for(let[e,a]of n)if(e.toLowerCase().includes(i)){if(50<=o){var s=document.createElement("div");s.className="text-center text-xs text-slate-400 py-2 italic border-t border-slate-100 mt-2",s.textContent="...e mais resultados. Refine sua busca.",r.appendChild(s);break}s=document.createElement("button");s.type="button",s.className="w-full text-left px-3 py-2 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300 rounded-lg transition-colors group mb-1",s.innerHTML=`
@@ -1392,7 +1428,7 @@
         <div class="flex flex-col items-center justify-center py-8 text-slate-400 opacity-60">
           <span class="material-symbols-outlined text-4xl mb-2">manage_search</span>
           <span class="text-xs font-medium">Digite para buscar...</span>
-        </div>`}}d(a,"input",()=>r(a.value)),document.addEventListener("input",o=>{if("examText"===o.target?.id){o=o.target;if(o&&l){var n=o.selectionStart??o.value.length,i=o.value.slice(0,n);if(/\s$/.test(i)){var i=i.trimEnd(),r=i.match(/(\S+)$/);if(r){let e=r[1],a=e;(a=Object.prototype.hasOwnProperty.call(l,e)?a:Object.keys(l).find(a=>a.toLowerCase()===e.toLowerCase()))&&(r=l[a],i=i.slice(0,i.length-e.length)+r+" ",o.value=i+o.value.slice(n),o.setSelectionRange(i.length,i.length))}}}}});let s=1,m=10,i="",p=t("editorHotstringsList");var _=t("searchEditorInput"),u=t("itemsPerPageSelect");let g=t("prevPageBtn"),v=t("nextPageBtn"),f=t("pageNumbers"),b=t("totalItems"),x=t("gotoPageInput"),h=t("hotstringModal"),A=t("modalCodeInput"),O=t("modalTextInput"),T=t("modalTitle");var I=t("modalSaveBtn"),E=t("modalCancelBtn");let C=null;function S(){var a=Object.entries(l);let o=i.trim().toLowerCase();return(o?a.filter(([a,e])=>a.toLowerCase().includes(o)||e.toLowerCase().includes(o)):a).sort((a,e)=>a[0].localeCompare(e[0],"pt-BR"))}function w(){if(p){var o=S(),a=o.length,a=(b&&(b.textContent=a),Math.ceil(a/m)||1),e=((s=Math.max(1,Math.min(s,a)))-1)*m,o=o.slice(e,e+m);if(p.innerHTML="",o.length)for(let[e,a]of o){var n=document.createElement("tr"),i=(n.className="group transition-colors hover:bg-black/5 text-slate-800 border-b border-transparent hover:border-slate-200",60<a.length?a.slice(0,60)+"...":a);n.innerHTML=`
+        </div>`}}d(a,"input",()=>r(a.value)),document.addEventListener("input",o=>{if("examText"===o.target?.id){o=o.target;if(o&&l){var n=o.selectionStart??o.value.length,i=o.value.slice(0,n);if(/\s$/.test(i)){var i=i.trimEnd(),r=i.match(/(\S+)$/);if(r){let e=r[1],a=e;(a=Object.prototype.hasOwnProperty.call(l,e)?a:Object.keys(l).find(a=>a.toLowerCase()===e.toLowerCase()))&&(r=l[a],i=i.slice(0,i.length-e.length)+r+" ",o.value=i+o.value.slice(n),o.setSelectionRange(i.length,i.length))}}}}});let s=1,m=10,i="",p=t("editorHotstringsList");var _=t("searchEditorInput"),u=t("itemsPerPageSelect");let g=t("prevPageBtn"),v=t("nextPageBtn"),f=t("pageNumbers"),b=t("totalItems"),x=t("gotoPageInput"),h=t("hotstringModal"),A=t("modalCodeInput"),T=t("modalTextInput"),I=t("modalTitle");var O=t("modalSaveBtn"),E=t("modalCancelBtn");let C=null;function S(){var a=Object.entries(l);let o=i.trim().toLowerCase();return(o?a.filter(([a,e])=>a.toLowerCase().includes(o)||e.toLowerCase().includes(o)):a).sort((a,e)=>a[0].localeCompare(e[0],"pt-BR"))}function w(){if(p){var o=S(),a=o.length,a=(b&&(b.textContent=a),Math.ceil(a/m)||1),e=((s=Math.max(1,Math.min(s,a)))-1)*m,o=o.slice(e,e+m);if(p.innerHTML="",o.length)for(let[e,a]of o){var n=document.createElement("tr"),i=(n.className="group transition-colors hover:bg-black/5 text-slate-800 border-b border-transparent hover:border-slate-200",60<a.length?a.slice(0,60)+"...":a);n.innerHTML=`
           <td class="px-6 py-4 font-mono font-bold align-top select-all">${e}</td>
           <td class="px-6 py-4 whitespace-pre-wrap align-top text-xs">${i}</td>
           <td class="px-6 py-4 align-top text-right">
@@ -1400,4 +1436,4 @@
               <button type="button" class="btn-edit p-2 rounded-full hover:bg-blue-100 text-slate-500 hover:text-blue-600 transition-colors" title="Editar"><span class="material-symbols-outlined text-lg">edit</span></button>
               <button type="button" class="btn-delete p-2 rounded-full hover:bg-red-100 text-slate-500 hover:text-red-600 transition-colors" title="Excluir"><span class="material-symbols-outlined text-lg">delete</span></button>
             </div>
-          </td>`,n.querySelector(".btn-edit").onclick=()=>R(e,a),n.querySelector(".btn-delete").onclick=()=>{var a;a=e,confirm(`Excluir "${a}"?`)&&(delete l[a],r(),w())},p.appendChild(n)}else{var e=document.createElement("tr");e.innerHTML='<td colspan="3" class="px-6 py-4 text-center text-slate-500">Nenhum item encontrado</td>',p.appendChild(e)}o=a;f&&(f.innerHTML="",(e=document.createElement("span")).className="text-sm font-semibold text-slate-800 self-center",e.textContent=s+" / "+o,f.appendChild(e)),g&&(g.disabled=s<=1),v&&(v.disabled=s>=o),x&&(x.value=s)}}function R(a=null,e=null){h&&h.classList.remove("hidden"),C=a,T&&(T.textContent=a?"Editar Hotstring":"Adicionar Hotstring"),A&&(A.value=a||""),O&&(O.value=e||""),A?.focus()}function y(){h&&h.classList.add("hidden"),C=null}d(t("addNewHotstringBtn"),"click",()=>R()),d(E,"click",y),d(I,"click",function(){var a=A?.value.trim(),e=O?.value;if(!a)return alert("Código é obrigatório!");(!l[a]||C===a&&C||confirm(`"${a}" já existe. Sobrescrever?`))&&(C&&a!==C&&delete l[C],l[a]=e,y(),r(),w())}),d(_,"input",a=>{i=a.target.value,s=1,w()}),d(u,"change",a=>{m=parseInt(a.target.value),s=1,w()}),d(g,"click",()=>{1<s&&(s--,w())}),d(v,"click",()=>{var a=Math.ceil(S().length/m)||1;s<a&&(s++,w())}),d(x,"change",a=>{a=parseInt(a.target.value);0<a&&(s=a,w())});let L=t("convertTextModal"),N=t("convertCodeInput"),D=t("convertTextInput");d(t("convertTextBtn"),"click",()=>{L&&L.classList.remove("hidden"),N&&(N.value=""),D&&(D.value="")}),d(t("convertCancelBtn"),"click",()=>{L&&L.classList.add("hidden")}),d(t("convertSaveBtn"),"click",()=>{var a=N?.value.trim(),e=D?.value;if(!a)return alert("Código necessário");l[a]&&!confirm("Sobrescrever?")||(l[a]=e,L&&L.classList.add("hidden"),r(),w())}),d(t("resetBtn"),"click",()=>{if(confirm("Restaurar hotstrings para o padrão original?")){for(var a of Object.keys(l))delete l[a];Object.assign(l,e),r(),w(),alert("Restaurado para o padrão.")}}),d(t("exportBtn"),"click",()=>{var a=document.createElement("a");a.href="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(l,null,2)),a.download="hotstrings_backup.json",document.body.appendChild(a),a.click(),a.remove()}),d(t("importInput"),"change",a=>{var e,o=a.target.files[0];o&&((e=new FileReader).onload=a=>{try{var e=JSON.parse(a.target.result);if(e&&"object"==typeof e){if(confirm("Importar substituirá a lista atual. Continuar?")){for(var o of Object.keys(l))delete l[o];Object.assign(l,e),r(),w(),alert("Importado com sucesso!")}}else alert("Arquivo inválido.")}catch(a){alert("Erro ao ler JSON: "+a.message)}},e.readAsText(o),a.target.value="")}),window.mostrarCNES=function(){var a=t("select-unidade"),e=t("cnes-container"),o=t("input-cnes");a&&(a=a.value,o&&(o.value=a),e)&&(e.style.display=a?"flex":"none")},window.inserirCNES=function(){var a,e=t("input-cnes")?.value;e&&((a=window.__asideRegistry?.get("cnes-search"))?.search?a.search(e):window.searchCNES&&window.searchCNES(e))},window.limparCamposCNES=function(){window.__asideBus?.emit("cnesDataCleared")},window.preencherCNES=function(a,e){window.searchCNES&&window.searchCNES(a,e)},r(),w()})();
+          </td>`,n.querySelector(".btn-edit").onclick=()=>y(e,a),n.querySelector(".btn-delete").onclick=()=>{var a;a=e,confirm(`Excluir "${a}"?`)&&(delete l[a],r(),w())},p.appendChild(n)}else{var e=document.createElement("tr");e.innerHTML='<td colspan="3" class="px-6 py-4 text-center text-slate-500">Nenhum item encontrado</td>',p.appendChild(e)}o=a;f&&(f.innerHTML="",(e=document.createElement("span")).className="text-sm font-semibold text-slate-800 self-center",e.textContent=s+" / "+o,f.appendChild(e)),g&&(g.disabled=s<=1),v&&(v.disabled=s>=o),x&&(x.value=s)}}function y(a=null,e=null){h&&h.classList.remove("hidden"),C=a,I&&(I.textContent=a?"Editar Hotstring":"Adicionar Hotstring"),A&&(A.value=a||""),T&&(T.value=e||""),A?.focus()}function R(){h&&h.classList.add("hidden"),C=null}d(t("addNewHotstringBtn"),"click",()=>y()),d(E,"click",R),d(O,"click",function(){var a=A?.value.trim(),e=T?.value;if(!a)return alert("Código é obrigatório!");(!l[a]||C===a&&C||confirm(`"${a}" já existe. Sobrescrever?`))&&(C&&a!==C&&delete l[C],l[a]=e,R(),r(),w())}),d(_,"input",a=>{i=a.target.value,s=1,w()}),d(u,"change",a=>{m=parseInt(a.target.value),s=1,w()}),d(g,"click",()=>{1<s&&(s--,w())}),d(v,"click",()=>{var a=Math.ceil(S().length/m)||1;s<a&&(s++,w())}),d(x,"change",a=>{a=parseInt(a.target.value);0<a&&(s=a,w())});let L=t("convertTextModal"),N=t("convertCodeInput"),D=t("convertTextInput");d(t("convertTextBtn"),"click",()=>{L&&L.classList.remove("hidden"),N&&(N.value=""),D&&(D.value="")}),d(t("convertCancelBtn"),"click",()=>{L&&L.classList.add("hidden")}),d(t("convertSaveBtn"),"click",()=>{var a=N?.value.trim(),e=D?.value;if(!a)return alert("Código necessário");l[a]&&!confirm("Sobrescrever?")||(l[a]=e,L&&L.classList.add("hidden"),r(),w())}),d(t("resetBtn"),"click",()=>{if(confirm("Restaurar hotstrings para o padrão original?")){for(var a of Object.keys(l))delete l[a];Object.assign(l,e),r(),w(),alert("Restaurado para o padrão.")}}),d(t("exportBtn"),"click",()=>{var a=document.createElement("a");a.href="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(l,null,2)),a.download="hotstrings_backup.json",document.body.appendChild(a),a.click(),a.remove()}),d(t("importInput"),"change",a=>{var e,o=a.target.files[0];o&&((e=new FileReader).onload=a=>{try{var e=JSON.parse(a.target.result);if(e&&"object"==typeof e){if(confirm("Importar substituirá a lista atual. Continuar?")){for(var o of Object.keys(l))delete l[o];Object.assign(l,e),r(),w(),alert("Importado com sucesso!")}}else alert("Arquivo inválido.")}catch(a){alert("Erro ao ler JSON: "+a.message)}},e.readAsText(o),a.target.value="")}),window.mostrarCNES=function(){var a=t("select-unidade"),e=t("cnes-container"),o=t("input-cnes");a&&(a=a.value,o&&(o.value=a),e)&&(e.style.display=a?"flex":"none")},window.inserirCNES=function(){var a,e=t("input-cnes")?.value;e&&((a=window.__asideRegistry?.get("cnes-search"))?.search?a.search(e):window.searchCNES&&window.searchCNES(e))},window.limparCamposCNES=function(){window.__asideBus?.emit("cnesDataCleared")},window.preencherCNES=function(a,e){window.searchCNES&&window.searchCNES(a,e)},r(),w()})();

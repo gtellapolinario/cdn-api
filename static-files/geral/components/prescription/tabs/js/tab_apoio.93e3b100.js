@@ -9,11 +9,11 @@
 
 	// Ferramentas de Apoio — cada uma com scripts e scaffold próprio
 	const apoioTools = [
-		{ key: 'clinica',     name: 'Clínica Médica',  icon: 'cardiology',   description: 'Protocolos clínicos e prescrições por patologia' },
-		{ key: 'emergencia',  name: 'Emergência',      icon: 'emergency',    description: 'Protocolos de emergência por especialidade' },
-		{ key: 'pediatria',   name: 'Pediatria',       icon: 'pediatrics',   description: 'Calculadora de fármacos pediátricos por peso' },
-		{ key: 'gineco',      name: 'Ginecologia',     icon: 'pregnancy',    description: 'Protocolos ginecológicos (em breve)' },
-		{ key: 'psiquiatria', name: 'Psiquiatria',     icon: 'psychology',   description: 'Protocolos psiquiátricos (em breve)' },
+		{ key: 'clinica', name: 'Clínica Médica', icon: 'cardiology', description: 'Protocolos clínicos e prescrições por patologia' },
+		{ key: 'emergencia', name: 'Emergência', icon: 'emergency', description: 'Protocolos de emergência por especialidade' },
+		{ key: 'pediatria', name: 'Pediatria', icon: 'pediatrics', description: 'Calculadora de fármacos pediátricos por peso' },
+		{ key: 'gineco', name: 'Ginecologia', icon: 'pregnancy', description: 'Protocolos ginecológicos (em breve)' },
+		{ key: 'psiquiatria', name: 'Psiquiatria', icon: 'psychology', description: 'Protocolos psiquiátricos (em breve)' },
 	];
 
 	let loaderApoio = null;
@@ -40,7 +40,7 @@
               <div>
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-slate-800">library_books</span>
-                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Apoio clínico por especialidade</h1>
+                  <h1 class="text-xl font-semibold tracking-tight text-slate-800">Apoio clínico por especialidade</h1>
                 </div>
                 <p class="mt-1 text-sm text-slate-800">
                   Selecione a especialidade para ver protocolos, prescrições e ferramentas clínicas.
@@ -53,7 +53,7 @@
                   <div class="flex items-start gap-3">
                     <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
                     <div class="space-y-1">
-                      <div class="font-semibold text-[#2d3748]">Material de apoio. Validar com protocolo institucional.</div>
+                      <div class="font-semibold text-slate-800">Material de apoio. Validar com protocolo institucional.</div>
                       <div>
                         Especialmente em gestação/lactação, insuficiência renal/hepática, interações, alergias e IST.
                       </div>
@@ -68,7 +68,7 @@
 
             <!-- Content -->
             <section class="p-4 pt-2">
-              <div class="bg-gray-200 overflow-hidden rounded-xl border border-gray-300">
+              <div class="bg-gray-200  overflow-hidden rounded-xl border border-gray-300">
                 <div id="apoio-content" class="min-h-[400px]"></div>
               </div>
             </section>
@@ -89,14 +89,18 @@
 		const menuContainer = document.getElementById('menu-apoio');
 
 		if (menuContainer) {
-			menuContainer.innerHTML = apoioTools.map(tool => `
+			menuContainer.innerHTML = apoioTools
+				.map(
+					(tool) => `
 				<button data-apoio-key="${tool.key}"
-					class="apoio-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
+					class="apoio-menu-btn inline-flex items-center cursor-pointer gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-semibold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
 					title="${tool.description}">
 					<span class="material-symbols-outlined text-base">${tool.icon}</span>
 					${tool.name}
 				</button>
-			`).join('');
+			`,
+				)
+				.join('');
 
 			menuContainer.addEventListener('click', (e) => {
 				const btn = e.target.closest('[data-apoio-key]');
@@ -113,13 +117,13 @@
 	// SWITCH ENTRE ESPECIALIDADES
 	// ============================================
 	async function switchApoio(key) {
-		const tool = apoioTools.find(t => t.key === key);
+		const tool = apoioTools.find((t) => t.key === key);
 		if (!tool) return;
 
 		const apoioContent = document.getElementById('apoio-content');
 
 		// Highlight botão ativo
-		document.querySelectorAll('.apoio-menu-btn').forEach(btn => {
+		document.querySelectorAll('.apoio-menu-btn').forEach((btn) => {
 			const isActive = btn.dataset.apoioKey === key;
 			if (isActive) {
 				btn.classList.add('text-[#007BFF]');
@@ -233,61 +237,69 @@
 		// Scaffold DOM que farmacos_completo.js espera
 		contentEl.innerHTML = `
 			<div class="p-6 bg-[#e0e5ec]">
-				<div class="flex flex-col gap-6">
-					<!-- Seleção + Inputs -->
-					<div class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
-						<h3 class="text-lg font-bold text-[#2d3748] mb-4 flex items-center gap-2">
-							<span class="material-symbols-outlined">pediatrics</span>
-							Calculadora Farmacológica Pediátrica
-						</h3>
+				<div class="flex flex-col md:flex-row gap-6">
+					<!-- Sidebar: Controles (1/3) -->
+					<div class="w-full md:w-1/3">
+						<div class="rounded-[20px] bg-[#e0e5ec] p-4 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+							<h3 class="text-sm font-bold text-[#2d3748] mb-3 flex items-center gap-2">
+								<span class="material-symbols-outlined text-sm">pediatrics</span>
+								Parâmetros
+							</h3>
 
-						<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-							<!-- Fármaco -->
-							<div class="md:col-span-2">
-								<label for="selectFarmaco" class="block text-xs font-bold text-[#2d3748] mb-1">Fármaco</label>
-								<select id="selectFarmaco"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none">
-									<option value="">— Selecione o fármaco —</option>
-								</select>
+							<div class="flex flex-col gap-3">
+								<!-- Fármaco -->
+								<div>
+									<label for="selectFarmaco" class="block text-xs font-bold text-[#2d3748] mb-1">Fármaco</label>
+									<select id="selectFarmaco"
+										class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none">
+										<option value="">— Selecione —</option>
+									</select>
+								</div>
+
+								<div class="grid grid-cols-2 gap-3">
+									<!-- Peso -->
+									<div>
+										<label for="inputPeso" class="block text-xs font-bold text-[#2d3748] mb-1">Peso (kg)</label>
+										<input id="inputPeso" type="number" step="0.1" min="0.5" placeholder="ex: 12"
+											class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+									</div>
+									<!-- Idade -->
+									<div>
+										<label for="inputIdadeMeses" class="block text-xs font-bold text-[#2d3748] mb-1">Idade (mes)</label>
+										<input id="inputIdadeMeses" type="number" min="0" placeholder="ex: 36"
+											class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+									</div>
+								</div>
 							</div>
 
-							<!-- Peso -->
-							<div>
-								<label for="inputPeso" class="block text-xs font-bold text-[#2d3748] mb-1">Peso (kg)</label>
-								<input id="inputPeso" type="number" step="0.1" min="0.5" placeholder="ex: 12.5"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+							<!-- Botões -->
+							<div class="flex flex-col gap-2 mt-4">
+								<button id="btnCalcular"
+									class="w-full inline-flex justify-center items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-[#007BFF] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
+									<span class="material-symbols-outlined text-sm">calculate</span>
+									Calcular
+								</button>
+								<div class="flex items-center gap-2">
+									<button id="btnCopiarRx"
+										class="flex-1 inline-flex justify-center items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-xs font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
+										<span class="material-symbols-outlined text-sm">content_copy</span>
+										Copiar
+									</button>
+									<span id="copyStatus" class="text-[10px] text-green-600 w-16 text-center"></span>
+								</div>
 							</div>
-
-							<!-- Idade -->
-							<div>
-								<label for="inputIdadeMeses" class="block text-xs font-bold text-[#2d3748] mb-1">Idade (meses)</label>
-								<input id="inputIdadeMeses" type="number" min="0" placeholder="ex: 36"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
-							</div>
-						</div>
-
-						<!-- Botões -->
-						<div class="flex gap-3 mt-4">
-							<button id="btnCalcular"
-								class="inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-5 py-2.5 text-sm font-bold text-[#007BFF] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
-								<span class="material-symbols-outlined text-sm">calculate</span>
-								Calcular
-							</button>
-							<button id="btnCopiarRx"
-								class="inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-5 py-2.5 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
-								<span class="material-symbols-outlined text-sm">content_copy</span>
-								Copiar Rx
-							</button>
-							<span id="copyStatus" class="text-xs text-green-600 self-center"></span>
 						</div>
 					</div>
 
-					<!-- Resultado -->
-					<div id="medicationCard"
-						class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[200px] font-mono text-sm text-[#25282e] whitespace-pre-wrap">
-						<div class="text-center py-8 text-[#5f6775]">
-							<span class="material-symbols-outlined text-4xl mb-3">medication</span>
-							<p>Selecione um fármaco e insira o peso para calcular a dose.</p>
+					<!-- Content: Resultado (2/3) -->
+					<div class="w-full md:w-2/3">
+						<div id="medicationCard"
+							class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[300px] font-mono text-sm text-[#25282e] whitespace-pre-wrap h-full">
+							<div class="text-center py-12 text-[#5f6775]">
+								<span class="material-symbols-outlined text-5xl mb-3 opacity-50">medication_liquid</span>
+								<h3 class="text-lg font-medium text-[#2d3748]">Calculadora Pediátrica</h3>
+								<p class="text-sm mt-2">Configure os parâmetros à esquerda para calcular.</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -318,14 +330,14 @@
 		if (!select || !data) return;
 
 		const categorias = data.getCategorias();
-		categorias.forEach(catKey => {
+		categorias.forEach((catKey) => {
 			const items = data.getByCategoria(catKey);
 			if (!items || !Object.keys(items).length) return;
 
 			const optgroup = document.createElement('optgroup');
 			optgroup.label = catKey.charAt(0).toUpperCase() + catKey.slice(1);
 
-			Object.keys(items).forEach(itemKey => {
+			Object.keys(items).forEach((itemKey) => {
 				const item = items[itemKey];
 				const opt = document.createElement('option');
 				opt.value = catKey + '.' + itemKey;
@@ -351,7 +363,9 @@
 		function setStatus(msg) {
 			if (!statusEl) return;
 			statusEl.textContent = msg;
-			setTimeout(() => { statusEl.textContent = ''; }, 1500);
+			setTimeout(() => {
+				statusEl.textContent = '';
+			}, 1500);
 		}
 
 		function getSelectedItem() {
@@ -371,11 +385,16 @@
 		}
 
 		function stripHtml(s) {
-			return String(s ?? '').replace(/<[^>]*>/g, '').trim();
+			return String(s ?? '')
+				.replace(/<[^>]*>/g, '')
+				.trim();
 		}
 
 		function normalizeSpaces(s) {
-			return String(s ?? '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+			return String(s ?? '')
+				.replace(/[ \t]+\n/g, '\n')
+				.replace(/\n{3,}/g, '\n\n')
+				.trim();
 		}
 
 		function buildRxText(item, ctx) {
@@ -503,13 +522,17 @@
 		if (!categoriesEl) return;
 
 		const categorias = PDM.getCategorias();
-		categoriesEl.innerHTML = categorias.map(cat => `
+		categoriesEl.innerHTML = categorias
+			.map(
+				(cat) => `
 			<button data-emerg-cat="${cat.key}"
 				class="emerg-cat-btn flex items-center justify-between rounded-[15px] bg-[#e0e5ec] px-4 py-2.5 text-xs font-bold text-slate-700 shadow-[4px_4px_8px_#c1c9d2,-4px_-4px_8px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_3px_3px_6px_#c1c9d2,inset_-3px_-3px_6px_#ffffff] transition-all text-left cursor-pointer">
 				<span>${cat.name}</span>
 				<span class="text-[10px] text-slate-400">${cat.count}</span>
 			</button>
-		`).join('');
+		`,
+			)
+			.join('');
 
 		// Event: clicar em categoria
 		categoriesEl.addEventListener('click', (e) => {
@@ -519,7 +542,7 @@
 			const catKey = btn.dataset.emergCat;
 
 			// Highlight categoria ativa
-			categoriesEl.querySelectorAll('.emerg-cat-btn').forEach(b => {
+			categoriesEl.querySelectorAll('.emerg-cat-btn').forEach((b) => {
 				if (b.dataset.emergCat === catKey) {
 					b.classList.add('text-[#007BFF]');
 					b.style.boxShadow = 'inset 3px 3px 6px #c1c9d2, inset -3px -3px 6px #ffffff';
@@ -550,7 +573,7 @@
 		let html = `<div class="space-y-3">`;
 		html += `<h3 class="text-base font-bold text-[#2d3748] mb-3">${protocolos[0]?.categoriaNome || catKey}</h3>`;
 
-		protocolos.forEach(p => {
+		protocolos.forEach((p) => {
 			html += `
 				<button data-emerg-proto="${p.key}" data-emerg-cat="${catKey}"
 					class="emerg-proto-btn w-full text-left rounded-[15px] bg-[#e0e5ec] px-4 py-3 text-sm font-medium text-[#25282e] shadow-[4px_4px_8px_#c1c9d2,-4px_-4px_8px_#ffffff] border-none hover:text-[#007BFF] hover:shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] active:shadow-[inset_3px_3px_6px_#c1c9d2,inset_-3px_-3px_6px_#ffffff] transition-all cursor-pointer">
@@ -638,7 +661,9 @@
 				try {
 					await navigator.clipboard.writeText(proto.rx_text);
 					copyBtn.textContent = 'Copiado ✅';
-					setTimeout(() => { copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx'; }, 1500);
+					setTimeout(() => {
+						copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx';
+					}, 1500);
 				} catch {
 					const ta = document.createElement('textarea');
 					ta.value = proto.rx_text;
@@ -647,7 +672,9 @@
 					document.execCommand('copy');
 					ta.remove();
 					copyBtn.textContent = 'Copiado ✅';
-					setTimeout(() => { copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx'; }, 1500);
+					setTimeout(() => {
+						copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx';
+					}, 1500);
 				}
 			});
 		}

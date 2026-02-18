@@ -1,0 +1,224 @@
+/**
+ * ApoioMed - Main Stylesheet
+ * @version 1.0.0
+ * @author Seu Nome
+ * @description Estilos principais do sistema ApoioMed
+ */
+
+/* ============================================
+   BASE & RESET
+   ============================================ */
+* {
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+/* ============================================
+   LAYOUT - A4
+   ============================================ */
+.a4 {
+	width: 210mm;
+	min-height: 297mm;
+}
+
+/* ============================================
+   COMPONENTS
+   ============================================ */
+
+/* Material Icons */
+.material-symbols-outlined {
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 600,
+		'GRAD' 0,
+		'opsz' 24;
+	vertical-align: -0.15em;
+}
+
+/* Region Icon */
+.region-icon {
+	width: 50px;
+	height: 50px;
+	background-color: #e0e5ec;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow:
+		5px 5px 10px #a3b1c6,
+		-5px -5px 10px #ffffff;
+}
+
+/* Tab Button */
+.tabBtn {
+	margin: 10px;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-fadeIn {
+	animation: fadeIn 0.5s ease;
+	will-change: opacity, transform;
+}
+
+/* ============================================
+   CHECKBOX "PDF" (usado nas guias SUS)
+   ============================================ */
+.pdf-box {
+	width: 12px;
+	height: 12px;
+	appearance: auto;
+	-webkit-appearance: auto;
+	background: initial;
+	border: initial;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@page {
+	size: A4;
+	margin: 0;
+}
+
+@media print {
+	html,
+	body {
+		background: white !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.a4 {
+		box-shadow: none !important;
+		border-radius: 0 !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	body * {
+		visibility: hidden !important;
+	}
+
+	#tab-prescricao #rxForm,
+	#tab-prescricao #rxForm * {
+		visibility: visible !important;
+	}
+
+	#tab-prescricao #textArea {
+		visibility: visible !important;
+		border: none !important;
+		box-shadow: none !important;
+		outline: none !important;
+	}
+
+	#tab-exames #app,
+	#tab-exames #app * {
+		visibility: visible !important;
+	}
+
+	#tab-exames #app table {
+		width: 100% !important;
+		table-layout: auto !important;
+	}
+
+	#tab-exames #app input,
+	#tab-exames #app textarea {
+		font-size: 10pt !important;
+	}
+
+	#tab-guias #guias-content,
+	#tab-guias #guias-content * {
+		visibility: visible !important;
+	}
+
+	#tab-guias #guias-content aside {
+		display: none !important;
+	}
+
+	#tab-guias #guias-content input:not([type='checkbox']):not([type='radio']),
+	#tab-guias #guias-content textarea,
+	#tab-guias #guias-content select {
+		border: none !important;
+		border-color: transparent !important;
+		outline: none !important;
+		box-shadow: none !important;
+		background: transparent !important;
+	}
+
+	.print\:hide,
+	.print\:hidden {
+		display: none !important;
+	}
+
+	#limitWarning {
+		display: none !important;
+	}
+
+	::placeholder,
+	::-webkit-input-placeholder,
+	:-moz-placeholder,
+	::-moz-placeholder,
+	:-ms-input-placeholder {
+		color: transparent !important;
+		opacity: 0 !important;
+	}
+
+	#tab-prescricao input,
+	#tab-prescricao select,
+	#tab-prescricao textarea {
+		border: none !important;
+		border-color: transparent !important;
+		outline: none !important;
+		box-shadow: none !important;
+		background: transparent !important;
+		-webkit-appearance: none !important;
+		-moz-appearance: none !important;
+		appearance: none !important;
+	}
+
+	#tab-prescricao .rounded-md.bg-slate-50 {
+		border: none !important;
+		background: transparent !important;
+	}
+
+	#tab-prescricao select {
+		background-image: none !important;
+	}
+
+	input[type='date'] {
+		border: none !important;
+		background: transparent !important;
+		outline: none !important;
+		box-shadow: none !important;
+		-webkit-appearance: none !important;
+		-moz-appearance: none !important;
+		appearance: none !important;
+		color: inherit !important;
+	}
+
+	input[type='date']::-webkit-calendar-picker-indicator,
+	input[type='date']::-webkit-inner-spin-button,
+	input[type='date']::-webkit-clear-button {
+		display: none !important;
+		-webkit-appearance: none !important;
+	}
+
+	#tab-prescricao input[type='date'] {
+		padding-left: 0 !important;
+	}
+}

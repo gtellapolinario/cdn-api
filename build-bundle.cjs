@@ -26,6 +26,7 @@ const FILES = [
 	'apoioClinico/js/exames-module.js',
 	'geral/js/adm_drugs.js',
 	'geral/js/ufs-brasil-module.js',
+	'geral/js/cid10-module.js',
 
 	// 2. API / CDNLoader
 	'geral/components/api/js/functions-initial.js',

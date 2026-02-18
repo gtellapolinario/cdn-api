@@ -1,8 +1,11 @@
 {
   "adm_drugs.js": "adm_drugs.b83e7b87.js",
-  "bundle.js": "bundle.f60d99ba.js",
-  "bundle.min.js": "bundle.min.fb5c5a84.js",
+  "bundle.js": "bundle.85c8a54f.js",
+  "bundle.min.js": "bundle.min.eb37ed3e.js",
+  "cid10-module.js": "cid10-module.4513fc95.js",
   "clipboard.js": "clipboard.43be8b16.js",
-  "guia_lme.js": "guia_lme.728ebbe6.js",
+  "guia_lme.js": "guia_lme.892ce184.js",
+  "mini-bundle.js": "mini-bundle.bf93142b.js",
+  "mini-bundle.min.js": "mini-bundle.min.4f042e82.js",
   "ufs-brasil-module.js": "ufs-brasil-module.c0c81c28.js"
 }

@@ -1,0 +1,2102 @@
+/**
+ * GT-Medics - Mini Bundle Utils
+ * @version 1.0.0-mini
+ * @generated 2026-02-11T01:37:22.242Z
+ * @files 4 arquivos concatenados
+ */
+
+'use strict';
+
+
+/* ==========================================
+   [1/4] geral/js/cid10-module.js
+   ========================================== */
+(() => {
+	'use strict';
+
+	// Ajuste conforme necessário - endpoint da API de CID
+	const API_URL = 'https://api-cid.gtmedics.com';
+
+	/**
+	 * Busca CID-10 na API
+	 * @param {string} query Termo de busca (código ou descrição)
+	 * @returns {Promise<Array>} Lista de resultados
+	 */
+	async function searchCid(query) {
+		// Evita chamadas vazias (min 2 caracteres conforme pedido)
+		if (!query || query.length < 2) return [];
+
+		try {
+			const res = await fetch(`${API_URL}/cid/search?q=${encodeURIComponent(query)}`);
+
+			if (!res.ok) {
+				throw new Error(`Erro na busca: ${res.statusText}`);
+			}
+
+			const data = await res.json();
+
+			// Lógica defensiva do snippet do usuário
+			if (Array.isArray(data)) {
+				return data;
+			} else if (data && Array.isArray(data.results)) {
+				return data.results;
+			}
+
+			return [];
+		} catch (error) {
+			console.error('Erro ao buscar CID:', error);
+			return [];
+		}
+	}
+
+	/**
+	 * Configura o autocomplete para um par de inputs (código e descrição)
+	 * @param {string|HTMLElement} inputCidId ID ou elemento do input de código (ex: lme_cid)
+	 * @param {string|HTMLElement} inputDescId ID ou elemento do input de descrição (ex: lme_diagnostico)
+	 */
+	function setupCidSearch(inputCidId, inputDescId) {
+		const elCid = typeof inputCidId === 'string' ? document.getElementById(inputCidId) : inputCidId;
+		const elDesc = typeof inputDescId === 'string' ? document.getElementById(inputDescId) : inputDescId;
+
+		if (!elCid) {
+			console.warn('Input CID não encontrado:', inputCidId);
+			return;
+		}
+
+		// Garante posição relativa no pai para posicionar a lista
+		if (elCid.parentNode) {
+			elCid.parentNode.style.position = 'relative';
+		}
+
+		// Cria lista de sugestões
+		let suggestionsBox = document.createElement('div');
+		suggestionsBox.className = 'absolute z-[9999] bg-white border border-gray-300 w-[300px] max-h-48 overflow-y-auto shadow-lg hidden';
+		suggestionsBox.style.top = '100%';
+		suggestionsBox.style.left = '0';
+
+		if (elCid.parentNode) {
+			elCid.parentNode.appendChild(suggestionsBox);
+		}
+
+		let debounceTimer;
+
+		console.log('SetupCidSearch anexado a:', elCid.id);
+
+		elCid.addEventListener('input', (e) => {
+			const term = e.target.value;
+			clearTimeout(debounceTimer);
+
+			// Ajustado para 2 caracteres conforme pedido
+			if (term.length < 2) {
+				suggestionsBox.innerHTML = '';
+				suggestionsBox.classList.add('hidden');
+				return;
+			}
+
+			debounceTimer = setTimeout(async () => {
+				suggestionsBox.innerHTML = '<div class="p-2 text-[10px] text-gray-500">Buscando...</div>';
+				suggestionsBox.classList.remove('hidden');
+
+				const results = await searchCid(term);
+
+				suggestionsBox.innerHTML = '';
+				if (!results || results.length === 0) {
+					suggestionsBox.innerHTML = '<div class="p-2 text-[10px] text-gray-500">Nenhum resultado</div>';
+				} else {
+					results.forEach((item) => {
+						const div = document.createElement('div');
+						div.className = 'p-2 hover:bg-blue-50 cursor-pointer text-[10px] border-b border-gray-100 flex flex-col';
+						// item: { code: "A00", description: "Cólera" }
+						// Ajuste para exibir codigo e descrição claramente
+						div.innerHTML = `
+                            <span class="font-bold text-blue-700">${item.code}</span>
+                            <span class="text-gray-600 truncate">${item.description || item.nome || ''}</span>
+                        `;
+
+						div.onclick = () => {
+							elCid.value = item.code;
+							if (elDesc) elDesc.value = item.description || item.nome || '';
+							suggestionsBox.innerHTML = '';
+							suggestionsBox.classList.add('hidden');
+						};
+						suggestionsBox.appendChild(div);
+					});
+				}
+			}, 300); // Debounce levemente menor
+		});
+
+		// Fecha ao clicar fora
+		document.addEventListener('click', (e) => {
+			if (!elCid.contains(e.target) && !suggestionsBox.contains(e.target)) {
+				suggestionsBox.classList.add('hidden');
+			}
+		});
+	}
+
+	window.Cid10Module = {
+		searchCid,
+		setupCidSearch,
+	};
+
+	console.log('✅ CID-10 Module carregado');
+})();
+
+
+/* ==========================================
+   [2/4] geral/js/ufs-brasil-module.js
+   ========================================== */
+(() => {
+  'use strict';
+
+  const UFS_BRASIL = [
+    { sigla: 'AC', nome: 'Acre', regiao: 'Norte' },
+    { sigla: 'AL', nome: 'Alagoas', regiao: 'Nordeste' },
+    { sigla: 'AP', nome: 'Amapá', regiao: 'Norte' },
+    { sigla: 'AM', nome: 'Amazonas', regiao: 'Norte' },
+    { sigla: 'BA', nome: 'Bahia', regiao: 'Nordeste' },
+    { sigla: 'CE', nome: 'Ceará', regiao: 'Nordeste' },
+    { sigla: 'DF', nome: 'Distrito Federal', regiao: 'Centro-Oeste' },
+    { sigla: 'ES', nome: 'Espírito Santo', regiao: 'Sudeste' },
+    { sigla: 'GO', nome: 'Goiás', regiao: 'Centro-Oeste' },
+    { sigla: 'MA', nome: 'Maranhão', regiao: 'Nordeste' },
+    { sigla: 'MT', nome: 'Mato Grosso', regiao: 'Centro-Oeste' },
+    { sigla: 'MS', nome: 'Mato Grosso do Sul', regiao: 'Centro-Oeste' },
+    { sigla: 'MG', nome: 'Minas Gerais', regiao: 'Sudeste' },
+    { sigla: 'PA', nome: 'Pará', regiao: 'Norte' },
+    { sigla: 'PB', nome: 'Paraíba', regiao: 'Nordeste' },
+    { sigla: 'PR', nome: 'Paraná', regiao: 'Sul' },
+    { sigla: 'PE', nome: 'Pernambuco', regiao: 'Nordeste' },
+    { sigla: 'PI', nome: 'Piauí', regiao: 'Nordeste' },
+    { sigla: 'RJ', nome: 'Rio de Janeiro', regiao: 'Sudeste' },
+    { sigla: 'RN', nome: 'Rio Grande do Norte', regiao: 'Nordeste' },
+    { sigla: 'RS', nome: 'Rio Grande do Sul', regiao: 'Sul' },
+    { sigla: 'RO', nome: 'Rondônia', regiao: 'Norte' },
+    { sigla: 'RR', nome: 'Roraima', regiao: 'Norte' },
+    { sigla: 'SC', nome: 'Santa Catarina', regiao: 'Sul' },
+    { sigla: 'SP', nome: 'São Paulo', regiao: 'Sudeste' },
+    { sigla: 'SE', nome: 'Sergipe', regiao: 'Nordeste' },
+    { sigla: 'TO', nome: 'Tocantins', regiao: 'Norte' },
+  ];
+
+  const getUF = (sigla) => UFS_BRASIL.find((uf) => uf.sigla === sigla.toUpperCase()) || null;
+  const getTodas = () => UFS_BRASIL;
+  const porRegiao = (regiao) => UFS_BRASIL.filter((uf) => uf.regiao === regiao);
+  const getSiglas = () => UFS_BRASIL.map((uf) => uf.sigla);
+  const isValidaUF = (sigla) => UFS_BRASIL.some((uf) => uf.sigla === sigla.toUpperCase());
+
+  function criarUfSelect(options = {}) {
+    const {
+      id = 'crmUf',
+      name = 'crmUf',
+      placeholder = 'UF',
+      selectedValue = '',
+      incluirVazio = true,
+      className = 'w-full rounded-md border border-slate-100 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400',
+      showNomeCompleto = false,
+    } = options;
+
+    const select = document.createElement('select');
+    select.id = id;
+    select.name = name;
+    select.className = className;
+
+    if (incluirVazio) {
+      const optionVazia = document.createElement('option');
+      optionVazia.value = '';
+      optionVazia.textContent = placeholder;
+      select.appendChild(optionVazia);
+    }
+
+    UFS_BRASIL.forEach((uf) => {
+      const option = document.createElement('option');
+      option.value = uf.sigla;
+      option.textContent = showNomeCompleto ? `${uf.sigla} - ${uf.nome}` : uf.sigla;
+      if (uf.sigla === selectedValue) option.selected = true;
+      select.appendChild(option);
+    });
+
+    return select;
+  }
+
+  function renderizarUfSelect(container, options = {}) {
+    const element = typeof container === 'string' ? document.getElementById(container) : container;
+    if (!element) {
+      console.error('Container não encontrado:', container);
+      return null;
+    }
+    const select = criarUfSelect(options);
+    element.innerHTML = '';
+    element.appendChild(select);
+    return select;
+  }
+
+  function renderizarLabelUfSelect(container, options = {}) {
+    const { 
+      labelText = 'UF:', 
+      labelClass = 'sm:col-span-2 print:col-span-2 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-2', 
+      labelTextClass = 'text-[10px] font-bold tracking-wide whitespace-nowrap', 
+      ...selectOptions 
+    } = options;
+
+    const element = typeof container === 'string' ? document.getElementById(container) : container;
+    if (!element) {
+      console.error('Container não encontrado:', container);
+      return null;
+    }
+
+    const label = document.createElement('label');
+    label.className = labelClass;
+
+    const labelDiv = document.createElement('div');
+    labelDiv.className = labelTextClass;
+    labelDiv.textContent = labelText;
+
+    const select = criarUfSelect(selectOptions);
+    label.appendChild(labelDiv);
+    label.appendChild(select);
+
+    element.innerHTML = '';
+    element.appendChild(label);
+
+    return select;
+  }
+
+  function gerarHTMLUfSelect(options = {}) {
+    const {
+      id = 'crmUf',
+      name = 'crmUf',
+      placeholder = 'UF',
+      selectedValue = '',
+      incluirVazio = true,
+      className = 'w-full rounded-md border border-slate-100 bg-white px-2 py-1 text-[11px] font-semibold outline-none focus:ring-2 focus:ring-slate-400',
+      showNomeCompleto = false,
+    } = options;
+
+    let html = `<select id="${id}" name="${name}" class="${className}">`;
+    if (incluirVazio) {
+      html += `<option value="">${placeholder}</option>`;
+    }
+    UFS_BRASIL.forEach((uf) => {
+      const text = showNomeCompleto ? `${uf.sigla} - ${uf.nome}` : uf.sigla;
+      const selected = uf.sigla === selectedValue ? ' selected' : '';
+      html += `<option value="${uf.sigla}"${selected}>${text}</option>`;
+    });
+    html += '</select>';
+    return html;
+  }
+
+  function gerarHTMLLabelUfSelect(options = {}) {
+    const { 
+      labelText = 'UF:', 
+      labelClass = 'sm:col-span-2 print:col-span-2 rounded-md bg-slate-50 px-1 py-1 flex items-center gap-2', 
+      labelTextClass = 'text-[10px] font-bold tracking-wide whitespace-nowrap', 
+      ...selectOptions 
+    } = options;
+
+    return `
+      <label class="${labelClass}">
+        <div class="${labelTextClass}">${labelText}</div>
+        ${gerarHTMLUfSelect(selectOptions)}
+      </label>
+    `;
+  }
+
+  window.UFsBrasilModule = {
+    data: UFS_BRASIL,
+    getUF: getUF,
+    getTodas: getTodas,
+    porRegiao: porRegiao,
+    getSiglas: getSiglas,
+    isValida: isValidaUF,
+    criarUfSelect: criarUfSelect,
+    renderizarUfSelect: renderizarUfSelect,
+    renderizarLabelUfSelect: renderizarLabelUfSelect,
+    gerarHTMLUfSelect: gerarHTMLUfSelect,
+    gerarHTMLLabelUfSelect: gerarHTMLLabelUfSelect,
+  };
+
+  console.log('✅ UFs Brasil Module carregado:', UFS_BRASIL.length, 'estados');
+})();
+
+
+/* ==========================================
+   [3/4] geral/js/adm_drugs.js
+   ========================================== */
+(() => {
+	'use strict';
+
+	const ADM_ROUTES = [
+		{ value: 'USO ORAL', label: 'USO ORAL' },
+		{ value: 'USO IM', label: 'USO IM' },
+		{ value: 'USO EV', label: 'USO EV' },
+		{ value: 'USO SC', label: 'USO SC' },
+		{ value: 'USO INTRANASAL', label: 'USO INTRANASAL' },
+		{ value: 'USO INALATÓRIO', label: 'USO INALATÓRIO' },
+		{ value: 'USO RETAL', label: 'USO RETAL' },
+		{ value: 'USO SUBLINGUAL', label: 'USO SUBLINGUAL' },
+		{ value: 'USO TÓPICO', label: 'USO TÓPICO' },
+		{ value: 'USO OFTÁLMICO', label: 'USO OFTÁLMICO' },
+		{ value: 'USO OTOLÓGICO', label: 'USO OTOLÓGICO' },
+		{ value: 'USO VAGINAL', label: 'USO VAGINAL' },
+		{ value: 'USO TRANSDÉRMICO', label: 'USO TRANSDÉRMICO' },
+	];
+
+	const getRoute = (value) => ADM_ROUTES.find((r) => r.value === value.toUpperCase()) || null;
+	const getAll = () => ADM_ROUTES;
+	const getValues = () => ADM_ROUTES.map((r) => r.value);
+	const isValid = (value) => ADM_ROUTES.some((r) => r.value === value.toUpperCase());
+
+	function createSelect(options = {}) {
+		const {
+			id = 'adm_farmaco',
+			name = 'adm_farmaco',
+			title = 'select_poso',
+			placeholder = 'SELECIONE A VIA',
+			selectedValue = '',
+			includeEmpty = false,
+			className = 'mt-1 w-full h-[32px] rounded-md border border-slate-50 bg-white px-2 py-1 text-[12px] font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent print:outline-0 print:shadow-none print:appearance-none',
+		} = options;
+
+		const select = document.createElement('select');
+		select.id = id;
+		select.name = name;
+		select.title = title;
+		select.className = className;
+
+		if (includeEmpty) {
+			const optionEmpty = document.createElement('option');
+			optionEmpty.value = '';
+			optionEmpty.textContent = placeholder;
+			select.appendChild(optionEmpty);
+		}
+
+		ADM_ROUTES.forEach((route) => {
+			const option = document.createElement('option');
+			option.value = route.value;
+			option.textContent = route.label;
+			if (route.value === selectedValue) option.selected = true;
+			select.appendChild(option);
+		});
+
+		return select;
+	}
+
+	function renderSelect(container, options = {}) {
+		const element = typeof container === 'string' ? document.getElementById(container) : container;
+		if (!element) {
+			console.error('Container não encontrado:', container);
+			return null;
+		}
+		const select = createSelect(options);
+		element.innerHTML = '';
+		element.appendChild(select);
+		return select;
+	}
+
+	function renderLabelSelect(container, options = {}) {
+		const { labelText = '', labelClass = 'bg-transparent flex items-center gap-2', labelTextClass = 'text-[11px] font-bold tracking-wide whitespace-nowrap', ...selectOptions } = options;
+
+		const element = typeof container === 'string' ? document.getElementById(container) : container;
+		if (!element) {
+			console.error('Container não encontrado:', container);
+			return null;
+		}
+
+		const label = document.createElement('label');
+		label.className = labelClass;
+
+		const labelDiv = document.createElement('div');
+		labelDiv.className = labelTextClass;
+		labelDiv.textContent = labelText;
+
+		const select = createSelect(selectOptions);
+		label.appendChild(labelDiv);
+		label.appendChild(select);
+
+		element.innerHTML = '';
+		element.appendChild(label);
+
+		return select;
+	}
+
+	function generateHTMLSelect(options = {}) {
+		const {
+			id = 'adm_farmaco',
+			name = 'adm_farmaco',
+			title = 'select_poso',
+			placeholder = 'SELECIONE A VIA',
+			selectedValue = '',
+			includeEmpty = false,
+			className = 'mt-1 w-full h-[32px] rounded-md border border-slate-50 bg-transparent px-2 py-1 text-[12px] text-center font-semibold outline-none focus:ring-2 focus:ring-slate-400 print:border-0 print:bg-transparent print:outline-0 print:shadow-none print:appearance-none',
+		} = options;
+
+		let html = `<select id="${id}" name="${name}" title="${title}" class="${className}">`;
+		if (includeEmpty) {
+			html += `<option value="">${placeholder}</option>`;
+		}
+		ADM_ROUTES.forEach((route) => {
+			const selected = route.value === selectedValue ? ' selected' : '';
+			html += `<option value="${route.value}"${selected}>${route.label}</option>`;
+		});
+		html += '</select>';
+		return html;
+	}
+
+	function generateHTMLLabelSelect(options = {}) {
+		const { labelText = '', labelClass = 'rounded-md bg-slate-50 px-2 py-1 flex items-center gap-2', labelTextClass = 'text-[11px] font-bold tracking-wide whitespace-nowrap', ...selectOptions } = options;
+
+		return `
+      <label class="${labelClass}">
+        <div class="${labelTextClass}">${labelText}</div>
+        ${generateHTMLSelect(selectOptions)}
+      </label>
+    `;
+	}
+
+	window.AdmDrugsModule = {
+		data: ADM_ROUTES,
+		getRoute: getRoute,
+		getAll: getAll,
+		getValues: getValues,
+		isValid: isValid,
+		createSelect: createSelect,
+		renderSelect: renderSelect,
+		renderLabelSelect: renderLabelSelect,
+		generateHTMLSelect: generateHTMLSelect,
+		generateHTMLLabelSelect: generateHTMLLabelSelect,
+		ADM_ROUTES: ADM_ROUTES,
+	};
+
+	console.log('✅ Adm Drugs Module carregado:', ADM_ROUTES.length, 'vias');
+})();
+
+
+/* ==========================================
+   [4/4] apoioClinico/js/unified_hotstrings.js
+   ========================================== */
+// unified_hotstrings.js
+(() => {
+  'use strict';
+
+  // ========================================
+  // HOTSTRINGS RÁPIDOS (shortcuts simples)
+  // ========================================
+  const quick_hotstrings = {
+		// Medicamentos Simples
+		lsr: '| Losartana 50mg  1 - 0 - 1',
+		espr: '| Espironolactona 25mg  0 - 0 - 1',
+		atn: '| Atenolol 25mg   1 - 0 - 1',
+		anl: '| Anlodipino 5mg   1 - 0 - 1',
+		nfd: '| Nifedipino mg   1 - 0 - 1',
+		hdr: '| Hidroclorotiazida 25mg  1 - 0 - 0',
+		ard: '| Aradois 50mg   1 - 0 - 1',
+		abl: '| Ablok 25mg   1 - 0 - 1',
+		frs: '| Furosemida 40mg   1 - 0 - 0',
+		enl: '| Enalapril mg   1 - 0 - 1',
+		olms: '| Olmesartana 40mg   1 - 0 - 0',
+		crv: '| Carvedilol mg   1 - 0 - 1',
+		indp: '| Indapamida 1,5mg   1 - 0 - 0',
+		mtldp: '| Metildopa 250mg   1 - 1 - 1',
+		cptp: '| Captopril 25mg   1 - 1 - 1',
+		amlrd: '| Amilorida 5mg   1 - 0 - 0',
+		prpr: '| Propranolol 40mg   1 - 0 - 1',
+		vrpm: '| Verapamil 80mg   1 - 0 - 0',
+		dltz: '| Diltiazem 60mg   1 - 0 - 0',
+		// Prescrições Complexas
+		qmsol:
+			'QUEIMADURA SOLAR LEVE (L55.0)\n\nUso Tópico\n\n1 ) SULFADIAZINA DE PRATA creme\nAplicar fina camada nas áreas afetadas 2x/dia por 5 dias\n\n2 ) NEOMICINA + BACITRACINA pomada\nAlternativa para pequenas lesões, aplicar 2x/dia\n\nUso Oral\n\n3 ) IBUPROFENO 300mg\nTomar 01 cp via oral de 8/8h por 03 dias\n\nNa unidade\n\n1 ) DIPIRONA 1g IM\n\nORIENTAR medidas de hidratação e proteção solar',
+		rnalerg:
+			'RINITE ALÉRGICA (J30.9)\n\nUso Oral\n\n1 ) LORATADINA 10mg\nTomar 01 cp via oral 1x/dia por 07 dias\n\nUso Tópico\n\n2 ) SORO FISIOLÓGICO nasal 0,9%\nInstilar 3-5 gotas em cada narina, 3x/dia\n\nNa unidade\n\n1 ) DEXCLORFENIRAMINA 5mg IM (se crise alérgica intensa)',
+		ansiedade:
+			'SÍNDROME ANSIOSA / CRISE DE ANSIEDADE LEVE (F41.0)\n\nUso Oral\n\n1 ) PASSIFLORA EXTRATO SECO 200mg\nTomar 01 cp via oral 2x/dia\n\n2 ) VALERIANA + MELISSA (fitoterápico composto)\nTomar 01 cp via oral à noite, se necessário\n\nNa unidade\n\n1 ) DIAZEPAM 5mg IM (se crise aguda com agitação)',
+		// Adicione mais prescrições conforme necessário
+		dm2: 'DIABETES MELLITUS TIPO 2 (E11.9)\n\nUso Oral\n\n1 ) METFORMINA 850mg\nTomar 01 cp via oral 2x/dia (após as refeições)\n\n2 ) GLICLAZIDA 30mg\nTomar 01 cp via oral 1x/dia (pela manhã)\n\nOrientações\n\n- Dieta com restrição de carboidratos simples\n- Atividade física regular (30 min, 5x/semana)\n- Monitorização glicêmica capilar',
+		has: 'HIPERTENSÃO ARTERIAL SISTÊMICA (I10)\n\nUso Oral\n\n1 ) LOSARTANA 50mg\nTomar 01 cp via oral 1x/dia (pela manhã)\n\n2 ) HIDROCLOROTIAZIDA 25mg\nTomar 01 cp via oral 1x/dia (pela manhã)\n\nOrientações\n\n- Restrição de sódio na dieta\n- Atividade física regular\n- Monitorização da PA em casa',
+		// Anti-inflamatórios
+		diclof: 'Diclofenaco Sódico 50 mg __________ 30 cp(s) \n Tomar 1 cp(s) de 8/8h. \n \n',
+		ibup: 'Ibuprofeno 600 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h. \n \n',
+		naprox: 'Naproxeno 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		melox: 'Meloxicam 15 mg __________ 10 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		nimes: 'Nimesulida 100 mg __________ 12 cp(s) \n Tomar 1 cp(s) a cada 12 horas, por no máximo 5 dias. \n \n',
+		celecox: 'Celecoxibe 200 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		etoricox: 'Etoricoxibe 90 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		ceto: 'Cetoprofeno 100 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		tenox: 'Tenoxicam 20 mg __________ 1 cx(s)  cp(s) \n Tomar 1 cp(s) ao dia por 5 dias. \n \n',
+		// Analgésicos
+		paracet: 'Paracetamol 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h. \n \n',
+		paracet750: 'Paracetamol 750 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h. \n \n',
+		dip: 'Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h. \n \n',
+		dip1: 'Dipirona 1g __________ 10 cp(s) \n Tomar 1 cp(s) de 6/6h. \n \n',
+		tramal: 'Tramadol 50 mg __________ 30 cp(s) \n Tomar 1 cp(s) de 8/8h. \n \n',
+		tramal100: 'Tramadol 100 mg Retard __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		codein: 'Codeína 30 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h se necessário. \n \n',
+		paco: 'Paracetamol {+} Codeína 500 mg/30 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h se necessário. \n \n',
+		revang: 'Tramadol 37,5 mg {+} Paracetamol 325 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h se necessário. \n \n',
+		// Inibidores de bomba de prótons
+		omep: 'Omeprazol 20 mg __________ 28 cp(s) \n Tomar 1 cápsula em jejum. \n \n',
+		panto: 'Pantoprazol 40 mg __________ 28 cp(s) \n Tomar 1 cp(s) em jejum. \n \n',
+		esomep: 'Esomeprazol 40 mg __________ 28 cp(s) \n Tomar 1 cápsula em jejum. \n \n',
+		lanso: 'Lansoprazol 30 mg __________ 28 cp(s) \n Tomar 1 cápsula em jejum. \n \n',
+		dexlanso: 'Dexlansoprazol 60 mg __________ 30 cp(s) \n Tomar 1 cápsula ao dia, com ou sem alimentos, conforme prescrição. \n \n',
+		rabepra: 'Rabeprazol 20 mg __________ 28 cp(s) \n Tomar 1 cp(s) em jejum. \n \n',
+		ilapra: 'Ilaprazol 10 mg __________ 28 cp(s) \n Tomar 1 cápsula ao dia. \n \n',
+		// Antialérgicos
+		lorat: 'Loratadina 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		deslorat: 'Desloratadina 5 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		hidroxi: 'Hidroxizina 25 mg __________ 30 cp(s) \n Tomar 1 cp(s) a cada 8 horas. \n \n',
+		zina: 'Cetirizina 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		alleg60: 'Fexofenadina 60 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		alleg120: 'Fexofenadina 120 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		alleg180: 'Fexofenadina 180 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		bila: 'Bilastina 20 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, longe das refeições. \n \n',
+		dexclor: 'Dexclorfeniramina 2 mg __________ 30 cp(s) \n Tomar 1 cp(s) a cada 8 horas, se necessário. \n \n',
+		ebastina: 'Ebastina 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		// Corticoides
+		pred5: 'Prednisona 5 mg __________ 20 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		pred: 'Prednisona 20 mg __________ 10 cp(s) \n Tomar 2 cp(s) ao dia, por 5 dias. \n \n',
+		avam: 'Avamys spray nasal ______________ 3 frasco(s) \n Aplicar 1 jato em cada narina de 12/12 horas por 3 meses. \n \n',
+		budesonida: 'Budesonida 32/50/64 mcg/jato spray nasal: 1 frasco \n Aplicar 1 jato em cada narina de 12/12 horas por 15 dias. \n \n',
+		beclo: 'Beclometasona 50 mcg/jato spray nasal ______________ 1 frasco \n Aplicar 1 jato em cada narina de 12/12 horas por 15 dias. \n \n',
+		fluticas: 'Fluticasona Spray Nasal 50 mcg __________ 1 Frasco \n Aplicar 1 jato em cada narina, 2 vezes ao dia. \n \n',
+		dipro: 'Diprospan ______________ 1 ampola \n Aplicar im dose única \n \n',
+		bt30: 'Betatrinta ______________ 1 ampola \n Aplicar im dose única \n \n',
+		monteluc: 'Montelucaste 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		acetilcisteina: 'Acetilcisteína 600 mg __________ 16 cp(s) Efervescentes \n Dissolver 1 cp(s) em água 1 vez ao dia. \n \n',
+		adrena: 'Adrenalina 1 mg/ml __________ 1 Ampola \n Aplicar conforme protocolo em caso de anafilaxia. \n \n',
+		dexa: 'Dexametasona 4 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12h por 5 dias. \n \n',
+		// Medicamentos tópicos
+		betacreme: 'Betametasona 0,1% Creme __________ 1 Bisnaga \n Aplicar na área afetada 2 vezes ao dia. \n \n',
+		trok: 'Cetoconazol {+} Betametasona creme __________ 1 bisnaga \n Aplicar na região afetada de 12/12 horas por 7 dias. \n \n',
+		dexacreme: 'Dexametasona creme __________ 1 bisnaga \n Aplicar na região afetada de 12/12 horas por 7 dias. \n \n',
+		desoni: 'Desonida creme __________ 1 bisnaga \n Aplicar na região afetada uma vez ao dia por 7 dias. \n \n',
+		momecreme: 'Mometasona 0,1% Creme __________ 1 Bisnaga \n Aplicar na área afetada 1 vez ao dia. \n \n',
+		hidrocreme: 'Hidrocortisona 1% Creme __________ 1 Bisnaga \n Aplicar na área afetada 2 vezes ao dia. \n \n',
+		// Antibióticos
+		penv: 'Penicilina V Potássica 500.000 UI __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h por 10 dias. \n \n',
+		benza: 'Benzilpenicilina Benzatina 1.200.000 UI __________ 1 Ampola \n Administrar 1 dose intramuscular profunda, dose única. \n \n',
+		benzasif1: 'Benzilpenicilina Benzatina 1.200.000 UI __________ 2 Ampolas \n Administrar 1 ampola im profundo em cada nádega, dose única. \n Aplicação Data:   \n Observações:   \n \n',
+		benzasif2: 'Benzilpenicilina Benzatina 1.200.000 UI __________ 2 Ampolas \n Administrar 1 ampola im profundo em cada nádega, dose única. \n Aplicação Data:   \n Observações:   \n \n',
+		benzasif3:
+			'Benzilpenicilina Benzatina 1.200.000 UI __________ 6 Ampolas \n Administrar 1 ampola im profundo em cada nádega, uma vez por semana por 3 semanas. \n Aplicação semana 1: Data:   \n Aplicação semana 2: Data:   \n Aplicação semana 3: Data:   \n \n',
+		amox500: 'Amoxicilina 500 mg __________ 21 cp(s) \n Tomar 1 cp(s) de 8/8h, por 7 dias. \n \n',
+		clav500: 'Amoxicilina {+} Clavulanato 500 mg/125 mg __________ 21 cp(s) \n Tomar 1 cp(s) de 8/8h, por 7 dias. \n \n',
+		amox875: 'Amoxicilina 875 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h, por 7 dias. \n \n',
+		clav875: 'Amoxicilina {+} Clavulanato 875 mg/125 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h, por 7 dias. \n \n',
+		cefalex: 'Cefalexina 500 mg __________ 28 cp(s) \n Tomar 1 cp(s) de 6/6h por 7 dias. \n \n',
+		cefadrox: 'Cefadroxila 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h por 10 dias. \n \n',
+		cefurox: 'Cefuroxima 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		cefaclo: 'Cefaclor 500 mg __________ 21 cp(s) \n Tomar 1 cp(s) de 8/8h por 7 dias. \n \n',
+		cefpro: 'Cefprozil 500 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		ceftriax: 'Ceftriaxona 1g __________ 1 Ampola \n Administrar 1g intravenosa ou intramuscular, uma vez ao dia, \n seguindo esquema de diluição e e prescrição do médico assistente. \n \n',
+		cefixi: 'Cefixima 400 mg __________ 10 cp(s) \n Tomar 1 cp(s) ao dia, por 7 dias. \n \n',
+		cefpodox: 'Cefpodoxima 200 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		cefditore: 'Cefditoreno 400 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12h por 5 a 7 dias. \n \n',
+		clinda: 'Clindamicina 300 mg __________ 16 cp(s) \n Tomar 1 cp(s) de 8/8h por 10 dias. \n \n',
+		lincom: 'Lincomicina 500 mg __________ 16 cp(s) \n Tomar 1 cp(s) de 8/8h por 10 dias. \n \n',
+		azi: 'Azitromicina 500 mg __________ 5 cp(s) \n Tomar 1 cp(s) ao dia, por 5 dias. \n \n',
+		claritro: 'Claritromicina 500 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		eritro: 'Eritromicina 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h por 10 dias. \n \n',
+		bactrif: 'Sulfametoxazol {+} Trimetoprima 800 mg/160 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h por 10 dias. \n \n',
+		bactri: 'Sulfametoxazol {+} Trimetoprima 400 mg/80 mg __________ 10 cp(s) \n Tomar 2 cp(s) de 12/12h em infecções graves, conforme prescrição. \n \n',
+		nalidix: 'Ácido Nalidíxico 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h por 7 dias. \n \n',
+		cipro: 'Ciprofloxacino 500 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		oflox: 'Ofloxacino 400 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		levo: 'Levofloxacino 500 mg __________ 7 cp(s) \n Tomar 1 cp(s) ao dia, por 7 dias. \n \n',
+		moxi: 'Moxifloxacino 400 mg __________ 7 cp(s) \n Tomar 1 cp(s) ao dia, por 7 dias. \n \n',
+		gemiflox: 'Gemifloxacino 320 mg __________ 5 cp(s) \n Tomar 1 cp(s) ao dia, por 5 dias. \n \n',
+		norflox: 'Norfloxacino 400 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		doxici: 'Doxiciclina 100 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		tetra: 'Tetraciclina 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h por 7 dias. \n \n',
+		minoc: 'Minociclina 100 mg __________ 14 cp(s) \n Tomar 1 cp(s) de 12/12h por 7 dias. \n \n',
+		metroni: 'Metronidazol 250 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h por 7 dias. \n \n',
+		tinida: 'Tinidazol 500 mg __________ 4 cp(s) \n Tomar 4 cp(s) em dose única. \n \n',
+		nitrofu: 'Nitrofurantoína 100 mg __________ 21 cp(s) \n Tomar 1 cp(s) de 8/8h por 7 dias. \n \n',
+		fosfomi: 'Fosfomicina Trometamol 3g __________ 1 Envelope \n Dissolver 1 envelope em água e tomar em dose única. \n \n',
+		metena: 'Metenamina 1g __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		fenazopir: 'Fenazopiridina 100 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 8/8h por 2 dias. \n \n',
+		Mefex: 'Mefex 500 mg ______________ 14 cp(s) \n Tomar 1 cp(s) de 12/12 horas por 7 dias \n \n',
+		// Antiparasitários
+		albend: 'Albendazol 400 mg __________ X cp(s) \n Tomar 1 cp(s) após o almoço, repetir em 15 dias. \n \n',
+		anni: 'Annita 500 mg __________ 1 cx(s)  \n Tomar 1 cp(s) de 12/12 horas por 3 dias. Acima de 12 anos. \n \n',
+		ivermec: 'Ivermectina 6 mg __________ X cp(s) \n Dar X cp(s) dose única pela manhã. \n (Dose: ½ cp(s) a cada 15 Kg de peso) \n \n',
+		// Anticonvulsivantes
+		fenito: 'Fenitoína 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		fenob: 'Fenobarbital 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		carba: 'Carbamazepina 200 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		primid: 'Primidona 250 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		depak: 'Ácido Valproico 250 mg __________ 360 cp(s) \n Tomar 2 cp(s) de 8/8h. \n \n',
+		valpro: 'Valproato de Sódio 500 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		lamot: 'Lamotrigina 25 mg __________ 30 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		lamot100: 'Lamotrigina 100 mg __________ 30 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		lamot50: 'Lamotrigina 50 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia \n \n',
+		levetic: 'Levetiracetam 500 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		topira: 'Topiramato 50 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		gabapen: 'Gabapentina 300 mg __________ 90 cp(s) \n Tomar 1 cp(s) a cada 8 horas. \n \n',
+		pregab: 'Pregabalina 75 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		pregab150: 'Pregabalina 150 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		oxcarb: 'Oxcarbazepina 300 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		eslicarb: 'Eslicarbazepina 800 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		zonis: 'Zonisamida 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		tiagab: 'Tiagabina 12 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		peramp: 'Perampanel 4 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		// Ansiolíticos
+		clona: 'Clonazepam 2 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		cloba: 'Clobazam 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		diaze: 'Diazepam 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		bromomaz: 'Bromazepam 3 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		// Antidepressivos
+		amitri: 'Amitriptilina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		imipra: 'Imipramina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		nortri: 'Nortriptilina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		desipra: 'Desipramina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		clomipra: 'Clomipramina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		clomipra75: 'Clomipramina 75 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		doxep: 'Doxepina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		trimipra: 'Trimipramina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		fluoxe: 'Fluoxetina 20 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		fluoxe40: 'Fluoxetina 20 mg __________ 60 cp(s) \n Tomar 2 cp(s) de manhã. \n \n',
+		sertra: 'Sertralina 50 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		sertra100: 'Sertralina 100 mg __________ 60 cp(s) \n Tomar 2 cp(s) de manhã. \n \n',
+		escit: 'Escitalopram 10 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		escit20: 'Escitalopram 20 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		citalo: 'Citalopram 20 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		parox: 'Paroxetina 20 mg __________ 30 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		fluvox: 'Fluvoxamina 50 mg __________ 60 cp(s) \n Tomar 1 cp(s) de manhã. \n \n',
+		voex: 'Vortioxetina 5 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		voex10: 'Vortioxetina 10 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		voex15: 'Vortioxetina 15 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		voex20: 'Vortioxetina 20 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		vilazo: 'Vilazodona 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		vilazo20: 'Vilazodona 20 mg __________ 30 cp(s) \n Tomar 2 cp(s) ao dia. \n \n',
+		bup: 'Bupropiona 150 mg __________ 60 cp(s) \n Tomar 1 cp(s) pela manhã. \n \n',
+		bup300: 'Bupropiona 300 mg __________ 60 cp(s) \n Tomar 1 cp(s) pela manhã. \n \n',
+		mirta: 'Mirtazapina 15 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		mirta30: 'Mirtazapina 30 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		mirta45: 'Mirtazapina 45 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		mirta60: 'Mirtazapina 60 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		atomex40: 'Atomexetina 10 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		atomex60: 'Atomexetina 60 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		atomex80: 'Atomexetina 80 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		desvenla: 'Desvenlafaxina 50 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		desvenla100: 'Desvenlafaxina 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		dulox: 'Duloxetina 30 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		dulox60: 'Duloxetina 60 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		venla: 'Venlafaxina 37,5 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		venla75: 'Venlafaxina 75 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		venla150: 'Venlafaxina 150 mg __________ 60 cp(s) \n Tomar 1 cp(s) ao dia pela manhã. \n \n',
+		// Antidiabéticos
+		met1: 'Metformina XR 500 mg __________ Contínuo \n Tomar 1 cp(s) no almoço \n \n',
+		met2: 'Metformina XR 500 mg __________ Contínuo \n Tomar 1 cp(s) no almoço e 1 cp(s) no jantar \n \n',
+		met3: 'Metformina XR 500 mg __________ Contínuo \n Tomar 2 cp(s) no almoço e 1 cp(s) no jantar \n \n',
+		met4: 'Metformina XR 500 mg __________ Contínuo \n Tomar 2 cp(s) no almoço e 2 cp(s) no jantar \n \n',
+		met5: 'Metformina XR 500 mg __________ Contínuo \n Tomar 1 cp(s) de manhã, 2 cp(s) no almoço e 2 cp(s) no jantar \n \n',
+		glifa1: 'Glifage XR 500 mg __________ Contínuo \n Tomar 1 cp(s) no almoço \n \n',
+		glifa2: 'Glifage XR 500 mg __________ Contínuo \n Tomar 1 cp(s) no almoço e 1 cp(s) no jantar \n \n',
+		glifa3: 'Glifage XR 500 mg __________ Contínuo \n Tomar 2 cp(s) no almoço e 1 cp(s) no jantar \n \n',
+		glifa4: 'Glifage XR 500 mg __________ Contínuo \n Tomar 2 cp(s) no almoço e 2 cp(s) no jantar \n \n',
+		glifa5: 'Glifage XR 500 mg __________ Contínuo \n Tomar 1 cp(s) de manhã, 2 cp(s) no almoço e 2 cp(s) no jantar \n \n',
+		met850: 'Metformina 850 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		glica: 'Glicazida 30 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		tolbuta: 'Tolbutamida 500 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		glib: 'Glibenclamida 5 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		glime1: 'Glimepirida 1 mg __________ Contínuo \n Tomar 1 cp(s) ao dia, geralmente no café da manhã \n \n',
+		glime2: 'Glimepirida 2 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		repagli: 'Repaglinida 0,5 mg __________ Contínuo \n Tomar 1 cp(s) 15 minutos antes das refeições \n \n',
+		nategli: 'Nateglinida 120 mg __________ Contínuo \n Tomar 1 cp(s) 30 minutos antes das refeições \n \n',
+		pioglita: 'Pioglitazona 15 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		rosiglta4: 'Rosiglitazona 4 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		alog: 'Alogliptina 25 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		linagli: 'Linagliptina 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		sitagli: 'Sitagliptina 100 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		saxagli: 'Saxagliptina 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		vildagi: 'Vildagliptina 50 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		forxi: 'Dapagliflozina 10 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		ertug: 'Ertugliflozina 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		empagli: 'Empagliflozina 10 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		canagli: 'Canagliflozina 100 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		dulaglu: 'Dulaglutida (Trulicity) 0,75 mg __________ Contínuo \n Injetar 0,75 mg uma vez por semana \n \n',
+		tirez: 'Tirzepatida (Mounjaro) 5 mg __________ Contínuo \n Injetar 5 mg uma vez por semana \n \n',
+		liraglut: 'Liraglutida (Victoza) 0,6 mg __________ Contínuo \n Iniciar com 0,6 mg ao dia; aumentar gradativamente conforme orientação \n \n',
+		semaglu: 'Semaglutida (Ozempic) 0,25 mg __________ Contínuo \n Aplicar 0,25 mg uma vez por semana; aumentar conforme orientação \n \n',
+		exena: 'Exenatida (Byetta) 5 mcg __________ Contínuo \n Aplicar 5 mcg de 12/12h \n \n',
+		acarb25: 'Acarbose 25 mg __________ Contínuo \n Tomar 1 cp(s) com cada refeição principal \n \n',
+		acarb50: 'Acarbose 50 mg __________ Contínuo \n Tomar 1 cp(s) com cada refeição principal \n \n',
+		migli25: 'Miglitol 25 mg __________ Contínuo \n Tomar 1 cp(s) com cada refeição principal \n \n',
+		migli50: 'Miglitol 50 mg __________ Contínuo \n Tomar 2 cp(s) com cada refeição principal \n \n',
+		glucobay25: 'Glucobay 25 mg __________ Contínuo \n Tomar 1 cp(s) com cada refeição principal \n \n',
+		glucobay50: 'Glucobay 50 mg __________ Contínuo \n Tomar 2 cp(s) com cada refeição principal \n \n',
+		inph: 'Insulina NPH __________ Contínuo \n Aplicar ui de manhã, ui no almoço e ui no jantar \n \n',
+		iregular: 'Insulina Regular __________ Contínuo \n Aplicar ui de manhã, ui no almoço e ui no jantar \n \n',
+		glargi: 'Insulina Glargina 100ui/ml-REFIL 3 mL subcutânea  __________ Contínuo \n Aplicar  ui de 1 em 1 dia durante 180 dias pela manhã \n \n',
+		aspar: 'Insulina Asparte 100ui/ml Caneta de 3 mL subcutânea  __________ Contínuo \n Aplicar  ui de 1 em 1 dia durante 180 dias pela manhã \n \n',
+		deglu: 'Insulina Degludeca (Tresiba) __________ Contínuo \n Aplicar dose conforme prescrição uma vez ao dia, no mesmo horário \n \n',
+		lispro: 'Insulina Lispro (Humalog) __________ Contínuo \n Aplicar conforme orientação médica, geralmente antes das refeições \n \n',
+		glulin: 'Insulina Glulisine (Apidra) __________ Contínuo \n Aplicar 15 minutos antes das refeições conforme orientação médica \n \n',
+		detemi: 'Insulina Detemir (Levemir) __________ Contínuo \n Aplicar ui ao deitar ou conforme prescrição \n \n',
+		// Anti-hipertensivos
+		selo25: 'Selozok (Metoprolol) 25 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		selo50: 'Selozok (Metoprolol) 50 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		metopro25: 'Metoprolol 25 mg __________ Contínuo \n Tomar 1 cp(s) ao dia. \n \n',
+		metopro50: 'Metoprolol 50 mg __________ Contínuo \n Tomar 1 cp(s) ao dia. \n \n',
+		bisopro5: 'Bisoprolol 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		bisopro10: 'Bisoprolol 10 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		los: 'Losartana 50 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		valsar: 'Valsartana 320 mg __________ Contínuo \n Tomar 1 cp(s) ao dia. \n \n',
+		olme20: 'Olmesartana 20 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		olme40: 'Olmesartana 40 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		olmeh: 'Olmesartana {+} Hidroclorotiazida (40 mg {+} 25 mg) __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		telmi: 'Telmisartana 40 mg __________ Contínuo \n Tomar 1 cp(s) ao dia. \n \n',
+		enala5: 'Enalapril 5 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		enala10: 'Enalapril 10 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		enala20: 'Enalapril 20 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		capto: 'Captopril 25 mg __________ Contínuo \n Tomar 1 cp(s) de 8/8h \n \n',
+		ramipri: 'Ramipril 2,5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		anlo: 'Anlodipino 5 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		nife10: 'Nifedipino 10 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		nife20: 'Nifedipino 20 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		dilti: 'Diltiazem 180 mg (liberação prolongada) __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		verapa: 'Verapamil 180 mg (liberação prolongada) __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		anlo5: 'Anlodipino 5 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		anlo10: 'Anlodipino 10 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		hidro: 'Hidroclorotiazida 25 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		clorta: 'Clortalidona 25 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		indapa: 'Indapamida 1,5 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		furo: 'Furosemida 40 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		espiro: 'Espironolactona 25 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		minox: 'Minoxidil 5 mg __________ Contínuo \n Tomar 1 cp(s) de 12/12h \n \n',
+		hidrala: 'Hidralazina 25 mg __________ Contínuo \n Tomar 1 cp(s) de manhã \n \n',
+		valsarh: 'Valsartana {+} Hidroclorotiazida (160 mg {+} 12,5 mg) __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		canderh: 'Candesartan {+} Hidroclorotiazida (16 mg {+} 12,5 mg) __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		doxazo2: 'Doxazosina 2 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		doxazo4: 'Doxazosina 4 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		// Antipsicóticos
+		halocp: 'Haloperidol 5 mg __________ 120 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		haloim: 'Haloperidol Decanoato 50 mg/ml __________ ampolas \n Aplicar ampolas im em glúteo a cada 28 dias. \n \n',
+		clorpro: 'Clorpromazina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		clorpro100: 'Clorpromazina 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		levomep: 'Levomepromazina 25 mg __________ 90 cp(s) \n Tomar 1 cp(s) ao deitar. \n \n',
+		triflu: 'Trifluoperazina 5 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h \n \n',
+		flufen: 'Flufenazina 2,5 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		risp1: 'Risperidona 1 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		risp2: 'Risperidona 2 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		pedrisp: 'Risperidona 1 mg/ml __________ 1 Frasco \n Tomar gotas à noite. \n \n',
+		quet: 'Quetiapina 25 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		quet100: 'Quetiapina 100 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		olanza: 'Olanzapina 2,5 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		olanza5: 'Olanzapina 5 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		olanza10: 'Olanzapina 10 mg __________ 60 cp(s) \n Tomar 1 cp(s) à noite. \n \n',
+		arip: 'Aripiprazol 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		arip15: 'Aripiprazol 15 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		clozapina: 'Clozapina 25 mg __________  cp(s) \n Tomar cp(s) à noite (monitorar contagem leucocitária). \n \n',
+		zipra: 'Ziprasidona 80 mg __________ 60 cp(s) \n Tomar 1 cp(s) pela manhã e 1 à noite. \n \n',
+		palip: 'Paliperidona 6 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		carip: 'Cariprazina 1,5 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		brexpi: 'Brexpiprazol 0,5 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		lumate: 'Lumateperona 42 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		// Prescrições Específicas
+		asmajato: 'USO INALATÓRIO \n  \n Beclometasona 250 mcg  ______________ Contínuo \n 02 jatos de 12/12 horas \n  \n Salbutamol Spray 100 mcg  ______________ Contínuo \n 04 jatos de 4/4 horas, se crise. \n \n',
+		gestafol:
+			'ÁCIDO FÓLICO 0,2 mg/ml  SOLUÇÃO ORAL ______________ Contínuo \n Tomar 40 (quarenta) gotas 1x ao dia, 30 minutos antes Do almoço. \n  \n  BROMOPRIDA 10 mg ______________ 1CX \n  \n  PARACETAMOL 500 mg ______________ 2 cx(s) \n Tomar 01 cp(s) de 8/8hs se dor de cabeça. \n  \n USO TÓPICO \n  \n  Repelente ______________ 02 frasco(s) \n Aplicar nas áreas expostas Do corpo, entre o amanhecer e a hora de dormir; \n Reaplicar de acordo com os intervalos recomendados nas instruções de uso; \n Caso use protetor solar, aplique o protetor antes e o repelente depois; \n Não aplicar na região dos olhos, narinas e boca; \n Não dormir com repelente, \n Não utilizar se a pele estiver irritada ou lesionada; \n Não aplicar por baixo de roupas; \n Em caso de intoxicação e/ou reação adversa, procurar a UBS mais próxima. \n  \n OBSERVAÇÃO: Não tomar o Ácido Fólico com leite. \n \n',
+		ivas1:
+			'Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6 horas se dor ou febre. \n  \n  Prednisona 20 mg __________ 10 cp(s) \n Tomar 2 cp(s) de manhã por 5 dias. \n  \n  Acebrofilina 50 mg/5 mL __________ 1 frasco \n Tomar 10 mL de 12/12 horas por 5 dias. \n  \n  Soro fisiológico 0,9% __________ 1 frasco \n Lavar As narinas de 4/4 horas. \n \n',
+		ivas2:
+			'Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6 horas se dor ou febre. \n  \n  Loratadina 10 mg __________ 10 cp(s) \n Tomar 1 cp(s) de 12/12 horas por 5 dias. \n  \n  Soro fisiológico 0,9% __________ 1 frasco \n Lavar As narinas de 4/4 horas. \n \n',
+		gea: 'Soro de reidratação oral __________ 10 envelopes \n Tomar 1 litro de soro ao dia, durante 5 dias. \n  \n  Probiótico (Enterogermina, Floratil, Bifidoflora, outros) __________ 1 cx(s)  \n Tomar 1 flaconete de 12/12 horas por 5 dias. \n  \n  Bromoprida 10 mg __________ 1 cx(s)  \n Tomar 1 cp(s) de 8/8 horas, se náusea ou vômitos. \n  \n  Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6 horas se dor ou febre. \n \n',
+		deng: 'Dipirona 500 mg ______________ 20cp \n Tomar 1cp de 6/6 horas se dor ou febre \n  \n Bromoprida 10 mg ______________ 1cx \n Tomar 1cp de 8/8hs se náusea ou vômito. \n  \n Soro de reidratação oral __________ 10 envelopes \n Tomar 1 litro de soro ao dia, durante 5 dias. \n  \n Hidratação abundante \n  \n Sinais de alarme - ATENÇÃO \n Caso apresente algum dos seguintes sintomas, procure imediatamente assistência médica: \n Dor abdominal forte e constante. \n Vômitos frequentes. \n Sinais de líquidos se acumulando no corpo. \n Sensação de desmaio ou tontura ao levantar. \n Sonolência ou irritabilidade contínuos. \n Sangramentos em gengivas, nariz ou outras mucosas. \n Redução na quantidade de urina. \n Diminuição da temperatura corpórea. \n Dificuldade para respirar. \n \n',
+		tadala: 'FENTOLAMINA 1,25 mg/ML \n TADALAFILA 40 mg/ML \n ARGININA 0,1 mg/ML  \n IOHIMBINA 0,1 mg/ML  \n BROMOPRIDA 2 mg/ML\n BROMOPRIDA 2 mg/ML  __________ 14 mL  \n 1 JATO SUBLINGUAL UMA VEZ AO DIA \n \n',
+		pedgea:
+			'Soro de reidratação oral __________ 10 envelopes \n Tomar 1 litro de soro ao dia, durante 5 dias. \n  \n  Probiótico (Enterogermina, Floratil, Bifidoflora, outros) __________ 1 cx(s)  \n Tomar 1 flaconete/sachê de 12/12 horas por 5 dias. \n  \n  Bromoprida 4 mg/ml __________ 1 frasco \n Tomar gotas de 8/8 horas, se náusea ou vômitos. \n  \n  Dipirona 500 mg/ml __________ 1 frasco \n Tomargotas de 6/6 horas se dor ou febre. \n \n',
+		covid:
+			'PaxlovidTM (Nirmatrelvir {+} Ritonavir) ______________ 10cp \n Tomar 2 cp(s) de Nirmatrelvir mais 1 cp(s) de Ritonavir, juntos, de 12/12 horas por 5 dias. \n {Iniciar somente se até 5 dias do início dos sintomas.} \n Dipirona 500 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6 horas se dor ou febre. \n  \n Bromoprida 10 mg ______________ 1cx \n Tomar 1cp de 8/8hs se náusea ou vômito. \n  \n Sinais de alarme - ATENÇÃO \n Caso apresente algum dos seguintes sintomas, procure imediatamente assistência médica: \n Falta de ar; \n Respiração rápida/ ofegante; \n Febre persistente; \n Dor forte/ dor súbita. \n Caso esses sintomas ocorram, retornar para reavaliação, \n ou procurar o pronto atendimento. \n \n',
+		lactente: 'Sulfato Ferroso 125 mg/ml ______________ Contínuo \n Dar  gotas até 2 anos de idade. \n  \n  Vitamina D 200 ui ______________ Contínuo \n \n',
+		// Estatinas
+		sinv20: 'Sinvastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		sinv40: 'Sinvastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		sinv80: 'Sinvastatina 80 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		rosu5: 'Rosuvastatina 5 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		rosu10: 'Rosuvastatina 10 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		rosu20: 'Rosuvastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		rosu40: 'Rosuvastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		ator20: 'Atorvastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		ator40: 'Atorvastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		ator80: 'Atorvastatina 80 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		prav10: 'Pravastatina 10 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		prav20: 'Pravastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		prav40: 'Pravastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		prav80: 'Pravastatina 80 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		lovast10: 'Lovastatina 10 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		lovast20: 'Lovastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		lovast40: 'Lovastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		flustat20: 'Fluvastatina 20 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		flustat40: 'Fluvastatina 40 mg __________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		pitav2: 'Pitavastatina 2 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		pitav4: 'Pitavastatina 4 mg __________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		// Anticoagulantes e Antiagregantes
+		mareva: 'Varfarina Sódica 5 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, conforme prescrição e monitoramento do INR. \n \n',
+		rivarox: 'Rivaroxabana 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, após refeição. \n \n',
+		rivarox15: 'Rivaroxabana 15 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, após refeição. \n \n',
+		rivarox20: 'Rivaroxabana 20 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, após refeição. \n \n',
+		apix: 'Apixabana 5 mg __________ 60 cp(s) \n Tomar 1 cp(s) a cada 12 horas, conforme prescrição. \n \n',
+		dabig: 'Dabigatrana 150 mg __________ 60 cp(s) \n Tomar 1 cápsula de 12/12h. \n \n',
+		edox: 'Edoxabana 60 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia. \n \n',
+		acid: 'Ácido Acetilsalicílico (AAS) 100 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, após refeição, para prevenção cardiovascular. \n \n',
+		clopido: 'Clopidogrel 75 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, conforme prescrição. \n \n',
+		ticag: 'Ticagrelor 90 mg __________ 60 cp(s) \n Tomar 1 cp(s) de 12/12h. \n \n',
+		prasug: 'Prasugrel 10 mg __________ 30 cp(s) \n Tomar 1 cp(s) ao dia, conforme prescrição médica. \n \n',
+		// Antieméticos
+		onda8: 'Ondansetrona 8 mg __________ 1cx \n Tomar 1 cp(s) de 8/8h, se náusea ou vômito. \n \n',
+		onda4: 'Ondansetrona 4 mg __________ 1cx \n Tomar 1 cp(s) de 8/8h, se náusea ou vômito. \n \n',
+		metoclop: 'Metoclopramida 10 mg __________ 20 cp(s) \n Tomar 1 cp(s) a cada 8 horas, antes das refeições. \n \n',
+		domp: 'Domperidona 10 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 8/8h, se náusea ou vômito. \n \n',
+		dimeni: 'Dimenidrinato 50 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 6/6h, se náusea ou vômito. \n \n',
+		mecliz: 'Meclizina 25 mg __________ 20 cp(s) \n Tomar 1 cp(s) de 12/12h, se náusea ou vômito. \n \n',
+		// Outros
+		condo: 'Condroitina 1,2G {+} Glicosamina 1,5G __________ 60 sachês \n Tomar 1 sachê dissolvido em um copo com água a noite \n \n',
+		alendron: 'Alendronato 70 mg __________ 8cp \n Tomar 1 cp(s) por semana. \n \n',
+		mesigy: 'Noretisterona 50 mg {+} Estradiol 5 mg __________ 6 ampolas \n Aplicar 1 ampola im em glúteo profundo uma vez ao mês. \n \n',
+		dexfer: 'Dexfer 400 mg __________ 120cp \n Tomar 1 cp(s) ao dia no almoço \n \n',
+		b12sl: 'Metilcobalamina 1.000 mcg __________ 60cp \n Tomar 1 cp(s) sublingual após o almoço \n \n',
+		calcio: 'Cálcio 600 mg {+} Vitamina D 400 ui ______________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		d1000: 'Colicalciferol D 1.000 ui ______________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		d50000: 'Colicalciferol D 50.000 ui ______________ 8cp \n Tomar 1 cp(s) por semana por 8 semanas \n \n',
+		b12im: 'Citoneurim 5.000 ______________ 3 ampolas \n Aplicar 1 ampola im uma vez por semana por 3 semanas \n \n',
+		medrox: 'Medroxiprogesterona 150 mg ______________ 2 ampolas \n Aplicar 1 ampola im uma vez a cada 3 meses \n \n',
+		levot4: 'Levotiroxina 25 mcg ______________ Contínuo \n Tomar 01 cp(s) em jejum \n \n',
+		ciprofi: 'Ciprofibrato 100 mg  ______________ Contínuo \n Tomar 1 cp(s) à noite \n \n',
+		alopur: 'Alopurinol 300 mg  ______________ Contínuo \n Tomar 1 cp(s) ao dia \n \n',
+		maxalt: 'Maxalt  ______________ 1 cx(s)  \n Tomar 1 cp(s) ao dia se crise de enxaqueca \n \n',
+		acebro: 'Acebrofilina 50 mg/5 mL ______________ 2 frasco(s) \n Tomar 10 mL de 12/12h por 7 dias \n \n',
+		sorooral: 'Soro de reidratação oral  ______________ 5 envelopes \n Tomar 1 litro de soro por dia, durante 5 dias \n \n',
+		entero: 'Enterogermina ______________ 1 cx(s)  \n Tomar 1 flaconete de 12/12h por 5 dias \n \n',
+		bromo: 'Bromoprida 10 mg  ______________ 1 cx(s)  \n Tomar 1 cp(s) de 8/8 horas, se náusea ou vômito \n \n',
+		plasi: 'Metoclopramida 10 mg  ______________ 1 cx(s)  \n Tomar 1 cp(s) de 8/8 horas, se náusea ou vômito \n \n',
+		vonau: 'Ondasentrona 8 mg  ______________ 1cx \n Tomar 1 cp(s) de 8/8 horas, se náusea ou vômito \n \n',
+		tobra: 'Tobramicina colírio ______________ 1 frasco \n Aplicar 1 gota em cada olho de 4 em 4 horas, por 5 dias. \n \n',
+		ciprocolirio: 'Ciprofloxacino colírio ______________ 1 frasco \n Aplicar 1 gota em cada olho de 4 em 4 horas, por 5 dias. \n \n',
+		ciprooto: 'Ciprofloxacina otológica ______________ 1 frasco \n Aplicar 5 gotas em cada ouvido de 6/6h por 7 dias. \n \n',
+		betnova: 'Oto Betnovate ______________ 1 frasco \n Aplicar 5 gotas no ouvido afetado de 12/12 horas por 7 dias. \n \n',
+		cerum: 'Cerumin ______________ 1 frasco \n Aplicar 5 gotas em cada ouvido de 6/6h por 7 dias. \n \n',
+		hexomed: 'Hexomedine spray ______________ 1 frasco \n Aplicar na boca 4 vezes ao dia, antes dos alimentos. \n \n',
+		malvatri: 'Malvatricin spray ______________ 1 frasco \n Aplicar na boca 4 vezes ao dia, antes dos alimentos. \n \n',
+		minilax: 'Minilax ______________ 1 bisnaga \n Aplicar, via retal, todo o conteúDo da embalagem. \n \n',
+		buscop: 'Escopolamina 10 mg ______________ 1Cxs \n Tomar  1cp de 8/8 horas, se cólica \n \n',
+		mecli: 'Meclin 25 mg ______________ 1Cxs \n Tomar  1cp de 12/12 horas, se crise de labirintite \n \n',
+		luft: 'Simeticona 125 mg ______________ 1Cxs \n Tomar  1cp de 8/8 horas, se cólica \n \n',
+		neba: 'Neomicina {+} Bacitracina pomada: 1 bisnaga \n Aplicar na região afetada de 12/12 horas por 7 dias. \n \n',
+		sulprata: 'Sulfadiazina de Prata 1% pomada: 1 bisnaga \n Aplicar na região afetada de 12/12 horas por 7 dias. \n \n',
+		ferro: 'Sulfato Ferroso 40 mg ______________ Contínuo \n 1 cp, 30 min. antes Do almoço, da 20ª semana de gestação a 3 meses Do pós parto. \n \n',
+		peg: 'PEG 4.000 sem eletrólitos ______________ Contínuo \n Diluir 40gramas (2 colheres de sopa) em um copo de água, e tomar uma vez ao dia  \n \n',
+		// Pediatria
+		pedparacet: 'Paracetamol 200 mg/ml __________ 2 frasco(s) \n Tomar gotas de 6/6 horas, se dor ou febre \n (Dose: 1 gota/kg/dose) \n \n',
+		peddip: 'Dipirona 500 mg/ml __________ 2 frasco(s) \n Tomar gotas de 6/6 horas, se dor ou febre \n (Dose: 1 gota/kg/dose) \n \n',
+		pedibup: 'Ibuprofeno 100 mg/ml __________ 2 frasco(s) \n Tomar gotas de 6/6 horas, se dor ou febre \n (Dose: 1 gota/kg/dose) \n \n',
+		pedceto: 'Cetoprofeno 20 mg/ml __________ 2 frasco(s) \n Tomar gotas de 8/8 horas, por 5 dias \n (Dose: 1 gota/kg/dose) \n \n',
+		pedazi: 'Azitromicina 200 mg/5 mL suspensão oral __________ 2 frasco(s) \n Tomar ml ao dia por 5 dias \n (Dose: 10 mg/kg/dia = 0,25 mL/kg/dia) \n \n',
+		pedcefa: 'Cefalexina 250 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar X mL de 6/6h por 7 dias (6h, 12h, 18h e 24h) \n (Dose: 1 mL/kg/dia divididos em 4 doses iguais) \n \n',
+		pedcefaclo: 'Cefaclor 250 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar X mL de 12/12 horas por 10 dias \n (Dose: 0,5 a 1 mL/kg/dia) \n \n',
+		amox250: 'Amoxicilina 250 mg/5 mL __________ 2 frasco(s) \n Tomar ml de 8/8 horas por 7 dias \n \n',
+		clav250: 'Amoxicilina {+} clavulanato (250{+}62,5)mg/5 mL __________ 2 frasco(s) \n Tomar ml de 8/8 horas por 7 dias \n \n',
+		amox400: 'Amoxicilina 400 mg __________ 2 frasco(s) \n Tomar ml de 12/12 horas por 7 dias \n \n',
+		clav400: 'Amoxicilina {+} clavulanato (400{+}57)mg __________ 2 frasco(s) \n Tomar ml de 12/12 horas por 7 dias \n \n',
+		pedbactri: 'Sulfametoxazol {+} Trimetoprima 200 mg/40 mg/ml __________ 1 Frasco \n Tomar ml de 12/12h. \n \n',
+		pedclari: 'Claritromicina 250 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar X mL de 12/12 horas por 10 dias \n (Dose: 15 mg/kg/dia) \n \n',
+		pedsulfa: 'Sulfametoxazol {+} Trimetroprim 200 mg {+} 40 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar X mL de 12/12 horas por 10 dias \n (Dose: 1 mL/kg/dia) \n \n',
+		pedmebe: 'Mebendazol 100 mg/5 mL suspensão oral __________ 2 frasco(s) \n Dar 5 mL após almoço e jantar por 3 dias. Repetir após 15 dias. \n (Dose: Repetir após 15 dias. Dose dobrada: Teníase) \n \n',
+		pedalbe: 'Albendazol 400 mg/10 mL suspensão oral __________ X frasco \n Dar 10 mL após o almoço, repetir após 15 dias. Acima de 2 anos. \n \n',
+		pedanni: 'Annita 20 mg/10 mL suspensão oral __________ X frasco \n Dar  ml de 12/12 horas por 3 dias. Acima de 1 ano. \n Dose: 375 mL (7,5 mg) por kg, 12/12 horas 3 dias \n \n',
+		pedmetro: 'Metronidazol 200 mg/5 mL suspensão oral __________ 1 frasco \n Dar X mL de 12/12 horas por X dias. \n Giardíase: 0,25 mL/kg/dose 7 dias. Amebíase: 0,4 mL/kg/dose 10 dias \n \n',
+		pedoselt: 'Oseltamivir 75 mg cápsula __________ X cp(s) \n Diluir a cápsula em 5 mL de água. Dar X ml de 12/12 horas por 5 dias. \n (Dose: < 15 Kg: 2 mL; 15 a 23: 3 mL; 23 a 40: 4 mL; Acima de 40 Kg: 1 cp) \n \n',
+		pedpred: 'Prednisolona 3 mg/ml xarope __________ 1 frasco \n Dar  ml de manhã, por 5 dias. \n \n',
+		peddexa: 'Dexametasona 0,5 mg/5 mL xarope __________ 1 frasco \n Dar X ml de 12/12 horas, por 5 dias. \n (Dose: 1 a 2 mL/kg/dia) \n \n',
+		peddex: 'Dexclorfeniramina 2 mg/5 mL xarope __________ 1 frasco \n Dar X ml de 8/8 horas, por X dias. \n (>6 meses = 0,4 mL/kg/dia) \n \n',
+		pedlorat: 'Loratadina 1 mg/ml xarope __________ 1 frasco \n Dar X ml uma vez ao dia por X dias. \n (> 2 anos. Dose: 2 a 5a = 5 mL; a partir de 6a = 10 mL) \n \n',
+		peddeslorat: 'Desloratadina 0,5 mg/ml __________ 1 frasco \n Tomar  ml ao dia por 10 dias \n \n',
+		pedalleg: 'Allegra pediátrico solução oral __________ 1 frasco \n Dar X ml de 12/12 horas por 7 dias. \n \n',
+		pedmonte: 'Montelucaste 4/5/10 mg __________ 1 caixa \n 2 a 5 anos de idade: Dar 1 cp(s) mastigável de 4 mg diariamente \n 6 a 14 anos: Dar 1 cp(s) mastigável de 5 mg diariamente \n \n',
+		pedacebro: 'Acebrofilina 25 mg/5 mL __________ 2 frasco(s) \n Tomar  ml de 12/12 horas por 7 dias \n \n',
+		pedvonau: 'Ondasentrona 4 mg  ______________ 1cx \n Dar  cp(s) de 8/8 horas, se náusea ou vômito \n \n',
+		peddomp: 'Domperidona 1 mg/ml suspensão oral __________ 1 frasco \n Dar X ml de 8/8 horas \n (Dose: 0,25 mL/kg/dose) \n \n',
+		pedbromo: 'Bromoprida 4 mg/ml __________ 2 frasco(s) \n Tomar  gotas de 8/8 horas, se náusea ou vômito \n \n',
+		pedfeno: 'Fenobarbital 40 mg/ml gotas: 1 frasco \n Dar X gotas à noite.  \n (Dose: 3 a 5 mg/kg/dia ? 1 gota = 1 mg) \n \n',
+		peddifen: 'Difenilhidantoína 100 mg/5 mL: 1 frasco \n Dar X ml de 12/12 horas. \n (Dose: 10 mg/kg/dia = 0,5 mL/kg/dia) \n \n',
+		pedcarba: 'Carbamazepina 100 mg/5 mL xarope: 1 frasco \n Dar X ml de 12/12 horas. \n (Dose: 10 a 30 mg/kg/dia = 0,5 a 1,5 mL/kg/dia) \n \n',
+		peddepak: 'Ácido Valpróico 250 mg/5 mL xarope: 1 frasco \n Dar X ml de 12/12 horas. \n (Dose: 15 a 60 mg/kg/dia = 0,3 a 1,2 mL/kg/dia) \n \n',
+		protovit: 'ProtoVit plus gotas ______________ 1 frasco \n Dar 12 gotas 1 vez ao dia. \n (Contém 500 UI de vitamina D, 1.500 UI de vitamina A) \n \n',
+		pednista: 'Nistatina {+} Óxido de Zinco pomada ______________ 1 bisnaga \n Aplicar após cada troca de fralda. \n \n',
+		pedureia: 'Creme de Uréia 5% {+} óleo de amêndoas pomada ______________ 150g \n Aplicar em todo o corpo imediatamente após o banho. \n \n',
+		pedperme5: 'Permetrina 5% loção ______________ 1 frasco (para Escabiose) \n Aplicar em todo o corpo, à noite, por 3 noites seguidas. De manha, banho para retirar o produto. Após 1 semana, repetir \n \n',
+		pedperme1: 'Permetrina 1% xampu ______________ 1 frasco (para Pediculose) \n Aplicar e deixar em contato por dez minutos, depois enxaguar bem. Repetir após 1 dia, depois 1 semana \n \n',
+		pednacl: 'Solução nasal de NaCl 0,9% ______________ 1 frasco \n Aplicar de 4 em 4 horas em ambas narinas por o dia. \n \n',
+		pednacl3: 'Solução nasal de Cloreto de Sódio 3% spray nasal ______________ 1 frasco \n Aplicar de 8/8h em ambas narinas. \n \n',
+		glicel: 'Supositório de Glicerina Infantil ______________ 1 caixa \n Aplicar, via retal. \n \n',
+		desc: 'Descon gotas __________ 1 frasco \n Tomar gotas de 8/8 horas por 5 dias \n (Dose: 2 gotas/kg/dia) \n \n',
+		bactrim: 'Sulfametoxazol + Trimetroprima (800+160)mg __________ 1caixa(s) \n Tomar 1 cp de 12/12 horas por 5 dias \n \n',
+		pedosel: 'Oseltamivir 75 mg cápsula __________ X comprimidos \n Diluir a cápsula em 5ml de água. Dar X ml de 12/12 horas por 5 dias. \n (Dose: < 15 Kg: 2mL; 15 a 23: 3 mL; 23 a 40: 4 mL; Acima de 40 Kg: 1 cp) \n \n',
+		ateno: 'Atenolol 25mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		ezet: 'Ezetimiba 10 mg __________ Contínuo \n Tomar 1 cp à noite \n \n',
+		b12nova: 'Bedoze __________ 2cx(s) \n Aplicar 1 ampola im uma vez por semana por 4 semanas \n \n',
+		ara: 'Aradois 50mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		ablok: 'Ablok 25mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		xarel: 'Xarelto mg __________ Contínuo \n Tomar 1 cp ao dia \n \n',
+		carvedi: 'Carvedilol mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		rosu: 'Rosuvastatina 20mg __________ Contínuo \n Tomar 1 cp à noite \n \n',
+		ator: 'Atorvastatina 20mg __________ Contínuo \n Tomar 1 cp à noite \n \n',
+		enala: 'Enalapril mg __________ Contínuo \n Tomar 1 cp de 12/12 horas \n \n',
+		daforin: 'Daforin 20mg/ml __________ 2 Frascos \n Tomar 1 cp de manhã \n \n',
+		neulep: 'Neuleptil __________ 60 Cps \n Tomar 1 cp à noite \n 4%: 40 mg/ml 1mL: 40gts, 1gt=1mg \n \n',
+		clitio: 'Carbonato de Lítio 300mg __________ 60 Cps \n Tomar 1 cp à noite \n \n',
+		metildo: 'Metildopa 250mg __________ Contínuo \n Tomar 1 cp de 8/8 horas \n \n',
+		// complexas
+		asma_ps:
+			'Salbutamol Spray 100 mcg/dose ou Fenoterol Spray 100 mcg/dose\n Fazer 4 a 10 puffs cada 20min na primeira hora.\n- Se Nebulização: Salbutamol 5mg/mL ou Fenoterol 5mg/mL\n Diluir 10 a 20 gotas em 4mL de SF0,9%. Fazer cada 20min na primeira hora.\n\n**ANTICOLINÉRGICO DE CURTA DURAÇÃO**\n- Se Bombinha / Spray: Ipratrópio Spray 200 mcg/dose\n Fazer 4 a 10 puffs cada 20min na primeira hora.\n- Se Nebulização: Ipratrópio 0,25mg/mL\n Diluir 20 a 40 gotas em 4mL de SF0,9%. Fazer cada 20min na primeira hora.\n\n**CORTICOIDE**\n- Se VO disponível: Prednisona 40mg VO AGORA ou Prednisolona 40mg VO AGORA\n- Se VO indisponível: Hidrocortisona (100mg/mL) 100mg EV AGORA ou Metilprednisolona (125mg/2mL) 62,5mg EV AGORA\n\n**SULFATO DE MAGNÉSIO**\n- Apenas em casos refratários ao tratamento com broncodilatadores otimizado\n Sulfato de Magnésio 50% (5g/10mL): Fazer 4mL + 100mL de SF0,9% EV AGORA, correr em 30 minutos.\n\n**OXIGENIOTERAPIA**\n- Cateter Nasal até 6L/min.\n- Máscara Não Reinalante até 15L/min.\n- VNI se necessário e indicado.\n- IOT se insuficiência respiratória franca.\n\n- Retornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		asma_alta_cara:
+			'Formoterol 12 mcg + Budesonida 400 mcg (Alenia®)\n - Utilize uma inalação por VO a 12/12h, por 30d. Seguir orientações da bula. Enxaguar boca após uso.\n\n Prednisolona 40 mg\n - Tomar 1cp VO de manhã, 1x/dia, por 5d.\n\n Salbutamol 100 mcg/dose \n Fazer 2 puffs até 4/4h em caso de cansaço sob demanda. Interromper em caso de palpitação\n\n Lavagem nasal com Soro Fisiológico (0,9%)\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Alimentação adequada; evitar alérgenos\n- Hidratar ~2L/dia.\n- Evitar alérgenos (poeira, perfumes, mofo, ácaros).\n- Evitar banhos muito quentes.\n\nRetornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		asma_alta_barato:
+			'Salbutamol 100 mcg/dose \n - Fazer 1 puff 8/8h por 30d.\n - Fazer 2 puffs até 4/4h em caso de cansaço sob demanda. Interromper em caso de palpitação\n\n Beclometasona 250 mcg/dose\n - Utilize uma inalação por VO a 12/12h, por 30d. Seguir orientações da bula. Enxaguar boca após uso.\n\n Prednisolona 40 mg\n - Tomar 1cp VO 1x/dia, de manhã, por 5d.\n\n Lavagem nasal com Soro Fisiológico (0,9%)\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Alimentação adequada; evitar alérgenos\n- Hidratar ~2L/dia.\n- Evitar alérgenos (poeira, perfumes, mofo, ácaros).\n- Evitar banhos muito quentes.\n\nRetornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		dpoc_ps:
+			'Salbutamol Spray 100 mcg/dose ou Fenoterol Spray 100 mcg/dose\n Fazer 4 a 10 puffs cada 20min na primeira hora.\n- Se Nebulização: Salbutamol 5mg/mL ou Fenoterol 5mg/mL\n Diluir 10 a 20 gotas em 4mL de SF0,9%. Fazer cada 20min na primeira hora.\n\n**ANTICOLINÉRGICO DE CURTA DURAÇÃO**\n- Se Bombinha / Spray: Ipratrópio Spray 200 mcg/dose\n Fazer 4 a 10 puffs cada 20min na primeira hora.\n- Se Nebulização: Ipratrópio 0,25mg/mL\n Diluir 20 a 40 gotas em 4mL de SF0,9%. Fazer cada 20min na primeira hora.\n\n**CORTICOIDE**\n- Se VO disponível: Prednisona 40mg VO AGORA ou Prednisolona 40mg VO AGORA\n- Se VO indisponível: Hidrocortisona (100mg/mL) 100mg EV AGORA ou Metilprednisolona (125mg/2mL) 62,5mg EV AGORA\n\n**SULFATO DE MAGNÉSIO**\n- Apenas em casos refratários ao tratamento com broncodilatadores otimizado\n Sulfato de Magnésio 50% (5g/10mL): Fazer 4mL + 100mL de SF0,9% EV AGORA, correr em 30 minutos.\n\n**OXIGENIOTERAPIA**\n- O2 em baixo fluxo (1-3 L/minuto) é recomendado em todos os pacientes com exacerbação aguda da DPOC e SatO2 < 90%.\n- VNI em BIPAP\n- IOT se insuficiência respiratória franca.\n\n**ANTIBIOTICOTERAPIA**\n- Indicada se piora da dispnéia + aumento de secreções + escarro purulento\n Amoxicilina + Clavulanato 875+125mg VO de 12/12 horas por 7 a 10 dias.\n Levofloxacino 750mg VO de 24/24 horas por 7d.\n Azitromicina 500mg VO de 24/24 horas por 5d.\n\nRetornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		dpoc_alta:
+			'Salbutamol 100 mcg/dose \n - Fazer 1 puff 8/8h por 30d.\n - Fazer 2 puffs até 4/4h em caso de cansaço sob demanda. Interromper em caso de palpitação\n\n Beclometasona 250 mcg/dose\n - Utilize uma inalação por VO a 12/12h, por 30d. Seguir orientações da bula. Enxaguar boca após uso.\n\n Prednisolona 40 mg\n - Tomar 1cp VO 1x/dia, de manhã, por 5d.\n\n Lavagem nasal com Soro Fisiológico (0,9%)\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Alimentação adequada; evitar alérgenos\n- Hidratar ~2L/dia.\n- Evitar alérgenos (poeira, perfumes, mofo, ácaros).\n- Evitar banhos muito quentes.\n\nRetornar se piora:\n- febre ↑ 37,8°C/48h, tosse produtiva, com secreção, dispneia, dispneia, síncope/pré-síncope.\n\nINTERNAÇÃO: Sem resposta ao tratamento hospitalar.',
+		farv: 'Prednisolona 40mg\n - Tomar 1cp VO 1x/dia por 4d\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha 6/6h (máximo de 3 dias). Dissolver lentamente na boca.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem\n- Tenha uma dieta saudável, durma bem e evite álcool.\n- Mudanças em medicações devem ser com orientação médica.\n- Faça acompanhamento médico regular.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão\n\n- INTERNAÇÃO:\n\n- Pacientes com complicações supurativas (como abscesso retrofaríngeo ou tonsilar) ou toxemia significativa devido a infecção bacteriana devem ser internados para antibioticoterapia parenteral e avaliação cirúrgica.',
+		farb_penicilina:
+			'Penicilina Benzatina 1,2 milhões de unidades.\n - Uma aplicação, IM, dose única.\n\n Prednisolona 40mg\n Tomar 1cp VO por VO, 1x/dia, de manhã, por 4d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha 6/6h (máximo de 3 dias). Dissolver lentamente na boca.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Alimentação adequada, sono regular, evitar álcool. Não alterar medicações de rotina sem orientação.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão\n\n- INTERNAÇÃO:\n\n- Pacientes com complicações supurativas (como abscesso retrofaríngeo ou tonsilar) ou toxemia significativa devido a infecção bacteriana devem ser internados para antibioticoterapia parenteral e avaliação cirúrgica.',
+		farb_amoxclav:
+			'Amoxicilina-Clavulanato 875/125 mg\n - Tomar 1cp VO 12/12h, por 10d\n\n Prednisolona 40mg\n - Tomar 1cp VO 1x/dia, de manhã, por 4d\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha 6/6h (máximo de 3 dias). Dissolver lentamente na boca.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Alimentação adequada, sono regular, evitar álcool. Não alterar medicações de rotina sem orientação.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão\n\n- INTERNAÇÃO:\n\n- Pacientes com complicações supurativas (como abscesso retrofaríngeo ou tonsilar) ou toxemia significativa devido a infecção bacteriana devem ser internados para antibioticoterapia parenteral e avaliação cirúrgica.',
+		influenza_alto_risco:
+			'Oseltamivir 75 mg (Tamiflu®)\n - Tomar 1cp VO de 12/12 horas por 5d.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Paciente com risco de evolução para insuficiência respiratória.\n- Pacientes em síndrome respiratória aguda grave.',
+		pac_amoxclav:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n - Tomar 1cp VO oralmente a 12/12h por 10d.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.\n\n- INTERNAÇÃO:\n\nConsiderar se CURB-65 ≥2, comorbidades (DPOC, DM, ICC, neoplasias, DRC), intolerância VO ou baixo acesso à saúde.',
+		pac_levofloxacino:
+			'Levofloxacina 750 mg\n - Tomar 1cp VO al día por 7d.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.\n\n- INTERNAÇÃO:\n\nSe CURB-65 ≥2, comorbidades (DPOC, DM, ICC, neoplasias, DRC), intolerância VO ou baixo acesso à saúde.',
+		pac_cefuroxima_azitromicina:
+			'Cefuroxima 500 mg\n - Tomar 1cp VO por vía oral 12/12h por 7d.\n\n Azitromicina 500 mg\n - Tomar 1cp VO 1x/dia, por 7d.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.\n\n- INTERNAÇÃO:\n\nConsiderar se CURB-65 ≥2, comorbidades (DPOC, DM, ICC, neoplasias, DRC), intolerância VO ou baixo acesso à saúde.',
+		pac_claritromicina:
+			'Claritromicina 500 mg\n - Tomar 1cp VO 12/12h por 7d.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Alimentação adequada, sono regular, evitar álcool. Não alterar medicações de rotina sem orientação.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora da dor, tosse, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.\n\n- INTERNAÇÃO:\n\nConsiderar se CURB-65 ≥2, comorbidades (DPOC, DM, ICC, neoplasias, DRC), intolerância VO ou baixo acesso à saúde.',
+		rinossinusite_viral:
+			'Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Diplopia;\n- Redução da acuidade visual ou da mobilidade ocular;\n- Proptose ocular;\n- Presença de sinais meníngeos;\n- Alteração do estado mental;\n- Indícios de sepse;\n- Cefaleia ou dor facial intensa que não responde à medicação oral.',
+		rinossinusite_bacteriana_amoxicilina:
+			'Amoxicilina 875mg\n - Tomar 1cp VO de 12/12 horas, por 10d.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Diplopia;\n- Redução da acuidade visual ou da mobilidade ocular;\n- Proptose ocular;\n- Presença de sinais meníngeos;\n- Alteração do estado mental;\n- Indícios de sepse;\n- Cefaleia ou dor facial intensa que não responde à medicação oral.',
+		rinossinusite_bacteriana_amoxclav:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n Tomar 1cp VO a 12/12h por 10d.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Diplopia;\n- Redução da acuidade visual ou da mobilidade ocular;\n- Proptose ocular;\n- Presença de sinais meníngeos;\n- Alteração do estado mental;\n- Indícios de sepse;\n- Cefaleia ou dor facial intensa que não responde à medicação oral.',
+		rinosinu_bac:
+			'Levofloxacino 750mg\n Tomar 1cp VO 1x/dia por 10d.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Strepsils® (Flurbiprofeno) pastilhas\n 1 pastilha de até 6/6h (até 3 dias). Dissolver na boca lentamente\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Cloridrato de oximetazolina 0,5 mg/mL (Aturgyl®, Oxifrin®)\n - Pingar entre 1-2 gotas em cada narina de manhã e à noite, por no máximo 5 dias.\n\n- Cuide-se bem.\n- Hidratar adequadamente.\n- Evitar irritantes ambientais.\n\n- Retornar se febre ↑37,8°C/48h, piora sintomática, dispneia, hipotensão, síncope.\n\n- INTERNAÇÃO:\n\n- Diplopia;\n- Redução da acuidade visual ou da mobilidade ocular;\n- Proptose ocular;\n- Presença de sinais meníngeos;\n- Alteração do estado mental;\n- Indícios de sepse;\n- Cefaleia ou dor facial intensa que não responde à medicação oral.',
+		tosse:
+			'Cloperastina 3,54 mg/mL (xarope) (Tilugen®, Seki®, Clope®)\n - Tomar 10mL de 8/8 horas.\n\n Acetilcisteína Xarope (40 mg/mL) ou Granulado (600 mg/5g)\n - Tomar 15mL ou 1 envelope dissolvido em ½ copo com água 1x/dia VO, por 5d.\n\n Cloridrato de Difenidramina + Cloreto de Amônio + Citrato de Sódio (Pastilha Endcoff®, Benalet®, Benatux®)\n - Dissolver lentamente 1 pastilha na boca, quando tosse intensa. Máximo de 8 pastilhas por dia.\n\n Budesonida spray nasal 50 mcg\n - Aplicar de 1 a 2 jatos em cada narina de 12/12 horas, por 10d.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora álgica, dispneia, hipotensão ou desmaios.\n- Tosse com sangramento intenso.\n- Piora do quadro, não conseguir se alimentar ou tomar medicamentos regularmente.',
+		afta: 'Triancinolona acetonida tópica 1mg/g (Omcilon-A Orabase®)\n - Aplique uma fina camada sobre a lesão, preferencialmente à noite, antes de dormir. Pode ser usado a 8/8h, por 7d, após as refeições.\n\n Prednisolona 20 mg\n Tomar 1cp VO 1x/dia, por 5d, se houver múltiplas lesões.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Medidas Gerais\n- Higiene oral com escovas macias.\n- Evitar traumas na boca.\n- Evitar alimentos/bebidas ácidas, como suco de limão, refrigerantes, café, etc.\n\n- Retornar se piora:\n- Dor intensa, sangramento intenso e piora das lesões.\n- Incapacidade de se alimentar ou ingerir líquidos.',
+		alergia_ps:
+			'Difenidramina (50mg/mL)\n Fazer 1mL (1 ampola) EV em bólus AGORA\n\n Prometazina (50mg/2mL)\n Fazer 2mL IM AGORA\n\n Hidrocortisona (100mg/mL)\n Fazer 100mg EV AGORA\n\n Metilprednisolona (125mg/2mL)\n Fazer 62,5mg EV AGORA\n\n- Se sinais de anafilaxia presentes, seguir protocolo: Adrenalina (1mg/mL) 0,5mL EV/IM, Soro Fisiológico 1000mL EV AGORA, Difenidramina (50mg/mL) 1mL EV e Hidrocortisona (100mg/mL) 100mg EV.\n\nRetornar se piora:\n- Falta de ar: dispneia.\n- Dificuldade para falar ou engolir.\n- Edema facial ou periocular.\n- Pressão baixa ou tontura.\n- Piora do inchaço ou vermelhidão.\n\nINTERNAÇÃO: Anafilaxia requer internação para observação.',
+		alergia_alta:
+			'Prednisolona 40 mg\n - Tomar 1cp VO por dia, de manhã, por 5d.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Alimentação adequada\n- Evitar alérgenos (ácaros, mofo, poeira, perfumes).\n- Hidratar ~2L/dia.\n- Restringir alimentos alergênicos até consulta médica: frutos do mar, enlatados e corantes.\n\nRetornar se piora:\n- Falta de ar: dispneia.\n- Dificuldade para falar ou engolir.\n- Edema facial ou periocular.\n- Pressão baixa ou tontura.\n- Piora do inchaço ou vermelhidão.',
+		celulite_erisipela_ps:
+			'Oxaciclina 2g EV de 4/4 horas, por 7-14 dias.\n Cefazolina 1-2 g EV de 8/8 horas, por 7-14 dias.\n Ceftriaxona 1 g EV de 12/12 horas, por 7-14 dias.\n Se infecção conjunta com úlcera diabética ou lesão por pressão: Ceftriaxona 1 g EV de 12/12 horas + Ciprofloxacino 400mg EV 12/12h.\n\n- Repouso no leito\n- Deve-se manter o membro elevado para facilitar a drenagem em virtude da gravidade do edema e das substâncias inflamatórias.\n- Permanganato de potássio 1:20.000 2x/dia no banho.\n\n- Retornar se piora:\n- Febre persistente (acima de 37,8°C) ou calafrios.\n- Dor intensa.\n- Aumento do inchaço ou vermelhidão no local da lesão.\n- Abscesso com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Suspeita de acometimento profundo (articular, ósseo ou muscular).\n- Sinais de choque/sepse.\n- Síndrome compartimental.\n- Envolvimento de enxerto vascular.\n- Falha na antibioticoterapia oral.\n- Pacientes imunossuprimidos e/ou sem capacidade de autocuidado.',
+		celulite_sem_mrsa:
+			'Cefalexina 500mg\n - Tomar 1cp VO de 6/6 horas por 7d.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Compressa de gelo: 15min até 6x/dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Coloque o membro acometido em posição elevada, facilitando a drenagem e diminuindo o inchaço.\n\n- Retornar se piora:\n- Febre persistente (acima de 37,8°C) ou calafrios.\n- Dor intensa.\n- Aumento do inchaço ou vermelhidão no local da lesão.\n- Abscesso com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Suspeita de acometimento profundo (articular, ósseo ou muscular).\n- Sinais de choque/sepse.\n- Síndrome compartimental.\n- Envolvimento de enxerto vascular.\n- Falha na antibioticoterapia oral.\n- Pacientes imunossuprimidos e/ou sem capacidade de autocuidado.',
+		celulite_com_mrsa:
+			'Sulfametoxazol + trimetoprima 800/160 mg (Bactrim®, Bacfar®, Bacteracin®)\n - Tomar 1cp VO de 12/12 horas por 7d.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Compressa de gelo: 15min até 6x/dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Coloque o membro acometido em posição elevada, facilitando a drenagem e diminuindo o inchaço.\n\n- Retornar se piora:\n- Febre persistente (acima de 37,8°C) ou calafrios.\n- Dor intensa.\n- Aumento do inchaço ou vermelhidão no local da lesão.\n- Abscesso com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Suspeita de acometimento profundo (articular, ósseo ou muscular).\n- Sinais de choque/sepse.\n- Síndrome compartimental.\n- Envolvimento de enxerto vascular.\n- Falha na antibioticoterapia oral.\n- Pacientes imunossuprimidos e/ou sem capacidade de autocuidado.',
+		erisipela_leve:
+			'Cefalexina 500mg\n - Tomar 1cp VO de 6/6 horas por 7d.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Compressa de gelo: 15min até 6x/dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Coloque o membro acometido em posição elevada, facilitando a drenagem e diminuindo o inchaço.\n\n- Retornar se piora:\n- Febre persistente (acima de 37,8°C) ou calafrios.\n- Dor intensa.\n- Aumento do inchaço ou vermelhidão no local da lesão.\n- Abscesso com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Recomendada para quadros moderados a graves com:\n- Acometimento facial.\n- Sinais de choque/sepse.\n- Síndrome compartimental.\n- Falha na antibioticoterapia oral.\n- Pacientes imunossuprimidos e/ou sem capacidade de autocuidado.',
+		dermatite_atopica:
+			'Tacrolimo 0,1% (pomada) (Protopic®, Tarfic®, Tacroz®, Cropoc®, Atobach®)\n - Aplicar sobre área afetadas até 2x/dia.\n\n Hidrocortisona creme (Cortisonal®, Cortigen®)\n - Aplicar sobre área afetadas até 2x/dia.\n\n Prednisolona 40 mg\n Tomar 1cp VO por dia, de manhã, por 5d. Usar se refratário a tratamento tópico.\n\n Loratadina 10 mg OU Allegra®/Fexofenadina 120 mg OU Levocetirizina/Zina® 5 mg\n - Tomar 1cp VO 12/12h, por 5d\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- RECOMENDAÇÕES para impedir recorrência.\n- Limitar o uso de sabonetes e optar por produtos de limpeza sem sabão, preferencialmente com pH neutro ou baixo (pH da pele 4-5,5).\n- Evitar exposição a alérgenos como ácaros, mofos, poeira, perfumes e pelos de animais.\n- Manter a casa limpa e ventilada, evitando carpetes e tapetes.\n- Hidratar ~2L/dia.\n- Optar por roupas leves de algodão que permitam a transpiração em vez de tecidos sintéticos.\n- Evitar banhos quentes, que podem agravar a atopia.\n\nRetornar se piora:\n- Falta de ar: dispneia.\n- Dificuldade para falar ou engolir.\n- Edema facial ou periocular.\n- Pressão baixa ou tontura.\n- Piora do inchaço ou vermelhidão.',
+		escabiose:
+			'Ivermectina 6mg (Leverctin®, Revectina®, Iverneo®)\n Tomar 2 cp(s)s hoje e 2 cp(s)s após 7 dias, ambos em dose única VO.\n\n Hidroxizina 25 mg (Hixizine®)\n Tomar 1cp VO a 12/12h por 5d; em caso de prurido intenso, pode-se tomar a 8/8h.\n\n Permetrina 1% (emulsão ou loção 60mL). (Permenati®, Pioletal®)\n Aplique na pele do pescoço para baixo, incluindo plantas e pés. Em pacientes calvos, aplique a suspensão no couro cabeludo, testa, linha do cabelo e têmporas.\n - Evite o contato com a mucosa bucal e os olhos.\n - Deixe a suspensão secar por 10 minutos antes de se vestir.\n - Mantenha na pele por 6 horas antes do banho.\n - Repita o tratamento em 1 semana.\n\n- Leia com atenção, pois o sucesso do tratamento depende dessas RECOMENDAÇÕES.\n- Troque diariamente a roupa de cama, banho e a roupa que foi usada no dia do tratamento e nos dias anteriores, pelo menos por três dias.\n- Lave as roupas, estenda-as ao sol quente e passe com ferro para eliminar o parasita.\n- Se não for possível lavar as roupas, coloque-as em um saco plástico por quatro a sete dias.\n- Mantenha as unhas curtas para não lesionar a pele ao coçar e evitar coçar a pele.\n- Evite banhos prolongados e quentes, use sabão neutro e aplique com moderação sobre as lesões.\n- Evite contato com alérgenos como poeira, pólens, pelos de animais, carpetes e cortinas. Mantenha os ambientes limpos e ventilados.\n- Opte por roupas leves.\n\nRetornar se piora:\n- Aumento do edema e inchaço na área da infecção\n- Intensificação da vermelhidão (hiperemia), acompanhada de calor e dor local\n- Febre (>37,8°C) ou sinais de tontura e hipotensão',
+		furunculo:
+			'Cefalexina 500 mg\n Tomar 1cp VO 6/6h por 7 días.\n\n Mupirocina 2% (Bactroban®, Bacrocin®) Pomada\n - Aplicar sobre a lesão até 3x/dia, por 7d ou até melhora.\n\n Compressas mornas.\n - Aplicar sobre a lesão por 20 minutos até 3x/dia até drenagem de pus.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\nRetornar se piora:\n- Aumento do edema e inchaço na área da infecção\n- Intensificação da vermelhidão (hiperemia), acompanhada de calor e dor local\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, secreção de pus)\n- Febre (>37,8°C) ou sinais de tontura e hipotensão\n\n- INTERNAÇÃO:\n\n- A internação é indicada apenas em casos de celulite/erisipela em locais de risco (como o rosto) e/ou critérios de sepse.',
+		herpes_simples_aciclovir:
+			'Aciclovir 400 mg\n - Tomar 1cp VO 8/8h VO, por 7d.\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\nRetornar se piora:\n- Piora do edema e inchaço na área da infecção.\n- Aumento da vermelhidão (hiperemia), acompanhada de calor e dor local.\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, drenagem de pus).\n- Febre (>37,8°C) ou sinais de tontura e hipotensão.',
+		herpes_simples_valaciclovir:
+			'Valaciclovir 500 mg\n - Tomar 1 cp(s)s, 8/8h VO, por 7d\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\nRetornar se piora:\n- Piora do edema e inchaço na área da infecção.\n- Aumento da vermelhidão (hiperemia), acompanhada de calor e dor local.\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, drenagem de pus).\n- Febre (>37,8°C) ou sinais de tontura e hipotensão.',
+		herpes_zoster:
+			'Valaciclovir 500 mg\n - Tomar 2 cp(s)s, 8/8h VO, por 7d\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia, por 5d, com alimentos\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Tramadol 50 mg\n - Tomar 1cp VO 6/6h em caso de dor intensa refratária as medicações acima, por 3d.\n\nRetornar se piora:\n- Piora do edema e inchaço na área da infecção.\n- Aumento da vermelhidão (hiperemia), acompanhada de calor e dor local.\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, drenagem de pus).\n- Febre (>37,8°C) ou sinais de tontura e hipotensão.\n\n- INTERNAÇÃO:\n\n- Indivíduos imunodeprimidos com quadro disseminado.\n- Presença de sintomas neurológicos, como suspeita de meningoencefalite ou mielite.\n- Quadro oftalmológico associado.\n- Indicado também para controle da dor aguda muito intensa.',
+		impetigo:
+			'Cefalexina 500 mg\n Tomar 1cp VO 6/6h por 7 días.\n\n Higiene das lesões com água + sabão neutro\n Não coçar ou remover as crostas; deixe-as cair espontaneamente para evitar disseminação. Mantenha as unhas cortadas e limpas para evitar contaminação.\n\n Limpar a região diariamente com água e sabão ou sabonetes antissépticos (Triclosano, Iodopovidona, Clorexidina).\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\nRetornar se piora:\n- Aumento do edema e inchaço na área da infecção\n- Intensificação da vermelhidão (hiperemia), acompanhada de calor e dor local\n- Endurecimento ou coloração roxa no local da infecção, ou presença de abscesso (furúnculo, secreção de pus)\n- Febre (>37,8°C) ou sinais de tontura e hipotensão',
+		insolacao:
+			'Calamina 8% (Loção ou creme)\n Aplicar na região afetada 3x/dia, por até 5 dias.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Orientações\n- Evitar exposição ao sol. Se o fizer, use protetor solar.\n- Compressar de água fria (sem gelo).\n- Use roupas folgadas e arejadas.\n- Se presença de bolhas, mantenha elas cobertas com curativos e não as rompa. Em caso de rompimento, lavar com águaa morna e sabão neutro apenas.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)',
+		larva_migrans:
+			'Ivermectina 6mg (Leverctin®, Revectina®, Iverneo®)\n - Tomar 2 cp(s)s hoje em dose única.\n - Repetir em 7 dias, caso ainda mantenha o quadro.\n\n- Siga as seguintes RECOMENDAÇÕES.\n- Evitar coçar o local, para não causar feridas.\n- Manter a região limpa e seca, evitando que a pele infeccione.\n- Aplicar gelo na região afetada, para aliviar a coceira.\n\nRetornar se piora:\n- Surgimento de dor intensa, feridas ou pus no local da lesão.',
+		onicocriptose:
+			'Nebacetin (Sulfato de neomicina, Bacitracina zíncica) - pomada bisnaga de 15g\n - Aplique uma fina camada do produto, 3x/dia, com o auxílio de uma gaze, por 7d\n\n Higiene das lesões com água + sabão neutro\n - Não coçar ou retirar as crostas, deixar cair espontaneamente, pare evitar disseminação\n - Manter unhas cortadas e limpas para não contaminar\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n- Se recorrente, procurar sua unidade básica de saúde ou profissional dermatologista para tratamento definitivo.\n- Evitar uso de calçados apertados por o tratamento.\n\nRetornar se piora:\n- piora do edema e inchaço no local da infecção\n- piora da vermelhidão (hiperemia), com calor e dor local\n- local da infecção ficar duro ou roxo ou com abscesso (furúnculo, drenagem de pus)\n- febre (>37,8°C) ou sinais de tonteira e hipotensão',
+		tinea_pedis:
+			'Cetoconazol 2% Creme (Fungonazol®, Cetonat®, Funed Cetoconazol®)\n - Limpar as lesões com água e sabão neutro e secar. Aplicar o creme nas lesões a 12/12h, por 30d ou até a cura.\n\n- Siga as seguintes RECOMENDAÇÕES.\n- Seque bem os pés e entre os dedos após o banho.\n- Aplique talco antisséptico nos pés e entre os dedos.\n- Opte por meias de algodão.\n- Evite calçados fechados por longos períodos.\n- Limpe os sapatos periodicamente com produtos antifúngicos (ex.: Lysoform®).\n- Descarte sapatos velhos e evite compartilhar itens de higiene pessoal.\n- Evite andar descalço, especialmente em piscinas, saunas, banheiros e chuveiros compartilhados.\n\nRetornar se piora:\n- Aumento do edema e inchaço na área da infecção\n- Intensificação da vermelhidão (hiperemia), acompanhada de calor e dor local\n- Febre (>37,8°C) ou sinais de tontura e hipotensão',
+		tungiase:
+			'Ivermectina (6 mg/cp(s))\n 200 microgramas/kg VO dose única.\n\n- Siga as seguintes recomendações.\n- Usar calçados fechados em locais contaminados.\n- Usar repelentes à base de óleo de coco 2x/dia para diminuir a infestação.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)',
+		cistite_fosfo:
+			'Fosfomicina Trometamol 5,631g Envelope (Monuril®, Traturil®, Fosmoryl®)\n - Esvaziar a bexiga e tomar a medicação antes de dormir. Dissolver o conteúdo do envelope em 200mL de água, mexendo com uma colher. Tomar em dose única; não é necessário repetir.\n\n Fenazopiridina 200mg (Pyridium®)\n - Tomar 1cp VO de 8/8 horas, por 2d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado(a).\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Urinar sempre que sentir vontade, evitando segurar a urina por longos períodos.\n- Evitar Banhos de Espuma ou Ducha Vaginal: Essas práticas podem alterar o pH vaginal e eliminar bactérias protetoras.\n\n- Retornar se piora:\n- Febre (temperatura axilar acima de 37,8°C) ou calafrio/sudorese\n- Pressão baixa, tonteira, sangramento, vômito sem melhora\n- Dor abdominal ou dor nas costas intensa\n- Sangramento urinário intenso\n\n- INTERNAÇÃO:\n\n- Sepse.\n- Uropatia Obstrutiva ou Nefrolitíase.\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		cistite_nitro:
+			'Nitrofurantoína 100mg (Macrodantina®, Nitrofen®)\n - Tomar 1cp VO de 6/6 horas, por 7d.\n\n Fenazopiridina 200mg (Pyridium®)\n - Tomar 1cp VO de 8/8 horas, por 2d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado(a).\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Urinar sempre que sentir vontade, evitando segurar a urina por longos períodos.\n- Evitar Banhos de Espuma ou Ducha Vaginal: Essas práticas podem alterar o pH vaginal e eliminar bactérias protetoras.\n\n- Retornar se piora:\n- Febre (temperatura axilar acima de 37,8°C) ou calafrio/sudorese\n- Pressão baixa, tonteira, sangramento, vômito sem melhora\n- Dor abdominal ou dor nas costas intensa\n- Sangramento urinário intenso\n\n- INTERNAÇÃO:\n\n- Sepse.\n- Uropatia Obstrutiva ou Nefrolitíase.\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		cistite_gestante:
+			'Cefuroxima 250 mg (Zinnat®, Mefex®)\n - Tomar 1cp VO de 12/12 horas, por 7d.\n\n Fenazopiridina 200mg (Pyridium®)\n - Tomar 1cp VO de 8/8 horas, por 2d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado(a).\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Urinar sempre que sentir vontade, evitando segurar a urina por longos períodos.\n- Evitar Banhos de Espuma ou Ducha Vaginal: Essas práticas podem alterar o pH vaginal e eliminar bactérias protetoras.\n\n- Retornar se piora:\n- Febre (temperatura axilar acima de 37,8°C) ou calafrio/sudorese\n- Pressão baixa, tonteira, sangramento, vômito sem melhora\n- Dor abdominal ou dor nas costas intensa\n- Sangramento urinário intenso\n\n- INTERNAÇÃO:\n\n- Sepse.\n- Uropatia Obstrutiva ou Nefrolitíase.\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		hemorroida:
+			'Policresuleno + cloridrato de cinchocaína (Proctyl®)\n - Aplicar até 3x/dia, em região anal, por 7d.\n\n Banho em assento com água morna.\n - Realizar 2 a 3 vezes por dia, após as evacuações. Colocar água morna em uma bacia e sentar-se nu, permitindo que a água entre em contato com a lesão por pelo menos 15 minutos ou até esfriar.\n\n Naproxeno 500 mg\n Tomar 1cp VO 1x/dia, por 5d.\n\n Alimentação e Hidratação\n Consuma aproximadamente 3 litros de líquido por dia, incluindo água, sucos de frutas e isotônicos.\n Aumente a ingestão de alimentos ricos em fibras, como mamão, laranja e legumes.\n Evite alimentos condimentados, como pimenta, chocolate e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Muvinlax®: tomar entre 1-3 sachês VO, por dia.\n\n Lactulose (667mg/120mL) 15mL VO, até 3x/dia.\n\n- Agendar consulta de reavaliação com Proctologista.\n- Tentar evitar o uso de papel higiênico. Lave-se por o banho ou com ducha higiênica.\n- Evitar esforço evacuatório, assim como ficar longos períodos sentado no vaso sanitário.\n\n- Retornar se piora:\n- Febre por mais de 48h, hipotensão, tonteira\n- Sangramento anal pior, vômitos sem melhora\n- Dor abdominal intensa',
+		pielonefrite_nao_complicada:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n Tomar 1cp VO a 12/12h por 10d.\n\n Fenazopiridina 200mg (Pyridium®)\n - Tomar 1cp VO de 8/8 horas, por 2d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado(a).\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas e frituras.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Urinar sempre que sentir vontade, evitando segurar a urina por longos períodos.\n- Evitar Banhos de Espuma ou Ducha Vaginal: Essas práticas podem alterar o pH vaginal e eliminar bactérias protetoras.\n\n- Retornar se piora:\n- Persistência dos sintomas após 48 horas.\n- Febre (temperatura axilar acima de 37,8°C) ou calafrio/sudorese.\n- Pressão baixa, tonteira, sangramento, vômito sem melhora.\n- Dor abdominal ou dor nas costas intensa.\n- Sangramento urinário intenso.\n\n- INTERNAÇÃO:\n\n- Quadros Graves ou Suspeita de Complicação (Abscesso renal, Abscesso perinéfrico, Pielonefrite xantogranulomatosa, Necrose papilar)\n- Imunossuprimidos, Gestantes e Crianças\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		ureterolitiase_ps:
+			'Tenoxicam (20mg/2mL) 20mg EV bolus AGORA\n ou\n Cetoprofeno 100mg + 100mL de SF0,9% EV AGORA\n\n**SE ANALGESIA REFRATÁRIA OU MUITO INTENSA NA CHEGADA**\n Tramadol (50mg/1mL) 50mg + 100mL de SF0,9 EV lento AGORA\n ou\n Morfina (10 mg/1mL) + 9mL de SG 5% (Solução com 1mg/mL)\n Fazer 2 a 4mL em bólus até 4/4h.\n\n- RECOMENDAÇÕES GERAIS\n- Evitar hidratação venosa excessiva, pois a hidratação piora a dor do paciente.\n- Se infecção associada, iniciar antibiótico: Ceftriaxone 1g EV 12/12h.\n\n- Retornar se piora:\n- Dor abdominal ou lombar intensa, sem resposta às medicações.\n- febre ↑ 37,8°C/48h ou calafrios/sudorese.\n- Pressão baixa, tontura, sangramento urinário abundante, vômito persistente.\n- Incapacidade de tomar medicações VO.\n\n- INTERNAÇÃO:\n\n- Pacientes com indicação de intervenção urológica (cálculos ≥ 10 mm, insuficiência renal aguda, sepse urinária em rim obstruído, refratariedade ao tratamento clínico, anúria)\n- Internação em terapia intensiva: Pacientes com critérios para sepse/choque séptico, necessidade de drogas vasoativas, rebaixamento do nível de consciência, insuficiência respiratória aguda, necessidade de ventilação mecânica.',
+		ureterolitiase_nao_complicada:
+			'Tansulosina 0,4 mg\n - Tomar 1cp VO 1x/dia, por 4 a 6 semanas.\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia VO, por 5d.\n\n Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n - Tomar 1cp VO 12/12h, por 10d.\n\n Hidratação e Alimentação\n - Manter-se bem hidratado.\n - Evitar alimentos gordurosos, doces, refrigerantes e excesso de massas.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Tramadol 50mg\n Tomar 1cp VO 8/8h, em caso de dor intensa refratária. Usar apenas em último caso.\n\n- Agendar consulta de reavaliação com o urologista para seguimento e investigação da causa.\n\n- Retornar se piora:\n- Dor abdominal ou lombar intensa, sem resposta às medicações.\n- febre ↑ 37,8°C/48h ou calafrios/sudorese.\n- Pressão baixa, tontura, sangramento urinário abundante, vômito persistente.\n- Incapacidade de tomar medicações VO.\n\n- INTERNAÇÃO:\n\n- Pacientes com cálculos ≥ 10 mm.\n- Injúria renal aguda\n- Rim único\n- Anúria\n- Dor refratária',
+		uretrite_homem:
+			'Ceftriaxona Sódica (ampola 500mg)\n - 1 ampola (500 mg) por via IM em dose única.\n\n Azitromicina 500 mg\n Tomar 2 cp(s)s por VO, dose única.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Abstenção de relações sexuais por o tratamento e 7 dias após o fim do mesmo.\n- Parceiro(as) sexuais também devem fazer o tratamento e abstenção.\n\n- Retornar se piora:\n- Piora da secreção ou sangramento urinário intenso.\n- Dor intensa mesmo após medicações.\n\n- INTERNAÇÃO:\n\n- Sinais de gravidade e/ou complicações sistêmicas.',
+		costocondrite:
+			'Naproxeno 500 mg\n Tomar 1cp VO a 12/12h, com alimento, por 4d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor articular intensa\n- Fraqueza, dormência, dificuldade de movimentação\n- Febre (temperatura axilar acima de 37,8°C)\n- Redução intensa do volume de urina e urina muito escura.',
+		dor_muscular_mialgia:
+			'Naproxeno 500 mg\n -Tomar 1cp VO 12/12h, com alimento, por 4d.\n\n Ciclobenzaprina + Cafeína 5 mg (Miosan CAF®)\n Tomar 1cp VO à noite, 1 vez por dia, por 4d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor articular intensa\n- Fraqueza, dormência, dificuldade de movimentação\n- Febre (temperatura axilar acima de 37,8°C)\n- Redução intensa do volume de urina e urina muito escura.',
+		gota_ps:
+			'Tenoxicam (20mg/2mL) 20mg EV bolus AGORA\n ou\n Cetoprofeno 100mg + 100mL de SF0,9% EV AGORA\n\n Dexametasona (10mg/2,5mL) 10mg EV em bolus AGORA\n Manter corticoides na alta por 3 a 5 dias.\n\n- Retornar se piora:\n- Piora ou manutenção da dor por mais de 48 horas, mesmo em uso correto das medicações.\n\n- INTERNAÇÃO:\n\n- Somente quando suspeita de artrite séptica concomitante para antibioticoterapia venosa.',
+		gota_alta:
+			'Naproxeno 500 mg\n - Tomar 1cp VO com alimentação, de 12/12 horas, por 5d.\n\n Colchicina 0,5 mg\n - Tomar 2 cp(s)s VO, e após 1 hora, tomar mais 1 cp(s).\n - Após, tomar 1 cp(s) de 12/12 horas até resolução da crise.\n\n Prednisolona 20mg\n - Tomar 1cp VO por dia, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem\n- Diminua o consumo de bebidas alcoólicas.\n- Regule sua alimentação: evite excesso de alimentos de origem animal, como churrascos e frutos do mar.\n\n- Retornar se piora:\n- Piora ou manutenção da dor por mais de 48 horas, mesmo em uso correto das medicações.\n\n- INTERNAÇÃO:\n\n- Somente quando suspeita de artrite séptica concomitante para antibioticoterapia venosa.',
+		cervicalgia_dorsalgia_lombalgia_ps:
+			'Tenoxicam (20mg/2mL) Fazer 20mg EV bolus AGORA\n ou\n Cetoprofeno Fazer 100mg + 100mL de SF0,9% EV AGORA\n ou\n Diclofenaco (75mg/3mL) 75mg IM AGORA\n\n Dexametasona (10mg/2,5mL) Fazer 10mg EV em bolus AGORA\n\n Tramadol (50mg/mL) Fazer 50mg + 100mL SF0,9% EV lento\n\n Tiocolchicosídeo (4mg/2mL) Fazer 4mg IM\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor articular intensa\n- Fraqueza, dormência, dificuldade de movimentação.\n- Febre (temperatura axilar acima de 37,8°C)\n- Redução intensa do volume de urina e urina muito escura.\n\n- INTERNAÇÃO:\n\n- Casos com dor refratária, déficit neurológico progressivo e síndrome da cauda equina são conduzidos com internação.',
+		cervicalgia_dorsalgia_lombalgia_alta:
+			'Naproxeno 500 mg\n -Tomar 1cp VO 12/12h, com alimento, por 4d.\n\n Ciclobenzaprina + Cafeína 5 mg (Miosan CAF®)\n Tomar 1cp VO à noite, 1 vez por dia, por 4d.\n\n Compressa com água morna de 8/8 horas na região acometida.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Tramadol 50mg\n Tomar 1cp VO até 6/6h. Usar apenas em último caso.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Após a melhora da dor, pratique atividades físicas com acompanhamento.\n- Se está acima do peso, procure ajuda para emagrecimento saudável.\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor articular intensa\n- Fraqueza, dormência, dificuldade de movimentação.\n- Febre (temperatura axilar acima de 37,8°C)\n- Redução intensa do volume de urina e urina muito escura.\n\n- INTERNAÇÃO:\n\n- Casos com dor refratária, déficit neurológico progressivo e síndrome da cauda equina são conduzidos com internação.',
+		const_funcional:
+			'Hidratação: tomar 2 a 3 litros de líquidos por dia.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n\n Plantago Ovata Forssk (Fibrems®, Metamucil®)\n - Diluir 1 envelope em 240mL de água VO, 3x/dia.\n\n Lactulose 667mg/mL (Pentalac®, Lactosan®)\n - Tomar 15mL VO, por dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Aumente a ingesta hídrica e o consume de fibras alimentares (leguminosas, grãos, cereais, vegetais e frutas)\n- Pratique exercícios físicos regularmente.\n- Tente evacuar logo após as refeições.\n\n- Retornar se piora:\n- Dor abdominal intensa e contínua.\n- Vômito persistentes.\n- Pressão baixa ou tontura.\n\n- INTERNAÇÃO:\n\n- Quadros associados a abdome agudo e/ou instabilidade.',
+		gea_n_infec:
+			'Racecadotrila 100mg (Tiorfan®, Avide®)\n - Tomar 1cp VO de 8/8 horas, antes das refeições por até 7 dias. Suspender em caso de constipação.\n\n Simeticona (Luftal®) 125 mg\n Tomar 1cp VO por día, vía oral, por 5d.\n\n Floratil® (Saccharomyces boulardii) 200 mg.\n Tomar 1cp VO por vía oral 12/12h por 3d.\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Alimentação saudável\n - Evite alimentos gordurosos, doces, refrigerantes e o consumo excessivo de massas, assim como laxantes como laranja, mamão, ameixa e fibras neste período.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n- Cuide-se bem: RECOMENDAÇÕES para melhorar os sintomas\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforço excessivo e desidratação.\n- Evitar consumo de café, sorbitol e leite.\n\n- Retornar se piora:\n- Febre (>37,8°C) por mais de 48h\n- Pressão baixa, tontura, sangramentos, vômitos persistentes e dor abdominal intensa\n- Piora da diarreia: mais de 6 episódios por dia, com sangue, muco ou pus nas fezes\n\n- INTERNAÇÃO:\n\n- Desidratação grave ou Intolerância VO',
+		gea_parasita:
+			'Nitazoxanida (Annita®) 500mg\n Tomar 1cp VO 12/12h por 3d.\n\n Simeticona (Luftal®) 125 mg\n Tomar 1cp VO por día, vía oral, por 5d.\n\n Floratil® (Saccharomyces boulardii) 200 mg.\n Tomar 1cp VO por vía oral 12/12h por 3d.\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Alimentação saudável\n - Evite alimentos gordurosos, doces, refrigerantes e o consumo excessivo de massas, assim como laxantes como laranja, mamão, ameixa e fibras neste período.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n- Cuide-se bem: RECOMENDAÇÕES para melhorar os sintomas\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforço excessivo e desidratação.\n- Evitar consumo de café, sorbitol e leite.\n\n- Retornar se piora:\n- Febre (>37,8°C) por mais de 48h\n- Pressão baixa, tontura, sangramentos, vômitos persistentes e dor abdominal intensa\n- Piora da diarreia: mais de 6 episódios por dia, com sangue, muco ou pus nas fezes\n\n- INTERNAÇÃO:\n\n- Desidratação grave ou Intolerância VO',
+		gea_cipro:
+			'Ciprofloxacino 500 mg\n - Tomar 1cp VO 12/12h, por 5d.\n\n Simeticona (Luftal®) 125 mg\n Tomar 1cp VO por día, vía oral, por 5d.\n\n Floratil® (Saccharomyces boulardii) 200 mg.\n Tomar 1cp VO por vía oral 12/12h por 3d.\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Alimentação saudável\n - Evite alimentos gordurosos, doces, refrigerantes e o consumo excessivo de massas, assim como laxantes como laranja, mamão, ameixa e fibras neste período.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n- Cuide-se bem: RECOMENDAÇÕES para melhorar os sintomas\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforço excessivo e desidratação.\n- Evitar consumo de café, sorbitol e leite.\n\n- Retornar se piora:\n- Febre (>37,8°C) por mais de 48h\n- Pressão baixa, tontura, sangramentos, vômitos persistentes e dor abdominal intensa\n- Piora da diarreia: mais de 6 episódios por dia, com sangue, muco ou pus nas fezes\n\n- INTERNAÇÃO:\n\n- Desidratação grave ou Intolerância VO',
+		gea_azi:
+			'Azitromicina 500 mg\n - Tomar 1cp VO 1x/dia, por 5d.\n\n Simeticona (Luftal®) 125 mg\n Tomar 1cp VO por día, vía oral, por 5d.\n\n Floratil® (Saccharomyces boulardii) 200 mg.\n Tomar 1cp VO por vía oral 12/12h por 3d.\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Alimentação saudável\n - Evite alimentos gordurosos, doces, refrigerantes e o consumo excessivo de massas, assim como laxantes como laranja, mamão, ameixa e fibras neste período.\n\n Escopolamina 10mg\n Tomar 1cp VO 8/8h se dor ou cólica abdominal.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n- Cuide-se bem: RECOMENDAÇÕES para melhorar os sintomas\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforço excessivo e desidratação.\n- Evitar consumo de café, sorbitol e leite.\n\n- Retornar se piora:\n- Febre (>37,8°C) por mais de 48h\n- Pressão baixa, tontura, sangramentos, vômitos persistentes e dor abdominal intensa\n- Piora da diarreia: mais de 6 episódios por dia, com sangue, muco ou pus nas fezes\n\n- INTERNAÇÃO:\n\n- Desidratação grave ou Intolerância VO',
+		diverticulite_amoxclav:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n Tomar 1cp VO a 12/12h por 10d.\n\n Hidratação e alimentação\n - Tomar de 1 a 2 litros de líquido por dia, por 5d, alternando entre água filtrada e isotônico.\n -Evitar alimentos gordurosos, doces, refrigerantes e excessos de massas.\n- por esse período, evitar laxantes como laranja, mamão, ameixa e alimentos ricos em fibras.\n- Nos primeiros dias, preferir alimentos pastosos (purês, sopas), evitando fibras, sementes e grãos.\n\n Buscopan Composto® (Escopolamina + Dipirona) ou BuscoDuo® (Escopolamina + Paracetamol)\n - Tomar 1cp VO 6/6h, em caso de dor ou cólica abdominal.\n\n Bromoprida (Digesan®) 10 mg ou Ondansetrona (Vonau®) 4 mg\n - Tomar 1cp VO a 8/8h VO, em caso de enjoo ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n Simeticona (Luftal®) 125 mg\n - Tomar 1cp VO um vez ao dia, por 5d.\n\n- Cuide-se bem: orientações para melhorar os sintomas.\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforços excessivos e desidratação.\n\n- Retorne se os sintomas piorarem, mesmo em uso de medicamentos:\n- Febre por mais de 48h, hipotensão, tontura.\n- Sangramento, vômito sem melhora, dor abdominal intensa.\n- Piora da diarreia: mais de 6 vezes ao dia, presença de sangue, muco ou pus nas fezes.\n\n- INTERNAÇÃO:\n\n- Falta de melhora clínica ou laboratorial em 48-72 horas;\n- Pacientes imunossuprimidos;\n- Idosos;\n- Febre alta (> 39 ºC);\n- Leucocitose acentuada;\n- Dor abdominal persistente;\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		diverticulite_sulfa_metro:
+			'Sulfametoxazol + trimetoprima 800/160 mg\n - Tomar 1cp VO a 12/12h por 10d.\n\n Metronidazol 500mg\n - Tomar 1cp VO a 8/8h por 10d.\n\n Hidratação e alimentação\n - Tomar de 1 a 2 litros de líquido por dia, por 5d, alternando entre água filtrada e isotônico.\n - Evitar alimentos gordurosos, doces, refrigerantes e excessos de massas.\n - Evite laxantes como laranja, mamão, ameixa e alimentos ricos em fibras por este período.\n - Nos primeiros dias, preferir alimentos pastosos (purês, sopas), evitando fibras, sementes e grãos.\n\n Buscopan Composto® (Escopolamina + Dipirona) ou BuscoDuo® (Escopolamina + Paracetamol)\n - Tomar 1cp VO 6/6h, em caso de dor ou cólica abdominal.\n\n Bromoprida (Digesan®) 10 mg ou Ondansetrona (Vonau®) 4 mg\n - Tomar 1cp VO a 8/8h VO, em caso de enjoo ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n Simeticona (Luftal®) 125 mg\n - Tomar 1cp VO um vez ao dia, por 5d.\n\n- Cuide-se bem: orientações para melhorar os sintomas.\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforços excessivos e desidratação.\n\n- Retorne se os sintomas piorarem, mesmo em uso de medicamentos:\n- Febre por mais de 48h, hipotensão, tontura.\n- Sangramento, vômito sem melhora, dor abdominal intensa.\n- Piora da diarreia: mais de 6 vezes ao dia, presença de sangue, muco ou pus nas fezes.\n\n- INTERNAÇÃO:\n\n- Falta de melhora clínica ou laboratorial em 48-72 horas;\n- Pacientes imunossuprimidos;\n- Idosos;\n- Febre alta (> 39 ºC);\n- Leucocitose acentuada;\n- Dor abdominal persistente;\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		diverticulite_cipro_metro:
+			'Ciprofloxacino 500mg\n - Tomar 1cp VO a 12/12h por 10d.\n\n Metronidazol 500mg\n - Tomar 1cp VO a 8/8h por 10d.\n\n Hidratação e alimentação\n - Tomar de 1 a 2 litros de líquido por dia, por 5d, alternando entre água filtrada e isotônico.\n - Evitar alimentos gordurosos, doces, refrigerantes e excessos de massas.\n - por esse período, evitar laxantes como laranja, mamão, ameixa e alimentos ricos em fibras.\n - Nos primeiros dias, preferir alimentos pastosos (purês, sopas), evitando fibras, sementes e grãos.\n\n Buscopan Composto® (Escopolamina + Dipirona) ou BuscoDuo® (Escopolamina + Paracetamol)\n - Tomar 1cp VO 6/6h, em caso de dor ou cólica abdominal.\n\n Bromoprida (Digesan®) 10 mg ou Ondansetrona (Vonau®) 4 mg\n - Tomar 1cp VO a 8/8h VO, em caso de enjoo ou vômito.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n - Tomar 1 colher 3x/dia (entre refeições e ao deitar) por até 5 dias.\n\n Simeticona (Luftal®) 125 mg\n - Tomar 1cp VO um vez ao dia, por 5d.\n\n- Cuide-se bem: orientações para melhorar os sintomas.\n- Evite bebidas alcoólicas.\n- Não use Loperamida (Imosec®) sem orientação médica.\n- Evite esforços excessivos e desidratação.\n\n- Retorne se os sintomas piorarem, mesmo em uso de medicamentos:\n- Febre por mais de 48h, hipotensão, tontura.\n- Sangramento, vômito sem melhora, dor abdominal intensa.\n- Piora da diarreia: mais de 6 vezes ao dia, presença de sangue, muco ou pus nas fezes.\n\n- INTERNAÇÃO:\n\n- Falta de melhora clínica ou laboratorial em 48-72 horas;\n- Pacientes imunossuprimidos;\n- Idosos;\n- Febre alta (> 39 ºC);\n- Leucocitose acentuada;\n- Dor abdominal persistente;\n- Intolerância VO, comorbidades graves ou Inviabilidade domiciliar',
+		drge: 'Pantoprazol (Pantozol®) 40 mg\n Tomar 1cp VO 1x/dia, de manhã em jejum, por 10d.\n\n Domperidona (Motilium®, Peridal®) 10 mg\n Tomar 1cp VO 2x/dia, 30 minutos antes do almoço e jantar, por 10d. Interromper o uso em caso de diarreia.\n\n Hidróxido de Alumínio/Magnésio (Mylanta Plus®)\n Tomar 1 colher, 3x/dia (entre as refeições e ao deitar) por até 5 dias.\n\n Simeticona (Luftal®) 125 mg\n - Tomar 1cp VO 1x/dia VO, por 10d.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Agendar consulta de reavaliação com Gastroenterologista.\n- RECOMENDAÇÕES para melhorar os sintomas\n- Fracione as refeições: consuma porções menores várias vezes ao dia.\n- Evite deitar-se após as refeições: aguarde pelo menos 2 a 3 horas e não deite de lado.\n- Não beba líquidos por as refeições: ingira-os 30 minutos antes ou 1 hora depois.\n- Evite bebidas gaseificadas e alcoólicas.\n- Cesse o tabagismo.\n- Não consuma alimentos gordurosos, cítricos (como limão e laranja), vinagre, ou café.\n- Eleve a cabeceira da cama com um travesseiro ao deitar-se.\n- Use roupas folgadas.\n- Evite anti-inflamatórios por este período: Ibuprofeno, Diclofenaco, Naproxeno, Nimesulida, Cetoprofeno, entre outros.\n\n- Retornar se piora:\n- Dor abdominal persistente.\n- Intensificação da dor, hipotensão e tonteira.',
+		agitacao_ps:
+			'# Agitação Psicomotora no PS\n## MEDICAÇÃO PARA USO IMEDIATO\n\n**VIA ORAL É PREFERÊNCIA**\n Diazepam 5mg ou 10mg VO\n Máximo 20mg/dia\n\n Clonazepam 0,25 ou 0,5 ou 2mg\n Máximo diário 4 a 6mg/dia\n\n**VIA INTRAMUSCULAR**\n Haloperidol (5mg/1mL)\n Fazer 1mL IM cada 30min até dose máxima de 30mg/dia\n\n Prometazina (50mg/2mL)\n Fazer 2mL IM\n\n Midazolam (5mg/5mL)\n Fazer 5mL IM\n\n**VIA ENDOVENOSA**\n Diazepam (10mg/2mL)\n Fazer 10mg EV em bolus lento.\n\n Midazolam (5mg/5mL)\n Fazer 5mL EV em bolus lento.\n\n- Abordagem Não Medicamentosa\n- Respeitar o espaço individual do paciente e prestar atenção para sua linguagem corporal.\n- Descalonamento Verbal (Estratégias verbais e não verbais para acalmar o paciente)\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)\n\n- INTERNAÇÃO:\n\n- A contenção mecânica deve ser realizada por uma equipe treinada... O paciente deve permanecer em decúbito dorsal com a cabeceira elevada. Sinais vitais devem ser monitorados a cada 15 a 30 minutos, e a avaliação psiquiátrica, cada 30min.',
+		cefaleias_ps:
+			'# Tratamento Cefaléias Primárias no Pronto Socorro\n## MEDICAÇÃO PARA USO IMEDIATO\n\n**TENSIONAL**\n Dipirona (1g/2mL) 2mL EV lento AGORA\n pode repetir de 6/6 horas\n\n Cetoprofeno 100mg + 100mL de SF0,9% EV AGORA\n\n**ENXAQUECA (MIGRÂNEA)**\n Dipirona (1g/2mL) 2mL EV lento AGORA\n pode repetir de 6/6 horas\n\n Cetoprofeno 100mg + 100mL de SF0,9% EV AGORA\n\n Sumatriptano (6mg/0,5mL) 6mg SC AGORA\n pode repetir em 2 horas se necessário\n\n Dexametasona (10mg/2,5mL) 10mg EV AGORA\n Se crises recorrentes ou dor > 72h (estado migranoso)\n\n Metoclopramida (10mg/2mL) 10mg + 100mL de SF0,9% EV lento\n ou\n Ondansetrona (4mg/2mL) 4mg EV AGORA\n Se náuseas e vômitos\n\n- Em todos os casos, deixar paciente a permanecer em repouso sob penumbra em ambiente tranquilo e silencioso.\n\n**SALVAS**\n Oxigênio suplementar: O2 em Máscara não reinalante 8 a 15 L/min por 15 minutos\n\n Sumatriptano (6mg/0,5mL) 6mg SC AGORA\n pode repetir em 2 horas se necessário\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos: (Não informado)\n\n- INTERNAÇÃO:\n\n- Cefaleias intensas refratárias ao tratamento clínico otimizado.\n- Estado de mal enxaquecoso.\n- Cefaleias secundárias de acordo com a causa.',
+		cefaleia_tensional_alta:
+			'Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem\n- Mantenha um sono regular.\n- Evite álcool e drogas.\n- Evite situações estressantes e estresses emocionais.\n- Pratique atividades físicas.\n- Não use opioides (tramadol, codeína).\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor de cabeça intensa sem melhora com medicações\n- Desmaio, alteração de consciência, visão dupla.\n- Fraqueza, dormência, dificuldade visual ou de fala.\n- Febre (temperatura axilar acima de 37,8°C)\n- Pressão baixa, tonteira, sangramento, vômito sem melhora.\n\n- INTERNAÇÃO:\n\n- Cefaleias intensas refratárias ao tratamento clínico otimizado.\n- Estado de mal enxaquecoso.\n- Cefaleias secundárias de acordo com a causa.',
+		cefaleia_enxaqueca_alta:
+			'Naproxeno 500 mg\n Tomar 1cp VO 1x/dia por 5d.\n\n Sumatriptano 50mg (Imigran®, Sumax®, Sutriptan®)\n - Tomar 1cp VO em caso de crise intensa e refratária. Não tomar mais de 4 cp(s)s no mesmo dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Metoclopramida 10 mg (Plasil ®) ou Ondansetrona (Vonau®) 4 mg\n Tomar 1cp VO a 8/8h VO, em caso de enjoo ou vômito.\n\n- Cuide-se bem\n- Tenha um sono regular.\n- Evite bebidas alcoólicas e uso de drogas.\n- Evite situações de estresse.\n- Faça atividades físicas.\n- Não utilize opioides (tramadol, codeína)\n\n- Retornar em caso de piora dos sintomas, mesmo em uso de medicamentos:\n- Dor de cabeça intensa sem melhora com medicações\n- Desmaio, alteração de consciência, visão dupla.\n- Fraqueza, dormência, dificuldade visual ou de fala.\n- Febre (temperatura axilar acima de 37,8°C)\n- Pressão baixa, tonteira, sangramento, vômito sem melhora.\n\n- INTERNAÇÃO:\n\n- Cefaleias intensas refratárias ao tratamento clínico otimizado.\n- Estado de mal enxaquecoso.\n- Cefaleias secundárias de acordo com a causa.',
+		crise_ansiedade_ps:
+			'Clonazepam 0,25 ou 0,5\n Fazer 0,5mg VO e reavaliar.\n ou\n Clonazepam 2mg/mL (solução oral)\n Fazer 5-10 gotas e reavaliar.\n ou\n Diazepam 5mg\n Fazer 5mg VO e reavaliar.\n ou\n Alprazolam 0,25 ou 0,5mg\n Fazer 0,5mg e reavaliar.\n\n- Abordagem Não Medicamentosa\n- Acolhimento\n- Respiração diafragmática\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)',
+		crise_ansiedade_alta:
+			'Passiflora incarnata (Calman®, Pasalix®)\n - Tomar 1cp VO 12/12h por 3d.\n\n Dipirona 1g (Novalgina®) OU Paracetamol 500mg (Tylenol®)\n Tomar 1cp VO de até 6/6h em caso de dor ou febre (temperatura axilar acima de 37,8°C)\n\n- Agendar consulta de reavaliação com sua equipe médica ou agendar consulta com Psiquiatra/Psicólogo.\n- Cuide-se bem\n- Mantenha uma alimentação saudável, durma bem e evite bebidas alcoólicas e uso de drogas ilícitas.\n- Alterar medicações somente com orientação médica.\n- Realize acompanhamento médico regular.\n- Continue a terapia com regularidade, se já a faz.\n- Mantenha-se em harmonia no trabalho, família e amizades.\n- Durma bem.\n- Evite álcool, energéticos, tabaco e drogas.\n- Pratique exercícios; uma caminhada em família é muito benéfica para corpo e mente.\n- Conte sempre com a rede de apoio de família e amigos; não se isole.\n- Mantenha-se positivo: você superará essa fase e sairá mais forte.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)',
+		paralisia_facial:
+			'Prednisona 20mg\n Tomar 3 cp(s)s, 1x/dia, de manhã, por 5d seguidos de mais cinco dias com redução de 10mg a cada dia. (Esquema de desmame de 10 dias)\n\n Colírio Lubrificante Sem conservantes (Hyabak®)\n - Pingar uma gota no olho afetado, quantas vezes for necessário por o dia.\n\n Acetato de retinol pomada oftalmológica (10.000 unidades/g)\n - Aplicar nos olhos antes de dormir.\n\n- Orientações\n- Procure reabilitação com fisioterapia e/ou fonoaudiológia em casos de paralisia extensa.\n\nRetornar se piora:\n- Dor e irritação ocular intensa.\n- Novo sintoma neurológico: fraqueza, tonteira intensa, perda de força, dor de cabeça intensa ou desmaios.',
+		vertigem_labirintite:
+			'Flunarizina 10 mg (Vertix®)\n Tomar 1cp VO 1x/dia, por 7d.\n\n Dimenidrinato + Cloridrato de Piridoxina (Dramin B6®)\n Tomar 1cp VO 6/6h em caso de tonteira ou enjoo.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Orientações\n- Evitar esforço excessivo.\n- Evitar alimentos gordurosos, enlatados ou álcool.\n- Manter-se bem hidratado(a).\n- Evitar movimentos súbitos da cabeça e pescoço.\n- Cuidado ao levantar-se; evite movimentos bruscos com a cabeça.\n- Agendar consulta de reavaliação com sua equipe médica ou agendar consulta com Otorrinolaringologista.\n\nRetornar se piora:\n- Tontura persistente e agravante\n- Fraqueza, dormência, turvação visual, dificuldade de fala ou alteração na visão\n- Dor de cabeça intensa ou vômito contínuo\n- Desmaio, queda ou trauma\n\n- INTERNAÇÃO:\n\n- Nos casos de síndrome vertiginosa aguda de origem central.',
+		candidíase_leve:
+			'Fluconazol 150mg\n - Tomar 1cp VO em dose única.\n ou\n Miconazol 2% Creme (20mg/g)\n - Aplicar 1 aplicador (5g) intravaginal ao deitar por 7d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Uso de roupas íntimas de algodão.\n- Evitar calças apertadas.\n- Retirar roupa íntima para dormir.\n- Não realizar atividades sexuais ou usar preservativos por o período de tratamento.\n- Evitar lavagem com duchas higiênicas.\n\n- Retornar se piora:\n- Febre >37,8°C/48h.\n- Piora das dos sintomas mesmo com uso adequado das medicações.',
+		candidíase_intensa:
+			'Fluconazol 150mg\n - Tomar 1cp VO a cada 72 horas em 3 doses.\n\n Miconazol 2% Creme (20mg/g)\n - Aplicar 1 aplicador (5g) intravaginal ao deitar por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Uso de roupas íntimas de algodão.\n- Evitar calças apertadas.\n- Retirar roupa íntima para dormir.\n- Não realizar atividades sexuais ou usar preservativos por o período de tratamento.\n- Evitar lavagem com duchas higiênicas.\n\n- Retornar se piora:\n- Febre >37,8°C/48h.\n- Piora das dos sintomas mesmo com uso adequado das medicações.',
+		contracepcao_emergencia:
+			'Levonorgestrel 0,75mg\n - Tomar 2 cp(s)s VO, em dose única.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Os efeitos colaterais esperados são: náuseas e vômitos, vertigem, dor de cabeça, dor nos seios, dor abdominal, diarreia e irregularidade menstrual.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos: (Não informado)\n\n- INTERNAÇÃO:\n\n- Não há.',
+		ginodip:
+			'Metronidazol 500mg\n - Tomar 1cp VO a 12/12h, por 14d.\n\n Ceftriaxona 500mg\n - Aplicar via IM em dose única.\n\n Doxiciclina 100mg\n - Tomar 1cp VO a 12/12h, por 14d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Orientações gerais:\n- Não praticar atividades sexuais por até 1 semanas após o fim do tratamento.\n- Use preservativos.\n\n- Retornar se piora:\n- Febre por mais de 72h (>37,8°C) e persistência dos sintomas.\n- Piora súbita dos sintomas.\n\n- INTERNAÇÃO:\n\n- Abscesso tubo-ovariano;\n- Gestantes;\n- Falta de resposta clínica após 72 horas de antibioticoterapia oral;\n- Intolerância a antibióticos orais ou dificuldade de acompanhamento ambulatorial;\n- Mau estado geral com febre alta, náuseas e vômitos, hipotensão, dor abdominal de difícil controle.\n- Risco de emergência cirúrgica (ex.: apendicite, gravidez ectópica).',
+		herpes_genital:
+			'Aciclovir 400 mg\n - Tomar 1cp VO 8/8h VO, por 7d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Cuide-se bem:\n- Uso de roupas íntimas de algodão.\n- Evitar calças apertadas.\n- Retirar roupa íntima para dormir.\n- Não realizar atividades sexuais ou usar preservativos por o período de tratamento.\n- Evitar lavagem com duchas higiênicas.\n\n- Retornar se piora:\n- Febre >37,8°C/48h.\n- Piora das dos sintomas mesmo com uso adequado das medicações.',
+		conjuntivite_bacteriana:
+			'Moxifloxacino 0,5% Colírio (Vigamox®, Oftalmox®)\n - Pingar uma gota no olho afetado de 6/6 horas, por 7d.\n\n Colírio Lubrificante Carmelose Sódica Oftalmológico (Lacrifilm®, Neo Fresh®, Ecofilm®)\n - Aplicar 1-2 gotas no(s) olho(s) afetado(s), até 4 vezes a dia.\n\n Irrigação com Soro Fisiológico (0,9%) Sem conservantes\n - Realizar a lavagem dos olhos com soro, até 3x/dia, em caso de secreções.\n - Usar compressa geladas com Soro Fisiológico 0,9% ou água filtrada, 3x ao dia por 10 minutos.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Cuide-se bem:\n- Não utilize lentes de contato por o tratamento do quadro.\n- Mantenha as mãos bem higienizadas com água e sabão neutro.\n- Separe objetos pessoais para evitar contaminação: toalhas, roupas, talheres, entre outros.\n\n- Retornar se piora:\n- Dor nos olhos intensa.\n- Piora da secreção ou vermelhidão dos olhos, apesar das medicações.\n- Dificuldades para enxergar.\n\n- INTERNAÇÃO:\n\n- Conjuntivite hiperaguda com comprometimento corneano grave;\n- Celulite orbitária.',
+		conjuntivite_viral:
+			'Colírio Lubrificante Carmelose Sódica Oftalmológico (Lacrifilm®, Neo Fresh®, Ecofilm®)\n - Aplicar 1-2 gotas no(s) olho(s) afetado(s), até 4 vezes a dia.\n\n Irrigação com Soro Fisiológico (0,9%) Sem conservantes\n - Realizar a lavagem dos olhos com soro, até 3x/dia, em caso de secreções.\n - Usar compressa geladas com Soro Fisiológico 0,9% ou água filtrada, 3x ao dia por 10 minutos.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Cuide-se bem:\n- Não utilize lentes de contato por o tratamento do quadro.\n- Mantenha as mãos bem higienizadas com água e sabão neutro.\n- Separe objetos pessoais para evitar contaminação: toalhas, roupas, talheres, entre outros.\n\n- Retornar se piora:\n- Dor nos olhos intensa.\n- Piora da secreção ou vermelhidão dos olhos, apesar das medicações.\n- Dificuldades para enxergar.\n\n- INTERNAÇÃO:\n\n- Conjuntivite hiperaguda com comprometimento corneano grave;\n- Celulite orbitária.',
+		hordeolo_calazio:
+			'Cloridrato de ciprofloxacino + dexametasona (Maxiflox-D®) pomada\n - Aplicar uma fina camada dentro da pálpebra acometida até 3x/dia.\n\n Compressa morna.\n - Realize massagens suaves na lesão por 10 minutos, 4x/dia.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n- Retornar se piora:\n- Dor nos olhos intensa.\n- Piora da secreção ou vermelhidão dos olhos, apesar das medicações.\n- Dificuldades para enxergar.',
+		abscesso_dentario:
+			'Amoxicilina/Clavulanato 875/125 mg\n - Tomar 1cp VO 12/12h por 7d.\n\n Naproxeno 500 mg\n - Tomar 1cp VO 1x/dia, por 5d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Procurar profissional dentista para seguimento do tratamento.\n- Evitar consumo de carnes e comidas duras.\n\n- Retornar se piora:\n- Febre persistente (>37,8°C) ou calafrios.\n- Dor intensa e dificuldade para se alimentar.\n- Agravamento do edema (inchaço) ou aumento da vermelhidão (eritema) na área afetada.\n- Presença de furúnculo (abscesso) com secreção purulenta.\n\n- INTERNAÇÃO:\n\n- Celulite de rápida progressão.\n- febre ↑ 37,8°C/48h, dispneia, disfagia e/ou trismo que limita a abertura da boca a menos de 10 mm.\n- Falha no tratamento prévio.\n- Incapacidade do paciente ou de seus familiares de administrar o tratamento de forma independente.\n- Necessidade de hidratação intravenosa.',
+		otite_externa_aguda:
+			'Ciprofloxacino + Hidrocortisona Otológico (Otociriax®)\n - Pingar 3 gotas na orelha acometida de 12/12 horas, por 7d.\n\n Cetoprofeno 150 mg\n Tomar 1cp VO ao dia, de manhã, por 5d, com alimentos.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Evitar molhar o ouvido, utilize tampões para evitar a entrada de água.\n\n- Retornar se os sintomas piorarem, mesmo com medicamentos.\n- Febre persistente por mais de 48h: >37,8°C.\n- Piora do quadro por 72 horas, mesmo com uso de antibióticos.\n\n- INTERNAÇÃO:\n\n- Pacientes imunossuprimidos com suspeita de otite externa necrosante, celulite facial e do pavilhão auricular, e abscessos no pavilhão auricular e pescoço.',
+		otite_media_amoxclav:
+			'Amoxicilina-Clavulanato (Clavulin® BD, Novamox 2x) 875/125 mg\n - Tomar 1cp VO 12/12h, por 7d\n\n Cetoprofeno 150 mg\n - Tomar 1cp VO 1x/dia, de manhã, por 5d, com alimentos\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20mL de soro fisiológico, 2 a 4x/dia, por 5d, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n- Retornar se os sintomas piorarem, mesmo com medicamentos.\n- Febre persistente por mais de 48h: >37,8°C.\n- Piora do quadro por 72 horas, mesmo com uso de antibióticos.\n\n- INTERNAÇÃO:\n\n- Indicada na presença de complicações como otomastoidite, complicações intracranianas, sepse ou otalgia resistente à antibioticoterapia.',
+		sifilis_recente:
+			'Penicilina Benzatina 2,4 milhões de unidades.\n - Uma aplicação de 1,2 milhão em cada glúteo, IM, em dose única.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Agendar consulta com sua equipe médica ou unidade básica de saúde para reavaliação.\n\n- Retornar se piora das lesões.',
+		mordedura_animais:
+			'Amoxicilina-Clavulanato (Clavulin® BD) 875/125 mg\n Tomar 1cp VO a 12/12h por 10d.\n\n Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n- Retornar se piora das lesões',
+		monkeypox:
+			'Dipirona 1g ou Paracetamol 500mg: 1cp VO 6/6h, se dor ou febre.\n\n Bromoprida 10mg ou Ondansetrona 8mg: 1cp VO 8/8h se náusea ou vômito.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1cp VO 12/12h por 5d.\n\n- Manter-se isolado até que as lesões estejam cicatrizadas para evitar a transmissão.\n- Evite coçar as lesões e levar as mãos a boca ou olhos.\n- Faça a limpeza das lesões diariamente com água e sabão.\n\n- Retornar se piora:\n- Febre >37,8°C/48h\n- Piora das lesões, com saída de pus e formação de abscessos.\n\n- INTERNAÇÃO:\n\n- Sepse e encefalite.\n- Erupções cutâneas múltiplas com infecção bacteriana secundária.\n- Lesão extensa em mucosa oral, limitando a alimentação e a hidratação VO.\n- Número de erupções cutâneas: 100 ou mais para a população em geral; 25 ou mais para a população vulnerável (gestantes, imunossuprimidos e crianças com menos de 8 anos).',
+		hemotransfusoes_ps:
+			'**CONCENTRADO DE HEMÁCIAS**\n Volume: 10 a 20mL/kg\n Um concentrado de hemácias = 230 a 300mL -> Aumenta a Hb em 1g/dL e Hematócrito em 3%\n O tempo de infusão deve ser de 60 a 120 minutos.\n Acesso venoso exclusivo.\n Dosar novo Hb/Ht de 1 a 2h após a transfusão.\n\n**PLASMA FRESCO CONGELADO**\n Uma unidade = 200 a 250mL.\n Dose padrão é de 15 a 20mL/kg ou 4 unidades.\n Tempo de infusão máximo de 1 hora.\n\n**CRIOPRECIPITADO**\n Uma unidade a cada 10 kg de peso.\n Uma unidade = 30 a 40mL -> Contém fator VIII, fibrinogênio e Fator de von Willebrand.\n Geralmente, 8 a 10 bolsas em adultos.\n Transfusão deve ser imediata após descongelamento.\n\n**PLAQUETAS**\n Concentrado de plaquetas: 1U = 50mL para cada 10kg de peso\n Sugestão: transfundir 5 a 10 bolsas EV (1 para cada 7 a 10kg)\n Aférese: 200mL. Corresponde a 6U de concentrado de Plt'
+  };
+
+  // ========================================
+  // HOTSTRINGS PSF (prescrições completas)
+  // ========================================
+	const psf_hotstrings = {
+		abscesso_furunculo:
+			'CEFALEXINA 500mg\n   Tomar 01 cp via oral de 6/6h por 10 dias\n   **Ou**\nCLINDAMICINA 300mg\n   Tomar 01 cp via oral de 8/8h por 10 dias\nIBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\nDIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**USO TÓPICO**\nMUPIROCINA 20mg/g\nAplicar em região afetada 3x ao dia por 10 dias\n\n**NA UNIDADE:**\nDrenagem (se flutuação ou se julgar necessário) + analgesia com Dipirona 01 amp IM',
+		aftas: 'Clorexidina 0,2% solução oral __________ 1 fr.\n   Fazer bochecho de 2 minutos, após higiene oral, duas vezes ao dia, por 10 dias.',
+		amenorreia_secundaria: 'Medroxiprogesterona 10mg __________ 10 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, por 10 dias, interromper o uso e retornar ao médico no 14º dia',
+		amigdalite_j03_9:
+			'AMOXICILINA + CLAVULANATO (500mg+125mg)\n   Tomar 01 cp via oral de 8/8h por 07 dias\nIBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\nDIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Na unidade:**\nPenicilina G benzatina 1.2M UI IM dose única + sintomáticos pra casa',
+		anemia_crianca: 'Sulfato Ferroso 12,5mg Fe/2,5ml xarope\n   Tomar __ ml, via oral, duas vezes ao dia, por 90 dias.',
+		anemia_ferropriva_sintomatica_d50_0: 'SULFATO FERROSO 120MG (COMPRIMIDO) __________ 1CX\n   TOMAR 1 CP VO DE 12/12H POR NO MÍNIMO 3 MESES',
+		asma: 'Prednisona 20mg\n   Tomar 2 comprimidos, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSalbutamol+ Ipratrópio 120+20mcg/jato aerossol – 1 fr. (Combivent)\n   Aspirar 2 jatos, a cada 4 a 6 horas, por 5 dias.',
+		asma_aguda_leve_moderada_j45_0:
+			'1) PREDNISONA 20mg ——— 1 cx\n   Tomar 01 cp via oral de 12/12h por 05 dias\n2) SALBUTAMOL Xarope 2mg/5mL ——— 1 frasco\n   Tomar 5mL via oral de 8/8h por 05 dias (Opção comum para crianças ou adultos sem acesso ao inalador)\n\n**USO INALATÓRIO**\n1) SALBUTAMOL SPRAY 100mcg/jato\n   Inalar 2 jatos de 6/6h, por até 5 dias. Usar com espaçador.',
+		asma_crianca_1: 'Prednisolona 3mg/ml xarope\n   Tomar __ ml, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSF 0,9% 3 ml + Fenoterol 5mg/ml __ gotas + Ipratrópio 0,25mg/ml __ gotas\n   Nebulizar a cada 6 horas, por 5 dias',
+		asma_crianca_2: 'Prednisolona 3mg/ml xarope __________ 60 ml.\n   Tomar __ ml, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSalbutamol aerosol 100mcg/jato __________ 200 doses.\n   Aspirar 1 jato, a cada __ horas, por 5 dias.',
+		asma_crianca_3: 'Salbutamol 2mg/5ml xarope __________ 120 ml.\n   Tomar 0,15mg/kg ml, via oral, a cada 8 horas, por 5 dias.\nPrednisolona 3mg/ml xarope __________ 60 ml.\n   Tomar __ ml, via oral, uma vez ao dia, pela manhã, por 5 dias.',
+		asma_crise_aguda: 'Prednisona 20mg\n   Tomar 2 comprimidos, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSF 0,9% 3 ml + Fenoterol 5mg/ml 5 gotas + Ipratrópio 0,25mg/ml 30 gotas\n   Nebulizar a cada 6 horas, por 5 dias',
+		asma_crise_aguda_2: 'Prednisona 20mg\n   Tomar 2 comprimidos, via oral, uma vez ao dia, pela manhã, por 5 dias.\n**Uso Externo:**\nSalbutamol aerosol 100mcg/jato __________ 200 doses.\n   Aspirar 2 jatos, a cada 4 horas, por 5 dias.',
+		candidiase_vaginal_corrimento: '1) FLUCONAZOL 150mg\n   Tomar 01 cp via oral em dose única\n**USO TÓPICO**\n2) NISTATINA creme vaginal\n   Aplicar 01 aplicador por via vaginal à noite por 07 dias',
+		cefaleia_tensional_cefaleia_dor_de_cabeca_g44_2: '1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias',
+		cerume_impactado: '**USO OTOLÓGICO**\n1) CERUMIN\n   Aplicar 05 gotas em ouvido afetado, manter posição deitada com o ouvido para cima por 05 minutos, de 8/8h por 05 dias',
+		cervicite_e_uretrite:
+			'Ciprofloxacino 500mg __________ 3 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, por 3 dias.\nAzitromicina 500mg __________ 4 cp.\n   Tomar 2 cp, via oral, dose única. Repetir no parceiro.\n**Uso Externo:**\nCeftriaxona 250mg __________ 1 amp.\n   Aplicar 1 ampola, via intramuscular, dose única.',
+		cinetose: 'Meclizina 25mg (Meclin) __________ 15 cp.\n   Tomar 1 comprimido, via oral, uma hora antes de viajar. Repetir após 12 horas, se necessário.',
+		colelitiase: 'Ácido Ursodesoxicólico 300mg __________ 120 cp.\n   Tomar 1 cp, via oral, após o café da manhã e após o jantar, todos os dias.',
+		colica_biliar_litiase_biliar_pedra_nos_rins_k80_2:
+			'1) BUSCOPAN COMPOSTO\n   Tomar 01 cp via oral de 6/6h se dor abdominal ou febre\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n3) TRAMADOL 50mg\n   Tomar 01 cp via oral de 8/8h se dor intensa e refratária a analgésicos comuns\n4) ONDANSETRONA 8mg\n   Tomar 01 cp via oral de 8/8h se náuseas ou vômitos\n\n**NA UNIDADE:**\n1) Dipirona 01 amp + Buscopan Composto 01 amp em SF 0,9% 100 mL EV\n   SE PERSISTIR, REPETIR MAIS UMA RODADA DA PRESCRIÇÃO ACIMA. SE MESMO ASSIM PERSISTIR:\n1) TRAMADOL 1 AMP EM SF 0,9% 100ML EV',
+		conjuntivite_h10_9:
+			'**USO OFTÁLMICO**\n1) TOBRAMICINA 0,3%\n   Aplicar 02 gotas no olho afetado de 6/6h por 05 dias\n\n**Orientações**\n1) Fazer compressas frias por 20 minutos no olho afetado\n2) Evitar coçar os olhos e não usar soro fisiológico para lavar\n3) Suspender o uso de lentes de contato durante o tratamento',
+		constipacao_funcional_k59_0:
+			'1) LACTULONA xarope\n   Tomar 15 mL via oral 1x ao dia. Pode aumentar até 30 mL/dia conforme resposta\n2) ÓLEO MINERAL\n   Tomar 15 mL via oral de 8/8h por até 07 dias se fezes endurecidas\n\n**Orientações**\n1) Aumentar a ingestão de água (mínimo 2L/dia)\n2) Aumentar fibras (frutas, verduras e cereais integrais)\n3) Praticar atividade física regular\n4) Evitar segurar vontade de evacuar\n\n**NA UNIDADE (SE NECESSÁRIO):**\nFOSFATO DE SÓDIO (FLEET ENEMA) Aplicar 01 enema por via retal, dose única.',
+		crise_convulsiva_epilepsia_g40_9:
+			'**Na unidade (se crise ativa ou pós-crise):**\n1) DIAZEPAM 10mg (retal ou EV)\n   Administrar 01 ampola via retal ou EV, dose única\n2) OXIGÊNIO\n   Administrar com máscara, se saturação < 94%\n\n**Uso Oral (pós-crise, se paciente não for epiléptico conhecido):**\n1) OBSERVAÇÃO E ENCAMINHAMENTO para neurologista (sem iniciar antiepiléptico sem histórico confirmado)',
+		crise_hipertensiva_i10_r03_0:
+			'1) CAPTOPRIL 25mg\n   Tomar 01 cp via oral. Repetir em 1h se pressão não reduzir\n2) FUROSEMIDA 40mg\n   Tomar 01 cp via oral, se houver congestão ou edema\n\n**Na unidade**\n1) CAPTOPRIL 25mg SL\n   Administrar 01 cp sublingual, monitorar PA a cada 15 min\n\n**Orientações**\n1) Manter uso correto dos anti-hipertensivos\n2) Retorno com clínico ou cardiologista para ajuste medicamentoso',
+		dengue:
+			'# Dengue - Grupo A e B (70kg)\n## MEDICAÇÕES PARA USO IMEDIATO\n\n Hidratação vigorosa: tomar 4 a 5 litros de líquidos por dia.\n - Soro de reidratação oral (SRO): Diluir 1 sachê em 1 litro de água.\n - Líquidos caseiros: água, suco de frutas, soro caseiro, chás, água de coco, entre outros.\n - Para fazer o soro caseiro deve-se misturar 1 litro de água com 1 colher de sopa bem cheia de açúcar (20 g) e 1 colher de café de sal (3,5 g).\n\n Dipirona 1g (Novalgina®) ou Paracetamol 500mg (Tylenol®)\n Tomar 1 comprimido via oral a cada 6 horas, se necessário, para dor ou febre (temperatura axilar acima de 37,8°C).\n\n Digesan® (Bromoprida) 10 mg ou Ondansetrona (Vonau®) 4 mg\n Tomar 1 comprimido a cada 8 horas, via oral, em caso de enjoo ou vômito.\n\n Loratadina 10 mg ou Fexofenadina 120 mg (Allegra®) ou Levocetirizina 5 mg (Zina®)\n - Tomar 1 comprimido cada 12 horas durante 5 días.\n\n- Eliminar focos de disseminação do mosquito Aedes aegypti.\n- Não use anti-inflamatórios como Nimesulida, Ibuprofeno, Diclofenaco, Cetoprofeno ou Naproxeno, entre outros.\n- Continue com os medicamentos de rotina.\n- Se você utiliza anticoagulantes (Rivaroxabana, Apixabana) ou antiagregantes (AAS, Clopidogrel), informe ao seu médico sobre a suspeita de dengue.\n\n- Retornar em caso de piora dos sintomas mesmo em uso de medicamentos\n- Dor abdominal intensa e contínua.\n- Vômito ou diarreia persistente.\n- Pressão baixa, tontura ou desmaios.\n- Sangramento ou manchas roxas na pele.\n\n- INTERNAÇÃO HOSPITALAR\n\n- Pacientes com sinais de alarme (grupo C) devem ser internados em hospital.\n- Pacientes em estado grave com sinais de choque (grupo D) devem ser encaminhados à terapia intensiva.\n- Internação é indicada também nas seguintes situações: recusa ou incapacidade de ingerir líquidos e alimentos; impossibilidade de acompanhamento ou retorno à unidade de saúde; descompensação de doença grave; plaquetas < 20.000/mm3.',
+		dengue_a90:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n2) ONDANSETRONA 8mg\n   Tomar 01 cp via oral de 8/8h se náuseas ou vômitos\n3) ENTEROGERMINA frasco\n   Tomar 01 frasco de 12/12h por 05 dias\n4) SRO\n   Diluir 01 sachê em 1L de água e beber ao longo do dia\n\n**Orientações**\nNão usar anti-inflamatórios (ibuprofeno, diclofenaco, cetoprofeno, nimesulida, etc)\nHidratação vigorosa (mínimo 80 mL/kg/dia)\nAlimentação leve (caldos, sucos, água de côco). Não tomar refrigerantes, sucos artificiais, gorduras como salgadinho e alimentos pesados.\nRetorno se: sangramentos, dor abdominal intensa, vômitos persistentes ou sonolência\nSe febre persistir mesmo com dipirona, intercalar com paracetamol\n\n**Na unidade**\n1) Dipirona 01 amp + Ondansetrona 01 amp em SF 0,9% 250 mL EV',
+		dermatite_de_contato_reacao_alergica_leve_l23_9: '1) LORATADINA 10mg\n   Tomar 01 cp via oral à noite por 07 dias\n**USO TÓPICO**\n2) DEXCLORFENIRAMINA + BETAMETASONA creme\n   Aplicar fina camada na região afetada 2x ao dia por 07 dias',
+		dermatite_seborreica_leve_l21_0:
+			'**Uso Tópico**\n1) CETOCONAZOL shampoo 2%\n   Aplicar no couro cabeludo 3x por semana, deixar agir por 5 minutos e enxaguar, por 4 semanas\n2) HIDROCORTISONA creme 1%\n   Aplicar fina camada 2x/dia nas áreas acometidas por 5 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se queixa de dor ou prurido intenso)',
+		dermatofitose_interdigital_pe_de_atleta_b35_3:
+			'**Uso Tópico**\n1) CLOTRIMAZOL creme\n   Aplicar fina camada 2x/dia por 14 dias\n\n**Orientações**\n→ Manter pés secos e arejados\n→ Trocar meias diariamente\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor local intensa)',
+		dip_1:
+			'Metronidazol 250mg __________ 56 cp.\n   Tomar 2 cp, via oral, a cada 12 horas, 14 dias.\nDoxiciclina 100mg __________ 28 cp.\n   Tomar 1 cp, via oral, a cada 12 horas, 14 dias.\nAzitromicina 500mg __________ 2 cp.\n   Parceiro tomar 2 cp, via oral, em dose única.\n**Uso Externo:**\nCeftriaxona 250mg __________ 1 amp.\n   Aplicar 1 ampola, via intramuscular, dose única.',
+		dip_2_comprometimento_sistemico:
+			'Metronidazol 250mg __________ 56 cp.\n   Tomar 2 cp, via oral, a cada 12 horas, por 14 dias.\nDoxiciclina 100mg __________ 28 cp.\n   Tomar 1 cp, via oral, a cada 12 horas, por 14 dias.\nLevofloxacino 500mg __________ 14 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, por 14 dias.\nAzitromicina 500mg __________ 2 cp.\n   Parceiro tomar 2 cp, via oral, em dose única.',
+		dismenorreia_1: 'Ibuprofeno 600mg __________ 15 cp.\n   Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nParacetamol+Codeína 500mg+30mg (Paco) __________ 12 cp.\n   Tomar 1 cp, via oral, a cada 8 horas, se dor forte',
+		dismenorreia_2:
+			'Emama 400mg __________ 60 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, todos os dias, por 30 dias. Após, tomar 1 cp, via oral uma vez ao dia, por 7 dias, no período menstrual.\nIbuprofeno 600mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.',
+		dispepsia_funcional_1:
+			'Omeprazol 20mg __________ 28 cp.\n   Tomar 1 cápsula, via oral, em jejum, imediatamente antes do café da manhã, por 28 dias.\nDomperidona 10mg (Domperix) __________ 60 cp. Tomar 1 comprimido, via oral, três vezes ao dia, refeições, por 20 dias',
+		dispesia_funcional_2:
+			'Omeprazol 20mg __________ 28 cp.\n   Tomar 1 cápsula, via oral, em jejum, imediatamente antes do café da manhã, por 28 dias.\nBromoprida 4mg/ml solução oral gotas __________ 3 fr. Tomar 60 gotas, via oral, a cada 8 horas, por 14 dias.',
+		dor_muscular_lombalgia_algia_m54_5:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor\n2) DICLOFENACO SÓDICO 50mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n3) CICLOBENZAPRINA 10mg\n   Tomar 01 cp via oral 2h antes de dormir por 05 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM + DICLOFENACO 75mg IM, dose única',
+		dorsalgia_1:
+			'Nimesulida 50mg/ml gotas __________ 2 fr. Tomar 40 gotas, via oral, a cada 12 horas, por 6 dias.\nParacetamol 500mg __________ 20 cp. Tomar 1 cp, via oral, a cada 6 horas, por 5 dias.\nCiclobenzaprina 5mg __________ 10 cp. Tomar 1 cp, via oral, à noite, por 10 dias.\n**Uso Externo:**\nBetametasona 5+2mg/ml __________ 1 amp. Aplicar 1 ampola, via intramuscular, dose única.',
+		dorsalgia_2:
+			'Diclofenaco de Sódio 50mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nDipirona 500mg/ml solução oral gotas __________ 1 fr. Tomar 40 gotas, via oral, a cada 8 horas, por 3 dias.\n**Uso Externo:**\nDexametasona 4mg/2,5ml __________ 1 amp. Aplicar 1 ampola, via intramuscular, dose única.',
+		dorsalgia_3:
+			'Ibuprofeno 600mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nTramadol 50mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nCiclobenzaprina 5mg __________ 10 cp. Tomar 1 cp, via oral, à noite, por 10 dias.\n\n**Uso Externo:**\nDexalgen __________ 3 amp.\n   Aplicar 1 ampola, via intramuscular, a cada 3 dias, por 3 doses.',
+		dorsalgia_intensa:
+			'Bi-Profenid 150mg __________ 10cp. Tomar 1 cp, via oral, uma vez ao dia, por 10 dias.\nTramadol 50mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\nMusculare 10mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.\n\n**Uso Externo:**\nDexalgen __________ 3 amp.\n   Aplicar 1 ampola, via intramuscular, a cada 3 dias, por 3 doses.',
+		dpoc_em_exacerbacao_j44_1:
+			'1) PREDNISONA 20mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n2) AZITROMICINA 500mg\n   Tomar 01 cp via oral 1x/dia por 05 dias\n\n**Inalatória (se disponível para casa):**\n3) SALBUTAMOL spray\n   Inalar 02 jatos de 6/6h com espaçador\n\n**Na unidade:**\n1) Inalação com 5 gotas de Fenoterol + 5 gotas de Brometo de Ipratrópio em 5 mL de SF 0,9%\n2) Hidrocortisona 100mg EV ou IM',
+		enterobiase_infestacao_por_oxiuros_b80:
+			'1) ALBENDAZOL 400mg\n   Tomar dose única via oral e repetir após 14 dias\n\n**Orientações**\nLavar roupas de cama e higiene pessoal\nTratar todos os contatos domiciliares\n\n**Na unidade**\n1) DIPIRONA 1g IM (se prurido anal intenso)',
+		enxaqueca_migranea_g43_9:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n3) NARATRIPTANA 2,5mg\n   Tomar 01 cp via oral ao sinal de dor intensa. Pode repetir em 4h se necessário. Máximo: 2 cp/dia\n\n**Na unidade**\n1) DIPIRONA 1g IM + DECADRON 4mg IM + ONDANSETRONA 01 amp IM',
+		erispela:
+			'1) CEFALEXINA 500mg\n   Tomar 01 cp via oral de 6/6h por 10 dias\n2) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n**Uso Tópico**\n4) NEOMICINA + BACITRACINA pomada\n   Aplicar fina camada na região afetada 3x/dia\n\n**Na unidade**\n1) DIPIRONA 1g IM + CEFTRIAXONA 1g IM',
+		escabiose_sarna_b86:
+			'**Uso Tópico**\n1) PERMETRINA 5% creme\n   Aplicar à noite da cabeça aos pés, deixar agir por 8-12h e remover no banho pela manhã. Repetir após 7 dias\n**Uso Oral (casos extensos ou falha do tópico)**\n2) IVERMECTINA 6mg\n   Tomar 3 comprimidos VO em dose única. Repetir após 7 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se prurido generalizado intenso)',
+		escoriacoes_feridas_leves_s00_8:
+			'**Uso Tópico**\n1) SULFADIAZINA DE PRATA creme\n   Aplicar fina camada na lesão 1 a 2x ao dia até cicatrização\n2) SF 0,9%\n   Lavar o local 2x ao dia antes da aplicação da pomada\n\n**Na unidade**\n1) DIPIRONA 1g IM, dose única para analgesia local',
+		faringite_viral_faringoamigdalite_viral_j02_9:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 03 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM + ORIENTAR repouso, hidratação e evitar antibiótico desnecessário',
+		foliculite:
+			'Eritromicina 500mg __________ 28 cp.\n   Tomar 1 cp, via oral, a cada 6 horas, por 7 dias. (às 6, 12, 18 e 24 horas)\n**Uso Externo:**\nMupirocina gel 2% __________ 15 g.\n   Aplicar nas lesões, após limpeza da pele com água e sabão, três vezes ao dia, por 7 dias.',
+		gases_em_bebes:
+			'Dimeticona gotas __________ 1 fr.\n   Tomar __ gotas, via oral, a cada 6 horas, por 10 dias.\n**Uso Externo:**\nSoro Fisiológico 0,9% __________ 1 fr.\n   Aplicar 1⁄2 conta-gotas em cada narina, 4 vezes ao dia (principalmente antes das mamadas e ao dormir).',
+		gastrite_drge_dispepsia_dor_no_estomago_k29_7_k21_9_k30:
+			'1) OMEPRAZOL 20mg\n   Tomar 01 cp via oral em jejum pela manhã por 30 dias\n2) BROMOPRIDA 10mg\n   Tomar 01 cp via oral 3x ao dia, 30 min antes das refeições\n3) ESCOPOLAMINA + DIPIRONA (10mg + 250mg)\n   Tomar 01 cp via oral de 6/6h se dor abdominal\n\n**Na unidade**\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		geca_gastroenterite_aguda_a09:
+			'1) OMEPRAZOL 20mg\n   Tomar 01 cp via oral em jejum pela manhã por 10 dias\n2) ENTEROGERMINA frasco\n   Tomar 01 frasco de 12/12h por 05 dias\n3) ONDANSETRONA 8mg\n   Tomar 01 cp via oral de 8/8h se náusea ou vômito\n4) ESCOPOLAMINA + DIPIRONA (10mg + 250mg)\n   Tomar 01 cp via oral de 6/6h se dor abdominal ou febre\n5) SAIS DE REIDRATAÇÃO ORAL\n   Diluir 01 sachê em 1L de água e beber ao longo do dia\n\nSe diarreia com sangue, febre ou dor em pontada:\n6) CIPROFLOXACINO 500mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		gota_1_crise: 'Indometacina 50mg __________ 20 cp. Tomar 1 cápsula, via oral, a cada 8 horas, por 7 dias.\nColchicina 1mg __________ 20 cp. Tomar 1 comprimido, via oral, a cada 8 horas, por 7 dias.',
+		gota_2_crise: 'Diclofenaco de Sódio 50mg __________ 20 cp. Tomar 1 cp, via oral, a cada 8 horas, por 7 dias.\nColchicina 1mg __________ 20 cp. Tomar 1 cp, via oral, a cada 8 horas, por 7 dias.',
+		gota_3_crise: 'Prednisona 20mg __________ 18 cp. Tomar 2 cp, via oral, uma vez ao dia, por 5 dias. Após, tomar 1 cp, via oral, uma vez ao dia, por 5 dias. Após, tomar 1⁄2 cp, via oral, uma vez ao dia, por 6 dias.',
+		gota_4_controle: 'Alopurinol 300mg __________ 30 cp. Tomar 1 cp, via oral, uma vez ao dia, por 30 dias.\nColchicina 0,5mg __________ 30 cp. Tomar 1 cp, via oral, uma vez ao dia, por 30 dias.',
+		h_pylori_1:
+			'Amoxicilina 500mg __________ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias.\nClaritromicina 500mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.\nOmeprazol 20mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.',
+		h_pylori_2_alergia_a_amoxicilina:
+			'Metronidazol 250mg __________ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias.\nClaritromicina 500mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.\nOmeprazol 20mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.',
+		hemorragia_nasal_epistaxe_leve_r04_0:
+			'**Uso Local**\n1) SF 0,9% gelado\n   Instilar no nariz e fazer compressão nasal por 10 minutos\n2) NAFAZOLINA spray nasal\n   Aplicar 1 jato em cada narina de 8/8h por até 03 dias\n\n**Na unidade**\n1) Compressão com algodão embebido em SF gelado + NAFAZOLINA spray',
+		hemorroida_i84_9:
+			'1) ÓLEO MINERAL\n   Tomar 15 mL via oral de 8/8h\n2) DAFLON (450mg + 50mg)\n   Tomar 01 cp via oral de 4/4h por 04 dias, depois 6/6h por 03 dias, depois 12/12h por 03 meses\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 12/12h por 05 dias\n4) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Uso Tópico**\n5) PROCTYL pomada\n   Aplicar fina camada na região anal de 2-3x/dia\n\n**Na unidade**\n1) DIPIRONA 1g IM + DECADRON 4mg IM',
+		herpes_simples_b00_9: '1) ACICLOVIR 400mg\n   Tomar 01 cp via oral de 8/8h por 07 dias (se gestante: 5 dias)\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor intensa local)',
+		hiperglicemia_descompensacao_do_dm2_e11_9: '**Na unidade**\n1) DIPIRONA 1g IM (se queixa de dor)\n2) SF 0,9% EV em 500 mL (caso de desidratação moderada)\n3) investigar causas secundárias ou aderência do paciente ao tratamento',
+		hiperplasia_prostata_1: 'Doxasozina 2mg __________ 30 cp. Tomar 1⁄2 cp, via oral, à noite, todos os dias, por 14 dias. Após, tomar 1 cp, via oral, à noite, todos os dias, por 21 dias e retornar ao médico para novo ajuste da dose.',
+		hiperplasia_prostata_2: 'Doxasozina 4mg __________ 60 cp. Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		hiperplasia_prostata_3: 'Tansulozina 0,4mg __________ 60 cp.\n   Tomar 1 cápsula, via oral, após o café da manhã, todos os dias.',
+		hiperplasia_prostata_4: 'Finasterida 5mg __________ 60 cp. Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		hiperplasia_prostata_5: 'Tansulozina 0,4mg __________ 60 cp.\n   Tomar 1 cápsula, via oral, após o café da manhã, todos os dias.\nFinasterida 5mg __________ 60 cp. Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		hipertensao_arterial_descompensada_i10: '**Na unidade**\n1) CAPTOPRIL 25mg VO + DIPIRONA 1g IM\n2) FUROSEMIDA 40mg tomar 01 cp via oral se houver congestão ou edema (avaliar se paciente é renal)\n3) retorno em 1h para reavaliar',
+		hipertireoidismo_1: 'Tiamazol 5mg (Tapazol) __________ 50 cp.\n   Tomar 1 comprimido, via oral, a cada 8 horas, por 15 dias e retornar ao médico para reavaliação.\nPropranolol 40mg __________ 30 cp. Tomar 1 cp, via oral, a cada 12 horas, por 15 dias.',
+		hipertireoidismo_2:
+			'Propiltiouracil 5mg (Propil) __________ 60 cp.\n   Tomar 1 comprimido, via oral, a cada 8 horas, por 20 dias e retornar ao médico para reavaliação.\nPropranolol 40mg __________ 40 cp. Tomar 1 cp, via oral, a cada 12 horas, por 20 dias.',
+		hipoglicemia_sintomatica_e16_2: '**Na unidade**\n1) GLICOSE 50% EV (01 ampola 20mL) em infundido lento (10-15min) diluída em 100mL de SF 0,9% EV (se paciente sintomático - tremores, queda de nível de consciência, sudorese).',
+		hipotireoidismo: 'Levotiroxina 50mcg __________ 60 cp.\n   Tomar 1 comprimido, via oral, em jejum, 60 minutos antes do café da manhã, todos os dias.',
+		impetigo_l01_0: '1) CEFALEXINA 500mg\n   Tomar 01 cp via oral de 6/6h por 07 dias\n**Uso Tópico**\n2) MUPIROCINA pomada\n   Aplicar fina camada nas lesões 3x ao dia por 07 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor local)',
+		impetigo_ou_ectima:
+			'**Uso Externo:**\nPenicilina G Benzatina 1.200.000 UI __________ 1 amp. Aplicar 1 ampola, via intramuscular, dose única.\nNeomicina + Bacitracina pomada __________ 1 tb.\n   Aplicar na lesão, após limpeza da pele e remoção das crostas com água morna e sabão, ou soro fisiológico, três vezes ao dia, por 7 dias.',
+		impetigo_ou_ectima_2:
+			'Eritromicina 250mg/5ml __________ 1 vd. Tomar 5 ml, via oral, a cada 6 horas, por 7 dias. (às 6, 12, 18 e 24 horas)\n**Uso Externo:**\nNeomicina + Bacitracina pomada __________ 1 tb.\n   Aplicar na lesão, após limpeza da pele e remoção das crostas com água morna e sabão, ou soro fisiológico, três vezes ao dia, por 7 dias.',
+		infeccao_de_urina_itu_n39_0:
+			'1) NITROFURANTOÍNA 100mg\n   Tomar 01 cp via oral de 6/6h por 07 dias\n   ou\n1) CIPROFLOXACINO 500mg\n   Tomar 01 cp via oral de 12/12h por 07 dias\n2) FENAZOPIRIDINA 200mg\n   Tomar 01 cp via oral de 8/8h por 03 dias\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n\nSe pielonefrite:\n4) CEFTRIAXONA 1g IM, dose única\n\n**Na unidade**\n1) DIPIRONA 1g IM + CEFTRIAXONA 1g IM',
+		insonia_leve_moderada_g47_0: '1) PASSIFLORA (extrato seco) 200mg\n   Tomar 01 cp via oral à noite, 30 minutos antes de dormir\n2) MELISSA + VALERIANA (fitoterápico composto)\n   Tomar 01 cp via oral à noite, se necessário\n\n**Na unidade**\nNão aplicável',
+		insuficiencia_venosa_cronica: '**Uso Externo:**\nMeia Compressiva Kendall – média compressão.\n   Calçar pela manhã, antes de levantar-se da cama. Usar durante todo o dia. Elevar as pernas por 15 minutos antes de calçar, se tiver de retirá-las.',
+		intoxicacao_alimentar_leve_t62_9_a05_9:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n2) METOCLOPRAMIDA 10mg\n   Tomar 01 cp via oral de 8/8h se náusea ou vômito, por até 3 dias\n3) SORO CASEIRO ou REIDRATANTE ORAL\n   Ingerir por via oral após cada evacuação líquida\n\n**Na unidade**\n1) METOCLOPRAMIDA 10mg IM (se náusea ou vômito ativo)',
+		labirintite_h81_0: '1) MECLIZINA 25mg\n   Tomar 01 cp via oral de 6/6h por 07 dias\n2) DRAMIN\n   Tomar 01 cp via oral de 8/8h se náusea ou vômito\n\n**Na unidade**\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		larva_migrans_1:
+			'18- Albendazol 400mg __________ 3 cp. Tomar 1 cp, via oral, uma vez ao dia, por 3 dias.\n**Uso Externo:**\nTiabendazol 50mg/g pomada (Foldan) __________ 45 g.\n   Aplicar nas lesões, friccionando a pomada nas trilhas escavadas pelo parasita na pele, três vezes ao dia, por 5 dias seguidos.',
+		larva_migrans_2:
+			'Ivermectina 6mg (Vermectil) __________ 2 cp. Tomar 2 comprimidos, via oral, em dose única.\n**Uso Externo:**\nTiabendazol 50mg/g pomada (Foldan) __________ 45 g.\n   Aplicar nas lesões, friccionando a pomada nas trilhas escavadas pelo parasita na pele, três vezes ao dia, por 5 dias seguidos.',
+		larva_migrans_criancas:
+			'19- Albendazol 400mg/10ml __________ 3 fr. Tomar o conteúdo de um frasco (10 ml), via oral, uma vez ao dia, por 3 dias.\n**Uso Externo:**\nTiabendazol 50mg/g pomada (Foldan) __________ 45 g.\n   Aplicar nas lesões, friccionando a pomada nas trilhas escavadas pelo parasita na pele, três vezes ao dia, por 5 dias seguidos.',
+		mastalgia_1: 'Tamoxifeno 10mg __________ 90 cp. Tomar 1 cp, via oral, uma vez ao dia, por 90 dias',
+		molusco_contagioso_b08_1:
+			'**Conduta Geral**\nOrientar conduta expectante (resolução espontânea em 6 a 12 meses)\nEvitar manipulação das lesões e compartilhar toalhas/objetos\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor local)\nEncaminhar para dermatologia se lesões extensas ou infeccionadas',
+		nauseas_e_vomitos_1_gestantes: '20- Dimenidrinato 50mg (Dramin B6) __________ 20 cp. + Piridoxina 10mg\n   Tomar 1 comprimido, via oral, a cada 8 horas, por 7 dias.',
+		nauseas_e_vomitos_severos_3: '21- Ondansetrona 8mg (Vonau Flash) __________ 10 cp. Tomar 1 comprimido, via oral, a cada 8 horas, por 3 dias.',
+		nefrolitiase_colica_renal_n20_0:
+			'1) ESCOPOLAMINA + DIPIRONA (10mg + 250mg)\n   Tomar 01 cp via oral de 6/6h se dor\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n3) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor\n4) BROMOPRIDA 10mg\n   Tomar 01 cp via oral 3x/dia se náusea\n5) HIDRATAÇÃO oral vigorosa com água\n\n**Na unidade**\n1) DIPIRONA + ESCOPOLAMINA 1AMP , ONDANSETRONA 01 AMP EM 100ML DE SF 0,9%\n2) REAVALIAR EM 1H',
+		onicomicose_1_maos_tinea_ungueum: 'Itraconazol 100mg __________ 28+ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias; uma vez ao mês, por 2 meses.',
+		onicomicose_2_maos_tinea_ungueum: 'Terbinafina 250mg __________ 56 cp. Tomar 1 cp, via oral, uma vez ao dia, por 56 dias.',
+		onicomicose_3_pes: 'Itraconazol 100mg __________ 28 + 28+ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias; uma vez ao mês, por 3 meses.',
+		onicomicose_4_pes: 'Terbinafina 250mg __________ 84 cp. Tomar 1 cp, via oral, uma vez ao dia, por 84 dias.',
+		osteoporose_1:
+			'Alendronato de Sódio 70mg __________ 8 cp.\n   Tomar 1 comprimido, via oral, pela manhã, em jejum, 40 minutos antes do café da manhã, uma vez na semana. Tomar com um copo cheio de água filtrada. Não se deitar até fazer a primeira refeição.\nCarbonato de Cálcio 600mg __________ 60 cp. + Vitamina D 400UI\n   Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		osteoporose_2:
+			'Risedronato de Sódio 35mg __________ 8 cp.\n   Tomar 1 comprimido, via oral, pela manhã, em jejum, 40 minutos antes do café da manhã, uma vez na semana. Tomar com um copo cheio de água filtrada. Não se deitar até fazer a primeira refeição.\nCarbonato de Cálcio 600mg __________ 60 cp. + Vitamina D 400UI\n   Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		osteoporose_3: 'Carbonato de Cálcio 600mg __________ 45 cp. + Vitamina D 400UI\n   Tomar 1 comprimido, via oral, à noite, todos os dias.',
+		otite_externa_h60_3:
+			'1) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n2) CEFALEXINA 500mg\n   Tomar 01 cp via oral de 6/6h por 07 dias\n**Uso Tópico**\n3) OTOSPORIN (ou similar com Polimixina B + Neomicina + Hidrocortisona)\n   Instilar 3 gotas no ouvido afetado 3x/dia por 07 dias\n\n**Na unidade**\n1) DIPIRONA + DECADRON 1AMP CADA IM',
+		otite_media_aguda_h66_0:
+			'1) AMOXICILINA 500mg\n   Tomar 01 cp via oral de 8/8h por 10 dias\n2) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n3) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Na unidade**\n1) DIPIRONA + DECADRON 1AMP CADA IM',
+		otite_media_cefuroxima:
+			'# Otite Média Aguda Bacteriana (Cefuroxima)\n## MEDICAÇÕES DE USO IMEDIATO\n\n Cefuroxima 500 mg (comprimido)\n - Tomar 1 comprimido, via oral, 12/12h, por 10 dias.\n\n Cetoprofeno 150 mg (comprimido)\n - Tomar 1 comprimido ao dia, pela manhã, durante 5 dias, com alimentos.\n\n Dipirona 1g (Novalgina®) ou Paracetamol 500mg (Tylenol®)\n Tomar 1 comprimido via oral a cada 6 horas, se necessário, para dor ou febre (temperatura axilar acima de 37,8°C).\n\n Digesan® (Bromoprida) 10 mg ou Ondansetrona (Vonau®) 4 mg\n Tomar 1 comprimido a cada 8 horas, via oral, em caso de enjoo ou vômito.\n\n Lavagem nasal com SF 0,9% 2-4x/dia\n Usar uma seringa (sem agulha) ou frasco de soro para lavagem: 20 mL de soro fisiológico, 2 a 4 vezes ao dia, por 5 dias, em caso de obstrução ou secreção nasal. Incline a cabeça para frente, com a boca aberta, e evite aplicar muita pressão ao lavar as narinas.\n\n- Retornar se os sintomas piorarem, mesmo com medicamentos.\n- Febre persistente por mais de 48h: temperatura acima de 37,8°C.\n- Piora do quadro por 72 horas, mesmo com uso de antibióticos.\n\n- INTERNAÇÃO HOSPITALAR\n\n- Indicada na presença de complicações como otomastoidite, complicações intracranianas, sepse ou otalgia resistente à antibioticoterapia.',
+		oxiuriase_1: 'Pamoato de Pirvínio 100mg __________ 12 dg.\n   Tomar 1dg/10kg (máx. 6 dg), via oral, em dose única. Repetir após 2 semanas.',
+		oxiuriase_criancas_2: 'Albendazol 400mg/10ml __________ 2 fr.\n   Tomar o conteúdo de um frasco (10 ml), via oral, em dose única.\n   Repetir após 7 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		pediculose_crianca_2_anos:
+			'Ivermectina 6mg (Vermectil) __________ 2 cp. Tomar 200mcg/kg comprimido, via oral, em dose única.\n**Uso Externo:**\nPermetrima 1% loção (Kwell) __________ 60 ml.\n   Lavar os cabelos com xampu, enxaguar bem e secar com toalha.\n   Aplicar a loção em todo o cabelo e couro cabeludo, com os cabelos ainda úmidos, principalmente na nuca e atrás das orelhas.\n   Deixe agir por 10 minutos.\n   Passe pente fino para remoção dos piolhos e lêndeas.\n   Enxague bem com água morna.\n   Repetir após 7 dias.',
+		pediculose_pubiana:
+			'Ivermectina 6mg (Vermectil) __________ 2 cp. Tomar 2 comprimidos, via oral, em dose única.\nDexclorfeniramina 2mg __________ 10 cp. Tomar 1 comprimido, via oral, a cada 8 horas, por 3 dias.\n**Uso Externo:**\nPermetrima 5% loção cremosa __________ 60 ml.\n   Aplicar nas áreas com pêlo, menos couro cabeludo, seguidos.\n   Remover com banho após 8 horas da aplicação.\n   Repetir procedimento após 7 dias.\n   Repetir tratamento no parceiro sexual.',
+		pep_profilaxia_pos_exposicao_sexual_z20_2:
+			'**Uso Oral (por 28 dias)**\n1) TENOFOVIR 300mg + LAMIVUDINA 300mg\n   Tomar 01 cp via oral 1x/dia\n2) DOLUTEGRAVIR 50mg\n   Tomar 01 cp via oral 1x/dia\n\nEncaminhar o paciente ao SAE/CTA para seguimento\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor associada)\n2) Início imediato do esquema acima, se disponível',
+		picada_de_inseto_com_reacao_inflamatoria_local_t63_4_l50_9:
+			'1) DEXCLORFENIRAMINA 0,5mg\n   Tomar 01 cp via oral de 8/8h por 05 dias\n2) PREDNISONA 20mg\n   Tomar 01 cp via oral 1x/dia por 03 dias\n3) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Na unidade**\n1) HIDROCORTISONA 100mg IM + DIPIRONA 1g IM',
+		pneumonias_pneumonia_broncopneumonia_bcp_j18_9:
+			'**Prescrição 01:**\nIndicado para pacientes com pneumonia adquirida na comunidade e sem fatores de risco para resistência bacteriana. Ideal em casos de intolerância ou contraindicação a betalactâmicos.\n1) AZITROMICINA 500mg Tomar 01 cp via oral uma vez ao dia por 05 dias\n2) PREDNISONA 20mg Tomar 01 cp via oral de 12/12h por 05 dias\n3) AMBROXOL 6mg/mL Tomar 05mL de 8/8h por 05 dias\n4) DIPIRONA 500mg Tomar 01 cp via oral de 6/6h se dor ou febre.\n\n**Prescrição 02:**\nPreferível em casos de pneumonia adquirida na comunidade com suspeita de infecção por *Streptococcus pneumoniae* ou outras bactérias suscetíveis. Indicado também para pacientes com risco de infecção por *Haemophilus influenzae*.\n\n1) AMOXICILINA + CLAVULANATO (500mg+125mg) Tomar 01 cp via oral de 8/8h por 07 dias\n2) PREDNISONA 20mg Tomar 01 cp via oral de 12/12h por 05 dias\n3) AMBROXOL 6mg/mL Tomar 05mL de 8/8h por 05 dias\n4) DIPIRONA 500mg Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Prescrição 03:**\nCombinação indicada para pacientes com pneumonia adquirida na comunidade, especialmente quando existe suspeita de infecção por *Mycoplasma pneumoniae*, *Chlamydia pneumoniae* ou *Legionella pneumophila*. A claritromicina pode ser usada como alternativa em caso de alergia à penicilina. Neste caso, realizar a seguinte prescrição:\n\n1) AMOXICILINA + CLAVULANATO (500mg+125mg) Tomar 01 cp via oral de 8/8h por 07 dias\n2) CLARITROMICINA 500mg Tomar 01 cp via oral de 12/12h por 07 dias\n3) PREDNISONA 20mg Tomar 01 cp via oral de 12/12h por 05 dias\n4) AMBROXOL 6mg/mL Tomar 05mL de 8/8h por 05 dias\n5) DIPIRONA 500mg Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Prescrição 04:**\nIndicado para pacientes com pneumonia grave, ou em casos onde há suspeita de resistência a antibióticos de primeira linha (ex: *Streptococcus pneumoniae* resistente à penicilina ou *Pseudomonas aeruginosa*). Preferível em pacientes com comorbidades, como diabetes, doenças pulmonares crônicas ou imunossupressão. (Mesma imagem utilizada no exemplo anterior + correlação clínica com o exemplo acima) Dito isso, prescrever:\n\n1) LEVOFLOXACINO 750mg Tomar 01 cp via oral uma vez ao dia por 07 dias\n2) PREDNISONA 20mg Tomar 01 cp via oral de 12/12h por 05 dias\n3) AMBROXOL 6mg/mL Tomar 05mL de 8/8h por 05 dias\n4) DIPIRONA 500mg Tomar 01 cp via oral de 6/6h se dor ou febre',
+		pre_natal_vitaminas:
+			'Ácido Fólico 5mg __________ 30 cp. Tomar 1 cp, via oral, uma vez ao dia, por 30 dias.\nSulfato Ferroso 300mg __________ 30 cp. Tomar 1 cp, via oral, uma vez ao dia, por 30 dias.\n\nObs: tomar com o estômago vazio, uma hora antes do almoço, com um pouco de água ou suco de laranja.\nNão tomar com leite.',
+		prostatite: 'Ciprofloxacino 500mg __________ 56 cp. Tomar 1 cp, via oral, a cada 12 horas, por 28 dias.\nIbuprofeno 600mg __________ 10 cp. Tomar 1 cp, via oral, a cada 8 horas, por 3 dias.',
+		psoriase_leve_l40_0:
+			'**Uso Tópico**\n1) ÁCIDO SALICÍLICO + UREIA creme\n   Aplicar fina camada 2x/dia sobre as placas\n2) HIDROCORTISONA creme\n   Aplicar 2x/dia nas áreas afetadas por 5 a 7 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor associada intensa)',
+		ptiriase_versicolor: 'Fluconazol 150mg __________ 3 cp.\n   Tomar 1 cápsula, via oral, uma vez por semana, por 3 semanas.\n**Uso Externo:**\nCetoconazol 2% creme __________ 30 g.\n   Aplicar na lesão, após limpeza da pele, a cada 8 horas, por 21 dias.',
+		queimadura_solar_leve_l55_0:
+			'**Uso Tópico**\n1) SULFADIAZINA DE PRATA creme\n   Aplicar fina camada nas áreas afetadas 2x/dia por 5 dias\n2) NEOMICINA + BACITRACINA pomada\n   Alternativa para pequenas lesões, aplicar 2x/dia\n\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 03 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM\n2) ORIENTAR medidas de hidratação e proteção solar',
+		rinite_alergica_j30_9:
+			'1) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 07 dias\n**Uso Tópico**\n2) SORO FISIOLÓGICO nasal 0,9%\n   Instilar 3-5 gotas em cada narina, 3x/dia\n\n**Na unidade**\n1) DEXCLORFENIRAMINA 5mg IM (se crise alérgica intensa)',
+		sangramento_uterino: 'Ácido Tranexâmico 250mg __________ 30 cp. Tomar 2 cp, via oral, a cada 8 horas, por 5 dias.\nÁcido Mefenâmico 500mg __________ 15 cp. Tomar 1 cp, via oral, a cada 8 horas, por 5 dias.',
+		sifilis_penicilina_benzatina: '**Uso Externo:**\nPenicilina Benzatina 1.200.000 UI __________ 12 amp.\n   Aplicar 2 ampolas, via intramuscular (uma em cada nádega), uma vez na semana, por 3 semanas.\n   Repetir tratamento no parceiro.',
+		sindrome_ansiosa_crise_de_ansiedade_leve_f41_0:
+			'1) PASSIFLORA EXTRATO SECO 200mg\n   Tomar 01 cp via oral 2x/dia\n2) VALERIANA + MELISSA (fitoterápico composto)\n   Tomar 01 cp via oral à noite, se necessário\n\n**Na unidade**\n1) DIAZEPAM 5mg IM (se crise aguda com agitação)',
+		sindrome_dispeptica:
+			'Omeprazol 20mg __________ 14 cp.\n   Tomar 1 cápsula, via oral, em jejum, imediatamente antes do café da manhã, por 14 dias.\nHidróxido de Alumínio suspensão __________ 1 vd. Tomar 10 ml, via oral, a cada 8 horas, por 4 dias.\nBromoprida 4mg/ml solução oral gotas __________ 1 fr. Tomar 60 gotas, via oral, a cada 8 horas, por 4 dias.',
+		sindrome_gripal_viral_simples_j11_1:
+			'1) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se febre ou dor\n2) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 05 dias\n3) IBUPROFENO 300mg\n   Tomar 01 cp via oral de 8/8h por 03 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM + ORIENTAR repouso e hidratação oral',
+		sinusite_aguda_j01_9:
+			'1) AMOXICILINA 500mg + CLAVULANATO 125mg\n   Tomar 01 cp via oral de 8/8h por 10 dias\n2) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 07 dias\n3) DIPIRONA 500mg\n   Tomar 01 cp via oral de 6/6h se dor ou febre\n\n**Na unidade**\n1) DIPIRONA 1g IM + LAVAGEM NASAL com SF 0,9%',
+		teniase:
+			'Praziquantel 150mg __________ 12 cp.\n   Tomar 10mg/kg, via oral, durante o café da manhã, com um pouco de líquido, em dose única.\n**Observações:**\nFerver e/ou filtrar toda a água a ser consumida em casa.\nNão ingerir bebidas alcoólicas no dia do tratamento e no dia seguinte.',
+		tetano_conduta_para_ferimentos_a35:
+			'**Conduta na unidade**\n1) LIMPEZA E DEBRIDAMENTO da ferida com SF 0,9% + PVPI\n2) VACINA dT IM (se esquema vacinal incompleto ou desconhecido)\n3) IMUNOGLOBULINA ANTITETÂNICA IM (se ferimento de alto risco e esquema vacinal incerto)\n\n**Orientações**\nEncaminhar para continuidade da vacinação no posto\nAvaliar antibioticoterapia se sinais de infecção local.',
+		tinea_micose_de_pele_ou_couro_cabeludo_b35_0_b35_4:
+			'**Uso Tópico**\n1) CLOTRIMAZOL creme\n   Aplicar 2x/dia nas lesões por 14 dias\n**Uso Oral (casos extensos ou couro cabeludo)**\n2) GRISEOFULVINA 500mg\n   Tomar 01 cp via oral 1x/dia por 30 dias\n\n**Na unidade**\n1) DIPIRONA 1g IM (se prurido ou dor local intensa)',
+		tonsilite: 'Amoxicilina 500mg __________ 21 cp. Tomar 1 cp, via oral, a cada 8 horas, por 7 dias. (às 6, 14, e 22 horas)\nDipirona 500mg/ml solução oral gotas __________ 1 fr. Tomar 40 gotas, via oral, a cada 8 horas, por 3 dias.',
+		tonsilite_2: '35- Amoxicilina + Clavulonato 875mg+125mg __________ 14 cp. Tomar 1 cp, via oral, a cada 12 horas, por 7 dias.\n36- Dipirona gotas __________ 1 fr. Tomar 40 gotas, via oral, a cada 8 horas, por 3 dias.',
+		tonsilite_criancas_1: 'Amoxicilina 250mg/5ml __________ 1 vd. Tomar kg/3 ml, via oral, a cada 8 horas, por 7 dias. (às 6, 14, e 22 horas)\nDipirona 500mg/ml solução oral gotas __________ 1 fr. Tomar kg gotas, via oral, a cada 8 horas, por 3 dias.',
+		tonsilite_criancas_2: 'Amoxicilina+Clavulonato 400mg+57mg/5ml __________ 1vd. Tomar __ ml, via oral, a cada 12 horas, por 7 dias.\nDipirona 500mg/ml solução oral gotas __________ 1 fr. Tomar __ gotas, via oral, a cada 8 horas, por 3 dias.',
+		tosse_seca_persistente_r05:
+			'1) BENZONATATO 100mg\n   Tomar 01 cp via oral de 8/8h por até 5 dias\n2) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 07 dias\n3) SORO FISIOLÓGICO 0,9%\n   Instilar em narinas 3x/dia\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor torácica associada à tosse)',
+		tricomoniase:
+			'Metronidazol 250mg __________ 16 cp.\n   Tomar 8 comprimidos, via oral, em dose única e repetir o tratamento no parceiro.\n**Uso Externo:**\nMetronidazol 0,75% gel vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 7 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		tricomoniase_2:
+			'Secnidazol 1000mg __________ 4 cp.\n   Tomar 2 cp, via oral, em dose única e repetir o tratamento no parceiro.\n**Uso Externo:**\nMetronidazol 0,75% gel vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 7 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas até 4 dias após o tratamento com secnidazol e manter abstinência sexual até o término do tratamento com o gel vaginal.',
+		ulcera_peptica_duodenal: 'Omeprazol 20mg __________ 42 cp.\n   Tomar 1 cápsula, via oral, em jejum, imediatamente antes do café da manhã, por 42 dias.',
+		urticaria:
+			'Dexclorfeniramina 2mg/5ml xarope __________ 1 vd. Tomar 10 ml, via oral, a cada 8 horas, por 4 dias.\nPrednisona 20mg __________ 10 cp. Tomar 1 cp, via oral, a cada 12 horas, por 5 dias.\n**Uso Externo:**\nAD 20ml + Hidrocortisona 500mg __________ 1 amp. Aplicar, via intravenosa, lento, dose única.\nEpinefrina 1:1000 __________ 1 amp. Aplicar 0,5 ml, via subcutânea, em dose única.',
+		urticaria_aguda_l50_9: '1) LORATADINA 10mg\n   Tomar 01 cp via oral 1x/dia por 07 dias\n2) PREDNISONA 20mg\n   Tomar 01 cp via oral 1x/dia por 03 dias\n\n**Na unidade**\n1) HIDROCORTISONA 100mg IM + DEXCLORFENIRAMINA 5mg IM',
+		urticaria_criancas:
+			'Dexclorfeniramina 2mg/5ml xarope __________ 1 vd. Tomar __ ml, via oral, a cada 8 horas, por 5 dias.\nPrednisolona 3mg/ml xarope __________ 1 vd. Tomar __ ml, via oral, a cada 12 horas, por 5 dias.\n**Uso Externo:**\nEpinefrina 1:1000 __________ 1 amp. Aplicar 0,01ml/kg, via subcutânea, em dose única.',
+		vacinacao_antitetanica_a35:
+			'**Na unidade**\n1) AVALIAR ESQUEMA VACINAL do paciente (3 doses básicas + reforços)\n2) dT IM (Vacina dupla adulto)\n   Aplicar em caso de ferimentos com risco ou calendário desatualizado\n3) IMUNOGLOBULINA ANTITETÂNICA IM\n   Aplicar se ferimento de risco + vacinação incompleta/desconhecida\n\n**Orientação:**\nEncaminhar paciente à UBS para continuidade de esquema vacinal completo',
+		vaginite_mista: '**Uso Externo:**\nTioconazol+Tinidazol creme vaginal (Cartrax) __________ 35 g. (100mg+150mg/5g)\n   Aplicar uma dose, via vaginal, à noite, por 7 dias.',
+		vaginose_bacteriana:
+			'Metronidazol 250mg __________ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias.\n**Uso Externo:**\nMetronidazol 0,75% gel vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 7 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		vaginose_bacteriana_2:
+			'Metronidazol 250mg __________ 28 cp. Tomar 2 cp, via oral, a cada 12 horas, por 7 dias.\n**Uso Externo:**\nClindamicina 2% creme vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 7 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		vaginose_bacteriana_3:
+			'Clindamicina 300mg __________ 28 cp. Tomar 1 cp, via oral, a cada 12 horas, por 14 dias.\n**Uso Externo:**\nMetronidazol 0,75% gel vaginal __________ 1 tb. Aplicar uma dose, via vaginal, à noite, por 14 dias.\n**Observação:**\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		varizes_dos_membros_inferiores_i83_9:
+			'1) FLAVONÓIDE (DAFLON® 500mg ou similar)\n   Tomar 01 cp via oral de 12/12h por 30 dias\n**Uso tópico (se dor local):**\n2) NITRATO DE MICONAZOL + HEPARINA (ex: Hirudoid®)\n   Aplicar fina camada 2x/dia nas pernas\n\n**Na unidade**\n1) DIPIRONA 1g IM (se dor local intensa)',
+		vermifugo_amplo_espectro_1:
+			'Mebendazol 100mg __________ 12 cp. Tomar 1 cp, via oral, a cada 12 horas, por 3 dias. Repetir após 7 dias.\nTiabendazol 500mg __________ 12 cp. Tomar 1 cp, via oral, a cada 12 horas, por 3 dias. Repetir após 7 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida em casa',
+		vermifugo_amplo_espectro_2: 'Nitazoxanida 500mg (Annita) __________ 6 cp.\n   Tomar 1 comprimido, via oral, a cada 12 horas, por 3 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida em casa.',
+		vermifugo_amplo_espectro_3: 'Albendazol 400mg __________ 6 cp.\n   Tomar 1 cp, via oral, uma vez ao dia, por 3 dias. Repetir após 7 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida em casa.',
+		vermifugo_criancas_1:
+			'Albendazol 400mg/10ml __________ 2 fr.\n   Tomar o conteúdo de um frasco (10 ml), via oral, em dose única.\n   Repetir após 7 dias.\nSulfato Ferroso 25mg/ml gotas __________ 2 fr. Tomar __ gotas, via oral, uma vez ao dia, por 90 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		vermifugo_criancas_2:
+			'Albendazol 400mg/10ml __________ 2 fr.\n   Tomar o conteúdo de um frasco (10 ml), via oral, em dose única.\n   Repetir após 7 dias.\nUltrafer 50mg/ml gotas __________ 2 fr. Tomar 10 gotas, via oral, duas vezes ao dia, por 90 dias.\nObs: tomar uma hora antes do almoço e do jantar, com um pouco de água ou suco de laranja.\nNão tomar com leite.\nNutrinfan xarope pediátrico __________ 1 fr. Tomar 2,5ml, via oral, uma vez ao dia, por 24 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		vermifugo_criancas_3:
+			'Mebendazol 100mg/5ml __________ 2 vd.\n   Tomar 5 ml, via oral, a cada 12 horas, por 3 dias. Repetir após 7 dias.\nMetronidazol 4% suspensão __________ 1 vd. Tomar __ ml, via oral, a cada 12 horas, por 5 dias.\nSulfato Ferroso 25mg/ml gotas __________ 2 fr. Tomar __ gotas, via oral, uma vez ao dia, por 90 dias.\n**Observação:**\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		vertigem_1: '37- Meclizina 25mg (Meclin) __________ 15 cp. Tomar 1 comprimido, via oral, a cada 8 horas, por 5 dias.',
+		vertigem_aguda: '38- Dimenidrinato 50mg (Dramin B6) __________ 20 cp. + Piridoxina 10mg\n   Tomar 1 comprimido, via oral, a cada 6 horas, por 5 dias.',
+		virose_criancas:
+			'Dipirona gotas __________ 1 fr. Tomar 20 gotas, via oral, a cada 6 horas, por 3 dias.\nBromoprida gotas __________ 1 fr. Tomar 20 gotas, via oral, a cada 8 horas, por 3 dias.\n**Uso Externo:**\nSF 0,9% 250ml + Metoclopramida __________ 1⁄2 amp.\n   Aplicar, via endovenosa, lento, dose único.',
+	};
+
+  // ========================================
+  // METADATA PSF (informações clínicas)
+  // ========================================
+  const psf_metadata = {
+
+		abscesso_furunculo: {
+			title: 'Abscesso Furunculo',
+			symptoms: 'Tumoração dolorosa, eritema, calor local, flutuação.',
+			tips: '\\nDrenagem (se flutuação ou se julgar necessário) + analgesia com Dipirona 01 amp IM',
+		},
+		aftas: {
+			title: 'Aftas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		amenorreia_secundaria: {
+			title: 'Amenorreia Secundaria',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		amigdalite_j03_9: {
+			title: 'Amigdalite J03 9',
+			symptoms: 'Dor de garganta, febre, disfagia, hiperemia tonsilar, exsudato purulento.',
+			tips: '\\nPenicilina G benzatina 1.2M UI IM dose única + sintomáticos pra casa',
+		},
+		anemia_crianca: {
+			title: 'Anemia Crianca',
+			symptoms: 'Palidez cutâneo-mucosa, fadiga, astenia, taquicardia, dispneia aos esforços.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		anemia_ferropriva_sintomatica_d50_0: {
+			title: 'Anemia Ferropriva Sintomatica D50 0',
+			symptoms: 'Palidez cutâneo-mucosa, fadiga, astenia, taquicardia, dispneia aos esforços.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma: {
+			title: 'Asma',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_aguda_leve_moderada_j45_0: {
+			title: 'Asma Aguda Leve Moderada J45 0',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crianca_1: {
+			title: 'Asma Crianca 1',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crianca_2: {
+			title: 'Asma Crianca 2',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crianca_3: {
+			title: 'Asma Crianca 3',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crise_aguda: {
+			title: 'Asma Crise Aguda',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		asma_crise_aguda_2: {
+			title: 'Asma Crise Aguda 2',
+			symptoms: 'Dispneia, sibilância, tosse seca, opressão torácica.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		candidiase_vaginal_corrimento: {
+			title: 'Candidiase Vaginal Corrimento',
+			symptoms: 'Prurido vulvovaginal, corrimento branco grumoso, disúria, dispareunia.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		cefaleia_tensional_cefaleia_dor_de_cabeca_g44_2: {
+			title: 'Cefaleia Tensional Cefaleia Dor De Cabeca G44 2',
+			symptoms: 'Dor de cabeça (pressão, pulsátil), fotofobia, fonofobia, náuseas.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		cerume_impactado: {
+			title: 'Cerume Impactado',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		cervicite_e_uretrite: {
+			title: 'Cervicite E Uretrite',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		cinetose: {
+			title: 'Cinetose',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		colelitiase: {
+			title: 'Colelitiase',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		colica_biliar_litiase_biliar_pedra_nos_rins_k80_2: {
+			title: 'Colica Biliar Litiase Biliar Pedra Nos Rins K80 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) Dipirona 01 amp + Buscopan Composto 01 amp em SF 0,9% 100 mL EV\\n   SE PERSISTIR, REPETIR MAIS UMA RODADA DA PRESCRIÇÃO ACIMA. SE MESMO ASSIM PERSISTIR:\\n1) TRAMADOL 1 AMP EM SF 0,9% 100ML EV',
+		},
+		conjuntivite_h10_9: {
+			title: 'Conjuntivite H10 9',
+			symptoms: 'Olhos vermelhos, prurido, lacrimejamento, secreção, sensação de areia nos olhos.',
+			tips: '\\n1) Fazer compressas frias por 20 minutos no olho afetado\\n2) Evitar coçar os olhos e não usar soro fisiológico para lavar\\n3) Suspender o uso de lentes de contato durante o tratamento',
+		},
+		constipacao_funcional_k59_0: {
+			title: 'Constipacao Funcional K59 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFOSFATO DE SÓDIO (FLEET ENEMA) Aplicar 01 enema por via retal, dose única.<br><br>\\n1) Aumentar a ingestão de água (mínimo 2L/dia)\\n2) Aumentar fibras (frutas, verduras e cereais integrais)\\n3) Praticar atividade física regular\\n4) Evitar segurar vontade de evacuar\\n\\n',
+		},
+		crise_convulsiva_epilepsia_g40_9: {
+			title: 'Crise Convulsiva Epilepsia G40 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIAZEPAM 10mg (retal ou EV)\\n   Administrar 01 ampola via retal ou EV, dose única\\n2) OXIGÊNIO\\n   Administrar com máscara, se saturação < 94%\\n\\n',
+		},
+		crise_hipertensiva_i10_r03_0: {
+			title: 'Crise Hipertensiva I10 R03 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) CAPTOPRIL 25mg SL\\n   Administrar 01 cp sublingual, monitorar PA a cada 15 min\\n\\n<br><br>\\n1) Manter uso correto dos anti-hipertensivos\\n2) Retorno com clínico ou cardiologista para ajuste medicamentoso',
+		},
+		dengue: {
+			title: 'Dengue',
+			symptoms: 'Febre alta súbita, cefaleia, dor retro-orbital, mialgia, artralgia, prostração, exantema.',
+			tips: 'INTERNAÇÃO HOSPITALAR\\n\\n- Pacientes com sinais de alarme (grupo C) devem ser internados em hospital.\\n- Pacientes em estado grave com sinais de choque (grupo D) devem ser encaminhados à terapia intensiva.\\n- Internação é indicada também nas seguintes situações: recusa ou incapacidade de ingerir líquidos e alimentos; impossibilidade de acompanhamento ou retorno à unidade de saúde; descompensação de doença grave; plaquetas < 20.000/mm3.',
+		},
+		dengue_a90: {
+			title: 'Dengue A90',
+			symptoms: 'Febre alta súbita, cefaleia, dor retro-orbital, mialgia, artralgia, prostração, exantema.',
+			tips: '\\n1) Dipirona 01 amp + Ondansetrona 01 amp em SF 0,9% 250 mL EV<br><br>\\nNão usar anti-inflamatórios (ibuprofeno, diclofenaco, cetoprofeno, nimesulida, etc)\\nHidratação vigorosa (mínimo 80 mL/kg/dia)\\nAlimentação leve (caldos, sucos, água de côco). Não tomar refrigerantes, sucos artificiais, gorduras como salgadinho e alimentos pesados.\\nRetorno se: sangramentos, dor abdominal intensa, vômitos persistentes ou sonolência\\nSe febre persistir mesmo com dipirona, intercalar com paracetamol\\n\\n',
+		},
+		dermatite_de_contato_reacao_alergica_leve_l23_9: {
+			title: 'Dermatite De Contato Reacao Alergica Leve L23 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dermatite_seborreica_leve_l21_0: {
+			title: 'Dermatite Seborreica Leve L21 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se queixa de dor ou prurido intenso)',
+		},
+		dermatofitose_interdigital_pe_de_atleta_b35_3: {
+			title: 'Dermatofitose Interdigital Pe De Atleta B35 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor local intensa)<br><br>\\n→ Manter pés secos e arejados\\n→ Trocar meias diariamente\\n\\n',
+		},
+		dip_1: {
+			title: 'Dip 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dip_2_comprometimento_sistemico: {
+			title: 'Dip 2 Comprometimento Sistemico',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dismenorreia_1: {
+			title: 'Dismenorreia 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dismenorreia_2: {
+			title: 'Dismenorreia 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dispepsia_funcional_1: {
+			title: 'Dispepsia Funcional 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dispesia_funcional_2: {
+			title: 'Dispesia Funcional 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dor_muscular_lombalgia_algia_m54_5: {
+			title: 'Dor Muscular Lombalgia Algia M54 5',
+			symptoms: 'Dor na região lombar, rigidez, irradiação para glúteos ou coxas.',
+			tips: '\\n1) DIPIRONA 1g IM + DICLOFENACO 75mg IM, dose única',
+		},
+		dorsalgia_1: {
+			title: 'Dorsalgia 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dorsalgia_2: {
+			title: 'Dorsalgia 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dorsalgia_3: {
+			title: 'Dorsalgia 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dorsalgia_intensa: {
+			title: 'Dorsalgia Intensa',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		dpoc_em_exacerbacao_j44_1: {
+			title: 'Dpoc Em Exacerbacao J44 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) Inalação com 5 gotas de Fenoterol + 5 gotas de Brometo de Ipratrópio em 5 mL de SF 0,9%\\n2) Hidrocortisona 100mg EV ou IM',
+		},
+		enterobiase_infestacao_por_oxiuros_b80: {
+			title: 'Enterobiase Infestacao Por Oxiuros B80',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se prurido anal intenso)<br><br>\\nLavar roupas de cama e higiene pessoal\\nTratar todos os contatos domiciliares\\n\\n',
+		},
+		enxaqueca_migranea_g43_9: {
+			title: 'Enxaqueca Migranea G43 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + DECADRON 4mg IM + ONDANSETRONA 01 amp IM',
+		},
+		erispela: {
+			title: 'Erispela',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + CEFTRIAXONA 1g IM',
+		},
+		escabiose_sarna_b86: {
+			title: 'Escabiose Sarna B86',
+			symptoms: 'Prurido intenso (pior à noite), pápulas escoriadas, túneis na pele.',
+			tips: '\\n1) DIPIRONA 1g IM (se prurido generalizado intenso)',
+		},
+		escoriacoes_feridas_leves_s00_8: {
+			title: 'Escoriacoes Feridas Leves S00 8',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM, dose única para analgesia local',
+		},
+		faringite_viral_faringoamigdalite_viral_j02_9: {
+			title: 'Faringite Viral Faringoamigdalite Viral J02 9',
+			symptoms: 'Dor de garganta, febre, disfagia, hiperemia tonsilar, exsudato purulento.',
+			tips: '\\n1) DIPIRONA 1g IM + ORIENTAR repouso, hidratação e evitar antibiótico desnecessário',
+		},
+		foliculite: {
+			title: 'Foliculite',
+			symptoms: 'Pústulas ou pápulas eritematosas ao redor do folículo piloso, prurido leve.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gases_em_bebes: {
+			title: 'Gases Em Bebes',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gastrite_drge_dispepsia_dor_no_estomago_k29_7_k21_9_k30: {
+			title: 'Gastrite Drge Dispepsia Dor No Estomago K29 7 K21 9 K30',
+			symptoms: 'Dor epigástrica, queimação, náuseas, plenitude pós-prandial.',
+			tips: '\\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		},
+		geca_gastroenterite_aguda_a09: {
+			title: 'Geca Gastroenterite Aguda A09',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		},
+		gota_1_crise: {
+			title: 'Gota 1 Crise',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gota_2_crise: {
+			title: 'Gota 2 Crise',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gota_3_crise: {
+			title: 'Gota 3 Crise',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		gota_4_controle: {
+			title: 'Gota 4 Controle',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		h_pylori_1: {
+			title: 'H Pylori 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		h_pylori_2_alergia_a_amoxicilina: {
+			title: 'H Pylori 2 Alergia A Amoxicilina',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hemorragia_nasal_epistaxe_leve_r04_0: {
+			title: 'Hemorragia Nasal Epistaxe Leve R04 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) Compressão com algodão embebido em SF gelado + NAFAZOLINA spray',
+		},
+		hemorroida_i84_9: {
+			title: 'Hemorroida I84 9',
+			symptoms: 'Sangramento ao evacuar, dor anal, prolapso, prurido.',
+			tips: '\\n1) DIPIRONA 1g IM + DECADRON 4mg IM',
+		},
+		herpes_simples_b00_9: {
+			title: 'Herpes Simples B00 9',
+			symptoms: 'Vesículas agrupadas sobre base eritematosa, dor, ardor, prurido local.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor intensa local)',
+		},
+		hiperglicemia_descompensacao_do_dm2_e11_9: {
+			title: 'Hiperglicemia Descompensacao Do Dm2 E11 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se queixa de dor)\\n2) SF 0,9% EV em 500 mL (caso de desidratação moderada)\\n3) investigar causas secundárias ou aderência do paciente ao tratamento',
+		},
+		hiperplasia_prostata_1: {
+			title: 'Hiperplasia Prostata 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hiperplasia_prostata_2: {
+			title: 'Hiperplasia Prostata 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hiperplasia_prostata_3: {
+			title: 'Hiperplasia Prostata 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hiperplasia_prostata_4: {
+			title: 'Hiperplasia Prostata 4',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hiperplasia_prostata_5: {
+			title: 'Hiperplasia Prostata 5',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hipertensao_arterial_descompensada_i10: {
+			title: 'Hipertensao Arterial Descompensada I10',
+			symptoms: 'Geralmente assintomática. Cefaleia nucal, tontura, escotomas em crises.',
+			tips: '\\n1) CAPTOPRIL 25mg VO + DIPIRONA 1g IM\\n2) FUROSEMIDA 40mg tomar 01 cp via oral se houver congestão ou edema (avaliar se paciente é renal)\\n3) retorno em 1h para reavaliar',
+		},
+		hipertireoidismo_1: {
+			title: 'Hipertireoidismo 1',
+			symptoms: 'Perda de peso, intolerância ao calor, tremores, palpitações, insônia.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hipertireoidismo_2: {
+			title: 'Hipertireoidismo 2',
+			symptoms: 'Perda de peso, intolerância ao calor, tremores, palpitações, insônia.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		hipoglicemia_sintomatica_e16_2: {
+			title: 'Hipoglicemia Sintomatica E16 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) GLICOSE 50% EV (01 ampola 20mL) em infundido lento (10-15min) diluída em 100mL de SF 0,9% EV (se paciente sintomático - tremores, queda de nível de consciência, sudorese).',
+		},
+		hipotireoidismo: {
+			title: 'Hipotireoidismo',
+			symptoms: 'Ganho de peso, intolerância ao frio, pele seca, constipação, astenia.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		impetigo_l01_0: {
+			title: 'Impetigo L01 0',
+			symptoms: 'Lesões vesico-pustulosas que rompem e formam crostas melicéricas.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor local)',
+		},
+		impetigo_ou_ectima: {
+			title: 'Impetigo Ou Ectima',
+			symptoms: 'Lesões vesico-pustulosas que rompem e formam crostas melicéricas.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		impetigo_ou_ectima_2: {
+			title: 'Impetigo Ou Ectima 2',
+			symptoms: 'Lesões vesico-pustulosas que rompem e formam crostas melicéricas.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		infeccao_de_urina_itu_n39_0: {
+			title: 'Infeccao De Urina Itu N39 0',
+			symptoms: 'Disúria, polaciúria, urgência miccional, dor suprapúbica, febre (pielonefrite).',
+			tips: '\\n1) DIPIRONA 1g IM + CEFTRIAXONA 1g IM',
+		},
+		insonia_leve_moderada_g47_0: {
+			title: 'Insonia Leve Moderada G47 0',
+			symptoms: 'Dificuldade para iniciar ou manter o sono, despertar precoce.',
+			tips: '\\nNão aplicável',
+		},
+		insuficiencia_venosa_cronica: {
+			title: 'Insuficiencia Venosa Cronica',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		intoxicacao_alimentar_leve_t62_9_a05_9: {
+			title: 'Intoxicacao Alimentar Leve T62 9 A05 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) METOCLOPRAMIDA 10mg IM (se náusea ou vômito ativo)',
+		},
+		labirintite_h81_0: {
+			title: 'Labirintite H81 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + ONDANSETRONA 8mg IM',
+		},
+		larva_migrans_1: {
+			title: 'Larva Migrans 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		larva_migrans_2: {
+			title: 'Larva Migrans 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		larva_migrans_criancas: {
+			title: 'Larva Migrans Criancas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		mastalgia_1: {
+			title: 'Mastalgia 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		molusco_contagioso_b08_1: {
+			title: 'Molusco Contagioso B08 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor local)\\nEncaminhar para dermatologia se lesões extensas ou infeccionadas<br><br>\\nOrientar conduta expectante (resolução espontânea em 6 a 12 meses)\\nEvitar manipulação das lesões e compartilhar toalhas/objetos\\n\\n',
+		},
+		nauseas_e_vomitos_1_gestantes: {
+			title: 'Nauseas E Vomitos 1 Gestantes',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		nauseas_e_vomitos_severos_3: {
+			title: 'Nauseas E Vomitos Severos 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		nefrolitiase_colica_renal_n20_0: {
+			title: 'Nefrolitiase Colica Renal N20 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA + ESCOPOLAMINA 1AMP , ONDANSETRONA 01 AMP EM 100ML DE SF 0,9%\\n2) REAVALIAR EM 1H',
+		},
+		onicomicose_1_maos_tinea_ungueum: {
+			title: 'Onicomicose 1 Maos Tinea Ungueum',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		onicomicose_2_maos_tinea_ungueum: {
+			title: 'Onicomicose 2 Maos Tinea Ungueum',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		onicomicose_3_pes: {
+			title: 'Onicomicose 3 Pes',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		onicomicose_4_pes: {
+			title: 'Onicomicose 4 Pes',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		osteoporose_1: {
+			title: 'Osteoporose 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		osteoporose_2: {
+			title: 'Osteoporose 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		osteoporose_3: {
+			title: 'Osteoporose 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		otite_externa_h60_3: {
+			title: 'Otite Externa H60 3',
+			symptoms: 'Otalgia, febre, irritabilidade, hipoacusia, abaulamento de membrana timpânica.',
+			tips: '\\n1) DIPIRONA + DECADRON 1AMP CADA IM',
+		},
+		otite_media_aguda_h66_0: {
+			title: 'Otite Media Aguda H66 0',
+			symptoms: 'Otalgia, febre, irritabilidade, hipoacusia, abaulamento de membrana timpânica.',
+			tips: '\\n1) DIPIRONA + DECADRON 1AMP CADA IM',
+		},
+		otite_media_cefuroxima: {
+			title: 'Otite Media Cefuroxima',
+			symptoms: 'Otalgia, febre, irritabilidade, hipoacusia, abaulamento de membrana timpânica.',
+			tips: 'Retornar se os sintomas piorarem, mesmo com medicamentos.\\n- Febre persistente por mais de 48h: temperatura acima de 37,8°C.\\n- Piora do quadro por 72 horas, mesmo com uso de antibióticos.\\n\\n- INTERNAÇÃO HOSPITALAR\\n\\n- Indicada na presença de complicações como otomastoidite, complicações intracranianas, sepse ou otalgia resistente à antibioticoterapia.<br><br>INTERNAÇÃO HOSPITALAR\\n\\n- Indicada na presença de complicações como otomastoidite, complicações intracranianas, sepse ou otalgia resistente à antibioticoterapia.',
+		},
+		oxiuriase_1: {
+			title: 'Oxiuriase 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		oxiuriase_criancas_2: {
+			title: 'Oxiuriase Criancas 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		},
+		pediculose_crianca_2_anos: {
+			title: 'Pediculose Crianca 2 Anos',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		pediculose_pubiana: {
+			title: 'Pediculose Pubiana',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		pep_profilaxia_pos_exposicao_sexual_z20_2: {
+			title: 'Pep Profilaxia Pos Exposicao Sexual Z20 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor associada)\\n2) Início imediato do esquema acima, se disponível',
+		},
+		picada_de_inseto_com_reacao_inflamatoria_local_t63_4_l50_9: {
+			title: 'Picada De Inseto Com Reacao Inflamatoria Local T63 4 L50 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) HIDROCORTISONA 100mg IM + DIPIRONA 1g IM',
+		},
+		pneumonias_pneumonia_broncopneumonia_bcp_j18_9: {
+			title: 'Pneumonias Pneumonia Broncopneumonia Bcp J18 9',
+			symptoms: 'Tosse com expectoração, febre, dispneia, dor torácica ventilatório-dependente.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		pre_natal_vitaminas: {
+			title: 'Pre Natal Vitaminas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		prostatite: {
+			title: 'Prostatite',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		psoriase_leve_l40_0: {
+			title: 'Psoriase Leve L40 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor associada intensa)',
+		},
+		ptiriase_versicolor: {
+			title: 'Ptiriase Versicolor',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		queimadura_solar_leve_l55_0: {
+			title: 'Queimadura Solar Leve L55 0',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM\\n2) ORIENTAR medidas de hidratação e proteção solar',
+		},
+		rinite_alergica_j30_9: {
+			title: 'Rinite Alergica J30 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DEXCLORFENIRAMINA 5mg IM (se crise alérgica intensa)',
+		},
+		sangramento_uterino: {
+			title: 'Sangramento Uterino',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		sifilis_penicilina_benzatina: {
+			title: 'Sifilis Penicilina Benzatina',
+			symptoms: 'Cancro duro (primária), manchas avermelhadas (secundária), gomas/neurosífilis (terciária).',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		sindrome_ansiosa_crise_de_ansiedade_leve_f41_0: {
+			title: 'Sindrome Ansiosa Crise De Ansiedade Leve F41 0',
+			symptoms: 'Inquietação, taquicardia, sudorese, tremores, sensação de morte iminente.',
+			tips: '\\n1) DIAZEPAM 5mg IM (se crise aguda com agitação)',
+		},
+		sindrome_dispeptica: {
+			title: 'Sindrome Dispeptica',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		sindrome_gripal_viral_simples_j11_1: {
+			title: 'Sindrome Gripal Viral Simples J11 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM + ORIENTAR repouso e hidratação oral',
+		},
+		sinusite_aguda_j01_9: {
+			title: 'Sinusite Aguda J01 9',
+			symptoms: 'Cefaleia frontal, congestão nasal, rinorreia purulenta, tosse, halitose.',
+			tips: '\\n1) DIPIRONA 1g IM + LAVAGEM NASAL com SF 0,9%',
+		},
+		teniase: {
+			title: 'Teniase',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida em casa.\\nNão ingerir bebidas alcoólicas no dia do tratamento e no dia seguinte.',
+		},
+		tetano_conduta_para_ferimentos_a35: {
+			title: 'Tetano Conduta Para Ferimentos A35',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nEncaminhar para continuidade da vacinação no posto\\nAvaliar antibioticoterapia se sinais de infecção local.<br><br>\\n1) LIMPEZA E DEBRIDAMENTO da ferida com SF 0,9% + PVPI\\n2) VACINA dT IM (se esquema vacinal incompleto ou desconhecido)\\n3) IMUNOGLOBULINA ANTITETÂNICA IM (se ferimento de alto risco e esquema vacinal incerto)\\n\\n',
+		},
+		tinea_micose_de_pele_ou_couro_cabeludo_b35_0_b35_4: {
+			title: 'Tinea Micose De Pele Ou Couro Cabeludo B35 0 B35 4',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se prurido ou dor local intensa)',
+		},
+		tonsilite: {
+			title: 'Tonsilite',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		tonsilite_2: {
+			title: 'Tonsilite 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		tonsilite_criancas_1: {
+			title: 'Tonsilite Criancas 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		tonsilite_criancas_2: {
+			title: 'Tonsilite Criancas 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		tosse_seca_persistente_r05: {
+			title: 'Tosse Seca Persistente R05',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor torácica associada à tosse)',
+		},
+		tricomoniase: {
+			title: 'Tricomoniase',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		},
+		tricomoniase_2: {
+			title: 'Tricomoniase 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nNão ingerir bebidas alcoólicas até 4 dias após o tratamento com secnidazol e manter abstinência sexual até o término do tratamento com o gel vaginal.',
+		},
+		ulcera_peptica_duodenal: {
+			title: 'Ulcera Peptica Duodenal',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		urticaria: {
+			title: 'Urticaria',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		urticaria_aguda_l50_9: {
+			title: 'Urticaria Aguda L50 9',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) HIDROCORTISONA 100mg IM + DEXCLORFENIRAMINA 5mg IM',
+		},
+		urticaria_criancas: {
+			title: 'Urticaria Criancas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		vacinacao_antitetanica_a35: {
+			title: 'Vacinacao Antitetanica A35',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\n1) AVALIAR ESQUEMA VACINAL do paciente (3 doses básicas + reforços)\\n2) dT IM (Vacina dupla adulto)\\n   Aplicar em caso de ferimentos com risco ou calendário desatualizado\\n3) IMUNOGLOBULINA ANTITETÂNICA IM\\n   Aplicar se ferimento de risco + vacinação incompleta/desconhecida\\n\\n',
+		},
+		vaginite_mista: {
+			title: 'Vaginite Mista',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		vaginose_bacteriana: {
+			title: 'Vaginose Bacteriana',
+			symptoms: 'Corrimento branco-acinzentado, odor fétido (peixe podre), sem inflamação exuberante.',
+			tips: '\\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		},
+		vaginose_bacteriana_2: {
+			title: 'Vaginose Bacteriana 2',
+			symptoms: 'Corrimento branco-acinzentado, odor fétido (peixe podre), sem inflamação exuberante.',
+			tips: '\\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		},
+		vaginose_bacteriana_3: {
+			title: 'Vaginose Bacteriana 3',
+			symptoms: 'Corrimento branco-acinzentado, odor fétido (peixe podre), sem inflamação exuberante.',
+			tips: '\\nNão ingerir bebidas alcoólicas e manter abstinência sexual até 24 horas após o tratamento.',
+		},
+		varizes_dos_membros_inferiores_i83_9: {
+			title: 'Varizes Dos Membros Inferiores I83 9',
+			symptoms: 'Veias dilatadas e tortuosas, dor em peso, edema, cansaço nas pernas.',
+			tips: '\\n1) DIPIRONA 1g IM (se dor local intensa)',
+		},
+		vermifugo_amplo_espectro_1: {
+			title: 'Vermifugo Amplo Espectro 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida em casa',
+		},
+		vermifugo_amplo_espectro_2: {
+			title: 'Vermifugo Amplo Espectro 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida em casa.',
+		},
+		vermifugo_amplo_espectro_3: {
+			title: 'Vermifugo Amplo Espectro 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida em casa.',
+		},
+		vermifugo_criancas_1: {
+			title: 'Vermifugo Criancas 1',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		},
+		vermifugo_criancas_2: {
+			title: 'Vermifugo Criancas 2',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		},
+		vermifugo_criancas_3: {
+			title: 'Vermifugo Criancas 3',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: '\\nFerver e/ou filtrar toda a água a ser consumida pela criança.',
+		},
+		vertigem_1: {
+			title: 'Vertigem 1',
+			symptoms: 'Sensação de rotação do ambiente ou do próprio corpo, náuseas, desequilíbrio.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		vertigem_aguda: {
+			title: 'Vertigem Aguda',
+			symptoms: 'Sensação de rotação do ambiente ou do próprio corpo, náuseas, desequilíbrio.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+		virose_criancas: {
+			title: 'Virose Criancas',
+			symptoms: 'Sinais e sintomas compatíveis com a hipótese diagnóstica. Avaliar quadro clínico.',
+			tips: 'Seguir conduta médica padrão e avaliar critérios de gravidade.',
+		},
+	
+  };
+
+  // ========================================
+  // EXPORTAR PARA WINDOW (global scope)
+  // ========================================
+  
+  // Criar objeto global se não existir
+  if (typeof window.hotstrings === 'undefined') {
+    window.hotstrings = {};
+  }
+  
+  // Exportar cada categoria separadamente (acesso direto)
+  window.quick_hotstrings = quick_hotstrings;
+  window.psf_hotstrings = psf_hotstrings;
+  window.psf_metadata = psf_metadata;
+  
+  // Merge tudo em window.hotstrings (para compatibilidade com código legado que busca tudo num lugar só)
+  Object.assign(window.hotstrings, quick_hotstrings, psf_hotstrings);
+  
+  console.log('✅ Unified Hotstrings loaded successfully.');
+})();
+

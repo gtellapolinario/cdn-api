@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checklist Pós-Tentativa → /api/scales</title>
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #0b1220;
+      color: #e6edf7;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: #111a2c;
+      border: 1px solid #223152;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 8px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin: 18px 0 10px;
+    }
+
+    p,
+    label {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .col-6 {
+      grid-column: span 6;
+    }
+
+    .col-12 {
+      grid-column: span 12;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background: #0b1220;
+      color: #e6edf7;
+      border: 1px solid #2a3a63;
+      border-radius: 10px;
+      padding: 10px 12px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #4c78ff;
+      box-shadow: 0 0 0 3px rgba(76, 120, 255, .18);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid #2a3a63;
+      background: #1b2a4a;
+      color: #e6edf7;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn.primary {
+      background: #1c8b54;
+      border-color: #1c8b54;
+    }
+
+    .btn.danger {
+      background: #9b2c2c;
+      border-color: #9b2c2c;
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .muted {
+      color: #a8b3cc;
+    }
+
+    details {
+      border: 1px solid #223152;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #0f1830;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(76, 120, 255, .15);
+      border: 1px solid rgba(76, 120, 255, .35);
+      margin-left: 8px;
+    }
+
+    .hr {
+      height: 1px;
+      background: #223152;
+      margin: 14px 0;
+    }
+
+    .status {
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #223152;
+      background: rgba(0, 0, 0, .12);
+    }
+
+    .ok {
+      border-color: rgba(28, 139, 84, .6);
+      background: rgba(28, 139, 84, .12);
+    }
+
+    .err {
+      border-color: rgba(155, 44, 44, .7);
+      background: rgba(155, 44, 44, .12);
+    }
+
+    .small {
+      font-size: 12px;
+    }
+
+    code {
+      background: rgba(255, 255, 255, .06);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 820px) {
+      .col-6 {
+        grid-column: span 12;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Checklist pós-tentativa (adolescente) → /api/scales</h1>
+      <p class="muted">
+        Envia <code>{ patient, results, tipo }</code> (compatível com seu <code>scaleRouter.js</code>) e exibe
+        <code>report</code>.
+      </p>
+
+      <div class="hr"></div>
+
+      <div class="grid">
+        <!-- barreira UI -->
+        <div class="col-6">
+          <label>Senha (front)</label>
+          <div class="row">
+            <input id="pw" type="password" placeholder="Digite a senha" />
+            <button class="btn" id="togglePw" type="button">Mostrar</button>
+          </div>
+          <p class="muted small">⚠️ só UI. Autenticação real tem que estar no backend.</p>
+        </div>
+
+        <div class="col-6">
+          <label>Tipo de prompt (campo <code>tipo</code>)</label>
+          <select id="tipo">
+            <option value="gerais">gerais</option>
+            <option value="suicidio">suicidio</option>
+            <option value="psiquiatria">psiquiatria</option>
+          </select>
+          <p class="muted small">
+            Se não existir em <code>PROMPTS[tipo]</code>, cai no <code>PROMPTS.gerais</code>.
+          </p>
+        </div>
+
+        <div class="col-6">
+          <label>Base URL</label>
+          <input id="baseUrl" placeholder="(auto) ex: https://mail-api.replit.app" />
+          <p class="muted small">Vazio: local usa <code>""</code>, prod usa <code>https://mail-api.replit.app</code>.
+          </p>
+        </div>
+
+        <div class="col-6">
+          <label>Nome da escala (vai em <code>results.scale</code>)</label>
+          <input id="scaleName" value="Checklist pós-tentativa (adolescente)" />
+        </div>
+
+        <div class="col-6">
+          <label>Paciente: Nome (obrigatório)</label>
+          <input id="patientName" value="Paciente Teste" />
+        </div>
+
+        <div class="col-6">
+          <label>Paciente: Email (obrigatório pelo validator do backend)</label>
+          <input id="patientEmail" value="paciente@exemplo.com" />
+        </div>
+
+        <div class="col-6">
+          <label>Idade</label>
+          <input id="patientAge" value="13" />
+        </div>
+
+        <div class="col-6">
+          <label>Responsável presente</label>
+          <select id="guardianPresent">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+            <option value="Incerto">Incerto</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label>Contexto mínimo do caso (sem dados sensíveis)</label>
+          <textarea id="caseContext"
+            placeholder="Ex: Primeira consulta. Tentativa há 4 dias. Encaminhada pós UPA. Mora com mãe/pai. ..."></textarea>
+        </div>
+
+        <div class="col-12">
+          <label>Instrução adicional (vai dentro de <code>results.instruction</code> e aparece no Markdown do
+            backend)</label>
+          <textarea id="instruction">
+Gere um relatório clínico estruturado e objetivo, em português, com:
+(1) síntese do episódio e linha do tempo,
+(2) psicopatologia atual (DSM-5 orientado a risco),
+(3) fatores de risco/proteção (state/trait),
+(4) estratificação do risco 24–72h com justificativa,
+(5) decisão de nível de cuidado,
+(6) plano de segurança (incl. restrição de meios),
+(7) follow-up e encaminhamentos.
+Não invente dados: se faltar, marque como "Não informado".
+            </textarea>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div id="formRoot"></div>
+
+      <div class="hr"></div>
+
+      <div class="row" style="justify-content: space-between; flex-wrap: wrap;">
+        <div class="row" style="flex-wrap: wrap;">
+          <button class="btn primary" id="sendBtn" type="button">Enviar → gerar relatório</button>
+          <button class="btn" id="previewBtn" type="button">Pré-visualizar (joinedText)</button>
+          <button class="btn" id="downloadBtn" type="button">Baixar joinedText (.md)</button>
+          <button class="btn danger" id="clearBtn" type="button">Limpar</button>
+        </div>
+        <div id="status" class="status muted">Pronto.</div>
+      </div>
+
+      <div class="hr"></div>
+
+      <h2>joinedText (Markdown opcional)</h2>
+      <textarea id="joinedText" placeholder="Clique em Pré-visualizar ou Enviar..."></textarea>
+
+      <h2>Retorno do endpoint</h2>
+      <textarea id="apiResult" placeholder="Aqui aparece o { report } retornado pelo /api/scales..."></textarea>
+    </div>
+  </div>
+
+  <script>
+    // =========================
+    // CONFIG
+    // =========================
+    const FRONT_SECRET = "enviar";
+
+    function resolveBaseUrl() {
+      const manual = document.getElementById("baseUrl").value.trim();
+      if (manual) return manual.replace(/\/+$/, "");
+      const host = location.hostname;
+      const isLocal =
+        host === "localhost" ||
+        host === "127.0.0.1" ||
+        host.endsWith(".local") ||
+        /^192\.168\./.test(host) ||
+        /^10\./.test(host);
+      return isLocal ? "" : "https://mail-api.replit.app";
+    }
+
+    // =========================
+    // FORM SCHEMA
+    // =========================
+    const SECTIONS = [
+      {
+        title: "Triagem de segurança imediata (state)",
+        badge: "prioridade",
+        fields: [
+          { key: "ideacao_atual", label: "Ideação suicida atual", type: "select", options: ["Não", "Sim", "Incerto"] },
+          { key: "plano_atual", label: "Plano atual específico", type: "select", options: ["Não", "Sim", "Incerto"] },
+          { key: "intencao_atual", label: "Intenção atual de morrer", type: "select", options: ["Não", "Sim", "Incerto"] },
+          { key: "acesso_meios", label: "Acesso a meios letais em casa", type: "select", options: ["Não", "Sim", "Incerto"] },
+          { key: "supervisao_72h", label: "Supervisão confiável nas próximas 72h", type: "select", options: ["Não", "Sim", "Parcial/duvidosa"] },
+          { key: "sinais_alarme", label: "Sinais de alarme atuais (agitação, intoxicação, psicose, dissociação grave etc.)", type: "textarea" }
+        ]
+      },
+      {
+        title: "Reconstrução do episódio (linha do tempo do ato)",
+        fields: [
+          { key: "gatilhos_24_72h", label: "Gatilhos 24–72h", type: "textarea" },
+          { key: "estado_pre_ato", label: "Estado mental pré-ato", type: "textarea" },
+          { key: "metodo_letalidade", label: "Método / letalidade / planejamento vs impulsivo / chance de resgate", type: "textarea" },
+          { key: "o_que_interrompeu", label: "O que interrompeu o ato / por que está viva", type: "textarea" },
+          { key: "reacao_pos_ato", label: "Reação pós-ato", type: "textarea" }
+        ]
+      },
+      {
+        title: "Psicopatologia e diagnóstico diferencial (DSM-5 orientado a risco)",
+        fields: [
+          { key: "depressao", label: "Depressão", type: "textarea" },
+          { key: "bipolar_misto", label: "Bipolaridade/estado misto", type: "textarea" },
+          { key: "ansiedade_toc", label: "Ansiedade/pânico/TOC", type: "textarea" },
+          { key: "psicose", label: "Psicose", type: "textarea" },
+          { key: "tept_estresse_agudo", label: "TEPT / estresse agudo", type: "textarea" },
+          { key: "dissociacao", label: "Dissociação", type: "textarea" },
+          { key: "nssi", label: "NSSI / função do corte", type: "textarea" },
+          { key: "substancias", label: "Substâncias", type: "textarea" }
+        ]
+      },
+      {
+        title: "Contexto e rede (onde o risco mora)",
+        fields: [
+          { key: "familia", label: "Família", type: "textarea" },
+          { key: "escola", label: "Escola", type: "textarea" },
+          { key: "internet", label: "Internet", type: "textarea" },
+          { key: "abuso", label: "Abuso / maus-tratos (indícios)", type: "textarea" },
+          { key: "historico_pessoal", label: "Histórico pessoal", type: "textarea" },
+          { key: "historico_familiar", label: "Histórico familiar", type: "textarea" }
+        ]
+      },
+      {
+        title: "Formulação e decisão",
+        badge: "decisão",
+        fields: [
+          { key: "riscos_trait", label: "Fatores de risco TRAIT", type: "textarea" },
+          { key: "riscos_state", label: "Fatores de risco STATE", type: "textarea" },
+          { key: "protetores", label: "Fatores protetores reais", type: "textarea" },
+          { key: "risco_24_72h", label: "Risco 24–72h", type: "select", options: ["Baixo", "Moderado", "Alto", "Indeterminado"] },
+          { key: "nivel_cuidado", label: "Decisão de nível de cuidado", type: "select", options: ["Ambulatório intensivo", "CAPS/CAPSij", "Urgência/Observação", "Internação"] },
+          { key: "plano_seguranca", label: "Plano de segurança (incl. restrição de meios)", type: "textarea" },
+          { key: "followup", label: "Follow-up e encaminhamentos", type: "textarea" }
+        ]
+      }
+    ];
+
+    // =========================
+    // UI HELPERS
+    // =========================
+    const formRoot = document.getElementById("formRoot");
+
+    function el(tag, attrs = {}, children = []) {
+      const node = document.createElement(tag);
+      Object.entries(attrs).forEach(([k, v]) => {
+        if (v === null || v === undefined) return;
+        if (k === "class") node.className = v;
+        else if (k === "text") node.textContent = v;
+        else node.setAttribute(k, v);
+      });
+      children.forEach((c) => node.appendChild(c));
+      return node;
+    }
+
+    function renderForm() {
+      formRoot.innerHTML = "";
+      SECTIONS.forEach((section, idx) => {
+        const details = el("details", { open: idx === 0 ? "true" : null });
+        const summary = el("summary", {});
+        summary.textContent = section.title;
+
+        if (section.badge) summary.appendChild(el("span", { class: "pill", text: section.badge }));
+        details.appendChild(summary);
+
+        const grid = el("div", { class: "grid", style: "margin-top:10px;" });
+
+        section.fields.forEach((f) => {
+          const col = el("div", { class: f.type === "textarea" ? "col-12" : "col-6" });
+          const label = el("label", { text: f.label });
+          const id = `f_${f.key}`;
+
+          let input;
+          if (f.type === "select") {
+            input = el("select", { id });
+            f.options.forEach((opt) => input.appendChild(el("option", { value: opt, text: opt })));
+          } else if (f.type === "textarea") {
+            input = el("textarea", { id, placeholder: "..." });
+          } else {
+            input = el("input", { id, type: "text", placeholder: "..." });
+          }
+
+          col.appendChild(label);
+          col.appendChild(input);
+          grid.appendChild(col);
+        });
+
+        details.appendChild(grid);
+        formRoot.appendChild(details);
+      });
+    }
+
+    renderForm();
+
+    function setStatus(text, kind = "muted") {
+      const statusEl = document.getElementById("status");
+      statusEl.className = `status ${kind}`;
+      statusEl.textContent = text;
+    }
+
+    function validatePw() {
+      const pw = (document.getElementById("pw").value || "").trim().toLowerCase();
+      const ok = pw === FRONT_SECRET;
+      if (!ok) setStatus("Senha incorreta.", "err");
+      return ok;
+    }
+
+    function collectAnswers() {
+      const answers = {};
+      SECTIONS.forEach((s) => s.fields.forEach((f) => {
+        const node = document.getElementById(`f_${f.key}`);
+        answers[f.key] = node && "value" in node ? String(node.value).trim() : "";
+      }));
+      return answers;
+    }
+
+    function buildStructuredResults() {
+      const answers = collectAnswers();
+      // Estrutura “bonita” para seu objToMd (fica legível no Markdown do backend)
+      const results = {
+        scale: document.getElementById("scaleName").value.trim() || "Escalas",
+        caseContext: document.getElementById("caseContext").value.trim() || "Não informado",
+        instruction: document.getElementById("instruction").value.trim() || "",
+        triagem_imediata: {
+          ideacao_atual: answers.ideacao_atual || "Não informado",
+          plano_atual: answers.plano_atual || "Não informado",
+          intencao_atual: answers.intencao_atual || "Não informado",
+          acesso_meios: answers.acesso_meios || "Não informado",
+          supervisao_72h: answers.supervisao_72h || "Não informado",
+          sinais_alarme: answers.sinais_alarme || "Não informado"
+        },
+        episodio_linha_do_tempo: {
+          gatilhos_24_72h: answers.gatilhos_24_72h || "Não informado",
+          estado_pre_ato: answers.estado_pre_ato || "Não informado",
+          metodo_letalidade: answers.metodo_letalidade || "Não informado",
+          o_que_interrompeu: answers.o_que_interrompeu || "Não informado",
+          reacao_pos_ato: answers.reacao_pos_ato || "Não informado"
+        },
+        psicopatologia_dsm5: {
+          depressao: answers.depressao || "Não informado",
+          bipolar_misto: answers.bipolar_misto || "Não informado",
+          ansiedade_toc: answers.ansiedade_toc || "Não informado",
+          psicose: answers.psicose || "Não informado",
+          tept_estresse_agudo: answers.tept_estresse_agudo || "Não informado",
+          dissociacao: answers.dissociacao || "Não informado",
+          nssi: answers.nssi || "Não informado",
+          substancias: answers.substancias || "Não informado"
+        },
+        contexto_rede: {
+          familia: answers.familia || "Não informado",
+          escola: answers.escola || "Não informado",
+          internet: answers.internet || "Não informado",
+          abuso_maus_tratos: answers.abuso || "Não informado",
+          historico_pessoal: answers.historico_pessoal || "Não informado",
+          historico_familiar: answers.historico_familiar || "Não informado"
+        },
+        formulacao_decisao: {
+          riscos_trait: answers.riscos_trait || "Não informado",
+          riscos_state: answers.riscos_state || "Não informado",
+          protetores: answers.protetores || "Não informado",
+          risco_24_72h: answers.risco_24_72h || "Não informado",
+          nivel_cuidado: answers.nivel_cuidado || "Não informado",
+          plano_seguranca: answers.plano_seguranca || "Não informado",
+          followup: answers.followup || "Não informado"
+        },
+        rawAnswers: answers // fica útil pra debug/auditoria
+      };
+
+      return { results, answers };
+    }
+
+    function buildJoinedText({ patient, tipo, results }) {
+      // joinedText é opcional, mas ajuda quando você quer copiar/colar ou auditar.
+      const lines = [];
+      lines.push(`# JoinedText – ${results.scale}`);
+      lines.push(``);
+      lines.push(`## Patient`);
+      lines.push(`- Name: ${patient.name}`);
+      lines.push(`- Email: ${patient.email}`);
+      if (patient.age) lines.push(`- Age: ${patient.age}`);
+      if (patient.guardianPresent) lines.push(`- Guardian present: ${patient.guardianPresent}`);
+      lines.push(`- Tipo: ${tipo}`);
+      lines.push(``);
+      lines.push(`## Contexto`);
+      lines.push(results.caseContext || "Não informado");
+      lines.push(``);
+      lines.push(`## Instruction`);
+      lines.push(results.instruction || "(vazio)");
+      lines.push(``);
+      lines.push(`## Results (JSON)`);
+      lines.push("```json");
+      lines.push(JSON.stringify(results, null, 2));
+      lines.push("```");
+      return lines.join("\n");
+    }
+
+    function buildPayload() {
+      const tipo = document.getElementById("tipo").value.trim() || "gerais";
+
+      const patient = {
+        name: document.getElementById("patientName").value.trim(),
+        email: document.getElementById("patientEmail").value.trim(),
+        age: document.getElementById("patientAge").value.trim(),
+        guardianPresent: document.getElementById("guardianPresent").value
+      };
+
+      const { results } = buildStructuredResults();
+
+      // >>> payload exatamente como seu backend espera:
+      // const { patient, results, tipo = "gerais" } = req.body;
+      return { patient, results, tipo };
+    }
+
+    // =========================
+    // BUTTONS
+    // =========================
+    const togglePwBtn = document.getElementById("togglePw");
+    const pwInput = document.getElementById("pw");
+    const previewBtn = document.getElementById("previewBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const sendBtn = document.getElementById("sendBtn");
+
+    togglePwBtn.addEventListener("click", () => {
+      const isPw = pwInput.type === "password";
+      pwInput.type = isPw ? "text" : "password";
+      togglePwBtn.textContent = isPw ? "Ocultar" : "Mostrar";
+    });
+
+    function preview() {
+      const payload = buildPayload();
+      const joinedText = buildJoinedText(payload);
+
+      document.getElementById("joinedText").value = joinedText;
+      setStatus("joinedText atualizado.", "ok");
+
+      return { payload, joinedText };
+    }
+
+    previewBtn.addEventListener("click", preview);
+
+    downloadBtn.addEventListener("click", () => {
+      const { joinedText } = preview();
+      const blob = new Blob([joinedText], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "joinedText-checklist.md";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      setStatus("Baixou joinedText-checklist.md", "ok");
+    });
+
+    clearBtn.addEventListener("click", () => {
+      if (!confirm("Limpar todos os campos?")) return;
+
+      document.getElementById("caseContext").value = "";
+      document.getElementById("apiResult").value = "";
+      document.getElementById("joinedText").value = "";
+
+      SECTIONS.forEach((s) => s.fields.forEach((f) => {
+        const node = document.getElementById(`f_${f.key}`);
+        if (!node) return;
+        if (node.tagName === "SELECT") node.value = node.options[0]?.value ?? "";
+        else node.value = "";
+      }));
+
+      setStatus("Campos limpos.", "ok");
+    });
+
+    async function send() {
+      if (!validatePw()) return;
+
+      const payload = buildPayload();
+
+      // validações mínimas compatíveis com seu backend
+      if (!payload.patient.name || !payload.patient.email || !payload.results) {
+        setStatus("Payload incompleto: patient.name, patient.email e results são obrigatórios.", "err");
+        return;
+      }
+
+      const base = resolveBaseUrl();
+      const url = `${base}/api/scales`;
+
+      sendBtn.disabled = true;
+      setStatus("Enviando para /api/scales…", "muted");
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const ct = res.headers.get("content-type") || "";
+        const isJson = ct.includes("application/json");
+        const data = isJson ? await res.json() : await res.text();
+
+        if (!res.ok) {
+          const msg =
+            isJson && data && typeof data === "object" && "error" in data
+              ? String(data.error)
+              : typeof data === "string"
+                ? data
+                : `Erro ${res.status}`;
+          throw new Error(msg);
+        }
+
+        // seu backend retorna { status: "sent", report }
+        const report = (data && typeof data === "object" && data.report)
+          ? String(data.report)
+          : (typeof data === "string" ? data : JSON.stringify(data, null, 2));
+
+        document.getElementById("apiResult").value = report;
+        setStatus("Relatório recebido (e email enviado pelo backend).", "ok");
+      } catch (e) {
+        document.getElementById("apiResult").value = "";
+        setStatus(`Erro ao enviar: ${e.message}`, "err");
+      } finally {
+        sendBtn.disabled = false;
+      }
+    }
+
+    sendBtn.addEventListener("click", send);
+
+    pwInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") send();
+    });
+  </script>
+</body>
+
+</html>

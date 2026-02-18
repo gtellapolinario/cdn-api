@@ -40,7 +40,7 @@
               <div>
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-slate-800">groups</span>
-                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Estratégia Saúde da Família (PSF)</h1>
+                  <h1 class="text-xl font-semibold tracking-tight text-[#2d3748]">Estratégia Saúde da Família (PSF)</h1>
                 </div>
               </div>
 
@@ -86,8 +86,8 @@
 		if (menuContainer) {
 			menuContainer.innerHTML = psfTools.map(tool => `
 				<button data-psf-key="${tool.key}"
-					class="psf-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none">
-					<span class="material-symbols-outlined text-base">${tool.icon}</span>
+					class="psf-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-semibold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none">
+					<span class="material-symbols-outlined text-sm">${tool.icon}</span>
 					${tool.name}
 				</button>
 			`).join('');

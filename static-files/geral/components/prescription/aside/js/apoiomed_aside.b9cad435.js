@@ -85,7 +85,7 @@
 			window.setInstitutionData?.(data.local1 || `PREFEITURA DE ${data.municipio.toUpperCase()}`, data.local2 || 'SECRETARIA MUNICIPAL DE SAÚDE', data.local3 || data.nome.toUpperCase());
 
 			window.setDoctorData?.({
-				local: data.local || data.nome,
+				local: [data.nome, data.endereco, data.municipio, data.uf].filter(Boolean).join(' - '),
 				cnes: data.cnes,
 				telefone: data.telefone,
 			});

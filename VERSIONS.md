@@ -1,4 +1,4 @@
-# Current CDN Versions (Updated: 2026-02-10 04:27:09)
+# Current CDN Versions (Updated: 2026-02-11 02:09:30)
 
 ## static-files/geral/js
 ### 📋 Copy-Paste for CDNLoader
@@ -10,8 +10,11 @@
     await loader.load("adm_drugs.js");
     await loader.load("bundle.js");
     await loader.load("bundle.min.js");
+    await loader.load("cid10-module.js");
     await loader.load("clipboard.js");
     await loader.load("guia_lme.js");
+    await loader.load("mini-bundle.js");
+    await loader.load("mini-bundle.min.js");
     await loader.load("ufs-brasil-module.js");
   })();
 </script>
@@ -20,10 +23,13 @@
 ### 🔗 Direct Hashed Links (Manual Update Required)
 ```html
 <script src="https://cdn.gtmedics.com/geral/js/adm_drugs.b83e7b87.js"></script>
-<script src="https://cdn.gtmedics.com/geral/js/bundle.f60d99ba.js"></script>
-<script src="https://cdn.gtmedics.com/geral/js/bundle.min.fb5c5a84.js"></script>
+<script src="https://cdn.gtmedics.com/geral/js/bundle.85c8a54f.js"></script>
+<script src="https://cdn.gtmedics.com/geral/js/bundle.min.eb37ed3e.js"></script>
+<script src="https://cdn.gtmedics.com/geral/js/cid10-module.4513fc95.js"></script>
 <script src="https://cdn.gtmedics.com/geral/js/clipboard.43be8b16.js"></script>
-<script src="https://cdn.gtmedics.com/geral/js/guia_lme.728ebbe6.js"></script>
+<script src="https://cdn.gtmedics.com/geral/js/guia_lme.892ce184.js"></script>
+<script src="https://cdn.gtmedics.com/geral/js/mini-bundle.bf93142b.js"></script>
+<script src="https://cdn.gtmedics.com/geral/js/mini-bundle.min.4f042e82.js"></script>
 <script src="https://cdn.gtmedics.com/geral/js/ufs-brasil-module.c0c81c28.js"></script>
 ```
 
@@ -111,10 +117,10 @@
 ### 🔗 Direct Hashed Links (Manual Update Required)
 ```html
 <script src="https://cdn.gtmedics.com/tabs/js/index.4501021b.js"></script>
-<script src="https://cdn.gtmedics.com/tabs/js/tab_apoio.e94d8f89.js"></script>
+<script src="https://cdn.gtmedics.com/tabs/js/tab_apoio.93e3b100.js"></script>
 <script src="https://cdn.gtmedics.com/tabs/js/tab_exames.d6f2315b.js"></script>
-<script src="https://cdn.gtmedics.com/tabs/js/tab_guias.778a0d2a.js"></script>
-<script src="https://cdn.gtmedics.com/tabs/js/tab_psf.77061422.js"></script>
+<script src="https://cdn.gtmedics.com/tabs/js/tab_guias.bf0c1531.js"></script>
+<script src="https://cdn.gtmedics.com/tabs/js/tab_psf.18488928.js"></script>
 <script src="https://cdn.gtmedics.com/tabs/js/tab_receituario.b9a14233.js"></script>
 ```
 
@@ -138,7 +144,7 @@
 
 ### 🔗 Direct Hashed Links (Manual Update Required)
 ```html
-<script src="https://cdn.gtmedics.com/aside/js/apoiomed_aside.d0693503.js"></script>
+<script src="https://cdn.gtmedics.com/aside/js/apoiomed_aside.b9cad435.js"></script>
 <script src="https://cdn.gtmedics.com/aside/js/aside_cnes_search.d2a970d9.js"></script>
 <script src="https://cdn.gtmedics.com/aside/js/aside_event_bus.aca4a25c.js"></script>
 <script src="https://cdn.gtmedics.com/aside/js/aside_formatting_tools.9ba23847.js"></script>
@@ -164,7 +170,7 @@
 ### 🔗 Direct Hashed Links (Manual Update Required)
 ```html
 <script src="https://cdn.gtmedics.com/header/js/header_index.259b6b9a.js"></script>
-<script src="https://cdn.gtmedics.com/header/js/header_tool_container.f054efd2.js"></script>
+<script src="https://cdn.gtmedics.com/header/js/header_tool_container.f74d28a9.js"></script>
 <script src="https://cdn.gtmedics.com/header/js/header_toolbar.a38674e6.js"></script>
 ```
 

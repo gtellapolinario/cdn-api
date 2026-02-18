@@ -4,6 +4,7 @@
 	"description": "Bundle builder para GT-Medics",
 	"scripts": {
 		"build": "node build-bundle.cjs --prod",
+		"build:mini": "node build-mini.cjs --prod",
 		"build:dev": "node build-bundle.cjs --dev",
 		"watch": "nodemon --watch static-files -e js --exec 'npm run build:dev'"
 	},

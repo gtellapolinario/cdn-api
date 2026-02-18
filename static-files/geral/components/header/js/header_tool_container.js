@@ -58,7 +58,7 @@
 
 		// Restaura tab salva
 		setTimeout(() => {
-			setActiveTab(localStorage.getItem('rx_active_tab') || 'prescricao');
+			setActiveTab(sessionStorage.getItem('rx_active_tab') || 'prescricao');
 		}, 100);
 
 		console.log('[Tabs] ✅ Rendered (' + tabButtons.length + ' tabs)');
@@ -94,7 +94,7 @@
 			btn.classList.toggle('font-medium', !active);
 		});
 
-		localStorage.setItem('rx_active_tab', name);
+		sessionStorage.setItem('rx_active_tab', name);
 		lazyInit(name);
 
 		bus?.emit('tabChanged', { tab: name });
@@ -115,7 +115,7 @@
 	}
 
 	function getActiveTab() {
-		return localStorage.getItem('rx_active_tab') || 'prescricao';
+		return sessionStorage.getItem('rx_active_tab') || 'prescricao';
 	}
 
 	function destroy() {

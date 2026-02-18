@@ -1,0 +1,224 @@
+.a4 {
+	width: 210mm;
+	min-height: 297mm;
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+@page {
+	size: A4;
+	margin: 0;
+}
+
+@media print {
+	html,
+	body {
+		background: white !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.a4 {
+		box-shadow: none !important;
+		border-radius: 0 !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	/* Esconde tudo com visibility */
+	body * {
+		visibility: hidden !important;
+	}
+
+	/* Estilos de impressão para a aba de PRESCRIÇÃO */
+	#tab-prescricao #rxForm,
+	#tab-prescricao #rxForm * {
+		visibility: visible !important;
+	}
+
+	/* IMPORTANTE: Se textArea é o contenteditable, ele PRECISA estar visível
+Se você tem um elemento de "preview" separado, ajuste conforme necessário */
+	#tab-prescricao #textArea {
+		visibility: visible !important;
+		border: none !important;
+		box-shadow: none !important;
+		outline: none !important;
+	}
+
+	/* Estilos de impressão para a aba de EXAMES */
+	#tab-exames #app,
+	#tab-exames #app * {
+		visibility: visible !important;
+	}
+
+	/* Garante que a tabela de exames ocupe a largura total da página */
+	#tab-exames #app table {
+		width: 100% !important;
+		table-layout: auto !important;
+	}
+
+	/* Ajustes de fonte para impressão nos exames */
+	#tab-exames #app input,
+	#tab-exames #app textarea {
+		font-size: 10pt !important;
+	}
+
+	/* Esconde elementos de UI desnecessários na impressão */
+	.print\:hide {
+		display: none !important;
+		/* Mudado de visibility para display */
+	}
+
+	/* Remove placeholders na impressão */
+	::-webkit-input-placeholder {
+		color: transparent !important;
+		opacity: 0 !important;
+	}
+
+	:-moz-placeholder {
+		color: transparent !important;
+		opacity: 0 !important;
+	}
+
+	::-moz-placeholder {
+		color: transparent !important;
+		opacity: 0 !important;
+	}
+
+	:-ms-input-placeholder {
+		color: transparent !important;
+		opacity: 0 !important;
+	}
+
+	::placeholder {
+		color: transparent !important;
+		opacity: 0 !important;
+	}
+
+	/* Remove bordas, focus rings e backgrounds de inputs */
+	#tab-prescricao input,
+	#tab-prescricao select,
+	#tab-prescricao textarea {
+		border: none !important;
+		border-color: transparent !important;
+		outline: none !important;
+		box-shadow: none !important;
+		background: transparent !important;
+		-webkit-appearance: none !important;
+		-moz-appearance: none !important;
+		appearance: none !important;
+	}
+
+	/* Remove bordas dos containers dos inputs */
+	#tab-prescricao .rounded-md.bg-slate-50 {
+		border: none !important;
+		background: transparent !important;
+	}
+
+	/* Remove o select dropdown arrow na impressão */
+	#tab-prescricao select {
+		background-image: none !important;
+	}
+
+  /* ✅ HABILITA IMPRESSÃO DAS GUIAS */
+  #tab-guias #guias-content,
+  #tab-guias #guias-content * {
+    visibility: visible !important;
+  }
+
+  #tab-guias #guias-content aside {
+    display: none !important;
+  }
+
+  #tab-guias #guias-content input:not([type="checkbox"]):not([type="radio"]),
+  #tab-guias #guias-content textarea,
+  #tab-guias #guias-content select {
+    border: none !important;
+    border-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+	/* Remove bordas de inputs na impressão */
+	input,
+	textarea {
+		border-color: transparent !important;
+	}
+
+	/* Remove controles do input date na impressão */
+	input[type='date']::-webkit-calendar-picker-indicator,
+	input[type='date']::-webkit-inner-spin-button,
+	input[type='date']::-webkit-clear-button {
+		display: none !important;
+		-webkit-appearance: none !important;
+	}
+
+	input[type='date'] {
+		border: none !important;
+		background: transparent !important;
+		outline: none !important;
+		box-shadow: none !important;
+		-webkit-appearance: none !important;
+		-moz-appearance: none !important;
+		appearance: none !important;
+		color: inherit !important;
+	}
+
+	/* Remove bordas do container também */
+	#tab-prescricao input[type='date'] {
+		padding-left: 0 !important;
+	}
+
+	/* Garante que o aviso de limite não apareça */
+	#limitWarning {
+		display: none !important;
+	}
+}
+
+/* Material symbols baseline alignment */
+.material-symbols-outlined {
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 600,
+		'GRAD' 0,
+		'opsz' 24;
+	vertical-align: -0.15em;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-fadeIn {
+	animation: fadeIn 0.5s ease;
+	will-change: opacity, transform;
+}
+
+.region-icon {
+	width: 50px;
+	height: 50px;
+	background-color: #e0e5ec;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow:
+		5px 5px 10px #a3b1c6,
+		-5px -5px 10px #ffffff;
+}
+
+.tabBtn {
+	margin: 10px;
+}

@@ -1,15 +1,15 @@
 /**
  * GT-Medics - Bundle Principal
  * @version 1.0.0
- * @generated 2026-02-10T04:26:37.372Z
- * @files 25 arquivos concatenados
+ * @generated 2026-02-11T02:09:05.422Z
+ * @files 26 arquivos concatenados
  */
 
 'use strict';
 
 
 /* ==========================================
-   [1/25] apoioClinico/js/unified_hotstrings.js
+   [1/26] apoioClinico/js/unified_hotstrings.js
    ========================================== */
 // unified_hotstrings.js
 (() => {
@@ -1639,7 +1639,7 @@
 
 
 /* ==========================================
-   [2/25] apoioClinico/js/exames-module.js
+   [2/26] apoioClinico/js/exames-module.js
    ========================================== */
 (() => {
 	'use strict';
@@ -2352,7 +2352,7 @@
 
 
 /* ==========================================
-   [3/25] geral/js/adm_drugs.js
+   [3/26] geral/js/adm_drugs.js
    ========================================== */
 (() => {
 	'use strict';
@@ -2504,7 +2504,7 @@
 
 
 /* ==========================================
-   [4/25] geral/js/ufs-brasil-module.js
+   [4/26] geral/js/ufs-brasil-module.js
    ========================================== */
 (() => {
   'use strict';
@@ -2681,7 +2681,141 @@
 
 
 /* ==========================================
-   [5/25] geral/components/api/js/functions-initial.js
+   [5/26] geral/js/cid10-module.js
+   ========================================== */
+(() => {
+	'use strict';
+
+	// Ajuste conforme necessário - endpoint da API de CID
+	const API_URL = 'https://api-cid.gtmedics.com';
+
+	/**
+	 * Busca CID-10 na API
+	 * @param {string} query Termo de busca (código ou descrição)
+	 * @returns {Promise<Array>} Lista de resultados
+	 */
+	async function searchCid(query) {
+		// Evita chamadas vazias (min 2 caracteres conforme pedido)
+		if (!query || query.length < 2) return [];
+
+		try {
+			const res = await fetch(`${API_URL}/cid/search?q=${encodeURIComponent(query)}`);
+
+			if (!res.ok) {
+				throw new Error(`Erro na busca: ${res.statusText}`);
+			}
+
+			const data = await res.json();
+
+			// Lógica defensiva do snippet do usuário
+			if (Array.isArray(data)) {
+				return data;
+			} else if (data && Array.isArray(data.results)) {
+				return data.results;
+			}
+
+			return [];
+		} catch (error) {
+			console.error('Erro ao buscar CID:', error);
+			return [];
+		}
+	}
+
+	/**
+	 * Configura o autocomplete para um par de inputs (código e descrição)
+	 * @param {string|HTMLElement} inputCidId ID ou elemento do input de código (ex: lme_cid)
+	 * @param {string|HTMLElement} inputDescId ID ou elemento do input de descrição (ex: lme_diagnostico)
+	 */
+	function setupCidSearch(inputCidId, inputDescId) {
+		const elCid = typeof inputCidId === 'string' ? document.getElementById(inputCidId) : inputCidId;
+		const elDesc = typeof inputDescId === 'string' ? document.getElementById(inputDescId) : inputDescId;
+
+		if (!elCid) {
+			console.warn('Input CID não encontrado:', inputCidId);
+			return;
+		}
+
+		// Garante posição relativa no pai para posicionar a lista
+		if (elCid.parentNode) {
+			elCid.parentNode.style.position = 'relative';
+		}
+
+		// Cria lista de sugestões
+		let suggestionsBox = document.createElement('div');
+		suggestionsBox.className = 'absolute z-[9999] bg-white border border-gray-300 w-[300px] max-h-48 overflow-y-auto shadow-lg hidden';
+		suggestionsBox.style.top = '100%';
+		suggestionsBox.style.left = '0';
+
+		if (elCid.parentNode) {
+			elCid.parentNode.appendChild(suggestionsBox);
+		}
+
+		let debounceTimer;
+
+		console.log('SetupCidSearch anexado a:', elCid.id);
+
+		elCid.addEventListener('input', (e) => {
+			const term = e.target.value;
+			clearTimeout(debounceTimer);
+
+			// Ajustado para 2 caracteres conforme pedido
+			if (term.length < 2) {
+				suggestionsBox.innerHTML = '';
+				suggestionsBox.classList.add('hidden');
+				return;
+			}
+
+			debounceTimer = setTimeout(async () => {
+				suggestionsBox.innerHTML = '<div class="p-2 text-[10px] text-gray-500">Buscando...</div>';
+				suggestionsBox.classList.remove('hidden');
+
+				const results = await searchCid(term);
+
+				suggestionsBox.innerHTML = '';
+				if (!results || results.length === 0) {
+					suggestionsBox.innerHTML = '<div class="p-2 text-[10px] text-gray-500">Nenhum resultado</div>';
+				} else {
+					results.forEach((item) => {
+						const div = document.createElement('div');
+						div.className = 'p-2 hover:bg-blue-50 cursor-pointer text-[10px] border-b border-gray-100 flex flex-col';
+						// item: { code: "A00", description: "Cólera" }
+						// Ajuste para exibir codigo e descrição claramente
+						div.innerHTML = `
+                            <span class="font-bold text-blue-700">${item.code}</span>
+                            <span class="text-gray-600 truncate">${item.description || item.nome || ''}</span>
+                        `;
+
+						div.onclick = () => {
+							elCid.value = item.code;
+							if (elDesc) elDesc.value = item.description || item.nome || '';
+							suggestionsBox.innerHTML = '';
+							suggestionsBox.classList.add('hidden');
+						};
+						suggestionsBox.appendChild(div);
+					});
+				}
+			}, 300); // Debounce levemente menor
+		});
+
+		// Fecha ao clicar fora
+		document.addEventListener('click', (e) => {
+			if (!elCid.contains(e.target) && !suggestionsBox.contains(e.target)) {
+				suggestionsBox.classList.add('hidden');
+			}
+		});
+	}
+
+	window.Cid10Module = {
+		searchCid,
+		setupCidSearch,
+	};
+
+	console.log('✅ CID-10 Module carregado');
+})();
+
+
+/* ==========================================
+   [6/26] geral/components/api/js/functions-initial.js
    ========================================== */
 // header_toolbar.js (BIND-ONLY)
 // O HTML da toolbar já existe no index.html.
@@ -2820,7 +2954,7 @@
 })();
 
 /* ==========================================
-   [6/25] geral/components/header/js/header_index.js
+   [7/26] geral/components/header/js/header_index.js
    ========================================== */
 // header_index.js
 // Renderiza o shell do header dentro de #header-index
@@ -2933,7 +3067,7 @@
 })();
 
 /* ==========================================
-   [7/25] geral/components/header/js/header_tool_container.js
+   [8/26] geral/components/header/js/header_tool_container.js
    ========================================== */
 // header_tool_container.js
 // Renderiza tabs dentro do wrapper correto da produção.
@@ -2995,7 +3129,7 @@
 
 		// Restaura tab salva
 		setTimeout(() => {
-			setActiveTab(localStorage.getItem('rx_active_tab') || 'prescricao');
+			setActiveTab(sessionStorage.getItem('rx_active_tab') || 'prescricao');
 		}, 100);
 
 		console.log('[Tabs] ✅ Rendered (' + tabButtons.length + ' tabs)');
@@ -3031,7 +3165,7 @@
 			btn.classList.toggle('font-medium', !active);
 		});
 
-		localStorage.setItem('rx_active_tab', name);
+		sessionStorage.setItem('rx_active_tab', name);
 		lazyInit(name);
 
 		bus?.emit('tabChanged', { tab: name });
@@ -3052,7 +3186,7 @@
 	}
 
 	function getActiveTab() {
-		return localStorage.getItem('rx_active_tab') || 'prescricao';
+		return sessionStorage.getItem('rx_active_tab') || 'prescricao';
 	}
 
 	function destroy() {
@@ -3069,7 +3203,7 @@
 
 
 /* ==========================================
-   [8/25] geral/components/header/js/header_toolbar.js
+   [9/26] geral/components/header/js/header_toolbar.js
    ========================================== */
 // header_toolbar.js
 // Renderiza botões + checkboxes dentro de #toolbar-prescricao
@@ -3261,7 +3395,7 @@
 
 
 /* ==========================================
-   [9/25] geral/components/prescription/aside/js/aside_event_bus.js
+   [10/26] geral/components/prescription/aside/js/aside_event_bus.js
    ========================================== */
 // aside_event_bus.js — Barramento de eventos centralizado
 // Substitui window.addEventListener + window.dispatchEvent por um sistema controlado
@@ -3395,7 +3529,7 @@
 
 
 /* ==========================================
-   [10/25] geral/components/prescription/aside/js/aside_registry.js
+   [11/26] geral/components/prescription/aside/js/aside_registry.js
    ========================================== */
 // aside_registry.js — Registro de componentes com resolução por Promise
 // Elimina polling (setInterval) e race conditions
@@ -3536,7 +3670,7 @@
 
 
 /* ==========================================
-   [11/25] geral/components/prescription/js/prescription_header.js
+   [12/26] geral/components/prescription/js/prescription_header.js
    ========================================== */
 // prescription_header.js (REFATORADO)
 // Dependências: aside_event_bus.js, aside_registry.js
@@ -3752,7 +3886,7 @@
 
 
 /* ==========================================
-   [12/25] geral/components/prescription/js/prescription_footer.js
+   [13/26] geral/components/prescription/js/prescription_footer.js
    ========================================== */
 // prescription_footer.js (REFATORADO)
 // Dependências: aside_event_bus.js, aside_registry.js
@@ -3957,7 +4091,7 @@
 
 
 /* ==========================================
-   [13/25] geral/components/prescription/box/js/apoiomed_prescription_box.js
+   [14/26] geral/components/prescription/box/js/apoiomed_prescription_box.js
    ========================================== */
 //@ts-nocheck
 // apoiomed_prescription_box.js (VERSÃO FINAL PERFEITA)
@@ -4294,7 +4428,7 @@
 
 
 /* ==========================================
-   [14/25] geral/components/prescription/aside/js/aside_cnes_search.js
+   [15/26] geral/components/prescription/aside/js/aside_cnes_search.js
    ========================================== */
 // aside_cnes_search.js (REFATORADO)
 // Dependências: aside_event_bus.js, aside_registry.js
@@ -4577,7 +4711,7 @@
 })();
 
 /* ==========================================
-   [15/25] geral/components/prescription/aside/js/aside_ubs_selector.js
+   [16/26] geral/components/prescription/aside/js/aside_ubs_selector.js
    ========================================== */
 // aside_ubs_selector.js (REFATORADO)
 // EXATO conforme código enviado pelo usuário.
@@ -4834,7 +4968,7 @@
 
 
 /* ==========================================
-   [16/25] geral/components/prescription/aside/js/aside_formatting_tools.js
+   [17/26] geral/components/prescription/aside/js/aside_formatting_tools.js
    ========================================== */
 // aside_formatting_tools.js (REFATORADO)
 // Dependências: aside_event_bus.js, aside_registry.js
@@ -5004,7 +5138,7 @@
 
 
 /* ==========================================
-   [17/25] geral/components/prescription/aside/js/aside_hotstrings_panel.js
+   [18/26] geral/components/prescription/aside/js/aside_hotstrings_panel.js
    ========================================== */
 // aside_hotstrings_panel.js (REFATORADO)
 // Sem favoritos (app aberta). Começa vazio — items aparecem conforme busca.
@@ -5217,7 +5351,7 @@
 })();
 
 /* ==========================================
-   [18/25] geral/components/prescription/aside/js/apoiomed_aside.js
+   [19/26] geral/components/prescription/aside/js/apoiomed_aside.js
    ========================================== */
 // apoiomed_aside.js — Orquestrador (REFATORADO)
 // Dependências: aside_event_bus.js, aside_registry.js (carregar antes)
@@ -5306,7 +5440,7 @@
 			window.setInstitutionData?.(data.local1 || `PREFEITURA DE ${data.municipio.toUpperCase()}`, data.local2 || 'SECRETARIA MUNICIPAL DE SAÚDE', data.local3 || data.nome.toUpperCase());
 
 			window.setDoctorData?.({
-				local: data.local || data.nome,
+				local: [data.nome, data.endereco, data.municipio, data.uf].filter(Boolean).join(' - '),
 				cnes: data.cnes,
 				telefone: data.telefone,
 			});
@@ -5478,7 +5612,7 @@
 
 
 /* ==========================================
-   [19/25] geral/components/prescription/tabs/js/tab_receituario.js
+   [20/26] geral/components/prescription/tabs/js/tab_receituario.js
    ========================================== */
 // tab_receituario.js (REFATORADO)
 // Dependências: aside_event_bus.js, aside_registry.js
@@ -5620,7 +5754,7 @@
 
 
 /* ==========================================
-   [20/25] geral/components/prescription/tabs/js/tab_exames.js
+   [21/26] geral/components/prescription/tabs/js/tab_exames.js
    ========================================== */
 //@ts-nocheck
 // tab_exames.js
@@ -5711,32 +5845,43 @@
 
 
 /* ==========================================
-   [21/25] geral/components/prescription/tabs/js/tab_guias.js
+   [22/26] geral/components/prescription/tabs/js/tab_guias.js
    ========================================== */
 //@ts-nocheck
 // tab_guias.js — Aba Guias SUS
-// Renderiza menu de guias + carrega modulos sob demanda (lazy load)
-// Padrao identico ao tab_psf.js — neuromorfico + CDNLoader
+// Padrão: main + aside (igual Exames), com botões Limpar/Imprimir e ações individuais por guia
 (() => {
 	'use strict';
 
 	const GUIAS_CDN = 'https://cdn.gtmedics.com/geral/js';
 
-	// Guias SUS — cada uma com script futuro para lazy-load via CDNLoader
+	// Registry global para módulos das guias
+	// window.GuiasModules = { lme: { clear(), loadSelects(btn), ... }, ... }
+	window.GuiasModules = window.GuiasModules || {};
+
 	const guiasTools = [
-		{ key: 'lme', name: 'LME', icon: 'lab_profile', script: 'guia_lme.js', containerId: 'guia_lme', renderFn: 'renderGuiaLme', description: 'Servico Auxiliar de Diagnostico e Terapia' },
-		{ key: 'consulta', name: 'Consulta', icon: 'stethoscope', script: 'guia_consulta.js', containerId: 'guia_consulta', renderFn: 'renderGuiaConsulta', description: 'Guia de Consulta' },
-		{ key: 'internacao', name: 'Internacao', icon: 'hotel', script: 'guia_internacao.js', containerId: 'guia_internacao', renderFn: 'renderGuiaInternacao', description: 'Guia de Internacao Hospitalar' },
-		{ key: 'sp_sadt', name: 'SP/SADT', icon: 'healing', script: 'guia_sp_sadt.js', containerId: 'guia_sp_sadt', renderFn: 'renderGuiaSpSadt', description: 'Solicitacao de Procedimento/SADT' },
-		{ key: 'resumo_internacao', name: 'Resumo Int.', icon: 'description', script: 'guia_resumo_internacao.js', containerId: 'guia_resumo_internacao', renderFn: 'renderGuiaResumoInt', description: 'Resumo de Internacao' },
+		{
+			key: 'lme',
+			name: 'LME',
+			icon: 'lab_profile',
+			script: 'guia_lme.js',
+			containerId: 'guia_lme',
+			renderFn: 'renderGuiaLme',
+			description: 'Servico Auxiliar de Diagnostico e Terapia',
+			actions: [{ action: 'loadSelects', label: 'CARREGAR SELECTS', icon: 'cloud_download' }],
+		},
+		{ key: 'consulta', name: 'Consulta', icon: 'stethoscope', script: 'guia_consulta.js', containerId: 'guia_consulta', renderFn: 'renderGuiaConsulta', description: 'Guia de Consulta', actions: [] },
+		{ key: 'internacao', name: 'Internacao', icon: 'hotel', script: 'guia_internacao.js', containerId: 'guia_internacao', renderFn: 'renderGuiaInternacao', description: 'Guia de Internacao Hospitalar', actions: [] },
+		{ key: 'sp_sadt', name: 'SP/SADT', icon: 'healing', script: 'guia_sp_sadt.js', containerId: 'guia_sp_sadt', renderFn: 'renderGuiaSpSadt', description: 'Solicitacao de Procedimento/SADT', actions: [] },
+		{ key: 'resumo_internacao', name: 'Resumo Int.', icon: 'description', script: 'guia_resumo_internacao.js', containerId: 'guia_resumo_internacao', renderFn: 'renderGuiaResumoInt', description: 'Resumo de Internacao', actions: [] },
 	];
 
 	let loaderGuias = null;
 	const loadedScripts = new Set();
 
-	/**
-	 * Renderiza a aba Guias SUS
-	 */
+	let activeKey = null;
+	let activeTool = null;
+
 	function renderGuiasTab() {
 		const container = document.getElementById('tab_guias');
 		if (!container) {
@@ -5745,56 +5890,97 @@
 		}
 
 		container.innerHTML = `
-      <section id="tab-guias" class="tabPanel hidden print:hidden">
-        <div class="w-full max-w-7xl">
-          <div
-            class="rounded-[20px] bg-[#e0e5ec] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+  <section id="tab-guias" class="tabPanel hidden">
+    <div class="grid gap-4 lg:grid-cols-[1fr_260px]">
 
-            <!-- Header -->
-            <header class="flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-slate-800">description</span>
-                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Guias SUS</h1>
-                </div>
+      <!-- MAIN -->
+      <div class="w-full max-w-7xl">
+        <div
+          class="rounded-[20px] bg-[#e0e5ec] shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] transition-all duration-300 ring-1 ring-slate-200">
+
+          <header class="flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-slate-800">description</span>
+                <h1 class="text-xl font-semibold tracking-tight text-[#2d3748]">Guias SUS</h1>
               </div>
+            </div>
 
-              <div class="px-6 pb-2">
-                <div
-                  class="rounded-2xl bg-[#e0e5ec] p-4 text-sm text-slate-800 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
-                  <div class="flex items-start gap-3">
-                    <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
-                    <div class="space-y-1">
-                      <div class="font-semibold text-[#2d3748]">Material de apoio — Guias gerais de uso no SUS.</div>
-                    </div>
+            <div class="px-6 pb-2">
+              <div
+                class="rounded-2xl bg-[#e0e5ec] p-4 text-sm text-slate-800 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
+                  <div class="space-y-1">
+                    <div class="font-semibold text-[#2d3748]">Material de apoio — Guias gerais de uso no SUS.</div>
                   </div>
                 </div>
               </div>
-            </header>
+            </div>
+          </header>
 
-            <!-- Menu de Selecao de Guias -->
-            <div id="menu-guias" class="px-6 pb-4 flex flex-wrap gap-3"></div>
+          <div id="menu-guias" class="px-6 pb-4 flex flex-wrap gap-3 border-b border-slate-300"></div>
 
-            <!-- Content -->
-            <section class="p-4 pt-2">
-              <div class="bg-gray-200 overflow-hidden rounded-xl border border-gray-300">
+          
+            <!-- Toolbar zoom -->
+            <div
+              class="flex items-center justify-self-end gap-2 p-4 rounded-3xl  bg-slate-300 w-fit shadow-2xl m-4 print:hidden">
+              <button id="guiasZoomOut"
+                class="px-3 py-1 shadow-xl rounded-2xl bg-slate-200 hover:bg-slate-400">−</button>
+              <div id="guiasZoomLabel"
+                class="!bg-white p-2 rounded-2xl shadow inset-shadow-lg text-sm font-semibold text-shadow-sm w-16 text-center">
+                100%</div>
+              <button id="guiasZoomIn"
+                class="px-3 py-1 shadow-xl rounded-2xl bg-slate-200 hover:bg-slate-400">+</button>
+              <button id="guiasZoomReset"
+                class="px-3 py-1 shadow-xl rounded-2xl bg-slate-200 hover:bg-slate-400">Reset</button>
+            </div>
+            
+						<div id="menu-guias" class="px-6 pb-4 flex flex-wrap gap-3 border-b border-slate-300"></div>
+            
+						<!-- Área do documento: cresce conforme conteúdo -->
+            <div class="p-3">
+              <!-- Este wrapper é o ALVO do zoom -->
+              <div id="guiasZoomTarget" class="origin-top-center w-fit">
                 <div id="guias-content" class="min-h-[400px]"></div>
               </div>
-            </section>
+            </div>
+        
+        </div>
+      </div>
 
+      <!-- ASIDE -->
+      <aside class="sidebar w-full max-w-60 flex flex-col p-6 rounded-xl shadow-xl bg-white print:hidden">
+        <div class="button-group bg-gray-200 p-4 mb-5 rounded-xl shadow-xl">
+          <button type="button"
+            class="text-[12px] font-semibold w-full mb-2 p-2.5 bg-sky-600 text-white rounded-xl shadow-xl hover:bg-sky-700 transition-colors cursor-pointer"
+            id="guias_clearBtn">LIMPAR GUIA</button>
+
+          <button type="button"
+            class="text-[12px] font-semibold w-full mb-2 p-2.5 bg-sky-600 text-white rounded-xl shadow-xl hover:bg-sky-700 transition-colors cursor-pointer"
+            id="guias_printBtn">IMPRIMIR</button>
+
+          <div class="mt-3 pt-3 border-t border-slate-300/60">
+            <div class="text-[11px] font-semibold text-slate-700 mb-2">Ações desta guia</div>
+            <div id="guias_extraActions" class="space-y-2"></div>
+          </div>
+
+          <div class="mt-3 text-[11px] text-slate-600">
+            <span class="font-semibold">Ativa:</span> <span id="guias_activeName">—</span>
           </div>
         </div>
-      </section>
+      </aside>
+
+    </div>
+  </section>
     `;
 
 		initializeGuiasTab();
+		setupGuiasZoom();
 	}
 
-	/**
-	 * Inicializa menu + placeholder
-	 */
 	function initializeGuiasTab() {
-		// CDNLoader para modulos de guias (quando existirem)
+		// CDNLoader para módulos (quando existirem)
 		if (typeof CDNLoader !== 'undefined') {
 			try {
 				loaderGuias = new CDNLoader(GUIAS_CDN);
@@ -5803,43 +5989,116 @@
 			}
 		}
 
-		const menuContainer = document.getElementById('menu-guias');
+		renderGuiasMenu();
+		bindAsideControls();
 
-		if (menuContainer) {
-			menuContainer.innerHTML = guiasTools
-				.map(
-					(tool) => `
-				<button data-guia-key="${tool.key}"
-					class="guia-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
-					title="${tool.description}">
-					<span class="material-symbols-outlined text-base">${tool.icon}</span>
-					${tool.name}
-				</button>
-			`,
-				)
-				.join('');
-
-			menuContainer.addEventListener('click', (e) => {
-				const btn = e.target.closest('[data-guia-key]');
-				if (btn) switchGuia(btn.dataset.guiaKey);
-			});
-		}
-
-		// Auto-seleciona a primeira guia
 		switchGuia(guiasTools[0].key);
 		console.log('[Guias] Aba renderizada e inicializada');
 	}
 
-	/**
-	 * Alterna entre guias SUS
-	 */
+	function renderGuiasMenu() {
+		const menuContainer = document.getElementById('menu-guias');
+		if (!menuContainer) return;
+
+		menuContainer.innerHTML = guiasTools
+			.map(
+				(tool) => `
+        <button data-guia-key="${tool.key}"
+          class="guia-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-semibold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
+          title="${tool.description}">
+          <span class="material-symbols-outlined text-base">${tool.icon}</span>
+          ${tool.name}
+        </button>
+      `,
+			)
+			.join('');
+
+		menuContainer.addEventListener('click', (e) => {
+			const btn = e.target.closest('[data-guia-key]');
+			if (btn) switchGuia(btn.dataset.guiaKey);
+		});
+	}
+
+	function bindAsideControls() {
+		const btnClear = document.getElementById('guias_clearBtn');
+		const btnPrint = document.getElementById('guias_printBtn');
+		const extra = document.getElementById('guias_extraActions');
+
+		if (btnClear) {
+			btnClear.addEventListener('click', () => {
+				const mod = getActiveModule();
+				if (mod && typeof mod.clear === 'function') return mod.clear();
+				genericClearActive();
+			});
+		}
+
+		if (btnPrint) {
+			btnPrint.addEventListener('click', () => {
+				// print SEM mexer no seu CSS global:
+				printOnlyActiveGuide();
+			});
+		}
+
+		if (extra) {
+			extra.addEventListener('click', async (e) => {
+				const btn = e.target.closest('[data-action]');
+				if (!btn) return;
+
+				const action = btn.dataset.action;
+				const mod = getActiveModule();
+
+				if (!mod || typeof mod[action] !== 'function') {
+					console.warn(`[Guias] Ação "${action}" não implementada para a guia ativa`);
+					return;
+				}
+
+				await mod[action](btn);
+			});
+		}
+	}
+
+	function getActiveModule() {
+		if (!activeKey) return null;
+		return window.GuiasModules?.[activeKey] || null;
+	}
+
+	function setActiveLabel(tool) {
+		const el = document.getElementById('guias_activeName');
+		if (el) el.textContent = tool?.name || '—';
+	}
+
+	function renderExtraActions(tool) {
+		const extra = document.getElementById('guias_extraActions');
+		if (!extra) return;
+
+		const actions = tool?.actions || [];
+		if (!actions.length) {
+			extra.innerHTML = `<div class="text-[11px] text-slate-500">Sem ações específicas.</div>`;
+			return;
+		}
+
+		extra.innerHTML = actions
+			.map((a) => {
+				const icon = a.icon ? `<span class="material-symbols-outlined text-sm">${a.icon}</span>` : '';
+				return `
+          <button type="button"
+            data-action="${a.action}"
+            class="text-[12px] font-semibold w-full p-2.5 bg-slate-700 text-white rounded-xl shadow-xl hover:bg-slate-800 transition-colors cursor-pointer flex items-center justify-center gap-2">
+            ${icon}${a.label}
+          </button>
+        `;
+			})
+			.join('');
+	}
+
 	async function switchGuia(key) {
 		const tool = guiasTools.find((t) => t.key === key);
 		if (!tool) return;
 
-		const guiasContent = document.getElementById('guias-content');
+		activeKey = key;
+		activeTool = tool;
 
-		// Highlight botao ativo
+		// highlight botão ativo
 		document.querySelectorAll('.guia-menu-btn').forEach((btn) => {
 			const isActive = btn.dataset.guiaKey === key;
 			if (isActive) {
@@ -5851,42 +6110,128 @@
 			}
 		});
 
-		if (guiasContent) {
-			guiasContent.innerHTML = `<div id="${tool.containerId}"></div>`;
+		setActiveLabel(tool);
+		renderExtraActions(tool);
+
+		// placeholder container
+		const guiasContent = document.getElementById('guias-content');
+		if (guiasContent) guiasContent.innerHTML = `<div id="${tool.containerId}"></div>`;
+
+		// Se já carregou (bundle), usa direto
+		if (window[tool.renderFn]) {
+			window[tool.renderFn]();
+			return;
 		}
 
-		// Tenta carregar modulo via CDNLoader (lazy load)
+		// Lazy-load via CDNLoader
 		if (loaderGuias && !loadedScripts.has(tool.script)) {
 			try {
 				await loaderGuias.load(tool.script);
 				loadedScripts.add(tool.script);
+
+				if (window[tool.renderFn]) {
+					window[tool.renderFn]();
+					return;
+				}
 			} catch (err) {
 				console.warn('[Guias] Modulo ' + tool.script + ' ainda nao disponivel');
-				showPlaceholder(tool);
 			}
-		} else if (window[tool.renderFn]) {
-			// Script ja carregado → re-renderizar no container recriado
-			window[tool.renderFn]();
-		} else {
-			showPlaceholder(tool);
 		}
+
+		showPlaceholder(tool);
 	}
 
-	/**
-	 * Exibe placeholder para modulos ainda nao implementados
-	 */
 	function showPlaceholder(tool) {
 		const container = document.getElementById(tool.containerId);
 		if (!container) return;
 
 		container.innerHTML = `
-			<div class="flex flex-col items-center justify-center py-16 text-slate-500">
-				<span class="material-symbols-outlined text-6xl mb-4 text-slate-300">construction</span>
-				<h3 class="text-lg font-bold text-[#2d3748] mb-2">${tool.name}</h3>
-				<p class="text-sm text-slate-500">${tool.description}</p>
-				<p class="text-xs text-slate-400 mt-4">Modulo em desenvolvimento — em breve disponivel.</p>
-			</div>
-		`;
+      <div class="flex flex-col items-center justify-center py-16 text-slate-500">
+        <span class="material-symbols-outlined text-6xl mb-4 text-slate-300">construction</span>
+        <h3 class="text-lg font-semibold text-[#2d3748] mb-2">${tool.name}</h3>
+        <p class="text-sm text-slate-500">${tool.description}</p>
+        <p class="text-xs text-slate-400 mt-4">Modulo em desenvolvimento — em breve disponivel.</p>
+      </div>
+    `;
+	}
+
+	function genericClearActive() {
+		const host = document.getElementById(activeTool?.containerId || '');
+		if (!host) return;
+
+		host.querySelectorAll('input[type="text"], input[type="email"], input[type="date"]').forEach((i) => (i.value = ''));
+		host.querySelectorAll('textarea').forEach((t) => (t.value = ''));
+		host.querySelectorAll('select').forEach((s) => (s.selectedIndex = 0));
+		host.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach((c) => (c.checked = false));
+	}
+
+	/**
+	 * PRINT helper (JS) para funcionar com seu CSS global atual,
+	 * que faz "body * { visibility:hidden !important; }" e só libera prescrição/exames.
+	 * Aqui a gente força via inline styles (!) visibilidade apenas da guia ativa e imprime.
+	 */
+	function printOnlyActiveGuide() {
+		const host = document.getElementById(activeTool?.containerId || '');
+		if (!host) return window.print();
+
+		const restore = forceOnlyThisVisibleForPrint(host);
+
+		const cleanup = () => {
+			try {
+				restore();
+			} catch (e) {}
+		};
+
+		// tenta restaurar sempre
+		window.addEventListener('afterprint', cleanup, { once: true });
+
+		window.print();
+
+		// fallback (caso afterprint não dispare)
+		setTimeout(cleanup, 800);
+	}
+
+	function forceOnlyThisVisibleForPrint(rootEl) {
+		const changed = new Map(); // el -> previous style attr
+
+		const rememberAndSet = (el, patch) => {
+			if (!changed.has(el)) changed.set(el, el.getAttribute('style'));
+			// aplica patch no style inline
+			Object.entries(patch).forEach(([k, v]) => {
+				el.style.setProperty(k, v, 'important');
+			});
+		};
+
+		// 1) esconde geral via inline (não depende do CSS)
+		rememberAndSet(document.body, { visibility: 'hidden' });
+
+		// 2) torna root e descendentes visíveis
+		rememberAndSet(rootEl, {
+			visibility: 'visible',
+			position: 'absolute',
+			left: '0',
+			top: '0',
+			width: '100%',
+			background: 'white',
+		});
+
+		rootEl.querySelectorAll('*').forEach((el) => {
+			rememberAndSet(el, { visibility: 'visible' });
+		});
+
+		// garante que os ancestrais do root não "cortem" layout (ex.: overflow hidden)
+		let p = rootEl.parentElement;
+		while (p && p !== document.body) {
+			rememberAndSet(p, { visibility: 'visible', overflow: 'visible' });
+			p = p.parentElement;
+		}
+
+		return () => {
+			changed.forEach((prev, el) => {
+				if (prev === null || prev === undefined) el.removeAttribute('style');
+				else el.setAttribute('style', prev);
+			});
+		};
 	}
 
 	if (document.readyState === 'loading') {
@@ -5895,138 +6240,138 @@
 		renderGuiasTab();
 	}
 
+	function setupGuiasZoom() {
+		const zoomTarget = document.getElementById('guiasZoomTarget');
+
+		const btnIn = document.getElementById('guiasZoomIn');
+		const btnOut = document.getElementById('guiasZoomOut');
+		const btnReset = document.getElementById('guiasZoomReset');
+		const label = document.getElementById('guiasZoomLabel');
+
+		if (!zoomTarget || !btnIn || !btnOut || !btnReset || !label) return;
+
+		let zoom = 1.0;
+		const ZOOM_MIN = 0.6;
+		const ZOOM_MAX = 1.8;
+		const STEP = 0.1;
+
+		const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+		function applyZoom(next) {
+			zoom = clamp(next, ZOOM_MIN, ZOOM_MAX);
+
+			// ✅ zoom (Chrome/Edge) altera o layout => altura acompanha
+			zoomTarget.style.zoom = String(zoom);
+
+			// fallback opcional (caso um dia rode em browser que não suporte bem)
+			// zoomTarget.style.transform = `scale(${zoom})`;
+
+			label.textContent = `${Math.round(zoom * 100)}%`;
+		}
+
+		btnIn.addEventListener('click', () => applyZoom(zoom + STEP));
+		btnOut.addEventListener('click', () => applyZoom(zoom - STEP));
+		btnReset.addEventListener('click', () => applyZoom(1.0));
+
+		// reset para impressão
+		const prev = { zoom: 1.0 };
+		window.addEventListener('beforeprint', () => {
+			prev.zoom = zoom;
+			zoomTarget.style.zoom = '1';
+			label.textContent = '100%';
+		});
+		window.addEventListener('afterprint', () => applyZoom(prev.zoom));
+
+		applyZoom(1.0);
+	}
+
 	window.renderGuiasTab = renderGuiasTab;
 	window.switchGuia = switchGuia;
 })();
 
 
 /* ==========================================
-   [22/25] geral/js/guia_lme.js
+   [23/26] geral/js/guia_lme.js
    ========================================== */
 /**
  * Guia LME (Laudo de Solicitação de Medicamentos)
- * Convertido de LME2.html
+ * Ajuste: sem botões flutuantes; controles ficam no aside do tab_guias.js
  */
 (function () {
 	'use strict';
 
 	const API_URL = 'https://sigtap.gtmedics.com';
 
-	function injectLmeStyles() {
-		if (document.getElementById('guia-lme-styles')) return;
-		const s = document.createElement('style');
-		s.id = 'guia-lme-styles';
-		s.textContent = `
-            /* =========================================================
-            CHECKBOX (padroniza TODOS como "bonitos" / nativos)
-            - mantém tamanho 12px
-            - aparência nativa (igual w-3 h-3)
-             ========================================================= */
-            #guia_lme .pdf-box {
-                width: 12px;
-                height: 12px;
-                appearance: auto;
-                -webkit-appearance: auto;
-                background: initial;
-                border: initial;
-                display: inline-block;
-                vertical-align: middle;
-            }
-
-            /* =========================================================
-            PÁGINA / A4
-            ========================================================= */
-            #guia_lme .a4 {
-                width: 210mm;
-                min-height: 297mm;
-            }
-
-            #guia_lme * {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            @page {
-                size: A4;
-                margin: 0;
-            }
-
-            /* =========================================================
-            PRINT
-            ========================================================= */
-            @media print {
-                html, body {
-                    background: white !important;
-                    margin: 0 !important;
-                    padding: 0 !important;
-                }
-
-                /* Ocultar elementos da interface geral na impressão */
-                #header, #sidebar, #tab-guias > div > header, #menu-guias {
-                    display: none !important;
-                }
-
-                /* Ocultar botão de limpar na impressão */
-                #guia_lme aside {
-                    display: none !important;
-                }
-
-                /* Esconder placeholders na impressão */
-                #guia_lme ::-webkit-input-placeholder { color: transparent !important; opacity: 0 !important; }
-                #guia_lme :-moz-placeholder { color: transparent !important; opacity: 0 !important; }
-                #guia_lme ::-moz-placeholder { color: transparent !important; opacity: 0 !important; }
-                #guia_lme :-ms-input-placeholder { color: transparent !important; opacity: 0 !important; }
-                #guia_lme ::placeholder { color: transparent !important; opacity: 0 !important; }
-
-                /* Remove bordas APENAS de inputs "de texto" e textarea */
-                #guia_lme input:not([type="checkbox"]):not([type="radio"]),
-                #guia_lme textarea {
-                    border-color: transparent !important;
-                }
-
-                /* Remove controles do input date na impressão */
-                #guia_lme input[type="date"]::-webkit-calendar-picker-indicator,
-                #guia_lme input[type="date"]::-webkit-inner-spin-button,
-                #guia_lme input[type="date"]::-webkit-clear-button {
-                    display: none !important;
-                    -webkit-appearance: none !important;
-                }
-
-                #guia_lme input[type="date"] {
-                    border: none !important;
-                    background: transparent !important;
-                    outline: none !important;
-                    box-shadow: none !important;
-                    -webkit-appearance: none !important;
-                    -moz-appearance: none !important;
-                    appearance: none !important;
-                    color: inherit !important;
-                    padding: 0 !important;
-                }
-
-                #guia_lme section#laudo-ceaf {
-                    box-shadow: none !important;
-                    border: none !important;
-                    margin: 0 !important;
-                    max-width: 100% !important;
-                }
-            }
-		`;
-		document.head.appendChild(s);
-	}
+	window.GuiasModules = window.GuiasModules || {};
 
 	// Função para mascara de data manual
 	function maskDateBR(input) {
 		let v = input.value.replace(/\D/g, '');
 		if (v.length > 8) v = v.substring(0, 8);
 
-		if (v.length >= 5) {
-			input.value = v.substring(0, 2) + '/' + v.substring(2, 4) + '/' + v.substring(4);
-		} else if (v.length >= 3) {
-			input.value = v.substring(0, 2) + '/' + v.substring(2);
-		} else {
-			input.value = v;
+		if (v.length >= 5) input.value = v.substring(0, 2) + '/' + v.substring(2, 4) + '/' + v.substring(4);
+		else if (v.length >= 3) input.value = v.substring(0, 2) + '/' + v.substring(2);
+		else input.value = v;
+	}
+
+	async function loadSelects(btnElement) {
+		let originalContent = '';
+
+		try {
+			const response = await fetch(`${API_URL}/farmacos_lme/lista_simples`);
+			const data = await response.json();
+
+			const optionsHtml = ['<option value="">Selecione um medicamento...</option>'];
+			data.forEach((item) => optionsHtml.push(`<option value="${item.value}">${item.label}</option>`));
+			const finalHtml = optionsHtml.join('');
+
+			['lme_med1', 'lme_med2'].forEach((id) => {
+				const el = document.getElementById(id);
+				if (el) el.innerHTML = finalHtml;
+			});
+
+			if (typeof Swal !== 'undefined') {
+				Swal.fire({
+					toast: true,
+					position: 'top-end',
+					icon: 'success',
+					title: `${data.length} medicamentos carregados!`,
+					showConfirmButton: false,
+					timer: 2500,
+				});
+			} else {
+				alert(`${data.length} medicamentos carregados!`);
+			}
+		} catch (error) {
+			console.error('[Guia LME] Erro ao carregar:', error);
+			alert('Erro ao carregar lista de medicamentos.');
+		} finally {
+			// clean up if needed
 		}
+	}
+
+	function clear() {
+		const wrapper = document.getElementById('guia_lme');
+		if (!wrapper) return;
+
+		const keepIds = new Set(['lme_cnes', 'lme_estabelecimento', 'lme_nomeMedico', 'lme_cnsMedico']);
+
+		const inputs = wrapper.querySelectorAll('input[type="text"], input[type="date"], input[type="email"]');
+		inputs.forEach((input) => {
+			if (keepIds.has(input.id)) return;
+			input.value = '';
+		});
+
+		['lme_med1', 'lme_med2'].forEach((id) => {
+			const select = document.getElementById(id);
+			if (select) select.selectedIndex = 0;
+		});
+
+		const anamnese = document.getElementById('lme_anamnese');
+		if (anamnese) anamnese.value = '';
+
+		wrapper.querySelectorAll('input[type="radio"]').forEach((r) => (r.checked = false));
+		wrapper.querySelectorAll('input[type="checkbox"]').forEach((c) => (c.checked = false));
 	}
 
 	function renderGuiaLme() {
@@ -6036,383 +6381,452 @@
 			return;
 		}
 
-		injectLmeStyles();
-
 		container.innerHTML = `
-            <div class="bg-gray-100 min-h-screen py-8 text-sm relative">
-
-                <!-- ASIDE (fora do A4) -->
-                <aside class="fixed top-20 right-4 z-50 flex flex-col gap-2 print:hidden">
-                    <button id="lme_btnLimpar"
-                        class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow transition-colors">
-                        Limpar Campos
-                    </button>
-
-                    <button id="lme_btnCarregar"
-                        class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sm">cloud_download</span>
-                        Carregar Selects
-                    </button>
-                </aside>
-
-                 <!-- Wrapper: scroll no mobile, normal no print -->
-                <div class="w-full overflow-x-auto print:overflow-visible">
-                    <!-- A4 sheet -->
-                    <section id="laudo-ceaf" class="bg-white w-full max-w-full md:max-w-[210mm] print:max-w-[210mm] mx-auto
-                        rounded-xl print:rounded-none
-                        shadow-sm print:shadow-none  
-                        ring-1 ring-black/5 print:ring-0">
-
-                        <div class="relative px-2 sm:px-4 md:px-6 print:px-2 py-4">
-                            <!-- FORMULARIO -->
-
-                            <div class="w-full max-w-5xl mx-auto bg-white p-4 relative">
-
-                                <!-- Header -->
-                                <div class="flex justify-center items-center">
-                                    <div class="flex items-center">
-                                        <div class="rounded-md px-3 flex items-center">
-                                            <img id="logoSus" src="https://static.cdnlogo.com/logos/s/74/sus-brasil.svg"
-                                                alt="Logo SUS"
-                                                class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 print:w-28 md:h-28 print:h-28 object-contain" />
-                                        </div>
-                                    </div>
-                                    <div class="text-sm font-semibold">
-                                        <p>Sistema Único de Saúde</p>
-                                        <p>Ministério da Saúde</p>
-                                        <p>Secretaria de Estado da Saúde</p>
-                                    </div>
-                                </div>
-
-                                <!-- Title -->
-                                <div class="text-center font-bold text-sm border-l border-r border-b border-t border-black">
-                                    <p>COMPONENTE ESPECIALIZADO DA ASSISTÊNCIA FARMACÊUTICA</p>
-                                    <p>LAUDO DE SOLICITAÇÃO, AVALIAÇÃO E AUTORIZAÇÃO DE MEDICAMENTO(S)</p>
-                                    <p>SOLICITAÇÃO DE MEDICAMENTO(S)</p>
-                                </div>
-
-                                <!-- Main Form -->
-                                <div class="mb-4">
-                                    <div class="text-[9px] font-bold">
-                                        CAMPOS DE PREENCHIMENTO EXCLUSIVO PELO MÉDICO SOLICITANTE
-                                    </div>
-
-                                    <!-- BOX 1 -->
-                                    <div id="box1" class="border border-black mb-1 leading-none">
-                                        <!-- Row 1 -->
-                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
-                                            <div class="w-1/2 border-r border-black relative h-full px-2 overflow-hidden">
-                                                <label for="lme_cnes"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    1. Número do CNES*
-                                                </label>
-                                                <input id="lme_cnes" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[20px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
-                                            </div>
-
-                                            <div class="w-1/2 relative h-full px-2 overflow-hidden">
-                                                <label for="lme_estabelecimento"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    2. Nome do Estabelecimento de Saúde Solicitante
-                                                </label>
-                                                <input id="lme_estabelecimento" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 2 -->
-                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
-                                            <div class="w-full relative h-full px-2 overflow-hidden">
-                                                <label for="lme_nomePaciente"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    3. Nome completo do Paciente*
-                                                </label>
-                                                <input id="lme_nomePaciente" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 3 -->
-                                        <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
-                                            <div class="w-1/2 relative h-full px-2 overflow-hidden">
-                                                <label for="lme_nomeSocial"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    3.1. Nome Social do Paciente
-                                                </label>
-                                                <input id="lme_nomeSocial" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-
-                                            <div class="w-1/4 border-r border-black relative h-full px-2 overflow-hidden"></div>
-
-                                            <div class="w-1/4 relative h-full px-2 overflow-hidden">
-                                                <label for="lme_peso"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    5. Peso do Paciente (kg)*
-                                                </label>
-                                                <input id="lme_peso" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 4 -->
-                                        <div class="flex h-[36px] text-[10px] leading-none">
-                                            <div class="w-3/4 border-r border-black relative h-full px-2 overflow-hidden">
-                                                <label for="lme_nomeMae"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    4. Nome da Mãe do Paciente*
-                                                </label>
-                                                <input id="lme_nomeMae" type="text" value="ELIETE DO CARMO CORNELIO ROSA"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-
-                                            <div class="w-1/4 relative h-full px-2 overflow-hidden">
-                                                <label for="lme_altura"
-                                                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
-                                                    6. Altura do Paciente (cm)*
-                                                </label>
-                                                <input id="lme_altura" type="text"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 2 — BLOCO 5 (Medicamentos) -->
-                                    <div id="box2" class="border border-black mb-1 leading-none">
-                                        <div class="">
-                                            <!-- HEADER -->
-                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] grid-rows-[18px_18px]">
-                                                <!-- 7 -->
-                                                <div
-                                                    class="col-span-2 row-span-2 border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
-                                                    7. Medicamentos*
-                                                </div>
-                                                <!-- 8 -->
-                                                <div
-                                                    class="col-span-6 border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
-                                                    8. Quantidade Solicitada*
-                                                </div>
-                                                <!-- Meses -->
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">1º mês</div>
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">2º mês</div>
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">3º mês</div>
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">4º mês</div>
-                                                <div class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">5º mês</div>
-                                                <div class="border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">6º mês</div>
-                                            </div>
-
-                                            <!-- LINHA 1 -->
-                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
-                                                <div class="border-r border-black flex items-center justify-center font-semibold">1</div>
-                                                <div class="border-r border-black overflow-hidden">
-                                                    <select id="lme_med1" class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
-                                                        <option value="">Selecione...</option>
-                                                        <option value="OLANZAPINA 10.00 MG COMPRIMIDO">OLANZAPINA 10.00 MG COMPRIMIDO</option>
-                                                        <option value="QUETIAPINA 25 MG COMPRIMIDO">QUETIAPINA 25 MG COMPRIMIDO</option>
-                                                        <option value="RISPERIDONA 2 MG COMPRIMIDO">RISPERIDONA 2 MG COMPRIMIDO</option>
-                                                    </select>
-                                                </div>
-                                                <div class="border-r border-black"><input id="lme_q1_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q1_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q1_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q1_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q1_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div><input id="lme_q1_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                            </div>
-
-                                            <!-- LINHA 2 -->
-                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
-                                                <div class="border-r border-black flex items-center justify-center font-semibold">2</div>
-                                                <div class="border-r border-black overflow-hidden">
-                                                    <select id="lme_med2" class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
-                                                        <option value="">Selecione...</option>
-                                                    </select>
-                                                </div>
-                                                <div class="border-r border-black"><input id="lme_q2_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q2_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q2_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q2_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q2_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div><input id="lme_q2_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                            </div>
-
-                                            <!-- LINHA 3 -->
-                                            <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] text-[10px] leading-none">
-                                                <div class="border-r border-black flex items-center justify-center font-semibold">3</div>
-                                                <div class="border-r border-black overflow-hidden">
-                                                    <input id="lme_med3" class="w-full h-full border-0 px-1 text-left text-[10px] leading-none" />
-                                                </div>
-                                                <div class="border-r border-black"><input id="lme_q3_1" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q3_2" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q3_3" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q3_4" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div class="border-r border-black"><input id="lme_q3_5" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                                <div><input id="lme_q3_6" class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" /></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 3 — BLOCO 9 a 12 -->
-                                    <div id="box3" class="border border-black mb-1 text-[10px] leading-none">
-                                        <!-- Row 9/10 -->
-                                        <div class="grid grid-cols-[120px_1fr] h-9 border-b border-black">
-                                            <div class="relative border-r border-black px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">9. CID-10*</div>
-                                                <input id="lme_cid" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                            <div class="relative px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">10. Diagnóstico</div>
-                                                <input id="lme_diagnostico" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Row 11 -->
-                                        <div class="relative border-b border-black h-[60px] px-2 overflow-hidden">
-                                            <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">11. Anamnese*</div>
-                                            <textarea id="lme_anamnese" class="absolute left-2 right-2 top-[18px] bottom-[2px] border-0 bg-transparent resize-none focus:ring-0 focus:outline-none"></textarea>
-                                        </div>
-
-                                        <!-- Row 12 (Tratamento Prévio) -->
-                                        <div class="relative h-12 px-2 overflow-hidden">
-                                            <div class="absolute top-[2px] left-2 right-2 font-semibold">12. Paciente realizou tratamento prévio ou está em tratamento na doença?*</div>
-                                            <div class="absolute left-2 right-2 bottom-[4px] flex items-center gap-4">
-                                                <label class="flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>NÃO</span></label>
-                                                <label class="flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>SIM. Relatar:</span></label>
-                                                <input type="text" class="flex-1 min-w-0 h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 3B - BLOCO 13 (Atestado) -->
-                                    <div id="box3-b" class="border border-black mb-1 text-[10px] leading-none">
-                                        <div class="h-5 flex items-center justify-center font-semibold tracking-[0.3px] whitespace-nowrap">13. Atestado de Capacidade*</div>
-                                        <div class="px-4 py-1 text-[11px] leading-tight">
-                                            A solicitação do medicamento deverá ser realizada pelo paciente. Entretanto, fica dispensada a obrigatoriedade da presença física do paciente considerado incapaz de acordo com os artigos 3º e 4º do Código Civil. O paciente é considerado incapaz?
-                                        </div>
-                                        <div class="grid grid-cols-5 h-12 ">
-                                            <div class="col-span-3 relative px-4 overflow-hidden">
-                                                <div class="absolute left-2 top-[4px] grid-rows-[36px_36px] right-2 flex items-center gap-6 text-[8px] leading-none">
-                                                    <div class="row-1 flex gap-8">
-                                                        <label class="flex items-center gap-1 shrink-0"><input type="checkbox" class="w-3 h-3" /> <span class="text-wrap text-[11px]">NÃO</span></label>
-                                                        <label class="flex items-center gap-1 min-w-0 "><input type="checkbox" class="w-3 h-3" /><span class="text-wrap text-[11px] text-justify">SIM. Indicar o nome do responsável pelo paciente, o qual</span></label>
-                                                    </div>
-                                                    <div class="absolute left-20 top-[14px] right-2 row-2 flex items-center gap-6 text-[8px] leading-none">
-                                                        <label class=" mt-1.5"><span class="text-wrap text-[11px] text-justify">poderá realizar a solicitação do medicamento</span></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-2 relative px-2 overflow-hidden">
-                                                <input type="text" class="absolute left-0.5 right-0.5 top-[8px] h-4 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                <div class="absolute left-0.5 right-2.5 bottom-[11px] text-center text-[9px]">Nome do Responsável</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 4 - BLOCO 14 - 17 (Médico) -->
-                                    <div id="box4" class="border border-black mb-1 text-[10px] leading-none">
-                                        <div class="grid grid-cols-[1fr_140px_220px] grid-rows-[36px_36px]">
-                                            <!-- 14 -->
-                                            <div class="relative border-b border-black px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">14. Nome do médico solicitante*</div>
-                                                <input id="lme_nomeMedico" type="text" class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                            <!-- coluna vazia -->
-                                            <div class="border-r border-b border-black"></div>
-                                            <!-- 17 -->
-                                            <div class="relative row-span-2 px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">17. Assinatura e carimbo do médico*</div>
-                                                <div class="absolute left-2 right-2 top-[16px] bottom-[4px]"></div>
-                                            </div>
-                                            <!-- 15 -->
-                                            <div class="relative border-r border-black px-2 overflow-hidden h-[36px]">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">15. Nº do Cartão Nacional de Saúde (CNS) do médico solicitante*</div>
-                                                <input id="lme_cnsMedico" type="text" class="absolute left-2 right-2 bottom-[2px] focus:ring-0 focus:outline-none" />
-                                            </div>
-                                            <!-- 16 -->
-                                            <div class="relative border-r border-black px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">16. Data da Solicitação*</div>
-                                                <input id="lme_dataSolicitacao" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10"
-                                                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- BOX 5 - BLOCO 18 (Campos preenchidos por) -->
-                                    <div id="box5" class="border border-black text-[10px] leading-none">
-                                        <div class="px-2 py-1 border-b border-black mb-2">
-                                            <div class="flex flex-row gap-x-3 gap-y-1 mt-1 text-[9px]">
-                                                <div class="font-semibold">18. CAMPOS ABAIXO PREENCHIDOS POR*:</div>
-                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Paciente</label></div>
-                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Mãe do Paciente</label></div>
-                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Responsável <span class="text-[8px]">(Descrito no item 13)</span></label></div>
-                                                <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Médico Solicitante</label></div>
-                                            </div>
-                                            <div class="flex items-center gap-2 mt-1 text-[9px]">
-                                                <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Outro, informar nome:</label>
-                                                <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                <span>e CPF:</span>
-                                                <input type="text" class="w-[140px] h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-
-                                        <div class="grid grid-cols-[2fr_1fr] border-b border-black h-[72px] text-[10px] leading-none">
-                                            <div class="relative border-r border-black px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 right-2 font-semibold">19. Raça/Cor/Etnia informado pelo Paciente Responsável*</div>
-                                                <div class="absolute left-2 right-2 top-[22px] flex items-center gap-6 whitespace-nowrap">
-                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Branca</span></label>
-                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Amarela</span></label>
-                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Indígena. Informar Etnia:</span></label>
-                                                    <input type="text" class="flex-1 min-w-0 h-[14px] border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                </div>
-                                                <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
-                                                    <label class="inline-flex items-center gap-2 w-[74px]"><input type="checkbox" class="pdf-box" /><span>Preta</span></label>
-                                                    <label class="inline-flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>Parda</span></label>
-                                                </div>
-                                            </div>
-                                            <div class="relative px-2 overflow-hidden">
-                                                <div class="absolute top-[2px] left-2 right-2 font-semibold">20. Telefone(s) para contato do paciente</div>
-                                                <div class="absolute left-2 right-2 top-[26px] flex items-center whitespace-nowrap">
-                                                    <span class="mr-1">(</span><input type="text" class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span class="ml-1">)</span>
-                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                </div>
-                                                <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
-                                                    <span class="mr-1">(</span><input type="text" class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span class="ml-1">)</span>
-                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="grid grid-cols-[1fr_1fr] grid-rows-[36px_36px]">
-                                            <div class="border-r border-b border-black px-2 py-1 overflow-hidden">
-                                                <div class="font-semibold">21. Número do documento do Paciente</div>
-                                                <div class="flex items-center gap-3 mt-1 text-[9px]">
-                                                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CPF</label>
-                                                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CNS:</label>
-                                                    <input type="text" class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
-                                                </div>
-                                            </div>
-                                            <div class="row-span-2 px-2 py-1">
-                                                <div class="font-semibold">23. Assinatura do responsável pelo preenchimento*</div>
-                                            </div>
-                                            <div class="border-r border-black px-2 py-1 overflow-hidden">
-                                                <div class="font-semibold">22. Correio Eletrônico do paciente</div>
-                                                <input type="email" class="mt-1 w-full h-3.5 bg-transparent focus:ring-0 focus:outline-none" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+  <div class="lg:col-span-3 w-full overflow-x-auto print:overflow-visible">
+    <!-- A4 sheet -->
+    <form id="laudo-ceaf"
+      class="p-0 m-0 bg-white rounded-xl print:shadow-none w-full max-w-full md:max-w-[210mm] print:max-w-[210mm] mx-auto">
+      <div class="relative h-full px-2 sm:px-4 md:px-6 print:px-2 pb-2 pt-2 w-full">
+        <!-- FORMULARIO -->
+        <div class="w-full max-w-5xl mx-auto bg-white p-4 relative">
+          <!-- Header -->
+          <div class="flex justify-center items-center">
+            <div class="flex items-center">
+              <div class="rounded-md px-3 flex items-center">
+                <img id="logoSus" src="https://static.cdnlogo.com/logos/s/74/sus-brasil.svg" alt="Logo SUS"
+                  class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 print:w-28 md:h-28 print:h-28 object-contain" />
+              </div>
             </div>
+            <div class="text-sm font-semibold">
+              <p>Sistema Único de Saúde</p>
+              <p>Ministério da Saúde</p>
+              <p>Secretaria de Estado da Saúde</p>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <div class="text-center font-bold text-sm border-l border-r border-b border-t border-black">
+            <p>COMPONENTE ESPECIALIZADO DA ASSISTÊNCIA FARMACÊUTICA</p>
+            <p>LAUDO DE SOLICITAÇÃO, AVALIAÇÃO E AUTORIZAÇÃO DE MEDICAMENTO(S)</p>
+            <p>SOLICITAÇÃO DE MEDICAMENTO(S)</p>
+          </div>
+
+          <!-- Main Form -->
+          <div class="mb-4">
+            <div class="text-[9px] font-bold">
+              CAMPOS DE PREENCHIMENTO EXCLUSIVO PELO MÉDICO SOLICITANTE
+            </div>
+
+            <!-- BOX 1 -->
+            <div id="box1" class="border border-black mb-1 leading-none">
+              <!-- Row 1 -->
+              <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                <div class="w-1/2 border-r border-black relative h-full px-2 overflow-hidden">
+                  <label for="lme_cnes"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    1. Número do CNES*
+                  </label>
+                  <input id="lme_cnes" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[20px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                </div>
+
+                <div class="w-1/2 relative h-full px-2 overflow-hidden">
+                  <label for="lme_estabelecimento"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    2. Nome do Estabelecimento de Saúde Solicitante
+                  </label>
+                  <input id="lme_estabelecimento" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                <div class="w-full relative h-full px-2 overflow-hidden">
+                  <label for="lme_nomePaciente"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    3. Nome completo do Paciente*
+                  </label>
+                  <input id="lme_nomePaciente" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="flex border-b border-black h-[36px] text-[10px] leading-none">
+                <div class="w-1/2 relative h-full px-2 overflow-hidden">
+                  <label for="lme_nomeSocial"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    3.1. Nome Social do Paciente
+                  </label>
+                  <input id="lme_nomeSocial" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+
+                <div class="w-1/4 border-r border-black relative h-full px-2 overflow-hidden"></div>
+
+                <div class="w-1/4 relative h-full px-2 overflow-hidden">
+                  <label for="lme_peso"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    5. Peso do Paciente (kg)*
+                  </label>
+                  <input id="lme_peso" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <!-- Row 4 -->
+              <div class="flex h-[36px] text-[10px] leading-none">
+                <div class="w-3/4 border-r border-black relative h-full px-2 overflow-hidden">
+                  <label for="lme_nomeMae"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    4. Nome da Mãe do Paciente*
+                  </label>
+                  <input id="lme_nomeMae" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+
+                <div class="w-1/4 relative h-full px-2 overflow-hidden">
+                  <label for="lme_altura"
+                    class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">
+                    6. Altura do Paciente (cm)*
+                  </label>
+                  <input id="lme_altura" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-[14px] border-0 bg-transparent text-center focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 2 — BLOCO 5 (Medicamentos) -->
+            <div id="box2" class="border border-black mb-1 leading-none">
+              <div class="">
+                <!-- HEADER -->
+                <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] grid-rows-[18px_18px]">
+                  <!-- 7 -->
+                  <div
+                    class="col-span-2 row-span-2 border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
+                    7. Medicamentos*
+                  </div>
+                  <!-- 8 -->
+                  <div
+                    class="col-span-6 border-b border-black bg-gray-100 flex items-center justify-center text-[10px] font-semibold leading-none">
+                    8. Quantidade Solicitada*
+                  </div>
+                  <!-- Meses -->
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    1º mês</div>
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    2º mês</div>
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    3º mês</div>
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    4º mês</div>
+                  <div
+                    class="border-r border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    5º mês</div>
+                  <div
+                    class="border-b border-black bg-gray-100 flex items-center justify-center text-[10px] leading-none">
+                    6º mês</div>
+                </div>
+
+                <!-- LINHA 1 -->
+                <div
+                  class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
+                  <div class="border-r border-black flex items-center justify-center font-semibold">1</div>
+                  <div class="border-r border-black overflow-hidden">
+                    <select id="lme_med1"
+                      class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
+                      <option value="">Selecione...</option>
+                    </select>
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_1"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_2"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_3"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_4"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q1_5"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div><input id="lme_q1_6"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+
+                <!-- LINHA 2 -->
+                <div
+                  class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] border-b border-black text-[10px] leading-none">
+                  <div class="border-r border-black flex items-center justify-center font-semibold">2</div>
+                  <div class="border-r border-black overflow-hidden">
+                    <select id="lme_med2"
+                      class="w-full h-full border-0 bg-transparent px-1 text-[10px] leading-none focus:ring-0 focus:outline-none cursor-pointer min-w-0">
+                      <option value="">Selecione...</option>
+                    </select>
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_1"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_2"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_3"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_4"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q2_5"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div><input id="lme_q2_6"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+
+                <!-- LINHA 3 -->
+                <div class="grid grid-cols-[32px_1fr_repeat(6,44px)] h-[30px] text-[10px] leading-none">
+                  <div class="border-r border-black flex items-center justify-center font-semibold">3</div>
+                  <div class="border-r border-black overflow-hidden">
+                    <input id="lme_med3" class="w-full h-full border-0 px-1 text-left text-[10px] leading-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_1"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_2"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_3"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_4"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="border-r border-black"><input id="lme_q3_5"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div><input id="lme_q3_6"
+                      class="w-full h-full border-0 p-0 text-center text-[10px] leading-none focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 3 — BLOCO 9 a 12 -->
+            <div id="box3" class="border border-black mb-1 text-[10px] leading-none">
+              <!-- Row 9/10 -->
+              <div class="grid grid-cols-[120px_1fr] h-9 border-b border-black">
+                <div class="relative border-r border-black px-2">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">9. CID-10*
+                  </div>
+                  <input id="lme_cid" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+                <div class="relative px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">10.
+                    Diagnóstico</div>
+                  <input id="lme_diagnostico" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <!-- Row 11 -->
+              <div class="relative border-b border-black h-[60px] px-2 overflow-hidden">
+                <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">11. Anamnese*
+                </div>
+                <textarea id="lme_anamnese"
+                  class="absolute left-2 right-2 top-[18px] bottom-[2px] border-0 bg-transparent resize-none focus:ring-0 focus:outline-none"></textarea>
+              </div>
+
+              <!-- Row 12 (Tratamento Prévio) -->
+              <div class="relative h-12 px-2 overflow-hidden">
+                <div class="absolute top-[2px] left-2 right-2 font-semibold">12. Paciente realizou tratamento prévio
+                  ou está em tratamento na doença?*</div>
+                <div class="absolute left-2 right-2 bottom-[4px] flex items-center gap-4">
+                  <label class="flex items-center gap-2"><input type="checkbox"
+                      class="pdf-box" /><span>NÃO</span></label>
+                  <label class="flex items-center gap-2"><input type="checkbox" class="pdf-box" /><span>SIM.
+                      Relatar:</span></label>
+                  <input type="text"
+                    class="flex-1 min-w-0 h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 3B - BLOCO 13 (Atestado) -->
+            <div id="box3-b" class="border border-black mb-1 text-[10px] leading-none">
+              <div class="h-5 flex items-center justify-center font-semibold tracking-[0.3px] whitespace-nowrap">13.
+                Atestado de Capacidade*</div>
+              <div class="px-4 py-1 text-[11px] leading-tight">
+                A solicitação do medicamento deverá ser realizada pelo paciente. Entretanto, fica dispensada a
+                obrigatoriedade da presença física do paciente considerado incapaz de acordo com os artigos 3º e 4º do
+                Código Civil. O paciente é considerado incapaz?
+              </div>
+              <div class="grid grid-cols-5 h-12 ">
+                <div class="col-span-3 relative px-4 overflow-hidden">
+                  <div
+                    class="absolute left-2 top-[4px] grid-rows-[36px_36px] right-2 flex items-center gap-6 text-[8px] leading-none">
+                    <div class="row-1 flex gap-8">
+                      <label class="flex items-center gap-1 shrink-0"><input type="checkbox" class="w-3 h-3" /> <span
+                          class="text-wrap text-[11px]">NÃO</span></label>
+                      <label class="flex items-center gap-1 min-w-0 "><input type="checkbox" class="w-3 h-3" /><span
+                          class="text-wrap text-[11px] text-justify">SIM. Indicar o nome do responsável pelo paciente,
+                          o qual</span></label>
+                    </div>
+                    <div
+                      class="absolute left-20 top-[14px] right-2 row-2 flex items-center gap-6 text-[8px] leading-none">
+                      <label class=" mt-1.5"><span class="text-wrap text-[11px] text-justify">poderá realizar a
+                          solicitação do medicamento</span></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-2 relative px-2 overflow-hidden">
+                  <input type="text"
+                    class="absolute left-0.5 right-0.5 top-[8px] h-4 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  <div class="absolute left-0.5 right-2.5 bottom-[11px] text-center text-[9px]">Nome do Responsável
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 4 - BLOCO 14 - 17 (Médico) -->
+            <div id="box4" class="border border-black mb-1 text-[10px] leading-none">
+              <div class="grid grid-cols-[1fr_140px_220px] grid-rows-[36px_36px]">
+                <!-- 14 -->
+                <div class="relative border-b border-black px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">14. Nome do
+                    médico solicitante*</div>
+                  <input id="lme_nomeMedico" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+                <!-- coluna vazia -->
+                <div class="border-r border-b border-black"></div>
+                <!-- 17 -->
+                <div class="relative row-span-2 px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">17.
+                    Assinatura e carimbo do médico*</div>
+                  <div class="absolute left-2 right-2 top-[16px] bottom-[4px]"></div>
+                </div>
+                <!-- 15 -->
+                <div class="relative border-r border-black px-2 overflow-hidden h-[36px]">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">15. Nº do
+                    Cartão Nacional de Saúde (CNS) do médico solicitante*</div>
+                  <input id="lme_cnsMedico" type="text"
+                    class="absolute left-2 right-2 bottom-[2px] focus:ring-0 focus:outline-none" />
+                </div>
+                <!-- 16 -->
+                <div class="relative border-r border-black px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 font-semibold tracking-[0.3px] whitespace-nowrap">16. Data da
+                    Solicitação*</div>
+                  <input id="lme_dataSolicitacao" type="text" inputmode="numeric" placeholder="dd/mm/aaaa"
+                    maxlength="10"
+                    class="absolute left-2 right-2 bottom-[2px] h-3.5 border-0 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 5 - BLOCO 18 (Campos preenchidos por) -->
+            <div id="box5" class="border border-black text-[10px] leading-none">
+              <div class="px-2 py-1 border-b border-black mb-2">
+                <div class="flex flex-row gap-x-3 gap-y-1 mt-1 text-[9px]">
+                  <div class="font-semibold">18. CAMPOS ABAIXO PREENCHIDOS POR*:</div>
+                  <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox"
+                        class="w-3 h-3" /> Paciente</label></div>
+                  <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox"
+                        class="w-3 h-3" /> Mãe do Paciente</label></div>
+                  <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox"
+                        class="w-3 h-3" /> Responsável <span class="text-[8px]">(Descrito no item 13)</span></label>
+                  </div>
+                  <div class="font-semibold"><label class="flex items-center gap-1"><input type="checkbox"
+                        class="w-3 h-3" /> Médico Solicitante</label></div>
+                </div>
+                <div class="flex items-center gap-2 mt-1 text-[9px]">
+                  <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> Outro, informar
+                    nome:</label>
+                  <input type="text"
+                    class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  <span>e CPF:</span>
+                  <input type="text"
+                    class="w-[140px] h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-[2fr_1fr] border-b border-black h-[72px] text-[10px] leading-none">
+                <div class="relative border-r border-black px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 right-2 font-semibold">19. Raça/Cor/Etnia informado pelo
+                    Paciente Responsável*</div>
+                  <div class="absolute left-2 right-2 top-[22px] flex items-center gap-6 whitespace-nowrap">
+                    <label class="inline-flex items-center gap-2"><input type="checkbox"
+                        class="pdf-box" /><span>Branca</span></label>
+                    <label class="inline-flex items-center gap-2"><input type="checkbox"
+                        class="pdf-box" /><span>Amarela</span></label>
+                    <label class="inline-flex items-center gap-2"><input type="checkbox"
+                        class="pdf-box" /><span>Indígena. Informar Etnia:</span></label>
+                    <input type="text"
+                      class="flex-1 min-w-0 h-[14px] border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
+                    <label class="inline-flex items-center gap-2 w-[74px]"><input type="checkbox"
+                        class="pdf-box" /><span>Preta</span></label>
+                    <label class="inline-flex items-center gap-2"><input type="checkbox"
+                        class="pdf-box" /><span>Parda</span></label>
+                  </div>
+                </div>
+                <div class="relative px-2 overflow-hidden">
+                  <div class="absolute top-[2px] left-2 right-2 font-semibold">20. Telefone(s) para contato do
+                    paciente</div>
+                  <div class="absolute left-2 right-2 top-[26px] flex items-center whitespace-nowrap">
+                    <span class="mr-1">(</span><input type="text"
+                      class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span
+                      class="ml-1">)</span>
+                    <input type="text"
+                      class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  </div>
+                  <div class="absolute left-2 right-2 top-[48px] flex items-center whitespace-nowrap">
+                    <span class="mr-1">(</span><input type="text"
+                      class="w-[44px] h-[14px] border-0 bg-transparent focus:ring-0 focus:outline-none text-center" /><span
+                      class="ml-1">)</span>
+                    <input type="text"
+                      class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-[1fr_1fr] grid-rows-[36px_36px]">
+                <div class="border-r border-b border-black px-2 py-1 overflow-hidden">
+                  <div class="font-semibold">21. Número do documento do Paciente</div>
+                  <div class="flex items-center gap-3 mt-1 text-[9px]">
+                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CPF</label>
+                    <label class="flex items-center gap-1"><input type="checkbox" class="w-3 h-3" /> CNS:</label>
+                    <input type="text"
+                      class="flex-1 h-3.5 border-0 border-b border-black bg-transparent focus:ring-0 focus:outline-none" />
+                  </div>
+                </div>
+                <div class="row-span-2 px-2 py-1">
+                  <div class="font-semibold">23. Assinatura do responsável pelo preenchimento*</div>
+                </div>
+                <div class="border-r border-black px-2 py-1 overflow-hidden">
+                  <div class="font-semibold">22. Correio Eletrônico do paciente</div>
+                  <input type="email" class="mt-1 w-full h-3.5 bg-transparent focus:ring-0 focus:outline-none" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
         `;
-
-		// ===============================
-		//  LOGICA
-		// ===============================
-
-		// Mascara de data no input
+		// máscara do input
 		const dataInput = document.getElementById('lme_dataSolicitacao');
 		if (dataInput) {
 			dataInput.addEventListener('input', function () {
@@ -6420,112 +6834,28 @@
 			});
 		}
 
-		// Carregar Selects
-		async function carregarLMECompleto(btnElement) {
-			let originalContent = '';
-
-			if (btnElement) {
-				originalContent = btnElement.innerHTML;
-				btnElement.disabled = true;
-				btnElement.innerHTML = `
-                    <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span>Baixando...</span>`;
-			}
-
-			try {
-				const response = await fetch(`${API_URL}/farmacos_lme/lista_simples`);
-				const data = await response.json();
-
-				const optionsHtml = ['<option value="">Selecione um medicamento...</option>'];
-				data.forEach((item) => {
-					optionsHtml.push(`<option value="${item.value}">${item.label}</option>`);
-				});
-				const finalHtml = optionsHtml.join('');
-
-				['lme_med1', 'lme_med2'].forEach((id) => {
-					const el = document.getElementById(id);
-					if (el) el.innerHTML = finalHtml;
-				});
-
-				// Toast simples se Swal nao estiver disponivel, ou console
-				if (typeof Swal !== 'undefined') {
-					Swal.fire({
-						toast: true,
-						position: 'top-end',
-						icon: 'success',
-						title: `${data.length} medicamentos carregados!`,
-						showConfirmButton: false,
-						timer: 2500,
-					});
-				} else {
-					alert(`${data.length} medicamentos carregados!`);
-				}
-			} catch (error) {
-				console.error('Erro ao carregar:', error);
-				alert('Erro ao carregar lista de medicamentos.');
-			} finally {
-				if (btnElement) {
-					btnElement.disabled = false;
-					btnElement.innerHTML = originalContent;
-				}
-			}
+		// Inicializa o módulo de CID-10 para os campos
+		if (window.Cid10Module && typeof window.Cid10Module.setupCidSearch === 'function') {
+			window.Cid10Module.setupCidSearch('lme_cid', 'lme_diagnostico');
+		} else {
+			console.warn('Cid10Module não carregado ou setupCidSearch indisponível.');
 		}
 
-		// Limpar Formulario
-		function limparFormulario() {
-			const wrapper = document.getElementById('guia_lme');
-			if (!wrapper) return;
-
-			const inputs = wrapper.querySelectorAll('input[type="text"], input[type="date"], input[type="email"]');
-			inputs.forEach((input) => {
-				if (input.id === 'lme_nomeMae') {
-					input.value = 'ELIETE DO CARMO CORNELIO ROSA';
-				} else {
-					input.value = '';
-				}
-			});
-
-			['lme_med1', 'lme_med2', 'lme_med3'].forEach((id) => {
-				const select = document.getElementById(id);
-				if (select) select.selectedIndex = 0;
-			});
-
-			const anamnese = document.getElementById('lme_anamnese');
-			if (anamnese) anamnese.value = '';
-
-			const radios = wrapper.querySelectorAll('input[type="radio"]');
-			radios.forEach((r) => (r.checked = false));
-
-			const checkboxes = wrapper.querySelectorAll('input[type="checkbox"]');
-			checkboxes.forEach((c) => (c.checked = false));
-		}
-
-		// Bind events manually after render
-		const btnCarregar = container.querySelector('#lme_btnCarregar');
-		if (btnCarregar) {
-			btnCarregar.addEventListener('click', function () {
-				carregarLMECompleto(this);
-			});
-		}
-
-		const btnLimpar = container.querySelector('#lme_btnLimpar');
-		if (btnLimpar) {
-			btnLimpar.addEventListener('click', limparFormulario);
-		}
-
-		console.log('[Guia LME] Renderizada com sucesso');
+		console.log('[Guia LME] Renderizada (controles via aside externo)');
 	}
+
+	// Expondo módulo para o aside do tab_guias.js
+	window.GuiasModules.lme = {
+		clear,
+		loadSelects,
+	};
 
 	window.renderGuiaLme = renderGuiaLme;
 })();
-window.renderGuiaLme = renderGuiaLme;
 
 
 /* ==========================================
-   [23/25] geral/components/prescription/tabs/js/tab_apoio.js
+   [24/26] geral/components/prescription/tabs/js/tab_apoio.js
    ========================================== */
 //@ts-nocheck
 // tab_apoio.js — Aba Apoio Clínico por Especialidade
@@ -6538,11 +6868,11 @@ window.renderGuiaLme = renderGuiaLme;
 
 	// Ferramentas de Apoio — cada uma com scripts e scaffold próprio
 	const apoioTools = [
-		{ key: 'clinica',     name: 'Clínica Médica',  icon: 'cardiology',   description: 'Protocolos clínicos e prescrições por patologia' },
-		{ key: 'emergencia',  name: 'Emergência',      icon: 'emergency',    description: 'Protocolos de emergência por especialidade' },
-		{ key: 'pediatria',   name: 'Pediatria',       icon: 'pediatrics',   description: 'Calculadora de fármacos pediátricos por peso' },
-		{ key: 'gineco',      name: 'Ginecologia',     icon: 'pregnancy',    description: 'Protocolos ginecológicos (em breve)' },
-		{ key: 'psiquiatria', name: 'Psiquiatria',     icon: 'psychology',   description: 'Protocolos psiquiátricos (em breve)' },
+		{ key: 'clinica', name: 'Clínica Médica', icon: 'cardiology', description: 'Protocolos clínicos e prescrições por patologia' },
+		{ key: 'emergencia', name: 'Emergência', icon: 'emergency', description: 'Protocolos de emergência por especialidade' },
+		{ key: 'pediatria', name: 'Pediatria', icon: 'pediatrics', description: 'Calculadora de fármacos pediátricos por peso' },
+		{ key: 'gineco', name: 'Ginecologia', icon: 'pregnancy', description: 'Protocolos ginecológicos (em breve)' },
+		{ key: 'psiquiatria', name: 'Psiquiatria', icon: 'psychology', description: 'Protocolos psiquiátricos (em breve)' },
 	];
 
 	let loaderApoio = null;
@@ -6569,7 +6899,7 @@ window.renderGuiaLme = renderGuiaLme;
               <div>
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-slate-800">library_books</span>
-                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Apoio clínico por especialidade</h1>
+                  <h1 class="text-xl font-semibold tracking-tight text-slate-800">Apoio clínico por especialidade</h1>
                 </div>
                 <p class="mt-1 text-sm text-slate-800">
                   Selecione a especialidade para ver protocolos, prescrições e ferramentas clínicas.
@@ -6582,7 +6912,7 @@ window.renderGuiaLme = renderGuiaLme;
                   <div class="flex items-start gap-3">
                     <span class="material-symbols-outlined mt-0.5 text-amber-700">warning</span>
                     <div class="space-y-1">
-                      <div class="font-semibold text-[#2d3748]">Material de apoio. Validar com protocolo institucional.</div>
+                      <div class="font-semibold text-slate-800">Material de apoio. Validar com protocolo institucional.</div>
                       <div>
                         Especialmente em gestação/lactação, insuficiência renal/hepática, interações, alergias e IST.
                       </div>
@@ -6597,7 +6927,7 @@ window.renderGuiaLme = renderGuiaLme;
 
             <!-- Content -->
             <section class="p-4 pt-2">
-              <div class="bg-gray-200 overflow-hidden rounded-xl border border-gray-300">
+              <div class="bg-gray-200  overflow-hidden rounded-xl border border-gray-300">
                 <div id="apoio-content" class="min-h-[400px]"></div>
               </div>
             </section>
@@ -6618,14 +6948,18 @@ window.renderGuiaLme = renderGuiaLme;
 		const menuContainer = document.getElementById('menu-apoio');
 
 		if (menuContainer) {
-			menuContainer.innerHTML = apoioTools.map(tool => `
+			menuContainer.innerHTML = apoioTools
+				.map(
+					(tool) => `
 				<button data-apoio-key="${tool.key}"
-					class="apoio-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
+					class="apoio-menu-btn inline-flex items-center cursor-pointer gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-semibold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none"
 					title="${tool.description}">
 					<span class="material-symbols-outlined text-base">${tool.icon}</span>
 					${tool.name}
 				</button>
-			`).join('');
+			`,
+				)
+				.join('');
 
 			menuContainer.addEventListener('click', (e) => {
 				const btn = e.target.closest('[data-apoio-key]');
@@ -6642,13 +6976,13 @@ window.renderGuiaLme = renderGuiaLme;
 	// SWITCH ENTRE ESPECIALIDADES
 	// ============================================
 	async function switchApoio(key) {
-		const tool = apoioTools.find(t => t.key === key);
+		const tool = apoioTools.find((t) => t.key === key);
 		if (!tool) return;
 
 		const apoioContent = document.getElementById('apoio-content');
 
 		// Highlight botão ativo
-		document.querySelectorAll('.apoio-menu-btn').forEach(btn => {
+		document.querySelectorAll('.apoio-menu-btn').forEach((btn) => {
 			const isActive = btn.dataset.apoioKey === key;
 			if (isActive) {
 				btn.classList.add('text-[#007BFF]');
@@ -6762,61 +7096,69 @@ window.renderGuiaLme = renderGuiaLme;
 		// Scaffold DOM que farmacos_completo.js espera
 		contentEl.innerHTML = `
 			<div class="p-6 bg-[#e0e5ec]">
-				<div class="flex flex-col gap-6">
-					<!-- Seleção + Inputs -->
-					<div class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
-						<h3 class="text-lg font-bold text-[#2d3748] mb-4 flex items-center gap-2">
-							<span class="material-symbols-outlined">pediatrics</span>
-							Calculadora Farmacológica Pediátrica
-						</h3>
+				<div class="flex flex-col md:flex-row gap-6">
+					<!-- Sidebar: Controles (1/3) -->
+					<div class="w-full md:w-1/3">
+						<div class="rounded-[20px] bg-[#e0e5ec] p-4 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff]">
+							<h3 class="text-sm font-bold text-[#2d3748] mb-3 flex items-center gap-2">
+								<span class="material-symbols-outlined text-sm">pediatrics</span>
+								Parâmetros
+							</h3>
 
-						<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-							<!-- Fármaco -->
-							<div class="md:col-span-2">
-								<label for="selectFarmaco" class="block text-xs font-bold text-[#2d3748] mb-1">Fármaco</label>
-								<select id="selectFarmaco"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none">
-									<option value="">— Selecione o fármaco —</option>
-								</select>
+							<div class="flex flex-col gap-3">
+								<!-- Fármaco -->
+								<div>
+									<label for="selectFarmaco" class="block text-xs font-bold text-[#2d3748] mb-1">Fármaco</label>
+									<select id="selectFarmaco"
+										class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none">
+										<option value="">— Selecione —</option>
+									</select>
+								</div>
+
+								<div class="grid grid-cols-2 gap-3">
+									<!-- Peso -->
+									<div>
+										<label for="inputPeso" class="block text-xs font-bold text-[#2d3748] mb-1">Peso (kg)</label>
+										<input id="inputPeso" type="number" step="0.1" min="0.5" placeholder="ex: 12"
+											class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+									</div>
+									<!-- Idade -->
+									<div>
+										<label for="inputIdadeMeses" class="block text-xs font-bold text-[#2d3748] mb-1">Idade (mes)</label>
+										<input id="inputIdadeMeses" type="number" min="0" placeholder="ex: 36"
+											class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+									</div>
+								</div>
 							</div>
 
-							<!-- Peso -->
-							<div>
-								<label for="inputPeso" class="block text-xs font-bold text-[#2d3748] mb-1">Peso (kg)</label>
-								<input id="inputPeso" type="number" step="0.1" min="0.5" placeholder="ex: 12.5"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
+							<!-- Botões -->
+							<div class="flex flex-col gap-2 mt-4">
+								<button id="btnCalcular"
+									class="w-full inline-flex justify-center items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-[#007BFF] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
+									<span class="material-symbols-outlined text-sm">calculate</span>
+									Calcular
+								</button>
+								<div class="flex items-center gap-2">
+									<button id="btnCopiarRx"
+										class="flex-1 inline-flex justify-center items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-xs font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
+										<span class="material-symbols-outlined text-sm">content_copy</span>
+										Copiar
+									</button>
+									<span id="copyStatus" class="text-[10px] text-green-600 w-16 text-center"></span>
+								</div>
 							</div>
-
-							<!-- Idade -->
-							<div>
-								<label for="inputIdadeMeses" class="block text-xs font-bold text-[#2d3748] mb-1">Idade (meses)</label>
-								<input id="inputIdadeMeses" type="number" min="0" placeholder="ex: 36"
-									class="w-full rounded-[15px] bg-[#e0e5ec] p-3 text-sm text-[#25282e] shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] border-none focus:outline-none" />
-							</div>
-						</div>
-
-						<!-- Botões -->
-						<div class="flex gap-3 mt-4">
-							<button id="btnCalcular"
-								class="inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-5 py-2.5 text-sm font-bold text-[#007BFF] shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
-								<span class="material-symbols-outlined text-sm">calculate</span>
-								Calcular
-							</button>
-							<button id="btnCopiarRx"
-								class="inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-5 py-2.5 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:shadow-[8px_8px_16px_#c1c9d2,-8px_-8px_16px_#ffffff] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all">
-								<span class="material-symbols-outlined text-sm">content_copy</span>
-								Copiar Rx
-							</button>
-							<span id="copyStatus" class="text-xs text-green-600 self-center"></span>
 						</div>
 					</div>
 
-					<!-- Resultado -->
-					<div id="medicationCard"
-						class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[200px] font-mono text-sm text-[#25282e] whitespace-pre-wrap">
-						<div class="text-center py-8 text-[#5f6775]">
-							<span class="material-symbols-outlined text-4xl mb-3">medication</span>
-							<p>Selecione um fármaco e insira o peso para calcular a dose.</p>
+					<!-- Content: Resultado (2/3) -->
+					<div class="w-full md:w-2/3">
+						<div id="medicationCard"
+							class="rounded-[20px] bg-[#e0e5ec] p-6 shadow-[inset_6px_6px_12px_#c1c9d2,inset_-6px_-6px_12px_#ffffff] min-h-[300px] font-mono text-sm text-[#25282e] whitespace-pre-wrap h-full">
+							<div class="text-center py-12 text-[#5f6775]">
+								<span class="material-symbols-outlined text-5xl mb-3 opacity-50">medication_liquid</span>
+								<h3 class="text-lg font-medium text-[#2d3748]">Calculadora Pediátrica</h3>
+								<p class="text-sm mt-2">Configure os parâmetros à esquerda para calcular.</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -6847,14 +7189,14 @@ window.renderGuiaLme = renderGuiaLme;
 		if (!select || !data) return;
 
 		const categorias = data.getCategorias();
-		categorias.forEach(catKey => {
+		categorias.forEach((catKey) => {
 			const items = data.getByCategoria(catKey);
 			if (!items || !Object.keys(items).length) return;
 
 			const optgroup = document.createElement('optgroup');
 			optgroup.label = catKey.charAt(0).toUpperCase() + catKey.slice(1);
 
-			Object.keys(items).forEach(itemKey => {
+			Object.keys(items).forEach((itemKey) => {
 				const item = items[itemKey];
 				const opt = document.createElement('option');
 				opt.value = catKey + '.' + itemKey;
@@ -6880,7 +7222,9 @@ window.renderGuiaLme = renderGuiaLme;
 		function setStatus(msg) {
 			if (!statusEl) return;
 			statusEl.textContent = msg;
-			setTimeout(() => { statusEl.textContent = ''; }, 1500);
+			setTimeout(() => {
+				statusEl.textContent = '';
+			}, 1500);
 		}
 
 		function getSelectedItem() {
@@ -6900,11 +7244,16 @@ window.renderGuiaLme = renderGuiaLme;
 		}
 
 		function stripHtml(s) {
-			return String(s ?? '').replace(/<[^>]*>/g, '').trim();
+			return String(s ?? '')
+				.replace(/<[^>]*>/g, '')
+				.trim();
 		}
 
 		function normalizeSpaces(s) {
-			return String(s ?? '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+			return String(s ?? '')
+				.replace(/[ \t]+\n/g, '\n')
+				.replace(/\n{3,}/g, '\n\n')
+				.trim();
 		}
 
 		function buildRxText(item, ctx) {
@@ -7032,13 +7381,17 @@ window.renderGuiaLme = renderGuiaLme;
 		if (!categoriesEl) return;
 
 		const categorias = PDM.getCategorias();
-		categoriesEl.innerHTML = categorias.map(cat => `
+		categoriesEl.innerHTML = categorias
+			.map(
+				(cat) => `
 			<button data-emerg-cat="${cat.key}"
 				class="emerg-cat-btn flex items-center justify-between rounded-[15px] bg-[#e0e5ec] px-4 py-2.5 text-xs font-bold text-slate-700 shadow-[4px_4px_8px_#c1c9d2,-4px_-4px_8px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_3px_3px_6px_#c1c9d2,inset_-3px_-3px_6px_#ffffff] transition-all text-left cursor-pointer">
 				<span>${cat.name}</span>
 				<span class="text-[10px] text-slate-400">${cat.count}</span>
 			</button>
-		`).join('');
+		`,
+			)
+			.join('');
 
 		// Event: clicar em categoria
 		categoriesEl.addEventListener('click', (e) => {
@@ -7048,7 +7401,7 @@ window.renderGuiaLme = renderGuiaLme;
 			const catKey = btn.dataset.emergCat;
 
 			// Highlight categoria ativa
-			categoriesEl.querySelectorAll('.emerg-cat-btn').forEach(b => {
+			categoriesEl.querySelectorAll('.emerg-cat-btn').forEach((b) => {
 				if (b.dataset.emergCat === catKey) {
 					b.classList.add('text-[#007BFF]');
 					b.style.boxShadow = 'inset 3px 3px 6px #c1c9d2, inset -3px -3px 6px #ffffff';
@@ -7079,7 +7432,7 @@ window.renderGuiaLme = renderGuiaLme;
 		let html = `<div class="space-y-3">`;
 		html += `<h3 class="text-base font-bold text-[#2d3748] mb-3">${protocolos[0]?.categoriaNome || catKey}</h3>`;
 
-		protocolos.forEach(p => {
+		protocolos.forEach((p) => {
 			html += `
 				<button data-emerg-proto="${p.key}" data-emerg-cat="${catKey}"
 					class="emerg-proto-btn w-full text-left rounded-[15px] bg-[#e0e5ec] px-4 py-3 text-sm font-medium text-[#25282e] shadow-[4px_4px_8px_#c1c9d2,-4px_-4px_8px_#ffffff] border-none hover:text-[#007BFF] hover:shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] active:shadow-[inset_3px_3px_6px_#c1c9d2,inset_-3px_-3px_6px_#ffffff] transition-all cursor-pointer">
@@ -7167,7 +7520,9 @@ window.renderGuiaLme = renderGuiaLme;
 				try {
 					await navigator.clipboard.writeText(proto.rx_text);
 					copyBtn.textContent = 'Copiado ✅';
-					setTimeout(() => { copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx'; }, 1500);
+					setTimeout(() => {
+						copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx';
+					}, 1500);
 				} catch {
 					const ta = document.createElement('textarea');
 					ta.value = proto.rx_text;
@@ -7176,7 +7531,9 @@ window.renderGuiaLme = renderGuiaLme;
 					document.execCommand('copy');
 					ta.remove();
 					copyBtn.textContent = 'Copiado ✅';
-					setTimeout(() => { copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx'; }, 1500);
+					setTimeout(() => {
+						copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copiar Rx';
+					}, 1500);
 				}
 			});
 		}
@@ -7221,7 +7578,7 @@ window.renderGuiaLme = renderGuiaLme;
 
 
 /* ==========================================
-   [24/25] geral/components/prescription/tabs/js/tab_psf.js
+   [25/26] geral/components/prescription/tabs/js/tab_psf.js
    ========================================== */
 //@ts-nocheck
 // tab_psf.js — Aba PSF (Estratégia Saúde da Família)
@@ -7265,7 +7622,7 @@ window.renderGuiaLme = renderGuiaLme;
               <div>
                 <div class="flex items-center gap-2">
                   <span class="material-symbols-outlined text-slate-800">groups</span>
-                  <h1 class="text-xl font-extrabold tracking-tight text-[#2d3748]">Estratégia Saúde da Família (PSF)</h1>
+                  <h1 class="text-xl font-semibold tracking-tight text-[#2d3748]">Estratégia Saúde da Família (PSF)</h1>
                 </div>
               </div>
 
@@ -7311,8 +7668,8 @@ window.renderGuiaLme = renderGuiaLme;
 		if (menuContainer) {
 			menuContainer.innerHTML = psfTools.map(tool => `
 				<button data-psf-key="${tool.key}"
-					class="psf-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-bold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none">
-					<span class="material-symbols-outlined text-base">${tool.icon}</span>
+					class="psf-menu-btn inline-flex items-center gap-2 rounded-full bg-[#e0e5ec] px-4 py-2 text-sm font-semibold text-slate-700 shadow-[6px_6px_12px_#c1c9d2,-6px_-6px_12px_#ffffff] border-none hover:text-[#007BFF] active:shadow-[inset_4px_4px_8px_#c1c9d2,inset_-4px_-4px_8px_#ffffff] transition-all focus:outline-none">
+					<span class="material-symbols-outlined text-sm">${tool.icon}</span>
 					${tool.name}
 				</button>
 			`).join('');
@@ -7386,7 +7743,7 @@ window.renderGuiaLme = renderGuiaLme;
 
 
 /* ==========================================
-   [25/25] geral/components/prescription/js/page_controller.js
+   [26/26] geral/components/prescription/js/page_controller.js
    ========================================== */
 // page_controller.js (FINAL)
 // Responsabilidades EXCLUSIVAS:
